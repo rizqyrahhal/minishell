@@ -6,7 +6,7 @@
 #    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/28 12:36:19 by rarahhal          #+#    #+#              #
-#    Updated: 2022/08/03 11:42:10 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/08/03 14:40:13 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ $(NAME): $(OBJS) $(OBJS_L)
 all: $(NAME)
 
 clean:
-	@rm -rf *.o
+	@rm -rf Mandatory/*.o
+	@rm -rf pipex/Mandatory/*.o
 	@rm -f Libft/libft/*.o
 	@rm -f Libft/*.o
 

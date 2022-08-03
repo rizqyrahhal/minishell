@@ -6,11 +6,11 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:39:13 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/03/17 11:33:05 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/03 13:09:18 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includs/pipex.h"
+#include "../../pipex/includs/pipex.h"
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {

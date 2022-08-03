@@ -6,11 +6,11 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:38:34 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/03/17 11:32:59 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/03 13:09:13 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includs/pipex.h"
+#include "../../pipex/includs/pipex.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
