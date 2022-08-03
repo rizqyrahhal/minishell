@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/28 12:42:37 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/03 11:34:37 by rarahhal         ###   ########.fr       */
+/*   Created: 2022/04/12 21:59:45 by rarahhal          #+#    #+#             */
+/*   Updated: 2022/04/13 16:23:07 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/minishell.h"
+#include "../includs/bonus.h"
 
-int	main(int ac, char *av[], char *env[])
-{
-	t_minishell	minishile;
+char	*ft_strchr(const char *s, int c)
+{	
+	int	i;
 
-	char *buf;
-	while(1)
+	i = 0;
+	while (s[i])
 	{
-		buf = readline("\033[0;33m minishell > \033[0m");
-		// printf("buf : %s\nwayiih", buf);
-		pipex(ac, buf, env);
-		free(buf);
+		if (s[i] == (char)c)
+			return ((char *)(s + i));
+		i++;
 	}
-	return (0);
+	if (s[i] == (char)c)
+		return ((char *)(s + i));
+	return (NULL);
 }

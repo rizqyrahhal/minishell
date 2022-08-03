@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/28 12:42:37 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/03 11:34:37 by rarahhal         ###   ########.fr       */
+/*   Created: 2022/03/16 16:38:34 by rarahhal          #+#    #+#             */
+/*   Updated: 2022/03/17 11:32:59 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/minishell.h"
+#include "../includs/pipex.h"
 
-int	main(int ac, char *av[], char *env[])
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	t_minishell	minishile;
+	int	i;
 
-	char *buf;
-	while(1)
+	i = 0;
+	while (n && s1[i] && s1[i] == s2[i])
 	{
-		buf = readline("\033[0;33m minishell > \033[0m");
-		// printf("buf : %s\nwayiih", buf);
-		pipex(ac, buf, env);
-		free(buf);
+		i++;
+		n--;
 	}
-	return (0);
+	if (n == 0)
+		return (0);
+	else
+		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

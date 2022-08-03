@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/28 12:42:37 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/03 11:34:37 by rarahhal         ###   ########.fr       */
+/*   Created: 2022/03/16 16:39:13 by rarahhal          #+#    #+#             */
+/*   Updated: 2022/03/17 11:33:05 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/minishell.h"
+#include "../includs/pipex.h"
 
-int	main(int ac, char *av[], char *env[])
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	t_minishell	minishile;
+	size_t	i;
+	size_t	j;
 
-	char *buf;
-	while(1)
+	i = 0;
+	if (*needle == '\0')
+		return ((char *) haystack);
+	while (haystack[i] != '\0' && i < len)
 	{
-		buf = readline("\033[0;33m minishell > \033[0m");
-		// printf("buf : %s\nwayiih", buf);
-		pipex(ac, buf, env);
-		free(buf);
+		j = 0;
+		while (haystack[i + j] == needle[j] && i + j < len)
+		{
+			j++;
+			if (needle[j] == '\0')
+				return ((char *)&haystack[i]);
+		}
+		i++;
 	}
 	return (0);
 }

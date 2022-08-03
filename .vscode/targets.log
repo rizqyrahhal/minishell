@@ -6,8 +6,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
 
-# Make data base, printed on Thu Jul 28 12:49:25 2022
+# Make data base, printed on Wed Aug  3 11:28:29 2022
 
 # Variables
 
@@ -21,6 +22,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 @D = $(patsubst %/,%,$(dir $@))
 # automatic
 @F = $(notdir $@)
+ 
 # makefile
 CURDIR := /Users/rarahhal/Desktop/minihell
 # makefile
@@ -31,12 +33,12 @@ VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupp
 _ = /usr/bin/make
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
-# makefile (from `Makefile', line 21)
+# makefile (from `Makefile', line 31)
 OBJS = $(SRCS:.c=.o)
 # environment
 VSCODE_CWD = /
 # environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.ETNK2XYBAq/Render
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.IPDZSXhlQD/Render
 # environment
 PATH = /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
 # environment
@@ -44,7 +46,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.ABoHVOvVEe/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.tQcEaMfW3x/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -74,11 +76,11 @@ MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # makefile (from `Makefile', line 17)
-SRCS = Mandatory/minishell.c 
+SRCS = Mandatory/minishell.c pipex/Mandatory/pipex.c pipex/Mandatory/childs.c pipex/Mandatory/error.c 
 # environment
 SHLVL = 1
-# makefile (from `Makefile', line 19)
-LIBFT = Libft/...... 
+# makefile (from `Makefile', line 23)
+LIBFT = Libft/libft/ft_split.c Libft/libft/ft_strjoin.c Libft/libft/ft_strlen.c Libft/libft/ft_strncmp.c Libft/libft/ft_strnstr.c Libft/libft/ft_calloc.c Libft/libft/ft_strchr.c 
 # makefile (from `Makefile', line 15)
 CC = cc
 # default
@@ -110,19 +112,23 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.1208
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000001.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
 # environment
 __CF_USER_TEXT_ENCODING = 0x11DE:0x0:0x0
+# environment
+COMMAND_MODE = unix2003
 # default
 MAKEFILES := 
 # automatic
 <F = $(notdir $<)
 # environment
 LC_ALL = C
+# environment
+SECURITYSESSIONID = 186a8
 # automatic
 ^F = $(notdir $^)
 # default
@@ -133,14 +139,14 @@ FLAGS = -Wall -Werror -Wextra
 .INCLUDE_DIRS = /usr/local/include
 # environment
 MAKELEVEL := 0
-# makefile (from `Makefile', line 22)
+# makefile (from `Makefile', line 32)
 OBJS_L = $(LIBFT:.c=.o)
 # environment
 LANG = C
 # environment
-VSCODE_PID = 4648
+VSCODE_PID = 37812
 # variable set hash-table stats:
-# Load=64/1024=6%, Rehash=0, Collisions=4/91=4%
+# Load=66/1024=6%, Rehash=0, Collisions=3/96=3%
 
 # Pattern-specific Variable Values
 
@@ -148,9 +154,9 @@ VSCODE_PID = 4648
 
 # Directories
 
-# . (device 16777227, inode 750316): 11 files, no impossibilities.
+# . (device 16777227, inode 750316): 13 files, no impossibilities.
 
-# 11 files, no impossibilities in 1 directories.
+# 13 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -158,9 +164,17 @@ VSCODE_PID = 4648
 
 # Files
 
-# Not a target:
-all:
+all: minishell
+#  Phony target (prerequisite of .PHONY).
 #  Command-line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+.PHONY: all clean fclean re
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -172,15 +186,78 @@ all:
 #  File has not been updated.
 
 # Not a target:
-Makefile:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+Libft/libft/ft_strlen.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-03 11:07:44
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-minishell: Mandatory/minishell.o Libft/......
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-03 11:28:11
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+Libft/libft/ft_strjoin.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-03 11:07:44
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+Libft/libft/ft_split.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-03 11:07:44
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+minishell: Mandatory/minishell.o pipex/Mandatory/pipex.o pipex/Mandatory/childs.o pipex/Mandatory/error.o Libft/libft/ft_split.o Libft/libft/ft_strjoin.o Libft/libft/ft_strlen.o Libft/libft/ft_strncmp.o Libft/libft/ft_strnstr.o Libft/libft/ft_calloc.o Libft/libft/ft_strchr.o
 #  Implicit rule search has not been done.
-#  Modification time never checked.
+#  Last modified 2022-08-03 11:28:13
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 35):
+	$(CC) -lreadline $(FLAGS) $(OBJS) $(OBJS_L) -o $(NAME)
+	
+
+# Not a target:
+Mandatory/minishell.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-03 11:22:03
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+fclean: clean
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
 #  File has not been updated.
+#  commands to execute (from `Makefile', line 44):
+	@rm -f $(NAME)
+	
+
+# Not a target:
+pipex/Mandatory/childs.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-03 11:27:40
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 .DEFAULT:
@@ -188,8 +265,82 @@ minishell: Mandatory/minishell.o Libft/......
 #  Modification time never checked.
 #  File has not been updated.
 
+re: fclean
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 47):
+	@make all
+	
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 40):
+	@rm -rf *.o
+	@rm -f Libft/*.o
+	
+
+# Not a target:
+Libft/libft/ft_calloc.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-03 11:07:44
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+pipex/Mandatory/error.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-03 11:07:44
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+Libft/libft/ft_strncmp.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-03 11:07:44
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+pipex/Mandatory/pipex.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-03 11:27:40
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+Libft/libft/ft_strchr.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-03 11:07:44
+#  File has been updated.
+#  Successfully updated.
+ 
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+Libft/libft/ft_strnstr.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-03 11:07:44
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
 # files hash-table stats:
-# Load=5/1024=0%, Rehash=0, Collisions=0/6=0%
+# Load=20/1024=2%, Rehash=0, Collisions=0/51=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -201,8 +352,6 @@ minishell: Mandatory/minishell.o Libft/......
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu Jul 28 12:49:25 2022
+# Finished Make data base on Wed Aug  3 11:28:29 2022
 
  
-Makefile:25: *** missing separator (did you mean TAB instead of 8 spaces?).  Stop.
-
