@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:43:36 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/03 14:29:50 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/04 12:07:32 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ typedef struct s_command
 	char	**arry; // alloca nmbr of command
 }   t_command;
 
+typedef struct s_redirection
+{
+	int		input; // < if input != 0 
+	int		output; // > if output != 1
+}	t_redirection;
 
 typedef struct s_envp
 {
@@ -34,8 +39,9 @@ typedef struct s_envp
 
 typedef struct s_minishell
 {
-	int 	nbr_command;
-	t_command	*command;
+	t_command		*command; // reallooc pour chaque cmd trete
+	int 			nbr_command;
+	t_redirection	redirection;
 }   t_minishell;
 
 /*
