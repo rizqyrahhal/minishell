@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:43:36 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/04 12:07:32 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/05 15:36:06 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_command
 
 typedef struct s_redirection
 {
-	int		input; // < if input != 0 
+	int		input; // < if input != 0
 	int		output; // > if output != 1
 }	t_redirection;
 
