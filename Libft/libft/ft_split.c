@@ -6,11 +6,11 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:37:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/03 13:08:37 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/08 09:36:53 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../pipex/includs/pipex.h"
+#include "../../mini_pipex/includs/pipex.h"
 
 size_t	ft_strlcpy(char *dist, const char *src, size_t dstsize)
 {

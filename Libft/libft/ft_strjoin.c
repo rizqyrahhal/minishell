@@ -6,11 +6,11 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:37:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/03 13:09:04 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/08 09:37:33 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../pipex/includs/pipex.h"
+#include "../../mini_pipex/includs/pipex.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

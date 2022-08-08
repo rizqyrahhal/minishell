@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/16 16:39:13 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/08 09:37:54 by rarahhal         ###   ########.fr       */
+/*   Created: 2022/03/14 16:42:14 by rarahhal          #+#    #+#             */
+/*   Updated: 2022/08/05 17:21:10 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../mini_pipex/includs/pipex.h"
+#include "../includs/pipex.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+char	*find_path(char **envp)
 {
-	size_t	i;
-	size_t	j;
+	int	i;
 
-	i = 0;
-	if (*needle == '\0')
-		return ((char *) haystack);
-	while (haystack[i] != '\0' && i < len)
-	{
-		j = 0;
-		while (haystack[i + j] == needle[j] && i + j < len)
-		{
-			j++;
-			if (needle[j] == '\0')
-				return ((char *)&haystack[i]);
-		}
-		i++;
-	}
+	i = -1;
+	while (ft_strncmp("PATH", *envp, 4) != 0 && envp[++i])
+		envp++;
+	if (ft_strnstr(*envp, "PATH", 4))
+		return (*envp + 5);
+	else
+		return ("PATH NOT EXISTE..");
+}
+
+int	pipex(int argc, char *cmd, char **envp)
+{
+	t_stock		pipex;
+
+	pipex.env_path = find_path(envp);
+	pipex.cmd_paths = ft_split(pipex.env_path, ':');
+	child_own(pipex, cmd, envp);
 	return (0);
 }

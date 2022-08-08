@@ -6,7 +6,7 @@
 #    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/28 12:36:19 by rarahhal          #+#    #+#              #
-#    Updated: 2022/08/05 14:51:09 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/08/08 09:38:19 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,9 @@ FLAGS = -Wall -Werror -Wextra
 CC = cc
 
 SRCS =  Mandatory/minishell.c \
-		pipex/Mandatory/pipex.c \
-		pipex/Mandatory/childs.c \
-		pipex/Mandatory/error.c \
+		mini_pipex/Mandatory/pipex.c \
+		mini_pipex/Mandatory/childs.c \
+		mini_pipex/Mandatory/error.c \
 
 
 LIBFT = Libft/libft/ft_split.c \

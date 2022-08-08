@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/16 16:39:13 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/08 09:37:54 by rarahhal         ###   ########.fr       */
+/*   Created: 2022/03/15 13:47:31 by rarahhal          #+#    #+#             */
+/*   Updated: 2022/04/19 22:47:08 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../mini_pipex/includs/pipex.h"
+#include "../includs/pipex.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+void	return_error(char *world)
 {
-	size_t	i;
-	size_t	j;
+	perror(world);
+	exit (EXIT_FAILURE);
+}
 
-	i = 0;
-	if (*needle == '\0')
-		return ((char *) haystack);
-	while (haystack[i] != '\0' && i < len)
-	{
-		j = 0;
-		while (haystack[i + j] == needle[j] && i + j < len)
-		{
-			j++;
-			if (needle[j] == '\0')
-				return ((char *)&haystack[i]);
-		}
-		i++;
-	}
-	return (0);
+void	use_this(char *msg)
+{
+	write(2, msg, ft_strlen(msg));
+	exit (EXIT_FAILURE);
+}
+
+void	cmd_not_found(char *cmd)
+{
+	write(2, cmd, ft_strlen(cmd));
+	write(2, ": command not found\n", 20);
 }

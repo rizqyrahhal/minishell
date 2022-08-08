@@ -6,11 +6,11 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 21:59:45 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/03 13:08:54 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/08 09:37:28 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../pipex/includs/pipex.h"
+#include "../../mini_pipex/includs/pipex.h"
 
 char	*ft_strchr(const char *s, int c)
 {	

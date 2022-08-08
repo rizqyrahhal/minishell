@@ -6,11 +6,11 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 21:58:54 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/03 13:13:17 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/08 09:36:48 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../pipex/includs/get_next_line.h"
+#include "../../mini_pipex/includs/get_next_line.h"
 
 void	ft_bzero(void *s, size_t n)
 {
