@@ -6,7 +6,7 @@
 #    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/28 12:36:19 by rarahhal          #+#    #+#              #
-#    Updated: 2022/08/08 11:11:50 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/08/08 13:28:04 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,20 +14,12 @@ NAME = minishell
 FLAGS = -Wall -Werror -Wextra
 CC = cc
 
-SRCS =  Mandatory/main.c \
-		Mandatory/parsing/parsing.c \
-		mini_pipex/Mandatory/pipex.c \
-		mini_pipex/Mandatory/childs.c \
-		mini_pipex/Mandatory/error.c \
+SRCS = 	src/main.c \
+		src/lexer.c \
+		src/tac.c \
+		src/token.c \
 
-
-LIBFT = Libft/libft/ft_split.c \
-		Libft/libft/ft_strjoin.c \
-		Libft/libft/ft_strlen.c \
-		Libft/libft/ft_strncmp.c \
-		Libft/libft/ft_strnstr.c \
-		Libft/libft/ft_calloc.c \
-		Libft/libft/ft_strchr.c \
+# LIBFT = 
 
 OBJS = $(SRCS:.c=.o)
 OBJS_L = $(LIBFT:.c=.o)
@@ -38,10 +30,8 @@ $(NAME): $(OBJS) $(OBJS_L)
 all: $(NAME)
 
 clean:
-	@rm -rf Mandatory/*.o
-	@rm -rf pipex/Mandatory/*.o
-	@rm -f Libft/libft/*.o
-	@rm -f Libft/*.o
+	@rm -rf src/*.o
+
 
 fclean: clean
 	@rm -f $(NAME)
