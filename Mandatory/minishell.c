@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:42:37 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/05 15:39:22 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/05 17:44:27 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int	main(int ac, char *av[], char *env[])
 {
 	t_command	*command;
+	t_minishell *minishell;
+
 
 	char *buf;
 	command = malloc(sizeof(t_command) * 2);
@@ -30,7 +32,7 @@ int	main(int ac, char *av[], char *env[])
 	while(1)
 	{
 		buf = readline("\033[0;33m minishell >\033[0m");
-		// printf("buf : %s\nwayiih", buf);
+		// printf("buf : %s\n", buf);
 		if (ft_strncmp(buf, "exit\0", 5) == 0)
 			return(0);
 		pipex(ac, buf, env);
