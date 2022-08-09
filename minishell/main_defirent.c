@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_defirent.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 10:19:57 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/08 14:50:33 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/09 16:05:34 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Includes/minishell.h"
+#include "../Includes/minishell.h"
 
 char	*delimiteurs = "<>|<<$>>";
 char	*respP[20];
@@ -30,9 +30,9 @@ int	main(int ac, char *av[], char *env[])
 	{
 		minishell.buf = readline("\033[0;33m minishell >\033[0m");
 		// printf("buf : %s\n", minishell.buf);
-		minishell.buf_sizeline = ft_strlen(minishell.buf);
-		prsing(&minishell);
-		if (ft_strncmp(minishell.buf, "exit\0", 5) == 0)
+		minishell.buf_sizeline = strlen(minishell.buf);
+		//prsing(&minishell);
+		if (strncmp(minishell.buf, "exit\0", 5) == 0)
 			return(0);
 		free(minishell.buf);
 	}
