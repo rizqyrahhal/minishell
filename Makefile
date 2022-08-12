@@ -6,11 +6,11 @@
 #    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/28 12:36:19 by rarahhal          #+#    #+#              #
-#    Updated: 2022/08/08 11:11:50 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/08/12 10:21:29 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell
+NAME = minishell_oll
 FLAGS = -Wall -Werror -Wextra
 CC = cc
 
