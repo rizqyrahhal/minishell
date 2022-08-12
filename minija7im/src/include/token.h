@@ -7,10 +7,15 @@ typedef struct TOKEN_STRUCT
 	enum
 	{
 		TOKEN_ID,
-		TOKEN_LT,
-		TOKEN_GT,
-		TOKEN_PIPE,
-		TOKEN_EOF,
+		TOKEN_HIOME_DIR, // Home directory
+		TOKEN_V_EXPRESSION, // ? Variable expression
+		// TOKEN_
+		TOKEN_SQ, // ' single qoute
+		TOKEN_DQ, // " double qoute
+		TOKEN_LT, // < inpute redirection
+		TOKEN_GT, // > output redirection
+		TOKEN_PIPE, // | pipe
+		TOKEN_EOF, // end of file
 	} type;
 } token_T;
 

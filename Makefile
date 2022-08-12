@@ -6,15 +6,15 @@
 #    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/28 12:36:19 by rarahhal          #+#    #+#              #
-#    Updated: 2022/08/12 10:21:29 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/08/12 10:25:09 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell_oll
+NAME = minishell
 FLAGS = -Wall -Werror -Wextra
 CC = cc
 
-SRCS =  Mandatory/main.c \
+SRCS =  Mandatory/minishell.c \
 		Mandatory/parsing/parsing.c \
 		mini_pipex/Mandatory/pipex.c \
 		mini_pipex/Mandatory/childs.c \
