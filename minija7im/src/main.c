@@ -9,7 +9,9 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
+	tac_compile_file(argv[1]);
+
 	return 0;
 }
 
-// 30.00
+// echo  "'$USER'"    -n "wqdqwd        " | exit 5 | ls    ccccbffbd          morisse chifrage

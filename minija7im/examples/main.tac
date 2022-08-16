@@ -1,1 +1,1 @@
-ls -la | wc -l > file
+main = (argc: int, argv: array<string>):int => 0;

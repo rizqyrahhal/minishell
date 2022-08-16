@@ -6,7 +6,7 @@
 #    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/28 12:36:19 by rarahhal          #+#    #+#              #
-#    Updated: 2022/08/12 10:25:09 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/08/16 16:52:11 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ SRCS =  Mandatory/minishell.c \
 		mini_pipex/Mandatory/childs.c \
 		mini_pipex/Mandatory/error.c \
 
-
 LIBFT = Libft/libft/ft_split.c \
 		Libft/libft/ft_strjoin.c \
 		Libft/libft/ft_strlen.c \
@@ -33,7 +32,7 @@ OBJS = $(SRCS:.c=.o)
 OBJS_L = $(LIBFT:.c=.o)
 
 $(NAME): $(OBJS) $(OBJS_L)
-	$(CC) -lreadline $(FLAGS) $(OBJS) $(OBJS_L) -o $(NAME)
+	$(CC)  -lreadline $(FLAGS) $(OBJS) $(OBJS_L) -o $(NAME)
 
 all: $(NAME)
 
