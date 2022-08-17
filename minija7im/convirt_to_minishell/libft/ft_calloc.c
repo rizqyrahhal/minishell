@@ -6,11 +6,11 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:24:47 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/17 17:36:33 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/17 22:07:18 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lbft.h"
+#include "../includes/libft.h"
 
 void	ft_bzero(void	*s, size_t	n)
 {

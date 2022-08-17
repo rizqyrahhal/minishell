@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:11:16 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/17 20:16:35 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/17 22:27:27 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ typedef struct s_token
 } t_token;
 
 t_token*	init_token(char* value, int type);
+char*		token_to_str(t_token* token);
 
 #endif

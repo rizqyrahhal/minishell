@@ -6,7 +6,7 @@
 #    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 17:12:13 by rarahhal          #+#    #+#              #
-#    Updated: 2022/08/17 17:39:58 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/08/17 22:35:54 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS = 	src/main.c \
 		src/tac.c \
 
 LIBFT = libft/ft_calloc.c \
+		libft/ft_strlen.c \
 		
 
 OBJS = $(SRCS:.c=.o)

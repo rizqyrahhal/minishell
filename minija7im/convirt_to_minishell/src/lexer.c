@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/17 20:21:26 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/17 22:17:58 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_token*	lexer_advance_with(t_lexer* lexer, t_token* token)
 	return token;
 }
 
-t_lexer*	lexer_advance_current(t_lexer* lexer, int type)
+t_token*	lexer_advance_current(t_lexer* lexer, int type)
 {
 	char* value;
 	t_token* token;
@@ -91,7 +91,7 @@ t_token*	lexer_next_token(t_lexer* lexer)
 			return lexer_advance_current(lexer, TOKEN_PIPE);
 		else if (lexer->c == '"')
 			return lexer_advance_current(lexer, TOKEN_DQ);
-		else if (lexer->c == "'")
+		else if (lexer->c == 39)
 			return lexer_advance_current(lexer, TOKEN_SQ);
 	}
 
