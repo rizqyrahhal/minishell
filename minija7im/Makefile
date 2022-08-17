@@ -6,7 +6,7 @@
 #    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/28 12:36:19 by rarahhal          #+#    #+#              #
-#    Updated: 2022/08/16 20:10:35 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/08/17 13:21:24 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS = 	src/main.c \
 		src/io.c \
 		src/parser.c \
 		src/AST.c \
+		src/list.c \
 
 # LIBFT = 
 

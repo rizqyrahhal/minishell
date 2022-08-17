@@ -14,4 +14,12 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
+// 29;00 min
+
 // echo  "'$USER'"    -n "wqdqwd        " | exit 5 | ls    ccccbffbd          morisse chifrage
+
+//  pour chek segmentatoin fault    valgrind
+
+// main = (argc: int, argv: array<string>):int => {
+// 	return 0;
+// }

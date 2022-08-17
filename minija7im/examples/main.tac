@@ -1,1 +1,3 @@
-main = (argc: int, argv: array<string>):int => 0;
+main = (argc: int, argv: array<string>):int => {
+	return 0;
+}
