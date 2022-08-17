@@ -1,0 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/17 17:08:43 by rarahhal          #+#    #+#             */
+/*   Updated: 2022/08/17 18:47:55 by rarahhal         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef LEXER_H
+#define LEXER_H
+
+#define MAX(a, b)\
+   a > b ? a : b
+
+#define MIN(a, b)\
+   a < b ? a : b
+
+#include "libft.h"
+#include "token.h"
+
+typedef struct s_lexer
+{
+	char*			src;
+	size_t			src_size;
+	char			c;
+	unsigned int	i;
+} t_lexer;
+
+t_lexer*	init_lexer(char* src);
+t_token*	lexer_next_token(t_lexer* lexer);
+
+#endif

@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
-// 29;00 min
+// 29;00 min in parsing part
 
 // echo  "'$USER'"    -n "wqdqwd        " | exit 5 | ls    ccccbffbd          morisse chifrage
 
