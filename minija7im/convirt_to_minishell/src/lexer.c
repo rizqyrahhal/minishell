@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/19 02:16:27 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/19 05:05:48 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ void	lexer_skip_whitespace(t_lexer* lexer)
 t_token* lexer_parse_id(t_lexer* lexer)
 {
 	char* value = ft_calloc(1, sizeof(char));
-	while (ft_isalpha(lexer->c))
+	
+	// ft_isalpha(lexer->c) || ft_isdigit(lexer->c)
+	while (ft_isalpha(lexer->c) || ft_isdigit(lexer->c))//// (!all_of_token(lexer->c, *token); pour assing all caracter  non_tokenable in one string) OR (change is_alpha par is_not_token(lexer->c))
 	{
 		value = realloc(value, (ft_strlen(value) + 2) * sizeof(char));
 		strcat(value, (char[]){lexer->c, 0}); /////// change strcat
@@ -86,8 +88,8 @@ t_token*	lexer_next_token(t_lexer* lexer)
 	{
 		lexer_skip_whitespace(lexer);
 
-		if (ft_isalpha(lexer->c))
-			return lexer_parse_id(lexer);
+		if (ft_isalpha(lexer->c) || ft_isdigit(lexer->c))
+			return lexer_parse_id(lexer);///// after change is_alpha add this line in last else
 
 		// number here
 
@@ -113,6 +115,8 @@ t_token*	lexer_next_token(t_lexer* lexer)
 			return lexer_advance_current(lexer, TOKEN_SQ);
 		else if (lexer->c == '\0')
 			break;
+		// else
+		// 	return lexer_parse_id(lexer);
 		else
 			printf("[Lexer]: Unexpected character `%c`\n", lexer->c); exit(1); break;
 	}

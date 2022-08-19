@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:08:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/17 22:14:16 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/19 04:35:44 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_lexer
 	size_t			src_size;
 	char			c;
 	unsigned int	i;
+	t_token*			token;
 } t_lexer;
 
 t_lexer*	init_lexer(char* src);
