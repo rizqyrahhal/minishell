@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/19 03:17:30 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/19 14:31:18 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,3 +33,11 @@ int	main(int argc, char** argv, char** envp)
 	return 0;
 }
 // < file ls -la | wc -l > file1
+
+
+//  $ kudfhsk
+// g e"c"'h'o
+// "$HOME.fsdgs" OR "$HOME-fsdgs"
+//  $USER.sgsrg  OR $USER-sgsrg
+// 
+// '$HOME'   hna ma3labalich bi $

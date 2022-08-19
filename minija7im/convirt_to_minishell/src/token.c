@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:08 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/19 02:20:29 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/19 13:33:23 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ const char* token_type_to_str(int type)
 		return "TOKEN_OU";
 	else if (type == TOKEN_APPAND)
 		return "TOKEN_APPAND";
+	else if (type == TOKEN_ENV_VARIABLE)
+		return "TOKEN_ENV_VARIABLE";	
 	else if (type == TOKEN_EOF)
 		return "TOKEN_EOF";
 	else
