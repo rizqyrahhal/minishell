@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:42:37 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/11 18:56:23 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/08/12 19:58:08 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_countt(char *s, int a)
 
 	i = 0;
 	count = 0;
-	while (s[i])
+	while (s && s[i])
 	{
 		if (s[i] == a)
 			count++;
@@ -63,9 +63,17 @@ int	main(int ac, char *av[], char *env[])
 	{
 		buf = readline("\033[0;33m minishell > \033[0m");
 		k = ft_countt(buf, '|');
+<<<<<<< HEAD
 		if (k >= 1)
 		{
 			s = ft_split(buf, '|');
+=======
+		// if ()
+		if (k >= 1)
+		{
+			s = ft_split(buf, '|');
+			// if (ft_strncmp(s))
+>>>>>>> 9e1366149909ffecb1c6dc5ef76688edcaceb34d
 			if (k > 1)
 				mpipex(k, s, env);
 			else

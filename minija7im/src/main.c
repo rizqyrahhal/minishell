@@ -9,5 +9,17 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
+	tac_compile_file(argv[1]);
+
 	return 0;
 }
+
+// 29;00 min in parsing part
+
+// echo  "'$USER'"    -n "wqdqwd        " | exit 5 | ls    ccccbffbd          morisse chifrage
+
+//  pour chek segmentatoin fault    valgrind
+
+// main = (argc: int, argv: array<string>):int => {
+// 	return 0;
+// }
