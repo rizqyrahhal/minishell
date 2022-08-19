@@ -63,11 +63,9 @@ int	main(int ac, char *av[], char *env[])
 	{
 		buf = readline("\033[0;33m minishell > \033[0m");
 		k = ft_countt(buf, '|');
-		if ()
 		if (k >= 1)
 		{
 			s = ft_split(buf, '|');
-			if (ft_strncmp(s))
 			if (k > 1)
 				mpipex(k, s, env);
 			else
