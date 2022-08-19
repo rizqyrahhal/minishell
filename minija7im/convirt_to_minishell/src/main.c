@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/17 23:10:42 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/19 02:19:55 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ int	main(int argc, char** argv)
 		tac_compile(buf);
 		free(buf);
 	}
+
+	return 0;
 }
-// 51 day in blach hole
+// < file ls -la | wc -l > file1

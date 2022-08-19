@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tac.c                                              :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/19 02:11:59 by rarahhal         ###   ########.fr       */
+/*   Created: 2022/08/19 01:36:57 by rarahhal          #+#    #+#             */
+/*   Updated: 2022/08/19 01:37:33 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/tac.h"
-#include "../includes/lexer.h"
+#include "../includes/libft.h"
 
-void	tac_compile(char* src)
+int	ft_isalpha(int c)
 {
-	t_lexer*	lexer;
-	t_token*	token;
-
-	lexer = init_lexer(src);
-	token = lexer_next_token(lexer);
-	while(token->type != TOKEN_EOF)
-	{
-		printf("%s\n", token_to_str(token));
-		token = lexer_next_token(lexer);
-	}	
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (1);
+	else
+		return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/17 22:17:58 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/19 02:16:27 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,19 @@ void	lexer_skip_whitespace(t_lexer* lexer)
 {
 	while (lexer->c == 13 || lexer->c == 10 || lexer->c == ' ' || lexer->c == '\t')
 		lexer_advance(lexer);
+}
+
+t_token* lexer_parse_id(t_lexer* lexer)
+{
+	char* value = ft_calloc(1, sizeof(char));
+	while (ft_isalpha(lexer->c))
+	{
+		value = realloc(value, (ft_strlen(value) + 2) * sizeof(char));
+		strcat(value, (char[]){lexer->c, 0}); /////// change strcat
+		lexer_advance(lexer);
+	}
+
+	return init_token(value, TOKEN_STRING);
 }
 
 char	lexer_peek(t_lexer* lexer, int offset)
@@ -73,6 +86,11 @@ t_token*	lexer_next_token(t_lexer* lexer)
 	{
 		lexer_skip_whitespace(lexer);
 
+		if (ft_isalpha(lexer->c))
+			return lexer_parse_id(lexer);
+
+		// number here
+
 		if (lexer->c == '<')
 		{
 			if (lexer_peek(lexer, 1) == '<')
@@ -93,6 +111,10 @@ t_token*	lexer_next_token(t_lexer* lexer)
 			return lexer_advance_current(lexer, TOKEN_DQ);
 		else if (lexer->c == 39)
 			return lexer_advance_current(lexer, TOKEN_SQ);
+		else if (lexer->c == '\0')
+			break;
+		else
+			printf("[Lexer]: Unexpected character `%c`\n", lexer->c); exit(1); break;
 	}
 
 	return (init_token(0, TOKEN_EOF));
