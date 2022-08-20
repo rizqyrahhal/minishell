@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/19 13:47:39 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/20 00:27:10 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,20 +104,16 @@ t_token*	lexer_next_token(t_lexer* lexer)
 				return lexer_advance_with(lexer, init_token(">>", TOKEN_APPAND));
 			return lexer_advance_with(lexer, init_token(">", TOKEN_OU));
 		}
-		else if (lexer->c == '-')
-			return lexer_advance_current(lexer, TOKEN_FLAGS);
 		else if (lexer->c == '|')
 			return lexer_advance_current(lexer, TOKEN_PIPE);
 		else if (lexer->c == '"')
 			return lexer_advance_current(lexer, TOKEN_DQ);
 		else if (lexer->c == 39)
 			return lexer_advance_current(lexer, TOKEN_SQ);
-		else if (lexer->c == '$')
-			return lexer_advance_current(lexer, TOKEN_ENV_VARIABLE);		
+		// else if (lexer->c == '$')
+		// 	return lexer_advance_current(lexer, TOKEN_ENV_VARIABLE);
 		else if (lexer->c == '\0')
 			break;
-		else
-			printf("[Lexer]: Unexpected character `%c`\n", lexer->c); exit(1); break;
 	}
 
 	return (init_token(0, TOKEN_EOF));
