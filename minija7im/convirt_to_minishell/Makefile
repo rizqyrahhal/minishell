@@ -6,7 +6,7 @@
 #    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 17:12:13 by rarahhal          #+#    #+#              #
-#    Updated: 2022/08/19 03:51:15 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/08/19 13:15:33 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,7 @@ SRCS = 	src/main.c \
 
 LIBFT = libft/ft_calloc.c \
 		libft/ft_strlen.c \
-		libft/ft_isalpha.c \
-		libft/ft_isdigit.c \
+		libft/ft_non_tokenable.c \
 		
 
 OBJS = $(SRCS:.c=.o)
