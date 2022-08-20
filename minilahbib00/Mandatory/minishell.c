@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:42:37 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/12 19:58:08 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/20 10:34:45 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,40 +45,30 @@ int	ft_countt(char *s, int a)
 int	main(int ac, char *av[], char *env[])
 {
 	t_command	*command;
-	char **s;
-	char *buf;
-	int k = 0;
-
-	command = malloc(sizeof(t_command) * 2);
-	command[0].arry = malloc(sizeof(char*) * 3);
-	command[1].arry = malloc(sizeof(char*) * 3);
-	command[0].arry[0] = "ls";
-	command[0].arry[1] = "-la";
-	command[0].arry[2] = 0;
-	command[1].arry[0] = "cat";
-	command[1].arry[1] = "-e";
-	command[1].arry[2] = 0;
+	char		**s;
+	char		*buf;
+	int			k;
+	int			i;
+	
+	k = 0;
+	i = 0;
+	command = malloc(sizeof(t_command));
 	// printf("%s\n %s\n %s\n %s\n",command[0].arry[0], command[0].arry[1], command[1].arry[0], command[1].arry[1]);
 	while(1)
 	{
 		buf = readline("\033[0;33m minishell > \033[0m");
 		k = ft_countt(buf, '|');
-<<<<<<< HEAD
+		//command->arry = ft_split(buf, '|');
 		if (k >= 1)
 		{
-			s = ft_split(buf, '|');
-=======
-		// if ()
-		if (k >= 1)
-		{
-			s = ft_split(buf, '|');
+			//s = ft_split(buf, '|');
+			command->arry = ft_split(buf, '|');
 			// if (ft_strncmp(s))
->>>>>>> 9e1366149909ffecb1c6dc5ef76688edcaceb34d
 			if (k > 1)
-				mpipex(k, s, env);
+				mpipex(k, command->arry, env);
 			else
-				dpipex(ac, s, env);
-			free(s);
+				dpipex(ac, command->arry, env);
+			free(command->arry);
 		}
 		else
 			pipex(ac, buf, env);
