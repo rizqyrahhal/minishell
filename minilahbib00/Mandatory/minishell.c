@@ -12,33 +12,47 @@
 
 #include "../Includes/minishell.h"
 
-int ft_exp(char **s)
+#include <string.h>
+#include <ctype.h>
+
+// Function to replace a string with another
+// string
+char* replaceWord(const char* s, const char* oldW,
+                  const char* newW)
 {
-    int i;
-    int j;
+    char* result;
+    int i, cnt = 0;
+    int newWlen = strlen(newW);
+    int oldWlen = strlen(oldW);
 
-    j = 0;
-    i = 0;
-    while (s[i])
-    {
-        while (s[i][j])
-        {
-            if (s[i][j] == '$')
-            {
+    // Counting the number of times old word
+    // occur in the string
+    for (i = 0; s[i] != '\0'; i++) {
+        if (strstr(&s[i], oldW) == &s[i]) {
+            cnt++;
 
-            }
+            // Jumping to index after the old word.
+            i += oldWlen - 1;
         }
     }
-}
 
-int env_size(char *env[])
-{
-    int i;
+    // Making new string of enough length
+    result = (char*)malloc(i + cnt * (newWlen - oldWlen) + 1);
 
     i = 0;
-    while (env[i])
-        i++;
-    return (i);
+    while (*s) {
+        // compare the substring with the result
+        if (strstr(s, oldW) == s) {
+            strcpy(&result[i], newW);
+            i += newWlen;
+            s += oldWlen;
+        }
+        else
+            result[i++] = *s++;
+    }
+
+    result[i] = '\0';
+    return result;
 }
 
 char    *ft_cpy(char *s, int k)
@@ -56,6 +70,76 @@ char    *ft_cpy(char *s, int k)
     return (var);
 }
 
+int env_size(char *env[])
+{
+    int i;
+
+    i = 0;
+    while (env[i])
+        i++;
+    return (i);
+}
+
+int ft_getidx(t_exp *exp, char *s, char *env[])
+{
+    int i;
+
+    i = 0;
+    while (i < env_size(env))
+    {
+        if (ft_strncmp(exp[i].var, s, ft_strlen(s)) == 0)
+            return (i);
+        i++;
+    }
+    return (-1);
+}
+
+char **ft_exp(char **s, t_exp *exp, char *env[])
+{
+    int i;
+    int j;
+    char *str;
+    int k;
+
+    j = 0;
+    i = 0;
+    k = 0;
+    str = NULL;
+    while (s[i])
+    {
+        j = 0;
+        str = NULL;
+        while (s[i][j])
+        {
+            k = 0;
+            if (s[i][j] == '$')
+            {
+                j++;
+                while (s[i][j] && isalpha(s[i][j]))
+                {
+                    j++;
+                    k++;
+                }
+                k++;
+                str = ft_cpy(&s[i][j - k], k);
+                k = ft_getidx(exp, str, env);
+                if (k > 0)
+                    str = replaceWord(s[i], str, exp[k].value);
+                else
+                    str = replaceWord(s[i], str, "\0");
+            }
+            if (k == 0)
+                j++;
+        }
+        if (str)
+            s[i] = ft_strdup(str);
+        i++;
+    }
+    return (s);
+}
+
+
+
 void ft_getVar(char *env[], t_exp **exp)
 {
     int i;
@@ -69,7 +153,7 @@ void ft_getVar(char *env[], t_exp **exp)
     {
         while (env[i][j] != '=')
             j++;
-        (*exp)[k].var = ft_cpy(env[i], j++);
+        (*exp)[k].var = ft_strjoin("$", ft_cpy(env[i], j++));
         (*exp)[k].value = ft_cpy(&env[i][j], ft_strlen(&env[i][j]));
         j = 0;
         i++;
@@ -131,6 +215,7 @@ int	main(int ac, char *av[], char *env[])
 		{
 			//s = ft_split(buf, '|');
 			command->arry = ft_split(buf, '|');
+            command->arry = ft_exp(command->arry, exp, env);
 			// if (ft_strncmp(s))
 			if (k > 1)
 				mpipex(k, command->arry, env);

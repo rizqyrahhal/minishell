@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/18 12:54:13 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/07/01 16:28:40 by lsemlali         ###   ########.fr       */
+/*   Created: 2021/11/22 10:04:49 by lsemlali          #+#    #+#             */
+/*   Updated: 2021/11/29 10:40:22 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+char	*ft_strrchr(const char *s, int c)
 {
-	int	i;
+	int		i;
+	int		p;
+	char	v;
 
-	if (!s)
-		return (0);
+	p = 0;
 	i = 0;
+	v = (char )c;
+	if (s[i] == '\0' && v == '\0')
+	{
+		return ((char *)&s[i]);
+	}
 	while (s[i])
+	{
+		if (s[i] == v)
+			p = i;
 		i++;
-	return (i);
+	}
+	if (v == '\0')
+		return ((char *)&s[i]);
+	if (p == 0 && s[0] != v)
+		return (0);
+	return ((char *)&s[p]);
 }

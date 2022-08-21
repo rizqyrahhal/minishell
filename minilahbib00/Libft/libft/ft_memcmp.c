@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 10:04:37 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/07/02 19:56:28 by lsemlali         ###   ########.fr       */
+/*   Created: 2021/11/22 09:57:02 by lsemlali          #+#    #+#             */
+/*   Updated: 2021/11/25 10:38:36 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	size_t			i;
-	unsigned char	*s01;
-	unsigned char	*s02;
+	unsigned char	*st1;
+	unsigned char	*st2;
 
-	i = 0;
+	st1 = (unsigned char *)s1;
+	st2 = (unsigned char *)s2;
 	if (n == 0)
 		return (0);
-	s01 = (unsigned char *)s1;
-	s02 = (unsigned char *)s2;
-	while (s01[i] && s02[i] && s01[i] == s02[i] && i < n - 1)
+	i = 0;
+	while (i < n - 1 && st1[i] == st2[i])
+	{
 		i++;
-	if (s01[i] - s02[i] > 0)
-		return (1);
-	if (s01[i] - s02[i] < 0)
-		return (-1);
-	return (0);
+	}
+	return (st1[i] - st2[i]);
 }
