@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:42:37 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/12 10:25:44 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/19 00:09:44 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ int	main(int ac, char *av[], char *env[])
 
 	char *buf;
 	command = malloc(sizeof(t_command) * 2);
-	command[0].arry = malloc(sizeof(char*) * 3);
-	command[1].arry = malloc(sizeof(char*) * 3);
-	command[0].arry[0] = "ls";
-	command[0].arry[1] = "-la";
-	command[0].arry[2] = 0;
-	command[1].arry[0] = "cat";
-	command[1].arry[1] = "-e";
-	command[1].arry[2] = 0;
+	// command[0].arry = malloc(sizeof(char*) * 3);
+	// command[1].arry = malloc(sizeof(char*) * 3);
+	// command[0].arry[0] = "ls";
+	// command[0].arry[1] = "-la";
+	// command[0].arry[2] = 0;
+	// command[1].arry[0] = "cat";
+	// command[1].arry[1] = "-e";
+	// command[1].arry[2] = 0;
 	// printf("%s\n %s\n %s\n %s\n",command[0].arry[0], command[0].arry[1], command[1].arry[0], command[1].arry[1]);
 	while(1)
 	{

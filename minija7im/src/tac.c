@@ -25,12 +25,3 @@ void tac_compile_file(const char* filename)
 	free(src);
 }
 
-// void tac_compile_file()
-// {
-// 	// char *src = tac_read_file(filename);
-// 	char *src;
-// 	src = readline("\033[0;33m minishell >\033[0m");
-// 	tac_compile(src);
-// 	free(src);
-// }
-
