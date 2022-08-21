@@ -1,30 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tac.c                                              :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/21 18:18:08 by rarahhal         ###   ########.fr       */
+/*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
+/*   Updated: 2022/08/21 18:32:39 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/tac.h"
-#include "../includes/lexer.h"
+#include "../includes/parser.h"
 
-void	tac_compile(char* src)
-{
-	t_lexer*	lexer;
-	t_token*	token;
-
-	lexer = init_lexer(src);
-	token = lexer_next_token(lexer);
-	while(token->type != TOKEN_EOF)
-	{
-		// sleep(1);
-		printf("%s\n", token_to_str(token));
-		// sleep(1);
-		token = lexer_next_token(lexer);
-	}	
-}

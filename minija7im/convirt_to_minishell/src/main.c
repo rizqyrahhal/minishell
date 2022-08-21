@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/21 13:32:24 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/21 16:20:28 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,3 +73,7 @@ and output in last one ma3a incha2 jami3 lmilafat */
 TOUT les caracter est un delemetre soft << < > >> | " '  
 alore ghnhandli lherdoc fi lexer ila kant de erorr se non ghn9ado flparsing wola ydoz le execution */
 
+
+
+/*Environment variable VS Shell variable =----> shell variable fi lgnalib mamtlobinch,
+wo mahoma ila des variable mdiclarin fi terminal mfto7a <----= */
