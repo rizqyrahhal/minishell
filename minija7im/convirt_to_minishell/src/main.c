@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/20 04:06:26 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/21 13:32:24 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char** argv, char** envp)
 	}
 	while(1)
 	{
-		buf = readline("\033[0;33m minishell >\033[0m");
+		buf = readline("\033[0;33m minishell > \033[0m");
 		tac_compile(buf);
 		free(buf);
 	}
@@ -47,6 +47,7 @@ examples :
 ---> "$HOME.fsdgs" OR "$HOME-fsdgs"
 ---> $USER.sgsrg  OR $USER-sgsrg    {{# $ MNI MKTKONCH LAS9A M3AH DIRICTEMENT CHI 7AJA KYT3TABAR CHARACTER 3ADI #}}
 ---> '$HOME' OR $ kudfhsk -|-|-|-> hna ma3labalich bi $
+!!!!---> $ in heredoc la yotarjam maba3dah 
 */
 
 
@@ -64,3 +65,11 @@ example ----> e"c"'h'o  "l"s
 /* REDERICTION : kola command hado < > dyawlha khassin biha, 
 fi 7alat multibale <if<if<if<if< OR >ot>ot>ot>ot>ot input from last one 
 and output in last one ma3a incha2 jami3 lmilafat */
+
+
+
+/* HEREDOC << : '< linked_list.c cat << l' ____----> open heredoc, aftre heredoc  cat first file est apres cat heredoc
+'<< STOP | cat ' open heredoc !!!!!!!!  in bash this | is vid !!!!!!!!!!!!
+TOUT les caracter est un delemetre soft << < > >> | " '  
+alore ghnhandli lherdoc fi lexer ila kant de erorr se non ghn9ado flparsing wola ydoz le execution */
+

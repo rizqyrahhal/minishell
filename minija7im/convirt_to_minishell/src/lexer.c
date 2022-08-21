@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/20 00:27:10 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/21 15:00:37 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,7 @@ t_token*	lexer_next_token(t_lexer* lexer)
 		lexer_skip_whitespace(lexer);
 
 		if (ft_non_tokenable(lexer->c))
-			return lexer_parse_id(lexer);///// after change is_alpha add this line in last else
-
-		// number here
+			return lexer_parse_id(lexer);
 
 		if (lexer->c == '<')
 		{
@@ -110,8 +108,6 @@ t_token*	lexer_next_token(t_lexer* lexer)
 			return lexer_advance_current(lexer, TOKEN_DQ);
 		else if (lexer->c == 39)
 			return lexer_advance_current(lexer, TOKEN_SQ);
-		// else if (lexer->c == '$')
-		// 	return lexer_advance_current(lexer, TOKEN_ENV_VARIABLE);
 		else if (lexer->c == '\0')
 			break;
 	}
