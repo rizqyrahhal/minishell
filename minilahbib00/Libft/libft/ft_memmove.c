@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsemlali <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 10:03:34 by lsemlali          #+#    #+#             */
-/*   Updated: 2021/11/27 10:32:22 by lsemlali         ###   ########.fr       */
+/*   Created: 2021/11/21 11:04:01 by lsemlali          #+#    #+#             */
+/*   Updated: 2021/11/21 13:43:20 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	int		i;
-	char	v;
+	unsigned char	*s;
+	unsigned char	*d;
 
-	v = c;
-	i = 0;
-	while (s[i])
+	s = (unsigned char *)src;
+	d = (unsigned char *)dst;
+	if (d == NULL && s == NULL)
+		return (0);
+	if (s == d && len == 0)
+		return (d);
+	if (d > s)
 	{
-		if (s[i] == v)
-			return ((char *)&s[i]);
-		i++;
+		while (len > 0)
+		{
+			d[len - 1] = s[len - 1];
+			len--;
+		}
 	}
-	if (v == '\0')
-		return ((char *)&s[i]);
-	s = NULL;
-	return ((char *)s);
+	else if (d < s)
+		ft_memcpy(d, s, len);
+	return (dst);
 }
