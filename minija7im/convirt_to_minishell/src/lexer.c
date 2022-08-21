@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/20 00:27:10 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/21 18:25:31 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_token* lexer_parse_id(t_lexer* lexer)
 
 char	lexer_peek(t_lexer* lexer, int offset)
 {
+
 	//  bash man9alabch kharj man size
 	return (lexer->src[MIN(lexer->i + offset, lexer->src_size)]);
 	// return lexer->src[i + 1] if exist or '\0'
@@ -88,21 +89,27 @@ t_token*	lexer_next_token(t_lexer* lexer)
 		lexer_skip_whitespace(lexer);
 
 		if (ft_non_tokenable(lexer->c))
-			return lexer_parse_id(lexer);///// after change is_alpha add this line in last else
-
-		// number here
+			return lexer_parse_id(lexer);
 
 		if (lexer->c == '<')
 		{
 			if (lexer_peek(lexer, 1) == '<')
+			{
+				lexer->i += 1;
 				return lexer_advance_with(lexer, init_token("<<", TOKEN_HERDOC));
-			return lexer_advance_with(lexer, init_token("<", TOKEN_IN));
+			}
+			else
+				return lexer_advance_with(lexer, init_token("<", TOKEN_IN));
 		}
 		else if (lexer->c == '>')
 		{
 			if (lexer_peek(lexer, 1) == '>')
+			{
+				lexer->i += 1;
 				return lexer_advance_with(lexer, init_token(">>", TOKEN_APPAND));
-			return lexer_advance_with(lexer, init_token(">", TOKEN_OU));
+			}
+			else
+				return lexer_advance_with(lexer, init_token(">", TOKEN_OU));
 		}
 		else if (lexer->c == '|')
 			return lexer_advance_current(lexer, TOKEN_PIPE);
@@ -110,8 +117,6 @@ t_token*	lexer_next_token(t_lexer* lexer)
 			return lexer_advance_current(lexer, TOKEN_DQ);
 		else if (lexer->c == 39)
 			return lexer_advance_current(lexer, TOKEN_SQ);
-		// else if (lexer->c == '$')
-		// 	return lexer_advance_current(lexer, TOKEN_ENV_VARIABLE);
 		else if (lexer->c == '\0')
 			break;
 	}
