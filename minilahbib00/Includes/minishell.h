@@ -24,6 +24,12 @@ typedef struct s_command
 	char	**arry; // alloca nmbr of command
 }   t_command;
 
+typedef struct s_exp
+{
+	char	*var;
+    char    *value;// alloca nmbr of command
+}   t_exp;
+
 typedef struct s_redirection
 {
 	int		input; // < if input != 0

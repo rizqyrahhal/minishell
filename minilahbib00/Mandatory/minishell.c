@@ -12,6 +12,71 @@
 
 #include "../Includes/minishell.h"
 
+int ft_exp(char **s)
+{
+    int i;
+    int j;
+
+    j = 0;
+    i = 0;
+    while (s[i])
+    {
+        while (s[i][j])
+        {
+            if (s[i][j] == '$')
+            {
+
+            }
+        }
+    }
+}
+
+int env_size(char *env[])
+{
+    int i;
+
+    i = 0;
+    while (env[i])
+        i++;
+    return (i);
+}
+
+char    *ft_cpy(char *s, int k)
+{
+    char    *var;
+    int     i;
+    i = 0;
+    var = malloc(k + 1);
+    var[k] = 0;
+    while (i < k)
+    {
+        var[i] = s[i];
+        i++;
+    }
+    return (var);
+}
+
+void ft_getVar(char *env[], t_exp **exp)
+{
+    int i;
+    int j;
+    int k;
+
+    k = 0;
+    j = 0;
+    i = 0;
+    while (env[i])
+    {
+        while (env[i][j] != '=')
+            j++;
+        (*exp)[k].var = ft_cpy(env[i], j++);
+        (*exp)[k].value = ft_cpy(&env[i][j], ft_strlen(&env[i][j]));
+        j = 0;
+        i++;
+        k++;
+    }
+}
+
 int	sea_rrch(char *s, int a)
 {
 	int		i;
@@ -45,6 +110,7 @@ int	ft_countt(char *s, int a)
 int	main(int ac, char *av[], char *env[])
 {
 	t_command	*command;
+    t_exp *exp;
 	char		**s;
 	char		*buf;
 	int			k;
@@ -53,6 +119,8 @@ int	main(int ac, char *av[], char *env[])
 	k = 0;
 	i = 0;
 	command = malloc(sizeof(t_command));
+	exp = malloc(sizeof(t_exp) * env_size(env));
+    ft_getVar(env, &exp);
 	// printf("%s\n %s\n %s\n %s\n",command[0].arry[0], command[0].arry[1], command[1].arry[0], command[1].arry[1]);
 	while(1)
 	{
