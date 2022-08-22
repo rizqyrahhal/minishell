@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:11:16 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/21 18:28:35 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/22 02:13:03 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_token
 	char* value;
 	enum
 	{
-		TOKEN_STRING, // cmd, argment, files, any other tokents ... 
+		TOKEN_STRING, // cmd, argment, files, any other tokents ...
 		TOKEN_PIPE, // | pipe
 		TOKEN_DQ, // " double qoute
 		TOKEN_SQ, // ' single qoute
