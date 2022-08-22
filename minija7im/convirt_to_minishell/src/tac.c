@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/21 18:18:08 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/21 23:02:56 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	tac_compile(char* src)
 	{
 		// sleep(1);
 		printf("%s\n", token_to_str(token));
-		// sleep(1);
+		sleep(1);
 		token = lexer_next_token(lexer);
 	}	
 }
