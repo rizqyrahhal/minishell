@@ -11,46 +11,40 @@
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
-
+#include "readline/history.h"
 #include <string.h>
 #include <ctype.h>
 
-// Function to replace a string with another
-// string
-char* replaceWord(const char* s, const char* oldW,
-                  const char* newW)
+char* ft_replace(char* s, char* old, char* new)
 {
     char* result;
-    int i, cnt = 0;
-    int newWlen = strlen(newW);
-    int oldWlen = strlen(oldW);
+    int i;
+    int count;
 
-    // Counting the number of times old word
-    // occur in the string
-    for (i = 0; s[i] != '\0'; i++) {
-        if (strstr(&s[i], oldW) == &s[i]) {
-            cnt++;
-
-            // Jumping to index after the old word.
-            i += oldWlen - 1;
-        }
-    }
-
-    // Making new string of enough length
-    result = (char*)malloc(i + cnt * (newWlen - oldWlen) + 1);
-
+    count = 0;
     i = 0;
-    while (*s) {
-        // compare the substring with the result
-        if (strstr(s, oldW) == s) {
-            strcpy(&result[i], newW);
-            i += newWlen;
-            s += oldWlen;
+    while (s[i] != '\0')
+    {
+        if (ft_strnstr(&s[i], old, ft_strlen(&s[i])) == &s[i])
+        {
+            count++;
+            i += ft_strlen(old) - 1;
+        }
+        i++;
+    }
+    result = (char*)malloc(i + count * (ft_strlen(new) - ft_strlen(old)) + 1);
+    i = 0;
+    while (*s)
+    {
+        if (ft_strnstr(s, old, ft_strlen(s)) == s)
+        {
+            strcpy(&result[i], new);
+            i += ft_strlen(new);
+            s += ft_strlen(old);
         }
         else
             result[i++] = *s++;
     }
-
     result[i] = '\0';
     return result;
 }
@@ -87,18 +81,19 @@ int ft_getidx(t_exp *exp, char *s, char *env[])
     i = 0;
     while (i < env_size(env))
     {
-        if (ft_strncmp(exp[i].var, s, ft_strlen(s)) == 0)
+        if (ft_strncmp(exp[i].var, s, ft_strlen(exp[i].var)) == 0)
             return (i);
         i++;
     }
     return (-1);
 }
 
-char **ft_exp(char **s, t_exp *exp, char *env[])
+char *ft_exp(char *s, t_exp *exp, char *env[])
 {
     int i;
     int j;
     char *str;
+    char *ss;
     int k;
 
     j = 0;
@@ -107,32 +102,23 @@ char **ft_exp(char **s, t_exp *exp, char *env[])
     str = NULL;
     while (s[i])
     {
-        j = 0;
-        str = NULL;
-        while (s[i][j])
+        k = 0;
+        if (s[i] == '$')
         {
-            k = 0;
-            if (s[i][j] == '$')
+            i++;
+            while (s[i] && isalpha(s[i]))
             {
-                j++;
-                while (s[i][j] && isalpha(s[i][j]))
-                {
-                    j++;
-                    k++;
-                }
+                i++;
                 k++;
-                str = ft_cpy(&s[i][j - k], k);
-                k = ft_getidx(exp, str, env);
-                if (k > 0)
-                    str = replaceWord(s[i], str, exp[k].value);
-                else
-                    str = replaceWord(s[i], str, "\0");
             }
-            if (k == 0)
-                j++;
+            k++;
+            str = ft_cpy(&s[i - k], k);
+            k = ft_getidx(exp, str, env);
+            if (k > -1)
+                s = ft_replace(s, str, exp[k].value);
+            else
+                s = ft_replace(s, str, "\0");
         }
-        if (str)
-            s[i] = ft_strdup(str);
         i++;
     }
     return (s);
@@ -209,13 +195,16 @@ int	main(int ac, char *av[], char *env[])
 	while(1)
 	{
 		buf = readline("\033[0;33m minishell > \033[0m");
+        printf("%s***\n", buf);
+        add_history(buf);
+        buf = ft_exp(buf, exp, env);
+        printf("%s---\n", buf);
 		k = ft_countt(buf, '|');
 		//command->arry = ft_split(buf, '|');
 		if (k >= 1)
 		{
 			//s = ft_split(buf, '|');
 			command->arry = ft_split(buf, '|');
-            command->arry = ft_exp(command->arry, exp, env);
 			// if (ft_strncmp(s))
 			if (k > 1)
 				mpipex(k, command->arry, env);

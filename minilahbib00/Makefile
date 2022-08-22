@@ -29,6 +29,7 @@ LIBFT = Libft/libft/ft_split.c \
 		Libft/libft/ft_strnstr.c \
 		Libft/libft/ft_strchr.c \
 		Libft/libft/ft_strdup.c \
+		Libft/libft/ft_strlcpy.c \
 		pipe/lbft/ft_substr.c
 
 OBJS = $(SRCS:.c=.o)
