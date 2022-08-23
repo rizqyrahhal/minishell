@@ -17,9 +17,9 @@
 
 char* ft_replace(char* s, char* old, char* new)
 {
-    char* result;
-    int i;
-    int count;
+	char*	result;
+	int 	i;
+	int		count;
 
     count = 0;
     i = 0;
@@ -105,7 +105,8 @@ char *ft_exp(char *s, t_exp *exp, char *env[])
         k = 0;
         if (s[i] == '$')
         {
-            i++;
+			while (s[i] == '$')
+				i++;
             while (s[i] && isalpha(s[i]))
             {
                 i++;
@@ -116,8 +117,6 @@ char *ft_exp(char *s, t_exp *exp, char *env[])
             k = ft_getidx(exp, str, env);
             if (k > -1)
                 s = ft_replace(s, str, exp[k].value);
-            else
-                s = ft_replace(s, str, "\0");
         }
         i++;
     }
@@ -185,7 +184,7 @@ int	main(int ac, char *av[], char *env[])
 	char		*buf;
 	int			k;
 	int			i;
-	
+
 	k = 0;
 	i = 0;
 	command = malloc(sizeof(t_command));
@@ -195,10 +194,8 @@ int	main(int ac, char *av[], char *env[])
 	while(1)
 	{
 		buf = readline("\033[0;33m minishell > \033[0m");
-        printf("%s***\n", buf);
         add_history(buf);
         buf = ft_exp(buf, exp, env);
-        printf("%s---\n", buf);
 		k = ft_countt(buf, '|');
 		//command->arry = ft_split(buf, '|');
 		if (k >= 1)
