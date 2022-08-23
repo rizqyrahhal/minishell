@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/23 16:17:28 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/23 18:08:49 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "../includes/lexer.h"
 #include <stdlib.h>
 
-void	ft_addfront(t_command	*list, t_command *new)
+void	ft_addfront(t_command	**list, int i, t_command *new)
 {
-	list->next = new;
+	list[i]->next = new;
 }
 
 t_command	*ft_lstnew(char *s, int infile, int outfile)
@@ -34,14 +34,19 @@ t_command	*ft_lstnew(char *s, int infile, int outfile)
 	return (n1);
 }
 
-void	check_struct(t_command **list)
+// print All data of linked list 
+void	print_node(t_command **list)
 {
 	int	i;
 
 	i = 0;
-	while (list[i]->next != NULL)
+	printf("\033[0;31m|--__---### All Data of Linked List Structre ###---__--|\033[0m\n");
+	while (list)
 	{
 		printf("COMMAND: %s, INfile: %d, OUTfile: %d\n", list[i]->cmd, list[i]->input, list[i]->output);
+		if (list[i]->next == NULL)
+			break;
+		i++;
 	}
 }
 
@@ -49,30 +54,30 @@ void	tac_compile(char* src)
 {
 	t_lexer*	lexer;
 	t_token*	token;
-	t_command*	list;
+	t_command**	list;
 	t_command*	new;
 	int			i = 0;
 
 	lexer = init_lexer(src);
 	token = lexer_next_token(lexer);
-	// list1 = (t_command*)malloc(sizeof(t_command));
-	// list1->cmd = (char**)malloc(2);
+	list = (t_command**)malloc(sizeof(t_command*));
 	while(token->type != TOKEN_EOF)
 	{
 		printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(token));
-		if (token->type == TOKEN_STRING && i == 0)
+		if (token->type == TOKEN_STRING)
 		{	
-			list = ft_lstnew(token->value, 0, 1);
-			printf("COMMAND: %s\nINfile: %d\nOUTfile: %d\n", list->cmd, list->input, list->output);
-			// i++;
+			list[i] = ft_lstnew(token->value, 0, 1);
+			printf("COMMAND: %s\nINfile: %d\nOUTfile: %d\n", list[i]->cmd, list[i]->input, list[i]->output);
 		}
 		if (token->type == TOKEN_PIPE)
 		{
-			ft_addfront(list, new);
-			new = ft_lstnew(token->value, 0, 1);
-			printf("COMMAND: %s\nINfile: %d\nOUTfile: %d\n", new->cmd, new->input, new->output);
+			printf("___-- IN condition PIPE --___\n");
+			ft_addfront(list, i, new);
+			i++;
+			list[i] = ft_lstnew(token->value, 0, 1);
+			printf("COMMAND: %s\nINfile: %d\nOUTfile: %d\n", list[i]->cmd, list[i]->input, list[i]->output);
 		}
 		token = lexer_next_token(lexer);
 	}
-	// check_struct(new);
+	print_node(list);
 }
