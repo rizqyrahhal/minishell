@@ -6,13 +6,16 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/22 02:10:32 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/23 13:34:36 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 #include "../includes/lexer.h"
 #include "../includes/tac.h"
+
+#include <sys/types.h>
+#include <sys/wait.h>
 
 int	main(int argc, char** argv, char** envp)
 {
@@ -29,7 +32,7 @@ int	main(int argc, char** argv, char** envp)
 		tac_compile(buf);
 		free(buf);
 	}
-
+	// waitpid(-1, exit_ss, );
 	return 0;
 }
 
