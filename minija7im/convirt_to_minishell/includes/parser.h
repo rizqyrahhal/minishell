@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:30:11 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/25 01:11:15 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/25 15:42:34 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@
 #include "struct.h"
 
 t_command*	parser(t_lexer* lexer, t_token* token, t_command* list);
+t_command*	simple_command(t_lexer* lexer, t_token* token, t_command* list);
 
 #endif

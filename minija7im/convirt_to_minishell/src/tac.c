@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/25 04:27:12 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/25 15:40:11 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_node(t_command *lst)
 	printf("\033[0;31m|--__---### All Data of Linked List Structre ###---__--|\033[0m\n");
 	while (list != NULL)
 	{
-		printf("COMMAND: %s, INfile: %d, OUTfile: %d\n", list->cmd, list->input, list->output);
+		printf("COMMAND: %s, INfile: %d, OUTfile: %d\n", list->cmd, list->infile, list->outfile);
 		list = list->next;
 	}
 }
@@ -36,7 +36,7 @@ void	tac_compile(char* src)
 	t_command*	list;
 
 	// functoin  pour check les error comme an while lope in src character par chararcter   (here or in main Function)
-	// static int	error_befor_parser(char* src);
+	// static int	error_befor_parser(char* src);  (function roturn exite status)
 	lexer = init_lexer(src);
 	token = lexer_next_token(lexer);
 	list = (t_command*)malloc(sizeof(t_command));
@@ -47,7 +47,8 @@ void	tac_compile(char* src)
 		list = parser(lexer, token, list);
 		token = lexer_next_token(lexer);
 	}
-	printf("'\n'dsfdffffffffffffffffffksfdok \" fgrsssssssssssg\"'\n'");
 	// printf("LOGNEM=%s\n", getenv("LOGNAME"));
 	print_node(list);
+	if (list->next == NULL)
+		printf("--------------------------------NULL---------------------------------\n");
 }

@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/25 04:19:28 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/25 15:51:43 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,37 @@
 #include "../include/struct.h"
 #include <stdlib.h>
 
-t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
+void	ft_rediriction(t_lexer* lexer, t_token* token, int infile, int outfile)
+{
+	if (token->type == TOKEN_IN)
+	{
+		
+	}
+}
+
+t_command*	simple_command(t_lexer* lexer, t_token* token, t_command* list)
 {
 	t_command*	new;
+	int			infile = 0;
+	int			outfile = 1;
 
 	// if (token->type == TOKEN_IN || token->type == TOKEN_OU)
 		// functoin pour handle rediriction;
-	
+	ft_rediriction(lexer, token, infile, outfile);
 	if (token->type == TOKEN_STRING)
 	{
 		printf("___-- IN condition TOKEN_STRING --___\n");
 		new = ft_lstnew(token->value, 0, 1);
 		ft_addfront(&list, new);
-		// if (lexer_next_token(lexer)->type == TOKEN_EOF)
-		// 	ft_addfront(&list, new);
 	}
+	return (list);
+}
+
+t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
+{
+	list = simple_command(lexer, token, list);
 	// if (token->type == TOKEN_PIPE)
-	// 	ft_addfront(&list, new);
+		// function_simple_command;
 	return (list);
 }
 
