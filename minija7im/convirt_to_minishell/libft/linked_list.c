@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 01:12:19 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/25 01:14:25 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/25 03:57:13 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,15 @@ void	ft_addfront(t_command	**list, t_command *new)
 	}
 }
 
-t_command	*ft_lstnew(char *s, int infile, int outfile)
+t_command	*ft_lstnew(char *cmd_data, int infile, int outfile)
 {
 	t_command*	n1;
 
 	n1 = malloc(sizeof(t_command));
 	if (n1 == 0)
 		return (NULL);
-	n1->cmd = malloc(ft_strlen(s));
-	n1->cmd = s;
+	n1->cmd = malloc(ft_strlen(cmd_data));
+	n1->cmd = cmd_data;
 	n1->input = infile;
 	n1->output = outfile;
 	n1->next = NULL;

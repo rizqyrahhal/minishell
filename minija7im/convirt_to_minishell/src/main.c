@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/25 01:39:58 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/25 03:32:04 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ int	main(int argc, char** argv, char** envp)
 	while(1)
 	{
 		buf = readline("\033[0;33m minishell > \033[0m");
+		/* functoin  pour check les error comme an while lope in src character par chararcter   (here or in main Function)
+		static int	error_befor_parser(char* src); */
 		tac_compile(buf);
 		free(buf);
 	}
-	// waitpid(-1, exit_ss, );
 	return 0;
 }
 
@@ -99,11 +100,12 @@ alore ghnhandli lherdoc fi lexer ila kant de erorr se non ghn9ado flparsing wola
 alore pour handl sa on a realloc mon buf,
 and use readline pour read from standar_input est apre join this on buf */
 
-/* les ERROR ::::::
+/* les ERROR :::::: before_parsing :::::::
 ::::::::::::    
 ('||' '|')------------> syntax error near unexpected token `|'
 (\n if not |)---------> syntax error near unexpected token `newline'
-(open " OR ' qout)----> syntax error open qout
+(open " OR ' qout)----> syntax error open quote
+(... < < ... OR ... << << ... OR ... > > > ... OR ... >> >> ...)-------> syntax error near unexpected token `token->value'
 ::::::::::::
 */
 

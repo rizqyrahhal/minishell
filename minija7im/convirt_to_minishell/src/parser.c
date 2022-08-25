@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/25 01:50:36 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/25 03:59:32 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
 	{
 		printf("___-- IN condition TOKEN_STRING --___\n");
 		new = ft_lstnew(token->value, 0, 1);
-		if (lexer_next_token(lexer)->type != TOKEN_EOF)
+		if (lexer_next_token(lexer)->type == TOKEN_EOF)
 			ft_addfront(&list, new);
 	}
 	// if (token->type == TOKEN_PIPE)
