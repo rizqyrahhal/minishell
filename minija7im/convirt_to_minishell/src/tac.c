@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/25 15:40:11 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/25 16:18:43 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,4 @@ void	tac_compile(char* src)
 	}
 	// printf("LOGNEM=%s\n", getenv("LOGNAME"));
 	print_node(list);
-	if (list->next == NULL)
-		printf("--------------------------------NULL---------------------------------\n");
 }

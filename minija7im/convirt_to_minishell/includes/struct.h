@@ -6,12 +6,21 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 12:53:58 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/25 15:39:00 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/25 17:14:21 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 #define STRUCT_H
+
+
+static struct variables
+{
+	/* data */
+	int exit_status;
+};
+
+// static int exit_status;
 
 typedef struct s_command_node
 {

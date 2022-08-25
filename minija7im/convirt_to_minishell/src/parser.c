@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/25 15:51:43 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/25 17:14:28 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,21 @@
 #include "../include/struct.h"
 #include <stdlib.h>
 
+//open
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
 void	ft_rediriction(t_lexer* lexer, t_token* token, int infile, int outfile)
 {
+	//  this will fill the infile till the end and will get the last one
 	if (token->type == TOKEN_IN)
 	{
-		
+		infile = open();
+	}
+	if (token->type == TOKEN_OU)
+	{
+		outfile = open();
 	}
 }
 
@@ -48,10 +58,38 @@ t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
 	list = simple_command(lexer, token, list);
 	// if (token->type == TOKEN_PIPE)
 		// function_simple_command;
+
 	return (list);
 }
 
 		// printf("COMMAND: %s, INfile: %d, OUTfile: %d\n", list->cmd, list->input, list->output);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
