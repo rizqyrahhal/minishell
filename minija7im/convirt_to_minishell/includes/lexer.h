@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:08:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/23 13:35:12 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/24 18:38:59 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 #include "libft.h"
 #include "token.h"
-#include "parser.h"
+// #include "parser.h"
 
 typedef struct s_lexer
 {
