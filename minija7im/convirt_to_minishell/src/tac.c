@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/25 16:18:43 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/25 17:41:10 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	tac_compile(char* src)
 	t_token*	token;
 	t_command*	list;
 
-	// functoin  pour check les error comme an while lope in src character par chararcter   (here or in main Function)
+	// function  pour check les error comme an while lope in src character par chararcter   (here or in main Function)
 	// static int	error_befor_parser(char* src);  (function roturn exite status)
 	lexer = init_lexer(src);
 	token = lexer_next_token(lexer);
@@ -48,5 +48,6 @@ void	tac_compile(char* src)
 		token = lexer_next_token(lexer);
 	}
 	// printf("LOGNEM=%s\n", getenv("LOGNAME"));
+	// execution part HERE!!
 	print_node(list);
 }

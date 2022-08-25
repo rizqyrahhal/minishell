@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/25 17:14:28 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/25 19:51:07 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,35 @@
 
 void	ft_rediriction(t_lexer* lexer, t_token* token, int infile, int outfile)
 {
+
 	//  this will fill the infile till the end and will get the last one
 	if (token->type == TOKEN_IN)
 	{
+		if(infile != 0)
+			close(infile);
 		infile = open();
 	}
+	
+	if (token->type == TOKEN_APPAND)
+	{
+		if(outfile != 1)
+			close(outfile);
+		outfile = open();///
+	}
+	
 	if (token->type == TOKEN_OU)
 	{
+		if(outfile != 1)
+			close(outfile);
 		outfile = open();
+	}
+	
+	if (infile = -1)
+	{
+		move_to_next_cmd(); 
+	/* in cas des error in open file :::: ghndir next token fwa7d lope 7ata l3nd TOKEN_PIPE OR TOKEN_EOF
+	sabab hadchi howa ana ay cmd msta9ala bdatha wo ila kan chi error fchi cmd kt7bs 3and lERROR ms bash kydoz lnext pipe 
+	bma3nd akhor ila khrajt fchi error fi l cmd li khadam fiha ghnprintih wo ndoz l next cmd*/
 	}
 }
 
@@ -41,13 +62,11 @@ t_command*	simple_command(t_lexer* lexer, t_token* token, t_command* list)
 	int			infile = 0;
 	int			outfile = 1;
 
-	// if (token->type == TOKEN_IN || token->type == TOKEN_OU)
-		// functoin pour handle rediriction;
 	ft_rediriction(lexer, token, infile, outfile);
 	if (token->type == TOKEN_STRING)
 	{
 		printf("___-- IN condition TOKEN_STRING --___\n");
-		new = ft_lstnew(token->value, 0, 1);
+		new = ft_lstnew(token->value, infile, outfile);
 		ft_addfront(&list, new);
 	}
 	return (list);

@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 12:53:58 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/25 17:14:21 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/25 17:48:31 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #define STRUCT_H
 
 
-static struct variables
-{
-	/* data */
-	int exit_status;
-};
+// static struct variables
+// {
+// 	/* data */
+// 	int exit_status;
+// };
 
 // static int exit_status;
 
