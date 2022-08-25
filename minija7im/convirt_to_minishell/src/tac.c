@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/25 04:03:40 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/25 04:27:12 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	tac_compile(char* src)
 		list = parser(lexer, token, list);
 		token = lexer_next_token(lexer);
 	}
+	printf("'\n'dsfdffffffffffffffffffksfdok \" fgrsssssssssssg\"'\n'");
 	// printf("LOGNEM=%s\n", getenv("LOGNAME"));
 	print_node(list);
 }

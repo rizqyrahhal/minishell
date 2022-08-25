@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/25 03:32:04 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/25 04:44:09 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,11 @@ and use readline pour read from standar_input est apre join this on buf */
 
 /* les ERROR :::::: before_parsing :::::::
 ::::::::::::    
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!! if open " OR ' qoute handle in ERROR, ya3ni maghanakhodhomch b3ayn l3tibar fach n9ad l7alat dyal " and ' qoute  !!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 ('||' '|')------------> syntax error near unexpected token `|'
 (\n if not |)---------> syntax error near unexpected token `newline'
 (open " OR ' qout)----> syntax error open quote
@@ -122,3 +127,12 @@ wo mahoma ila des variable mdiclarin fi terminal mfto7a <----= */
 
 
 
+
+
+/*
+function ------> prancibale ERROR
+function ------> semple command (larobama ghn7taj lexe cmd par cmd)
+function ------> (lope par semple vommand)--->multble command
+function ------> hndal rediriction 
+function ------> here_doc
+*/ 

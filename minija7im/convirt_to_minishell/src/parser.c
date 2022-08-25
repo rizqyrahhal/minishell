@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/25 03:59:32 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/25 04:19:28 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,7 @@
 t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
 {
 	t_command*	new;
-	t_token*	next_token;
 
-	// next_token = lexer_next_token(lexer);
-	// printf("next_token: %s   NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN\n", next_token->value);
-	printf("token: %s   TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\n", token->value);
 	// if (token->type == TOKEN_IN || token->type == TOKEN_OU)
 		// functoin pour handle rediriction;
 	
@@ -32,8 +28,9 @@ t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
 	{
 		printf("___-- IN condition TOKEN_STRING --___\n");
 		new = ft_lstnew(token->value, 0, 1);
-		if (lexer_next_token(lexer)->type == TOKEN_EOF)
-			ft_addfront(&list, new);
+		ft_addfront(&list, new);
+		// if (lexer_next_token(lexer)->type == TOKEN_EOF)
+		// 	ft_addfront(&list, new);
 	}
 	// if (token->type == TOKEN_PIPE)
 	// 	ft_addfront(&list, new);
