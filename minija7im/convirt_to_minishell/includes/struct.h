@@ -6,12 +6,14 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 12:53:58 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/24 00:03:03 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/25 01:41:08 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 #define STRUCT_H
+
+
 
 typedef struct s_command_node
 {

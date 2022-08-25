@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/23 13:34:36 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/25 01:39:58 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,26 @@ alore ghnhandli lherdoc fi lexer ila kant de erorr se non ghn9ado flparsing wola
 !!!!!!!    << l << k << S cat    open ga3 li herdoc and close it est read from last one,
 (bikol basasata akhir faile ghaydoz l cat ka 2anaho argement)
 */
+
+
+/* PIPE :::::::: exemple :::::::::
+< file |         in this cas bash open attend pour complete input,
+alore pour handl sa on a realloc mon buf,
+and use readline pour read from standar_input est apre join this on buf */
+
+/* les ERROR ::::::
+::::::::::::    
+('||' '|')------------> syntax error near unexpected token `|'
+(\n if not |)---------> syntax error near unexpected token `newline'
+(open " OR ' qout)----> syntax error open qout
+::::::::::::
+*/
+
+
+
+
+
+
 
 
 /*Environment variable VS Shell variable =----> shell variable fi lgnalib mamtlobinch,
