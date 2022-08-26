@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/26 16:52:22 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/26 23:16:05 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 #include <fcntl.h>
 // close
 #include <unistd.h>
+
+// strdup
+#include <string.h>
 
 t_command*	ft_rediriction(t_lexer* lexer, t_token* token, t_command* list)
 {
@@ -67,53 +70,42 @@ t_command*	ft_rediriction(t_lexer* lexer, t_token* token, t_command* list)
 t_command*	simple_command(t_lexer* lexer, t_token* token, t_command* list)
 {
 	t_command*	new;
-	int			counter;
-	// t_parser*	parser;
+	// char		**cmd;
+	int			i;
 
-	// parser = (t_parser*)malloc(sizeof(t_parser));
-	// parser->infile = 0;
-	// parser->outfile = 1;
-	counter = 0;
+	i = 0;
+	new = ft_lstnew(NULL, 0, 1);   //// use realooc pour ajout anothre flag
+		ft_addfront(&list, new);
 	while(token->type != TOKEN_PIPE && token->type != TOKEN_EOF)
 	{
-		list = ft_rediriction(lexer, token, list);
-		// first parametre
 		if (token->type == TOKEN_STRING)
 		{
 			printf("___-- IN condition TOKEN_STRING --___\n");
 			list->cmd = token->value;
-			// new = ft_lstnew(token->value, 0, 1);   //// use realooc pour ajout anothre flag
-			// ft_addfront(&list, new);
+			// strcpy(cmd[i], token->value);
+			i++;
 		}
+		list = ft_rediriction(lexer, token, list);
 		token = lexer_next_token(lexer);
 		printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(token));
 	}
+	// list->cmd = cmd;
 	return (list);
 }
 
 t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
 {
-	t_command*	new;
+	/*                 ##!!!!!! DONT forgit HERE_DOC !!!!!!##       */
+	
+	list = simple_command(lexer, token, list);
 
-	if (token->type == TOKEN_APPAND || token->type == TOKEN_IN || token->type == TOKEN_OU || token->type == TOKEN_STRING)
+	if (token->type == TOKEN_PIPE)
 	{
-		/*
-		mli nl9a | ghanzid node wo ndoze lsempel command i7timal wo sf
-		*/
-		new = ft_lstnew(token->value, 0, 1);   //// use realooc pour ajout anothre flag
-			ft_addfront(&list, new);
+		// function_simple_command;
+		token = lexer_next_token(lexer);
 		list = simple_command(lexer, token, list);
-
-		if (token->type == TOKEN_PIPE)
-		{
-			// function_simple_command;
-			new = ft_lstnew(token->value, 0, 1);
-			ft_addfront(&list, new);
-			list = simple_command(lexer, token, list);
-			// list = multi_command(lexer, token, list);//   comme simlpe just a simple defirent ---->  just assing not creat next node becouse is creat here
-		}
+		// list = multi_command(lexer, token, list);//   comme simlpe just a simple defirent ---->  just assing not creat next node becouse is creat here
 	}
-
 	return (list);
 }
 
@@ -128,8 +120,9 @@ t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
 
 /*  ::::::::::::::::::::::::::::::::::::: ALGO OF SIMPLE_COMMAND  ::::::::::::::::::::::::::::::::::::::::::
 
-
-
+hata nakhad data 3la khatri dyal lcomand kamlha 3ad nzidha fi list ila makan fiha 7ata error 
+ila kan fiha chi error magahndawzhach lih bmara,
+ghanrotirni error wo ndawoz lih ghi les CMD lis khashom ytexsicutaw
 
 */
 
