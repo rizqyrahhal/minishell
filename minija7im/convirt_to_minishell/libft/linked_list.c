@@ -6,14 +6,14 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 01:12:19 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/26 23:16:54 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/26 23:40:44 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 #include "../includes/struct.h"
 
-t_command*	ft_lstlast(t_command *list)
+t_command*	ft_lstlast(t_command* list)
 {
 	while (list)
 	{
@@ -24,7 +24,7 @@ t_command*	ft_lstlast(t_command *list)
 	return (list);
 }
 
-void	ft_addfront(t_command	**list, t_command *new)
+void	ft_addfront(t_command**	list, t_command *new)
 {
 	t_command*	tmp;
 	
@@ -42,7 +42,7 @@ void	ft_addfront(t_command	**list, t_command *new)
 	}
 }
 
-t_command	*ft_lstnew(char *cmd_data, int infile, int outfile)
+t_command*	ft_lstnew(char** cmd_data, int infile, int outfile)
 {
 	t_command*	n1;
 
@@ -51,7 +51,7 @@ t_command	*ft_lstnew(char *cmd_data, int infile, int outfile)
 		return (NULL);
 	if (cmd_data != NULL)
 	{
-		n1->cmd = malloc(ft_strlen(cmd_data));
+		n1->cmd = (char**)malloc(sizeof(char*) * ft_d_strlen(cmd_data) + 1);
 		n1->cmd = cmd_data;
 	}
 	n1->infile = infile;

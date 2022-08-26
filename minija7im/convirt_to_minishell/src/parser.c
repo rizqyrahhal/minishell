@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/26 23:16:05 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/27 00:35:42 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,25 @@
 // strdup
 #include <string.h>
 
-t_command*	ft_rediriction(t_lexer* lexer, t_token* token, t_command* list)
+/*   After break =======>> n9ad lprintaj dyal list
+est apre n9ad lallocation dyal t_parser (outfile et infile ===== kaykhorjo 3la ranj chi marrat)
+*/
+
+
+t_parser*	ft_rediriction(t_lexer* lexer, t_token* token, t_parser* parser)
 {
 	t_token*	next_token;
 
 	//  this will fill the infile till the end and will get the last one
 	if (token->type == TOKEN_IN)
 	{
-		if(list->infile != 0){
+		if(parser->infile != 0){
 			printf("_-------------------_\n");
-			close(list->infile);
+			close(parser->infile);
 		}
 		if ((next_token = lexer_next_token(lexer))->type == TOKEN_STRING)
-			list->infile = open(next_token->value, O_RDONLY | O_TRUNC, 0600);
-		printf("TOKEN_VALUE: %s\nNUMBER_OF_FD: %d\n", next_token->value, list->infile);
+			parser->infile = open(next_token->value, O_RDONLY | O_TRUNC, 0600);
+		printf("TOKEN_VALUE: %s\nNUMBER_OF_FD: %d\n", next_token->value, parser->infile);
 	}
 
 	// if (token->type == TOKEN_APPAND)
@@ -64,32 +69,36 @@ t_command*	ft_rediriction(t_lexer* lexer, t_token* token, t_command* list)
 	sabab hadchi howa ana ay cmd msta9ala bdatha wo ila kan chi error fchi cmd kt7bs 3and lERROR ms bash kydoz lnext pipe 
 	bma3nd akhor ila khrajt fchi error fi l cmd li khadam fiha ghnprintih wo ndoz l next cmd*/
 	// }
-	return (list);
+	return (parser);
 }
 
 t_command*	simple_command(t_lexer* lexer, t_token* token, t_command* list)
 {
+	t_parser*	parser;
 	t_command*	new;
-	// char		**cmd;
 	int			i;
 
 	i = 0;
-	new = ft_lstnew(NULL, 0, 1);   //// use realooc pour ajout anothre flag
-		ft_addfront(&list, new);
+	parser = (t_parser*)malloc(sizeof(t_parser));
+	parser->cmd = malloc(sizeof(char*)); /// on a ajoute realloc pour alloce a chaque foi nl9a chi flag jdid
 	while(token->type != TOKEN_PIPE && token->type != TOKEN_EOF)
 	{
 		if (token->type == TOKEN_STRING)
 		{
-			printf("___-- IN condition TOKEN_STRING --___\n");
-			list->cmd = token->value;
-			// strcpy(cmd[i], token->value);
+			parser->cmd = realloc(parser->cmd, i);
+			parser->cmd[i] = ft_strdup(token->value);
 			i++;
 		}
-		list = ft_rediriction(lexer, token, list);
+		parser = ft_rediriction(lexer, token, parser);
 		token = lexer_next_token(lexer);
 		printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(token));
 	}
-	// list->cmd = cmd;
+	// parser->cmd[i] = NULL;
+	new = ft_lstnew(parser->cmd, parser->infile, parser->outfile);
+		ft_addfront(&list, new);
+
+	free(parser);
+	// printf("___------------------------___\n");
 	return (list);
 }
 
