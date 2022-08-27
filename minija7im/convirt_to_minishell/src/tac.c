@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/27 02:45:59 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/27 17:27:53 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 #include <stdlib.h>
 
 // print All data of linked list 
-void	print_node(t_command *lst)
+void	print_node(t_command *list)
 {
-	t_command*	list;
+	// t_command*	list;
 	int			i = -1;
 
-	list = lst;
+	// list = lst;
 	printf("\033[0;31m|--__---### All Data of Linked List Structre ###---__--|\033[0m\n");
 	while (list != NULL)
 	{
