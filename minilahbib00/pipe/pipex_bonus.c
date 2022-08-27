@@ -55,7 +55,7 @@ void	f_close(t_pipe p, int k)
 	}
 }
 
-void	child(t_pipe p, int ac, char *av[], char *env[])
+void	_child(t_pipe p, int ac, char *av[], char *env[])
 {
 	p.pid1 = fork();
 	if (p.pid1 == 0)
@@ -85,6 +85,6 @@ int	mpipex(int ac, char **av, char *env[])
 		p.fd[i] = malloc(2 * sizeof(int));
 		pipe(p.fd[i]);
 	}
-	child(p, ac, av, env);
+	_child(p, ac, av, env);
 	return (0);
 }
