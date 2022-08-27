@@ -17,11 +17,14 @@
 # include <readline/readline.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include "../pipe/pipex.h"
+//# include "../pipe/pipex.h"
+# include "../pipes/pipex.h"
 
 typedef struct s_command
 {
-	char	**arry; // alloca nmbr of command
+	char	**cmd;
+	int 	input;
+	int		output;// alloca nmbr of command
 }   t_command;
 
 typedef struct s_exp
