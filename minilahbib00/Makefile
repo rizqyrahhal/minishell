@@ -33,6 +33,7 @@ LIBFT = Libft/libft/ft_split.c \
 		Libft/libft/ft_strlcpy.c \
 		Libft/libft/ft_isalpha.c \
 		Libft/libft/ft_putstr_fd.c \
+		Libft/libft/linked_list.c \
 		pipe/lbft/ft_substr.c
 
 OBJS = $(SRCS:.c=.o)

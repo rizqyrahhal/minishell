@@ -38,8 +38,6 @@ void	ft_addfront(t_command**	list, t_command *new)
 {
 	t_command*	tmp;
 
-	printf("this is new : %s\n", new->cmd[0]);
-
 	if (*list == NULL)
 		*list = new;
 	else
@@ -60,6 +58,7 @@ char**	fill_t(char** s)
 		str[i] = ft_strdup(s[i]);
 		i++;
 	}
+	str[i] = NULL;
 	return (str);
 }
 

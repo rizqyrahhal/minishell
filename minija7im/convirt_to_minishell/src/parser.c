@@ -97,6 +97,8 @@ t_command*	simple_command(t_lexer* lexer, t_token* token, t_command* list)
 	i = 0;
 	parser = ft_calloc(1, sizeof(t_parser));
 	parser->cmd = ft_calloc(1, sizeof(char*));
+	parser->infile = 0;
+	parser->outfile = 1;
 	while(token->type != TOKEN_PIPE && token->type != TOKEN_EOF)
 	{
 		if (token->type == TOKEN_STRING)
@@ -122,16 +124,16 @@ t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
 	/*                 ##!!!!!! DONT forgit HERE_DOC IN EUTCH COMMAND!!!!!!##       */
 	printf("\n\n\n\n%s\n\n\n\n", token->value); ////////                    LMOCHKIL HNA MAKATRJA3CH LVALOR DYAL TOKEN KATB9A KIFMA KANT HNA 
 	list = simple_command(lexer, token, list);
-	while (token->type != TOKEN_EOF)
-	{
-		if (token->type == TOKEN_PIPE)
-		{
-		// function_simple_command;
-		token = lexer_next_token(lexer);
-		list = simple_command(lexer, token, list);
-		// list = multi_command(lexer, token, list);//   comme simlpe just a simple defirent ---->  just assing not creat next node becouse is creat here	
-		}
-	}
+//	while (token->type != TOKEN_EOF)
+//	{
+//		if (token->type == TOKEN_PIPE)
+//		{
+//		// function_simple_command;
+//		token = lexer_next_token(lexer);
+//		list = simple_command(lexer, token, list);
+//		// list = multi_command(lexer, token, list);//   comme simlpe just a simple defirent ---->  just assing not creat next node becouse is creat here
+//		}
+//	}
 	return (list);
 }
 

@@ -11,6 +11,16 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
+
+int skip__(char* s, char k, int i)
+{
+	if (k == '{')
+		k = '}';
+	while (s[i] != k)
+		i++;
+	return (i + 1);
+}
 
 static int	hmuch_calc(char *str, char c)
 {
@@ -29,6 +39,8 @@ static int	hmuch_calc(char *str, char c)
 		hmuch++;
 		while (str[i] && str[i] != c)
 		{
+			if (str[i] == '\'' || str[i] == '\"' || str[i] == '{')
+				i = skip__(str, str[i], i + 1);
 			i++;
 		}
 	}
@@ -44,8 +56,11 @@ static int	ft_fill(char **arr, char *s, int i, char c)
 	while (s[i] == c)
 		i++;
 	p = i;
-	while (s[i] && s[i] != c)
+	while (s[i] && s[i] != c) {
+		if (s[i] == '\'' || s[i] == '\"' || s[i] == '{')
+			i = skip__(s, s[i], i + 1) - 1;
 		i++;
+	}
 	arr[0] = malloc(i - p + 1);
 	n = 0;
 	while (p < i)

@@ -20,13 +20,6 @@
 //# include "../pipe/pipex.h"
 # include "../pipes/pipex.h"
 
-typedef struct s_command
-{
-	char	**cmd;
-	int 	input;
-	int		output;// alloca nmbr of command
-}   t_command;
-
 typedef struct s_exp
 {
 	char	*var;
@@ -53,6 +46,10 @@ typedef struct s_minishell
 	t_redirection	redirection;
 }   t_minishell;
 
+
+t_command*	ft_lstlast(t_command* list);
+void	ft_addfront(t_command**	list, t_command *new);
+t_command*	ft_lstnew(char** cmd_data, int infile, int outfile);
 /*
 pipe
 < >

@@ -205,31 +205,68 @@ void free_arr(char **s)
 	}
 }
 
+size_t d_strlen(char** s)
+{
+	size_t i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+t_command*	get_data(t_command* command, char** cmd, int infile, int outfile)
+{
+	t_command	*tmp;
+
+//	command->cmd = malloc((ft_d_strlen(cmd) + 1) * sizeof(char*));
+	tmp = ft_lstnew(cmd, infile, outfile);
+
+	ft_addfront(&command, tmp);
+
+	return (command);
+}
+
 int	main(int ac, char *av[], char *env[])
 {
-	t_command	*command;
-    t_exp *exp;
+	t_command*	command;
 	char		**s;
-	char		*buf;
-	int			k;
-	int			i;
 
-	k = 0;
-	i = 0;
-	command = malloc(sizeof(t_command));
-	exp = malloc(sizeof(t_exp) * env_size(env));
-    ft_getVar(env, &exp);
-	while(1)
-	{
-		buf = readline("\033[0;33m minishell > \033[0m");
-		if (buf[0] == 0)
-			continue ;
-        add_history(buf);
-        buf = ft_exp(buf, exp, env);
-		k = ft_countt(buf, '|');
-		command->cmd = ft_split(buf, '|');
-		pipes(k, command->cmd, env, 0, -1);
-		free(buf);
-	}
+	command = malloc(sizeof (t_command));
+	command = NULL;
+	s = malloc(3 * sizeof(char*));
+	s[0] = ft_strdup("ls");
+	s[1] = ft_strdup("-l");
+	s[2] = NULL;
+	command = get_data(command ,s, 0, -1);
+	s[0] = ft_strdup("cat");
+	s[1] = ft_strdup("-e");
+	s[2] = NULL;
+	command = get_data(command, s, 0, -1);
+	s[0] = ft_strdup("awk");
+	s[1] = ft_strdup("{print $1}");
+	s[2] = NULL;
+	command = get_data(command , s, 0, -1);
+
+//	s[0] = ft_strdup("cat");
+//	s[1] = ft_strdup("-e");
+//	s[2] = NULL;
+//	command = get_data(s, 0, 1);
+
+	pipes(2, command, env);
+
+	//exp = malloc(sizeof(t_exp) * env_size(env));
+    //ft_getVar(env, &exp);
+//	while(1)
+//	{
+		//buf = readline("\033[0;33m minishell > \033[0m");
+		//if (buf[0] == 0)
+			//continue ;
+        //add_history(buf);
+        //buf = ft_exp(buf, exp, env);
+		//k = ft_countt(buf, '|');
+		//command->cmd = ft_split(buf, '|');
+//		free(buf);
+//	}
 	return (0);
 }
