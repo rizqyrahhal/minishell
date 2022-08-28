@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:30 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/24 20:26:03 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/27 16:53:28 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@
 #include "lexer.h"
 #include "parser.h"
 
+typedef struct s_tac
+{
+	t_lexer*	lexer;
+	t_token*	token;
+	t_command*	list;
+	t_parser*	parser;
+} t_tac;
+
+
 void	tac_compile(char* src);
+void	print_node(t_command *lst);
 
 #endif
