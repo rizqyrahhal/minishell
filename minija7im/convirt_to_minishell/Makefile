@@ -6,7 +6,7 @@
 #    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 17:12:13 by rarahhal          #+#    #+#              #
-#    Updated: 2022/08/26 23:57:09 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/08/29 21:31:02 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS = 	src/main.c \
 		src/parser.c \
 
 LIBFT = libft/ft_calloc.c \
+		libft/ft_realloc.c \
 		libft/ft_strlen.c \
 		libft/ft_non_tokenable.c \
 		libft/ft_strjoin.c \

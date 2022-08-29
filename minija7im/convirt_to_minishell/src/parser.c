@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/29 19:08:11 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/29 23:36:54 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,23 +90,6 @@ t_parser*	ft_rediriction(t_lexer* lexer, t_token* token, t_parser* parser)
 	return (parser);
 }
 
-char**	ft_realloc(char	**s)
-{
-	int		i;
-	int		k;
-	char	**str;
-	
-	i = 0;
-	k = ft_d_strlen(s);
-	str = malloc((k + 2) * sizeof(char*));
-	while (s[i])
-	{
-		str[i] = ft_strdup(s[i]);
-		i++;
-	}
-	return (str);
-}
-
 t_tac*	simple_command(t_tac* tac)
 {
 	t_command*	new;
@@ -119,8 +102,6 @@ t_tac*	simple_command(t_tac* tac)
 	tac->parser->infile = 0;
 	tac->parser->outfile = 1;
 
-	if (tac->list)
-		printf("-----------%s\n", tac->list->cmd[0]);
 	while(tac->token->type != TOKEN_PIPE && tac->token->type != TOKEN_EOF)
 	{
 		tac->parser = ft_rediriction(tac->lexer, tac->token, tac->parser);
@@ -136,18 +117,8 @@ t_tac*	simple_command(t_tac* tac)
 			tac->token = lexer_next_token(tac->lexer);
 		printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(tac->token));
 	}
-	// i = 0;
-	// while(tac->parser->cmd[i]){
-	// 	printf("CMD(%d): %s\n", i, tac->parser->cmd[i]);
-	// 	i++;
-	// }
 	new = ft_lstnew(tac->parser->cmd, tac->parser->infile, tac->parser->outfile);
 	ft_addfront(&tac->list, new);
-		printf("++++++++++%s\n", tac->list->cmd[0]);
-	if (tac->list->next)
-		printf("++++++++++%s\n", tac->list->next->cmd[0]);
-	// free_parser(tac->parser);///      mfhamtch 3lach db salit manha walakin fach tanfriyiha ktkhssar data fi list
-	// print_node(tac->list);
 	return (tac);
 }
 
@@ -170,10 +141,10 @@ t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
 		
 			// printf("\n\nAPRE:   %s\n\n", tac->token->value); ////////                    LMOCHKIL HNA MAKATRJA3CH LVALOR DYAL TOKEN KATB9A KIFMA KANT HNA 
 		}
-		// free_parser(tac->parser);
+		if (tac->parser)
+			free_parser(tac->parser);
 	}
-	// printf("CMD1:  %s\n", tac->list->cmd[0]);
-	// printf("______-_________-_______-________\n");
+
 	return (tac->list);
 }
 
