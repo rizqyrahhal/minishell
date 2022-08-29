@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/29 05:37:13 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/29 19:08:11 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ void	free_parser(t_parser* parser)
 {
 	int	i;
 
-	i = -1;
-	while (parser->cmd[++i]){
+	i = 0;
+	while (parser->cmd[i]){
 		free(parser->cmd[i]);
+		i++;
 	}
 	free(parser->cmd);
 	free(parser);
@@ -89,39 +90,64 @@ t_parser*	ft_rediriction(t_lexer* lexer, t_token* token, t_parser* parser)
 	return (parser);
 }
 
+char**	ft_realloc(char	**s)
+{
+	int		i;
+	int		k;
+	char	**str;
+	
+	i = 0;
+	k = ft_d_strlen(s);
+	str = malloc((k + 2) * sizeof(char*));
+	while (s[i])
+	{
+		str[i] = ft_strdup(s[i]);
+		i++;
+	}
+	return (str);
+}
+
 t_tac*	simple_command(t_tac* tac)
 {
 	t_command*	new;
-	char**		cmd;
 	int			i;
 
 	i = 0;
-	tac->parser = ft_calloc(1, sizeof(t_parser));
-	tac->parser->cmd = ft_calloc(1, sizeof(char*));
+	tac->parser = malloc(sizeof(t_parser));
+	tac->parser->cmd = malloc(sizeof(char*));
+	tac->parser->cmd[0] = NULL;
 	tac->parser->infile = 0;
 	tac->parser->outfile = 1;
+
+	if (tac->list)
+		printf("-----------%s\n", tac->list->cmd[0]);
 	while(tac->token->type != TOKEN_PIPE && tac->token->type != TOKEN_EOF)
 	{
 		tac->parser = ft_rediriction(tac->lexer, tac->token, tac->parser);
 		if (tac->token->type == TOKEN_STRING)
 		{
-			tac->parser->cmd = realloc(tac->parser->cmd, i); /////// change par ft_realloc
 			printf("token_value: %s\n", tac->token->value);
+			tac->parser->cmd = ft_realloc(tac->parser->cmd); /////// change par ft_realloc
 			tac->parser->cmd[i] = ft_strdup(tac->token->value);
 			i++;
+			tac->parser->cmd[i] = 0;
 		}
 		if (tac->token->type != TOKEN_PIPE || tac->token->type != TOKEN_EOF)
 			tac->token = lexer_next_token(tac->lexer);
 		printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(tac->token));
 	}
-	tac->parser->cmd[i] = 0;
-	i = -1;
-	while(tac->parser->cmd[++i])
-		printf("CMD(%d): %s\n", i, tac->parser->cmd[i]);
+	// i = 0;
+	// while(tac->parser->cmd[i]){
+	// 	printf("CMD(%d): %s\n", i, tac->parser->cmd[i]);
+	// 	i++;
+	// }
 	new = ft_lstnew(tac->parser->cmd, tac->parser->infile, tac->parser->outfile);
 	ft_addfront(&tac->list, new);
+		printf("++++++++++%s\n", tac->list->cmd[0]);
+	if (tac->list->next)
+		printf("++++++++++%s\n", tac->list->next->cmd[0]);
 	// free_parser(tac->parser);///      mfhamtch 3lach db salit manha walakin fach tanfriyiha ktkhssar data fi list
-	print_node(tac->list);
+	// print_node(tac->list);
 	return (tac);
 }
 
@@ -133,19 +159,18 @@ t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
 	tac->lexer = lexer;
 	tac->token = token;
 	tac->list = list;
-	/*                 ##!!!!!! DONT forgit HERE_DOC IN EUTCH COMMAND!!!!!!##       */
 	while (tac->token->type != TOKEN_EOF)
 	{
 		tac = simple_command(tac);
 		if (tac->token->type == TOKEN_PIPE)
 		{
-			printf("\n\nAFTER:  %s\n\n", tac->token->value); ////////                    LMOCHKIL HNA MAKATRJA3CH LVALOR DYAL TOKEN KATB9A KIFMA KANT HNA 
+			// printf("\n\nAFTER:  %s\n\n", tac->token->value); ////////                    LMOCHKIL HNA MAKATRJA3CH LVALOR DYAL TOKEN KATB9A KIFMA KANT HNA 
 
 			tac->token = lexer_next_token(tac->lexer);
 		
-			printf("\n\nAPRE:   %s\n\n", tac->token->value); ////////                    LMOCHKIL HNA MAKATRJA3CH LVALOR DYAL TOKEN KATB9A KIFMA KANT HNA 
+			// printf("\n\nAPRE:   %s\n\n", tac->token->value); ////////                    LMOCHKIL HNA MAKATRJA3CH LVALOR DYAL TOKEN KATB9A KIFMA KANT HNA 
 		}
-		free_parser(tac->parser);
+		// free_parser(tac->parser);
 	}
 	// printf("CMD1:  %s\n", tac->list->cmd[0]);
 	// printf("______-_________-_______-________\n");

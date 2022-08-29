@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/29 05:24:30 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/29 19:16:19 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@
 void	print_node(t_command *lst)
 {
 	t_command*	list;
-	int			i = 0;
+	int			i;
 
 	list = lst;
 	printf("\033[0;31m|--__---### All Data of Linked List Structre ###---__--|\033[0m\n");
 	while (list != NULL)
 	{
+		i = 0;
 		printf("COMMAND: ");
 		while (list->cmd[i])
 		{

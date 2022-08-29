@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 01:12:19 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/29 03:56:11 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/29 19:11:36 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,13 @@ void	ft_addfront(t_command**	list, t_command *new)
 		*list = new;
 	else
 	{
-		(*list)->next = new;
+		if (*list)
+		{
+			tmp = ft_lstlast(*list);
+			tmp->next = new;
+		}
+		else
+			*list = new;
 	}
 }
 
