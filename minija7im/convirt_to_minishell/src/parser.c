@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/29 01:39:58 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/29 05:37:13 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ t_parser*	ft_rediriction(t_lexer* lexer, t_token* token, t_parser* parser)
 
 	// if (infile = -1)
 	// {
+		// while (token->type != TOKEN_PIPE || token->type != TOKEN_EOF)
+		// 	token = lexer_next_token(lexer);
 	// 	move_to_next_cmd();
 	/* in cas des error in open file :::: ghndir next token fwa7d lope 7ata l3nd TOKEN_PIPE OR TOKEN_EOF
 	sabab hadchi howa ana ay cmd msta9ala bdatha wo ila kan chi error fchi cmd kt7bs 3and lERROR ms bash kydoz lnext pipe 
@@ -90,6 +92,7 @@ t_parser*	ft_rediriction(t_lexer* lexer, t_token* token, t_parser* parser)
 t_tac*	simple_command(t_tac* tac)
 {
 	t_command*	new;
+	char**		cmd;
 	int			i;
 
 	i = 0;
@@ -103,16 +106,22 @@ t_tac*	simple_command(t_tac* tac)
 		if (tac->token->type == TOKEN_STRING)
 		{
 			tac->parser->cmd = realloc(tac->parser->cmd, i); /////// change par ft_realloc
+			printf("token_value: %s\n", tac->token->value);
 			tac->parser->cmd[i] = ft_strdup(tac->token->value);
 			i++;
 		}
-		tac->token = lexer_next_token(tac->lexer);
+		if (tac->token->type != TOKEN_PIPE || tac->token->type != TOKEN_EOF)
+			tac->token = lexer_next_token(tac->lexer);
 		printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(tac->token));
 	}
 	tac->parser->cmd[i] = 0;
+	i = -1;
+	while(tac->parser->cmd[++i])
+		printf("CMD(%d): %s\n", i, tac->parser->cmd[i]);
 	new = ft_lstnew(tac->parser->cmd, tac->parser->infile, tac->parser->outfile);
 	ft_addfront(&tac->list, new);
-	free_parser(tac->parser);///      mfhamtch 3lach db salit manha walakin fach tanfriyiha ktkhssar data fi list
+	// free_parser(tac->parser);///      mfhamtch 3lach db salit manha walakin fach tanfriyiha ktkhssar data fi list
+	print_node(tac->list);
 	return (tac);
 }
 
@@ -125,18 +134,18 @@ t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
 	tac->token = token;
 	tac->list = list;
 	/*                 ##!!!!!! DONT forgit HERE_DOC IN EUTCH COMMAND!!!!!!##       */
-	tac = simple_command(tac);
 	while (tac->token->type != TOKEN_EOF)
 	{
+		tac = simple_command(tac);
 		if (tac->token->type == TOKEN_PIPE)
 		{
-	// printf("\n\nAFTER:  %s\n\n", tac->token->value); ////////                    LMOCHKIL HNA MAKATRJA3CH LVALOR DYAL TOKEN KATB9A KIFMA KANT HNA 
+			printf("\n\nAFTER:  %s\n\n", tac->token->value); ////////                    LMOCHKIL HNA MAKATRJA3CH LVALOR DYAL TOKEN KATB9A KIFMA KANT HNA 
 
-		tac->token = lexer_next_token(tac->lexer);
+			tac->token = lexer_next_token(tac->lexer);
 		
-	// printf("\n\nAPRE:   %s\n\n", tac->token->value); ////////                    LMOCHKIL HNA MAKATRJA3CH LVALOR DYAL TOKEN KATB9A KIFMA KANT HNA 
-		tac = simple_command(tac);
+			printf("\n\nAPRE:   %s\n\n", tac->token->value); ////////                    LMOCHKIL HNA MAKATRJA3CH LVALOR DYAL TOKEN KATB9A KIFMA KANT HNA 
 		}
+		free_parser(tac->parser);
 	}
 	// printf("CMD1:  %s\n", tac->list->cmd[0]);
 	// printf("______-_________-_______-________\n");
