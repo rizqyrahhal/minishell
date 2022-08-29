@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/27 17:35:34 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/29 01:39:58 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ t_parser*	ft_rediriction(t_lexer* lexer, t_token* token, t_parser* parser)
 {
 	t_token*	next_token;
 
-	printf("_-------------------_\n");
 	//  this will fill the infile till the end and will get the last one
 	if (token->type == TOKEN_IN)
 	{
@@ -94,36 +93,26 @@ t_tac*	simple_command(t_tac* tac)
 	int			i;
 
 	i = 0;
-<<<<<<< HEAD
-	parser = ft_calloc(1, sizeof(t_parser));
-	parser->cmd = ft_calloc(1, sizeof(char*));
-	parser->infile = 0;
-	parser->outfile = 1;
-	while(token->type != TOKEN_PIPE && token->type != TOKEN_EOF)
-=======
 	tac->parser = ft_calloc(1, sizeof(t_parser));
 	tac->parser->cmd = ft_calloc(1, sizeof(char*));
 	tac->parser->infile = 0;
 	tac->parser->outfile = 1;
-	tac->parser->cmd = NULL;
 	while(tac->token->type != TOKEN_PIPE && tac->token->type != TOKEN_EOF)
->>>>>>> 5a893f4a1249e9decf249b220647490f2c894483
 	{
+		tac->parser = ft_rediriction(tac->lexer, tac->token, tac->parser);
 		if (tac->token->type == TOKEN_STRING)
 		{
 			tac->parser->cmd = realloc(tac->parser->cmd, i); /////// change par ft_realloc
 			tac->parser->cmd[i] = ft_strdup(tac->token->value);
 			i++;
 		}
-		tac->parser = ft_rediriction(tac->lexer, tac->token, tac->parser);
 		tac->token = lexer_next_token(tac->lexer);
 		printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(tac->token));
 	}
 	tac->parser->cmd[i] = 0;
 	new = ft_lstnew(tac->parser->cmd, tac->parser->infile, tac->parser->outfile);
-		ft_addfront(&tac->list, new);
-	print_node(tac->list);
-	// free_parser(parser);///      mfhamtch 3lach db salit manha walakin fach tanfriyiha ktkhssar data fi list
+	ft_addfront(&tac->list, new);
+	free_parser(tac->parser);///      mfhamtch 3lach db salit manha walakin fach tanfriyiha ktkhssar data fi list
 	return (tac);
 }
 
@@ -131,31 +120,14 @@ t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
 {
 	t_tac*	tac;
 
-	tac = ft_calloc(1, sizeof(t_tac));
+	tac = (t_tac*)malloc(sizeof(t_tac));
 	tac->lexer = lexer;
 	tac->token = token;
 	tac->list = list;
 	/*                 ##!!!!!! DONT forgit HERE_DOC IN EUTCH COMMAND!!!!!!##       */
-<<<<<<< HEAD
-	printf("\n\n\n\n%s\n\n\n\n", token->value); ////////                    LMOCHKIL HNA MAKATRJA3CH LVALOR DYAL TOKEN KATB9A KIFMA KANT HNA 
-	list = simple_command(lexer, token, list);
-//	while (token->type != TOKEN_EOF)
-//	{
-//		if (token->type == TOKEN_PIPE)
-//		{
-//		// function_simple_command;
-//		token = lexer_next_token(lexer);
-//		list = simple_command(lexer, token, list);
-//		// list = multi_command(lexer, token, list);//   comme simlpe just a simple defirent ---->  just assing not creat next node becouse is creat here
-//		}
-//	}
-	return (list);
-=======
-	tac->parser = 0;
 	tac = simple_command(tac);
 	while (tac->token->type != TOKEN_EOF)
 	{
-		free_parser(tac->parser);
 		if (tac->token->type == TOKEN_PIPE)
 		{
 	// printf("\n\nAFTER:  %s\n\n", tac->token->value); ////////                    LMOCHKIL HNA MAKATRJA3CH LVALOR DYAL TOKEN KATB9A KIFMA KANT HNA 
@@ -168,18 +140,10 @@ t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
 	}
 	// printf("CMD1:  %s\n", tac->list->cmd[0]);
 	// printf("______-_________-_______-________\n");
-	// print_node(tac->list);
 	return (tac->list);
->>>>>>> 5a893f4a1249e9decf249b220647490f2c894483
 }
 
 		// printf("COMMAND: %s, INfile: %d, OUTfile: %d\n", list->cmd, list->input, list->output);
-
-
-
-
-
-
 
 
 /*  ::::::::::::::::::::::::::::::::::::: ALGO OF SIMPLE_COMMAND  ::::::::::::::::::::::::::::::::::::::::::
