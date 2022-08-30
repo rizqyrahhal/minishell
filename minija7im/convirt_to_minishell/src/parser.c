@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/30 18:54:09 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/30 19:35:06 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	free_parser(t_parser* parser)
 t_tac*	ft_rediriction(t_tac* tac)
 {
 	t_token*	next_token;
+	char		*here_doc;
 
 	if (tac->token->type == TOKEN_IN)
 	{
@@ -75,16 +76,32 @@ t_tac*	ft_rediriction(t_tac* tac)
 			tac->parser->outfile = open(next_token->value, O_CREAT | O_RDWR | O_APPEND, 0644);
 	}
 
-	// if (token->type == TOKEN_HERDOC)
-	// {
-	// 	handl here_doce here
-	// }
+	if (tac->token->type == TOKEN_HERDOC)
+	{
+		// handl here_doce here	
+		tac->parser->infile = open(".temporere", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		// if (tac->parser->infile < 0)
+			// return_error("ERR_HEREDOC");
+		next_token = lexer_next_token(tac->lexer);
+		while (1)
+		{
+			here_doc = readline("> ");
+			if (!here_doc || !ft_strncmp(next_token->value, here_doc, ft_strlen(next_token->value) + 1))
+				break ;
+			write(tac->parser->infile, here_doc, ft_strlen(here_doc));
+			write(tac->parser->infile, "\n", 1);
+			free(here_doc);
+		}
+		free(here_doc);
+		close(tac->parser->infile);
+	// 	tac->parser->infile = open(".temporere", O_RDONLY);
+	// 	if (tac->parser->infile < 0)
+	// 	{
+	// 		unlink(".temporere");
+	// 		// return_error("ERR_heredoc_infile");
+	// 	}
+	}
 
-
-	// 	move_to_next_cmd();
-	/* in cas des error in open file :::: ghndir next token fwa7d lope 7ata l3nd TOKEN_PIPE OR TOKEN_EOF
-	sabab hadchi howa ana ay cmd msta9ala bdatha wo ila kan chi error fchi cmd kt7bs 3and lERROR ms bash kydoz lnext pipe 
-	bma3nd akhor ila khrajt fchi error fi l cmd li khadam fiha ghnprintih wo ndoz l next cmd*/
 	if (tac->parser->infile == -1)
 	{
 		printf("minishell: %s: No such file or directory\n", next_token->value);
@@ -166,4 +183,5 @@ t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
 
 hata nakhad data 3la khatri dyal lcomand kamlha 3ad nzidha fi list ila makan fiha 7ata error 
 ila kan fiha chi error magahndawzhach lih bmara,
-ghanrotirni error wo ndawoz lih ghi les CMD lis khashom ytexsicutaw*/
+ghanrotirni error wo ndawoz lih ghi les CMD lis khashom ytexsicutaw
+*/
