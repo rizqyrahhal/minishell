@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/30 18:08:36 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/30 18:46:43 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,15 @@ t_tac*	ft_rediriction(t_tac* tac)
 			tac->parser->infile = open(next_token->value, O_RDONLY | O_TRUNC, 0600);
 	}
 
-	// if (token->type == TOKEN_OU)
-	// {
-	// 	if(outfile != 1)
-	// 		close(outfile);
-	// 	outfile = open();
-	// }
+	if (tac->token->type == TOKEN_OU)
+	{
+		if(tac->parser->outfile != 1){
+			close(tac->parser->outfile);
+		}
+		if ((next_token = lexer_next_token(tac->lexer))->type == TOKEN_STRING)
+			tac->parser->outfile = open(next_token->value, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	}
+	
 	
 	// if (token->type == TOKEN_APPAND)
 	// {
