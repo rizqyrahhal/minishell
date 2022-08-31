@@ -15,18 +15,19 @@ FLAGS = -Wall -Werror -Wextra
 CC = cc
 
 SRCS =  Mandatory/minishell.c \
-		pipes/pipex_bonus.c \
-        pipes/here_doc.c \
-        pipes/pipex_outils.c \
-        pipes/pipex_outils2.c \
-        pipes/put_error.c \
-		pipes/get_next_line/get_next_line.c \
-		pipes/get_next_line/get_next_line_utils.c \
+		tools/tools1.c \
+		tools/arr_tools.c \
+		tools/arr_tools2.c \
+		execution/execute.c \
+		execution/ex_tools.c \
+		execution/ex_tools2.c \
+		execution/put_error.c \
 
 LIBFT = Libft/libft/ft_split.c \
 		Libft/libft/ft_strjoin.c \
 		Libft/libft/ft_strlen.c \
 		Libft/libft/ft_strncmp.c \
+		Libft/libft/ft_strcmp.c \
 		Libft/libft/ft_strnstr.c \
 		Libft/libft/ft_strchr.c \
 		Libft/libft/ft_strdup.c \
@@ -34,7 +35,7 @@ LIBFT = Libft/libft/ft_split.c \
 		Libft/libft/ft_isalpha.c \
 		Libft/libft/ft_putstr_fd.c \
 		Libft/libft/linked_list.c \
-		pipe/lbft/ft_substr.c
+		Libft/libft/ft_substr.c
 
 OBJS = $(SRCS:.c=.o)
 OBJS_L = $(LIBFT:.c=.o)
@@ -46,9 +47,8 @@ all: $(NAME)
 
 clean:
 	@rm -rf Mandatory/*.o
-	@rm -rf pipex/Mandatory/*.o
+	@rm -rf pipes/*.o
 	@rm -f Libft/libft/*.o
-	@rm -f Libft/*.o
 
 fclean: clean
 	@rm -f $(NAME)
