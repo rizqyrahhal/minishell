@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "../../pipes/pipex.h"
+#include "../../Includes/minishell.h"
 
 size_t	ft_d_strlen(char **s)
 {
@@ -42,7 +42,13 @@ void	ft_addfront(t_command**	list, t_command *new)
 		*list = new;
 	else
 	{
-		(*list)->next = new;
+		if (*list)
+		{
+			tmp = ft_lstlast(*list);
+			tmp->next = new;
+		}
+		else
+			*list = new;
 	}
 }
 
