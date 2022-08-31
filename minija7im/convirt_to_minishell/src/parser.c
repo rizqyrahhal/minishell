@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/27 17:35:34 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/30 19:35:06 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,95 +35,117 @@ void	free_parser(t_parser* parser)
 {
 	int	i;
 
-	i = -1;
-	while (parser->cmd[++i]){
+	i = 0;
+	while (parser->cmd[i]){
 		free(parser->cmd[i]);
+		i++;
 	}
 	free(parser->cmd);
 	free(parser);
 }
 
-t_parser*	ft_rediriction(t_lexer* lexer, t_token* token, t_parser* parser)
+t_tac*	ft_rediriction(t_tac* tac)
 {
 	t_token*	next_token;
+	char		*here_doc;
 
-	printf("_-------------------_\n");
-	//  this will fill the infile till the end and will get the last one
-	if (token->type == TOKEN_IN)
+	if (tac->token->type == TOKEN_IN)
 	{
-		if(parser->infile != 0){
-			close(parser->infile);
+		if(tac->parser->infile != 0){
+			close(tac->parser->infile);
 		}
-		if ((next_token = lexer_next_token(lexer))->type == TOKEN_STRING)
-			parser->infile = open(next_token->value, O_RDONLY | O_TRUNC, 0600);
-		printf("TOKEN_VALUE: %s\nNUMBER_OF_FD: %d\n", next_token->value, parser->infile);
+		if ((next_token = lexer_next_token(tac->lexer))->type == TOKEN_STRING)
+			tac->parser->infile = open(next_token->value, O_RDONLY , 0600);
 	}
 
-	// if (token->type == TOKEN_APPAND)
-	// {
-	// 	if(outfile != 1)
-	// 		close(outfile);
-	// 	outfile = open();///
-	// }
+	if (tac->token->type == TOKEN_OU)
+	{
+		if(tac->parser->outfile != 1){
+			close(tac->parser->outfile);
+		}
+		if ((next_token = lexer_next_token(tac->lexer))->type == TOKEN_STRING)
+			tac->parser->outfile = open(next_token->value, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	}
+	
+	if (tac->token->type == TOKEN_APPAND)
+	{
+		if(tac->parser->outfile != 1){
+			close(tac->parser->outfile);
+		}
+		if ((next_token = lexer_next_token(tac->lexer))->type == TOKEN_STRING)
+			tac->parser->outfile = open(next_token->value, O_CREAT | O_RDWR | O_APPEND, 0644);
+	}
 
-	// if (token->type == TOKEN_OU)
-	// {
-	// 	if(outfile != 1)
-	// 		close(outfile);
-	// 	outfile = open();
-	// }
+	if (tac->token->type == TOKEN_HERDOC)
+	{
+		// handl here_doce here	
+		tac->parser->infile = open(".temporere", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		// if (tac->parser->infile < 0)
+			// return_error("ERR_HEREDOC");
+		next_token = lexer_next_token(tac->lexer);
+		while (1)
+		{
+			here_doc = readline("> ");
+			if (!here_doc || !ft_strncmp(next_token->value, here_doc, ft_strlen(next_token->value) + 1))
+				break ;
+			write(tac->parser->infile, here_doc, ft_strlen(here_doc));
+			write(tac->parser->infile, "\n", 1);
+			free(here_doc);
+		}
+		free(here_doc);
+		close(tac->parser->infile);
+	// 	tac->parser->infile = open(".temporere", O_RDONLY);
+	// 	if (tac->parser->infile < 0)
+	// 	{
+	// 		unlink(".temporere");
+	// 		// return_error("ERR_heredoc_infile");
+	// 	}
+	}
 
-	// if (token->type == TOKEN_HERDOC)
-	// {
-	// 	handl here_doce here
-	// }
-
-	// if (infile = -1)
-	// {
-	// 	move_to_next_cmd();
-	/* in cas des error in open file :::: ghndir next token fwa7d lope 7ata l3nd TOKEN_PIPE OR TOKEN_EOF
-	sabab hadchi howa ana ay cmd msta9ala bdatha wo ila kan chi error fchi cmd kt7bs 3and lERROR ms bash kydoz lnext pipe 
-	bma3nd akhor ila khrajt fchi error fi l cmd li khadam fiha ghnprintih wo ndoz l next cmd*/
-	// }
-	return (parser);
+	if (tac->parser->infile == -1)
+	{
+		printf("minishell: %s: No such file or directory\n", next_token->value);
+		while (tac->token->type != TOKEN_PIPE && tac->token->type != TOKEN_EOF)
+		{
+			tac->token = lexer_next_token(tac->lexer);
+		}
+	}
+	return (tac);
 }
 
 t_tac*	simple_command(t_tac* tac)
 {
 	t_command*	new;
+	t_token*	next_token;
 	int			i;
 
 	i = 0;
-<<<<<<< HEAD
-	parser = ft_calloc(1, sizeof(t_parser));
-	parser->cmd = ft_calloc(1, sizeof(char*));
-	parser->infile = 0;
-	parser->outfile = 1;
-	while(token->type != TOKEN_PIPE && token->type != TOKEN_EOF)
-=======
-	tac->parser = ft_calloc(1, sizeof(t_parser));
-	tac->parser->cmd = ft_calloc(1, sizeof(char*));
+	tac->parser = malloc(sizeof(t_parser));
+	tac->parser->cmd = malloc(sizeof(char*));
+	tac->parser->cmd[0] = NULL;
 	tac->parser->infile = 0;
 	tac->parser->outfile = 1;
-	tac->parser->cmd = NULL;
+
 	while(tac->token->type != TOKEN_PIPE && tac->token->type != TOKEN_EOF)
->>>>>>> 5a893f4a1249e9decf249b220647490f2c894483
 	{
+		tac = ft_rediriction(tac);
 		if (tac->token->type == TOKEN_STRING)
 		{
-			tac->parser->cmd = realloc(tac->parser->cmd, i); /////// change par ft_realloc
+			tac->parser->cmd = ft_realloc(tac->parser->cmd);
 			tac->parser->cmd[i] = ft_strdup(tac->token->value);
 			i++;
+			tac->parser->cmd[i] = 0;
 		}
-		tac->parser = ft_rediriction(tac->lexer, tac->token, tac->parser);
-		tac->token = lexer_next_token(tac->lexer);
-		printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(tac->token));
+			if (tac->token->type != TOKEN_EOF && tac->token->type != TOKEN_PIPE)
+				tac->token = lexer_next_token(tac->lexer);
+		// printf("A la fin de first while in simpele_command\n");
+		// printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(tac->token));
 	}
-	tac->parser->cmd[i] = 0;
-	new = ft_lstnew(tac->parser->cmd, tac->parser->infile, tac->parser->outfile);
+	if (tac->parser->infile != -1)
+	{
+		new = ft_lstnew(tac->parser->cmd, tac->parser->infile, tac->parser->outfile);
 		ft_addfront(&tac->list, new);
-	print_node(tac->list);
-	// free_parser(parser);///      mfhamtch 3lach db salit manha walakin fach tanfriyiha ktkhssar data fi list
+	}
 	return (tac);
 }
 
@@ -131,55 +153,30 @@ t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
 {
 	t_tac*	tac;
 
-	tac = ft_calloc(1, sizeof(t_tac));
+	tac = (t_tac*)malloc(sizeof(t_tac));
 	tac->lexer = lexer;
 	tac->token = token;
 	tac->list = list;
-	/*                 ##!!!!!! DONT forgit HERE_DOC IN EUTCH COMMAND!!!!!!##       */
-<<<<<<< HEAD
-	printf("\n\n\n\n%s\n\n\n\n", token->value); ////////                    LMOCHKIL HNA MAKATRJA3CH LVALOR DYAL TOKEN KATB9A KIFMA KANT HNA 
-	list = simple_command(lexer, token, list);
-//	while (token->type != TOKEN_EOF)
-//	{
-//		if (token->type == TOKEN_PIPE)
-//		{
-//		// function_simple_command;
-//		token = lexer_next_token(lexer);
-//		list = simple_command(lexer, token, list);
-//		// list = multi_command(lexer, token, list);//   comme simlpe just a simple defirent ---->  just assing not creat next node becouse is creat here
-//		}
-//	}
-	return (list);
-=======
-	tac->parser = 0;
-	tac = simple_command(tac);
 	while (tac->token->type != TOKEN_EOF)
 	{
-		free_parser(tac->parser);
+		// printf("DEMARE::::::::::::::::::::::::::::\n");
+		// printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(tac->token));
+		tac = simple_command(tac);
 		if (tac->token->type == TOKEN_PIPE)
 		{
-	// printf("\n\nAFTER:  %s\n\n", tac->token->value); ////////                    LMOCHKIL HNA MAKATRJA3CH LVALOR DYAL TOKEN KATB9A KIFMA KANT HNA 
-
-		tac->token = lexer_next_token(tac->lexer);
+			// printf("\n\nAFTER:  %s\n\n", tac->token->value);
+			tac->token = lexer_next_token(tac->lexer);
 		
-	// printf("\n\nAPRE:   %s\n\n", tac->token->value); ////////                    LMOCHKIL HNA MAKATRJA3CH LVALOR DYAL TOKEN KATB9A KIFMA KANT HNA 
-		tac = simple_command(tac);
+			// printf("\n\nAPRE:   %s\n\n", tac->token->value);
 		}
+		if (tac->parser)
+			free_parser(tac->parser);
 	}
-	// printf("CMD1:  %s\n", tac->list->cmd[0]);
-	// printf("______-_________-_______-________\n");
-	// print_node(tac->list);
+
 	return (tac->list);
->>>>>>> 5a893f4a1249e9decf249b220647490f2c894483
 }
 
 		// printf("COMMAND: %s, INfile: %d, OUTfile: %d\n", list->cmd, list->input, list->output);
-
-
-
-
-
-
 
 
 /*  ::::::::::::::::::::::::::::::::::::: ALGO OF SIMPLE_COMMAND  ::::::::::::::::::::::::::::::::::::::::::
@@ -187,82 +184,4 @@ t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
 hata nakhad data 3la khatri dyal lcomand kamlha 3ad nzidha fi list ila makan fiha 7ata error 
 ila kan fiha chi error magahndawzhach lih bmara,
 ghanrotirni error wo ndawoz lih ghi les CMD lis khashom ytexsicutaw
-
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// t_command*	ft_lstlast(t_command *list)
-// {
-// 	while (list)
-// 	{
-// 		if (!list->next)
-// 			return(list);
-// 		list = list->next;
-// 	}
-// 	return (list);
-// }
-
-// void	ft_addfront(t_command	**list, t_command *new)
-// {
-// 	t_command*	tmp;
-	
-// 	if (*list == NULL)
-// 		*list = new;
-// 	else
-// 	{
-// 		if (*list)
-// 		{
-// 			tmp = ft_lstlast(*list);
-// 			tmp->next = new;
-// 		}
-// 		else
-// 			*list = new;
-// 	}
-// }
-
-// t_command	*ft_lstnew(char *s, int infile, int outfile)
-// {
-// 	t_command*	n1;
-
-// 	n1 = malloc(sizeof(t_command));
-// 	if (n1 == 0)
-// 		return (NULL);
-// 	n1->cmd = malloc(ft_strlen(s));
-// 	n1->cmd = s;
-// 	n1->input = infile;
-// 	n1->output = outfile;
-// 	n1->next = NULL;
-// 	return (n1);
-// }

@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/25 17:39:12 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/30 19:08:45 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,11 @@ alore pour handl sa on a realloc mon buf,
 and use readline pour read from standar_input est apre join this on buf */
 
 /* les ERROR :::::: before_parsing :::::::
-::::::::::::    
+::::::::::::
+
+
+
+ls >  | ......		----->		bash: syntax error near unexpected token `|'
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!! if open " OR ' qoute handle in ERROR, ya3ni maghanakhodhomch b3ayn l3tibar fach n9ad l7alat dyal " and ' qoute  !!!!!!
