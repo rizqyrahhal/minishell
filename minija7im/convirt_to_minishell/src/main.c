@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/30 19:08:45 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/30 23:06:51 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 int	main(int argc, char** argv, char** envp)
 {
-	char*	buf;
+	char	*buf;
 
 	if (argc > 1)
 	{
@@ -29,9 +29,11 @@ int	main(int argc, char** argv, char** envp)
 	while(1)
 	{
 		buf = readline("\033[0;33m minishell > \033[0m");
+		add_history(buf);
 		/* functoin  pour check les error comme an while lope in src character par chararcter   (here or in main Function)
 		static int	error_befor_parser(char* src); */
-		tac_compile(buf);
+		if (buf)
+			tac_compile(buf);
 		free(buf);
 	}
 	return 0;

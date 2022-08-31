@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/30 19:35:06 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/08/31 21:30:35 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,25 @@ t_tac*	ft_rediriction(t_tac* tac)
 			tac->parser->outfile = open(next_token->value, O_CREAT | O_RDWR | O_APPEND, 0644);
 	}
 
+	/*
+	HERE_DOC kysali ila dart (control + c) wo had lblan ya2ima khasso here_doc ykon f childe prossece ya ima chi 7al akhor b7al kif taydir bash
+	L7AL howa mni nkon fi lhirdoc (cntl + c) OR (cntl + d) ghykono kykhorjo ghi mn here_doc wo appar here_doc ydiro khadmathoom
+	
+	!!!!!!! in bash tout HERE_DOC ktftah 9bal parssing dyal line !!!!!!!!!
+	-----> CTRL+D : est un delemeter de here_doc (ya3ni ghanzid siognal dyalha fi condition bash ywa9f print b7al delimeter wo sf).
+	-----> CTRL+C : kat anelee ay 7aja mn binha here_doc alor madam l here_doc fi bash kythandlo 9bal parsin dyal line,
+	idan fa  khasni mn opnich les outfile ila kan chi here_doc mn ba3d chi wo7din wo 7bas bi CTRL+C.
+
+	(L7OLOL :):) ----__--> 1) (***) ima ghnchiki ila kant ctrl+c wo tfat7o chi filat nm7ihom 
+	(L7OLOL :):) ----__--> 2) (*****) in lexer opning here_doc and save your files with delimitre like name,
+	and handl it apre in parsing like infile  
+
+	// FILE POUR STOCK HERE_DOC "/tmp/sh-thd-1641928925"
+	*/
 	if (tac->token->type == TOKEN_HERDOC)
-	{
-		// handl here_doce here	
+	{	
+		if (tac->parser->infile != 0)
+			close(tac->parser->infile);
 		tac->parser->infile = open(".temporere", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		// if (tac->parser->infile < 0)
 			// return_error("ERR_HEREDOC");
@@ -93,7 +109,6 @@ t_tac*	ft_rediriction(t_tac* tac)
 			free(here_doc);
 		}
 		free(here_doc);
-		close(tac->parser->infile);
 	// 	tac->parser->infile = open(".temporere", O_RDONLY);
 	// 	if (tac->parser->infile < 0)
 	// 	{
@@ -141,7 +156,7 @@ t_tac*	simple_command(t_tac* tac)
 		// printf("A la fin de first while in simpele_command\n");
 		// printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(tac->token));
 	}
-	if (tac->parser->infile != -1)
+	if (tac->parser->infile != -1 && tac->parser->cmd[0] != NULL)
 	{
 		new = ft_lstnew(tac->parser->cmd, tac->parser->infile, tac->parser->outfile);
 		ft_addfront(&tac->list, new);
