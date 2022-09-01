@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:35:14 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/30 19:25:20 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/01 02:18:14 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char		*ft_strdup(const char *s1);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 // hulper function for use linked_list
-t_command*	ft_lstnew(char** s, int infile, int outfile);
+t_command*	ft_lstnew(char** s, int infile, int outfile, char* name_of_file);
 void		ft_addfront(t_command** list, t_command* new);
 
 #endif

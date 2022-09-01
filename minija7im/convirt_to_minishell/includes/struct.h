@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 12:53:58 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/01 00:33:39 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/01 00:55:29 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_command_node
 	
 	int		infile; // < if input != 0
 	int		outfile; // > if output != 1
+	char*	name_of_file; // last output file name
 	struct s_command_node *next;
 } t_command;
 
