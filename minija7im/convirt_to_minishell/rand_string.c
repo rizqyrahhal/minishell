@@ -11,12 +11,11 @@ char *randstring(size_t length) {
     if (length) {
         randomString = malloc(sizeof(char) * (length +1));
 
-        if (randomString) {            
+        if (randomString) {
             for (int n = 0;n < length;n++) {            
                 int key = rand() % (int)(sizeof(charset) -1);
                 randomString[n] = charset[key];
             }
-
             randomString[length] = '\0';
         }
     }
@@ -26,8 +25,6 @@ char *randstring(size_t length) {
 
 int main()
 {
-	//char	*s;
-
 	printf("%s\n", randstring(8));
 	printf("%s\n", randstring(8));
 }

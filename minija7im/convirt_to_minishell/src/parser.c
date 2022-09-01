@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/01 02:18:11 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/01 17:45:03 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,19 @@ t_tac*	ft_rediriction(t_tac* tac)
 	t_token*	next_token;
 	char		*here_doc;
 
+	/* EXAMPLE GHAYKHASSAR LBLAN:   (ls << l > outtttt | cat << y > oufffff < infffff),
+	daba hna kykhass ytkriya outfile 3ad ytprinta error dyal infile, 
+	ALORS ----> makayn 7ata 7al mn ghir ndawoz lhabib ga3 les file bash ykon 3ando tartib dyalhom*/
+	// HERE_DOC ghanakhod akhir file name 9adit wo man ttabi3t l7al ghankon m7it lakhrin wo ghanzido fi l **array dyal infile
+
 	if (tac->token->type == TOKEN_IN)
 	{
 		if(tac->parser->infile != 0){
 			close(tac->parser->infile);
 		}
 		if ((next_token = lexer_next_token(tac->lexer))->type == TOKEN_STRING)
-			tac->parser->infile = open(next_token->value, O_RDONLY , 0600);
+			tac->parser->infile = open(next_token->value, O_RDONLY, 0600);
 	}
-
-
-
 
 	if (tac->token->type == TOKEN_OU)
 	{
@@ -68,10 +70,6 @@ t_tac*	ft_rediriction(t_tac* tac)
 		if ((next_token = lexer_next_token(tac->lexer))->type == TOKEN_STRING)
 			tac->parser->name_of_file = ft_strdup(next_token->value);
 	}
-
-
-
-
 
 	if (tac->token->type == TOKEN_APPAND)
 	{
@@ -97,11 +95,13 @@ t_tac*	ft_rediriction(t_tac* tac)
 
 	// FILE POUR STOCK HERE_DOC "/tmp/sh-thd-1641928925"
 	*/
+
 	if (tac->token->type == TOKEN_HERDOC)
-	{	
+	{
 		if (tac->parser->infile != 0)
 			close(tac->parser->infile);
-		tac->parser->infile = open(".temporere", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		char*	tmpstr = ft_randstring(8);
+		tac->parser->infile = open(tmpstr, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		// if (tac->parser->infile < 0)
 			// return_error("ERR_HEREDOC");
 		next_token = lexer_next_token(tac->lexer);

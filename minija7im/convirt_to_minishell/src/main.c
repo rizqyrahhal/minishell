@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/30 23:06:51 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/01 03:58:59 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ fach nbghi nparssi maghanb9ach n3raf wach kan mabibn "$" OR '$ */ // khasha chi 
 7int fihome bzaf dyal les cas wo ila khalithom 7ata Pareser 
 ghatkharba9 liya data li m3ahom
 example ----> e"c"'h'o  "l"s
+
+SOURCE : lexer_collect_string function __
+__|> https://stackoverflow.com/questions/70958263/trying-to-make-a-lexer-in-c-and-the-output-is-not-desirable
 */
 
 
