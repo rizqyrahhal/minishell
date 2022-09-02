@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/01 17:48:15 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/02 16:29:27 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,26 @@ void	lexer_advance(t_lexer* lexer)
 	}
 }
 
-// t_token* lexer_collect_string(t_lexer* lexer) {
-//     char *value = ft_calloc(1, sizeof(char));
-//     unsigned int len = 0;
+t_token* lexer_collect_string(t_lexer* lexer) {
+    char *value = ft_calloc(1, sizeof(char));
+    unsigned int len = 0;
 
-//     lexer_advance(lexer);
-//     while (lexer->c != '\0' && lexer->c != '\'') {
-//         value = realloc(value, (len + 1) * sizeof(char));
-//         value[len++] = lexer->c;
-//         lexer_advance(lexer);
-// 		// if (lexer->c == '\'' && ft_non_tokenable(lexer_advance(lexer)->c))
+    lexer_advance(lexer);
+    while (lexer->c != '\0' && lexer->c != '\'') {
+        value = realloc(value, (len + 1) * sizeof(char));
+        value[len++] = lexer->c;
+        lexer_advance(lexer);
+		// if (lexer->c == '\'' && ft_non_tokenable(lexer_advance(lexer)->c))
 		
-//     }
-//     value[len] = '\0';
-// 	lexer_skip_whitespace(lexer);
+    }
+    value[len] = '\0';
+	lexer_skip_whitespace(lexer);
 
-//     if (lexer->c == '\'')
-//         lexer_advance(lexer);
+    if (lexer->c == '\'')
+        lexer_advance(lexer);
 
-//     return init_token(value, TOKEN_STRING);
-// }
+    return init_token(value, TOKEN_STRING);
+}
 
 void	lexer_skip_whitespace(t_lexer* lexer)
 {

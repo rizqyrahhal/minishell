@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/01 03:58:59 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/02 16:22:32 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 int	main(int argc, char** argv, char** envp)
 {
 	char	*buf;
+	// char	
 
 	if (argc > 1)
 	{
@@ -30,8 +31,12 @@ int	main(int argc, char** argv, char** envp)
 	{
 		buf = readline("\033[0;33m minishell > \033[0m");
 		add_history(buf);
+
 		/* functoin  pour check les error comme an while lope in src character par chararcter   (here or in main Function)
 		static int	error_befor_parser(char* src); */
+
+		// here_doc whit change delemeter par name of file
+
 		if (buf)
 			tac_compile(buf);
 		free(buf);

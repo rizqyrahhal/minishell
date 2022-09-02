@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/01 17:45:03 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/02 16:24:09 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,15 @@ t_tac*	ft_rediriction(t_tac* tac)
 
 	if (tac->token->type == TOKEN_OU)
 	{
-		if(tac->parser->name_of_file != NULL)
-			ft_calloc(ft_strlen(tac->parser->name_of_file), sizeof(char));
+		if(tac->parser->outfile != 1){
+			close(tac->parser->outfile);
+		}
 		if ((next_token = lexer_next_token(tac->lexer))->type == TOKEN_STRING)
-			tac->parser->name_of_file = ft_strdup(next_token->value);
+			tac->parser->outfile = open(next_token->value,  O_CREAT | O_RDWR | O_TRUNC, 0644);
+		// if(tac->parser->name_of_file != NULL)
+		// 	ft_calloc(ft_strlen(tac->parser->name_of_file), sizeof(char));
+		// if ((next_token = lexer_next_token(tac->lexer))->type == TOKEN_STRING)
+		// 	tac->parser->name_of_file = ft_strdup(next_token->value);
 	}
 
 	if (tac->token->type == TOKEN_APPAND)
@@ -146,8 +151,6 @@ t_tac*	simple_command(t_tac* tac)
 	tac->parser->cmd[0] = NULL;
 	tac->parser->infile = 0;
 	tac->parser->outfile = 1;
-	tac->parser->name_of_file = ft_calloc(1, sizeof(char));
-	tac->parser->name_of_file = NULL;
 	while(tac->token->type != TOKEN_PIPE && tac->token->type != TOKEN_EOF)
 	{
 		tac = ft_rediriction(tac);
@@ -165,7 +168,7 @@ t_tac*	simple_command(t_tac* tac)
 	}
 	if (tac->parser->infile != -1 && tac->parser->cmd[0] != NULL)
 	{
-		new = ft_lstnew(tac->parser->cmd, tac->parser->infile, tac->parser->outfile, tac->parser->name_of_file);
+		new = ft_lstnew(tac->parser->cmd, tac->parser->infile, tac->parser->outfile);
 		ft_addfront(&tac->list, new);
 	}
 	return (tac);

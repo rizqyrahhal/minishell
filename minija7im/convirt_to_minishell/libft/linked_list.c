@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 01:12:19 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/01 02:28:08 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/02 15:44:17 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,34 +58,32 @@ char**	fill_t(char** s)
 	return (str);
 }
 
-char*	name_f(char* s)
-{
-	int 	i;
-	char*	str;
+// char*	name_f(char* s)
+// {
+// 	int 	i;
+// 	char*	str;
 
-	i = 0;
-	if (s)
-	{
-		str = malloc((ft_strlen(s) + 1) * sizeof(char));
-		while (s[i])
-		{
-			str[i] = s[i];
-			i++;
-		}
-		str[i] = '\0';
-			return (str);
-	}
-	return(NULL);
-}
+// 	i = 0;
+// 	if (s)
+// 	{
+// 		str = malloc((ft_strlen(s) + 1) * sizeof(char));
+// 		while (s[i])
+// 		{
+// 			str[i] = s[i];
+// 			i++;
+// 		}
+// 		str[i] = '\0';
+// 			return (str);
+// 	}
+// 	return(NULL);
+// }
 
-t_command*	ft_lstnew(char** cmd_data, int infile, int outfile, char* name_of_file)
+t_command*	ft_lstnew(char** cmd_data, int infile, int outfile)
 {
 	t_command*	n1;
 	char**		s;
-	char*		f;
 
 	s = fill_t(cmd_data);
-	f = name_f(name_of_file);
 	n1 = malloc(sizeof(t_command));
 	if (n1 == 0)
 		return (NULL);
@@ -93,7 +91,6 @@ t_command*	ft_lstnew(char** cmd_data, int infile, int outfile, char* name_of_fil
 	{
 		n1->cmd = (char**)malloc(sizeof(char*) * ft_d_strlen(s) + 1);
 		n1->cmd = s;
-		n1->name_of_file = f;
 	}
 	n1->infile = infile;
 	n1->outfile = outfile;
