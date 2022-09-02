@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/02 16:29:27 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/02 20:21:03 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,43 @@ t_token* lexer_collect_string(t_lexer* lexer) {
     char *value = ft_calloc(1, sizeof(char));
     unsigned int len = 0;
 
-    lexer_advance(lexer);
-    while (lexer->c != '\0' && lexer->c != '\'') {
-        value = realloc(value, (len + 1) * sizeof(char));
-        value[len++] = lexer->c;
-        lexer_advance(lexer);
-		// if (lexer->c == '\'' && ft_non_tokenable(lexer_advance(lexer)->c))
-		
-    }
+	while (ft_non_tokenable(lexer->c) && lexer->c != '\0')
+	{
+		if (lexer->c == '\''){ ///////// Single Qoute '\''
+    		lexer_advance(lexer);
+			while(ft_non_tokenable(lexer->c) && lexer->c != '\0' && lexer->c != '\''){
+    			while (lexer->c != '\0' && lexer->c != '\'') {
+    	    		value = realloc(value, (len + 1) * sizeof(char)); // change par ft_realloc char*
+    	    		value[len++] = lexer->c;
+    	    		lexer_advance(lexer);
+    			}
+    	    	lexer_advance(lexer);
+			}
+		}
+		// if (lexer->c == '"'){
+		// 	if (lexer->c == '$')
+		// 	{
+		// 		expande
+		// 	}
+		// 	// Double Qoute '"'  ::: la meme implementation comme single qoute ---->  bil2idafa ila $$$$$$$$$
+		// }
+		if (lexer->c == '\0')
+			break;
+		// if (lexer->c == '$')
+		// {
+		// 	// expande
+		// }
+		if (ft_non_tokenable(lexer->c) && lexer->c != '\''){
+        	value = realloc(value, (len + 1) * sizeof(char)); // change par ft_realloc char*
+			value[len++] = lexer->c;
+        	lexer_advance(lexer);
+		}
+		else
+    	    lexer_advance(lexer);
+	}
     value[len] = '\0';
-	lexer_skip_whitespace(lexer);
-
-    if (lexer->c == '\'')
-        lexer_advance(lexer);
-
-    return init_token(value, TOKEN_STRING);
+    
+	return init_token(value, TOKEN_STRING);
 }
 
 void	lexer_skip_whitespace(t_lexer* lexer)
@@ -61,19 +83,25 @@ void	lexer_skip_whitespace(t_lexer* lexer)
 		lexer_advance(lexer);
 }
 
-t_token* lexer_parse_id(t_lexer* lexer)
-{
-	char* value = ft_calloc(1, sizeof(char));
+// t_token* lexer_parse_id(t_lexer* lexer)
+// {
+// 	char* value = ft_calloc(1, sizeof(char));
 
-	while (ft_non_tokenable(lexer->c) && lexer->c != '\0')
-	{
-		value = realloc(value, (ft_strlen(value) + 2) * sizeof(char));
-		strcat(value, (char[]){lexer->c, 0}); /////// change strcat
-		lexer_advance(lexer);
-	}
-
-	return init_token(value, TOKEN_STRING);
-}
+// 	while (ft_non_tokenable(lexer->c) && lexer->c != '\0')
+// 	{
+// 		if (lexer->c != '\''){
+// 			value = realloc(value, (ft_strlen(value) + 2) * sizeof(char)); // change realloc
+// 			strcat(value, (char[]){lexer->c, 0}); /////// change strcat
+// 		}
+// 		if (lexer->c == '\''){  // single qoute
+//         	lexer_collect_string(lexer, value);
+// 			// lexer_advance(lexer);
+// 		}
+// 		lexer_advance(lexer);
+// 	}
+	
+// 	return init_token(value, TOKEN_STRING);
+// }
 
 char	lexer_peek(t_lexer* lexer, int offset)
 {
@@ -109,11 +137,11 @@ t_token*	lexer_next_token(t_lexer* lexer)
 	{
 		lexer_skip_whitespace(lexer);
 
-		// if (lexer->c == '\'')
-        //     return lexer_collect_string(lexer);
-
-		if (ft_non_tokenable(lexer->c))
-			return lexer_parse_id(lexer);
+		if (ft_non_tokenable(lexer->c)){
+			// if (lexer->c == '\'')  // single qoute
+            	return lexer_collect_string(lexer);	
+			// return lexer_parse_id(lexer);
+		}
 
 		if (lexer->c == '<')
 		{
@@ -137,10 +165,10 @@ t_token*	lexer_next_token(t_lexer* lexer)
 		}
 		else if (lexer->c == '|')
 			return lexer_advance_current(lexer, TOKEN_PIPE);
-		else if (lexer->c == '"')
-			return lexer_advance_current(lexer, TOKEN_DQ);
-		else if (lexer->c == 39)
-			return lexer_advance_current(lexer, TOKEN_SQ);
+		// else if (lexer->c == '"')
+		// 	return lexer_advance_current(lexer, TOKEN_DQ);
+		// else if (lexer->c == '\'')
+		// 	return lexer_advance_current(lexer, TOKEN_SQ);
 		else if (lexer->c == '\0')
 			break;
 	}
