@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/03 16:14:26 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/03 17:30:48 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	lexer_advance(t_lexer* lexer)
 t_token* lexer_collect_string(t_lexer* lexer) {
     char *value = ft_calloc(1, sizeof(char));
     unsigned int len = 0;
-
+printf("---------------------------------------------------\n");
 	while (ft_non_tokenable(lexer->c) && lexer->c != '\0')
 	{
 		if (lexer->c == '\''){ ///////// Single Qoute '\''

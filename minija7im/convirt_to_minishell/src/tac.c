@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/03 16:05:27 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/03 17:31:33 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	print_node(t_command *lst)
 		printf("COMMAND: ");
 		while (list->cmd[i])
 		{
-			printf("%s ", list->cmd[i]);
+			printf("[%s] ", list->cmd[i]);
 			i++;
 		}
 		printf(", INfile: %d, OUTfile: %d", list->infile, list->outfile);
