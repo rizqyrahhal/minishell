@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:59:32 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/26 22:55:08 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/03 15:39:48 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ size_t	ft_d_strlen(char **s)
 	size_t	i;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while(s[i])
 		i++;
 	return (i);

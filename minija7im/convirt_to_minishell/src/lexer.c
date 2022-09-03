@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/02 20:21:03 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/03 16:14:26 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,32 +48,40 @@ t_token* lexer_collect_string(t_lexer* lexer) {
     	    		value[len++] = lexer->c;
     	    		lexer_advance(lexer);
     			}
-    	    	lexer_advance(lexer);
+				lexer_advance(lexer);
 			}
 		}
-		// if (lexer->c == '"'){
-		// 	if (lexer->c == '$')
-		// 	{
-		// 		expande
-		// 	}
-		// 	// Double Qoute '"'  ::: la meme implementation comme single qoute ---->  bil2idafa ila $$$$$$$$$
-		// }
+		if (lexer->c == '"'){
+			// Double Qoute '"'  ::: la meme implementation comme single qoute ---->  bil2idafa ila $$$$$$$$$
+			lexer_advance(lexer);
+			while(ft_non_tokenable(lexer->c) && lexer->c != '\0' && lexer->c != '"'){
+    			while (lexer->c != '\0' && lexer->c != '"') {
+    	    		value = realloc(value, (len + 1) * sizeof(char)); // change par ft_realloc char*
+    	    		value[len++] = lexer->c;
+    	    		lexer_advance(lexer);
+    			}
+	    		lexer_advance(lexer);
+			}
+			// if (lexer->c == '$')
+			// {
+			// 	// expande
+			// }
+		}
 		if (lexer->c == '\0')
 			break;
 		// if (lexer->c == '$')
 		// {
 		// 	// expande
 		// }
-		if (ft_non_tokenable(lexer->c) && lexer->c != '\''){
+		if (ft_non_tokenable(lexer->c) && lexer->c != '\'' && lexer->c != '"'){
         	value = realloc(value, (len + 1) * sizeof(char)); // change par ft_realloc char*
 			value[len++] = lexer->c;
         	lexer_advance(lexer);
 		}
-		else
+		else if (lexer->c != ' ')
     	    lexer_advance(lexer);
 	}
     value[len] = '\0';
-    
 	return init_token(value, TOKEN_STRING);
 }
 
@@ -138,7 +146,6 @@ t_token*	lexer_next_token(t_lexer* lexer)
 		lexer_skip_whitespace(lexer);
 
 		if (ft_non_tokenable(lexer->c)){
-			// if (lexer->c == '\'')  // single qoute
             	return lexer_collect_string(lexer);	
 			// return lexer_parse_id(lexer);
 		}

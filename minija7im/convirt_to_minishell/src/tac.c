@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/02 15:46:45 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/03 16:05:27 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	tac_compile(char* src)
 	list = NULL;
 	while(token->type != TOKEN_EOF)
 	{
-		// printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(token));
+		printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(token));
 		list = parser(lexer, token, list);
 		token = lexer_next_token(lexer);
 	}
@@ -84,7 +84,7 @@ void	tac_compile(char* src)
 	printf("\033[0;34m                     ---------------------\n                     | LINKED_LIST FINAL |\n                     ---------------------\n\033[0m");
 	print_node(list);
 	if (list)
-		free_list(list);    // ndya khss nrja3 m3a lcod wo nfrii li khas ytfriya ms 7ata ntchiki readline achman lik filha
+		free_list(list);   // ndya khss nrja3 m3a lcod wo nfrii li khas ytfriya ms 7ata ntchiki readline achman lik filha
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::SEGNAL:::::::::::::::::::::::::::::::::::::;:::::::::::::::::::::::::::::::::::::::
