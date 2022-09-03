@@ -3,9 +3,9 @@
 #include <string.h>
 #include <ctype.h>
 
-int arr_size(char *env[])
+size_t	arr_size(char *env[])
 {
-	int i;
+	size_t i;
 
 	i = 0;
 	while (env[i])

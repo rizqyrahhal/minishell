@@ -1,3 +1,32 @@
+declare -x Apple_PubSub_Socket_Render="/private/tmp/com.apple.launchd.QhuJirctUX/Render"
+declare -x COMMAND_MODE="unix2003"
+declare -x HOME="/Users/lsemlali"
+declare -x HOMEBREW_CACHE="/tmp/lsemlali/Homebrew/Caches"
+declare -x HOMEBREW_TEMP="/tmp/lsemlali/Homebrew/Temp"
+declare -x LC_CTYPE="en_US.UTF-8"
+declare -x LESS="-R"
+declare -x LOGIN_SHELL="1"
+declare -x LOGNAME="lsemlali"
+declare -x LSCOLORS="Gxfxcxdxbxegedabagacad"
+declare -x OLDPWD="/Users/lsemlali/Desktop/minirahhal/minilahbib00"
+declare -x PAGER="less"
+declare -x PATH="/Users/lsemlali/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Frameworks/Mono.framework/Versions/Current/Commands"
+declare -x PWD="/Users/lsemlali/Desktop/minirahhal/minilahbib00"
+declare -x SECURITYSESSIONID="18703"
+declare -x SHELL="/bin/zsh"
+declare -x SHLVL="1"
+declare -x SSH_AUTH_SOCK="/private/tmp/com.apple.launchd.hzFOaat49Z/Listeners"
+declare -x TERM="xterm-256color"
+declare -x TERMINAL_EMULATOR="JetBrains-JediTerm"
+declare -x TERM_SESSION_ID="adb39363-eb61-4eb5-add9-76aa3829cc79"
+declare -x TMPDIR="/var/folders/zz/zyxvpxvq6csfxvn_n0000jh80004c2/T/"
+declare -x USER="lsemlali"
+declare -x XPC_FLAGS="0x0"
+declare -x XPC_SERVICE_NAME="0"
+declare -x ZSH="/Users/lsemlali/.oh-my-zsh"
+declare -x _="/Users/lsemlali/Desktop/minirahhal/minilahbib00/./minishell"
+declare -x __CF_USER_TEXT_ENCODING="0x1182:0x0:0x0"
+declare -x __INTELLIJ_COMMAND_HISTFILE__="/Users/lsemlali/Library/Caches/JetBrains/CLion2022.2/terminal/history/minirahhal-history"
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
@@ -15,7 +44,6 @@ FLAGS = -Wall -Werror -Wextra
 CC = cc
 
 SRCS =  Mandatory/minishell.c \
-		Mandatory/expanda.c \
 		tools/tools1.c \
 		tools/arr_tools.c \
 		tools/arr_tools2.c \
@@ -28,7 +56,6 @@ SRCS =  Mandatory/minishell.c \
 
 LIBFT = Libft/libft/ft_split.c \
 		Libft/libft/ft_strjoin.c \
-		Libft/libft/ft_atoi.c \
 		Libft/libft/ft_strlen.c \
 		Libft/libft/ft_strncmp.c \
 		Libft/libft/ft_strcmp.c \

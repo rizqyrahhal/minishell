@@ -87,7 +87,6 @@ void	arr_app(char **my_env, char **s, char *str)
 		i++;
 	}
 	i = 0;
-			printf("waaaaaaaaayli%d\n", k);
 	while (my_env[j])
 	{
 		if (k != -1 && j == k) {

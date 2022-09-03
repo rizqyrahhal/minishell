@@ -50,6 +50,26 @@ char**	ft_removee(char *my_env[], char *var)
 	return (s);
 }
 
+void	print_q(char *s)
+{
+	int i;
+
+	i = 0;
+	printf("declare -x ");
+	while (s[i])
+	{
+		if (s[i] == '=')
+		{
+			printf("%c", s[i]);
+			printf("\"");
+		}
+		else
+			printf("%c", s[i]);
+		i++;
+	}
+	printf("\"\n");
+}
+
 void	export_(char **arr)
 {
 	int i;
@@ -63,7 +83,7 @@ void	export_(char **arr)
 	while (arr_size(s) > 0)
 	{
 		c = __sort(s);
-		printf("declare -x %s\n", s[c]);
+		print_q(s[c]);
 		s = ft_removee(s, s[c]);
 		i++;
 	}
