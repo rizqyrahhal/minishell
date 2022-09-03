@@ -79,7 +79,7 @@ void	tac_compile(char* src)
 /* LEAKS  : 7ata n7ayd lprantage wo les function dyalo 3ad nchof m3ah */
 
 	// printf("LOGNEM=%s\n", getenv("LOGNAME"));
-	// execution part HERE!!
+	// execution part HERE!!z
 	printf("\033[0;34m                     ---------------------\n                     | LINKED_LIST FINAL |\n                     ---------------------\n\033[0m");
 	print_node(list);
 	if (list)
