@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:08 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/25 04:03:06 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/03 15:41:52 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_token*	init_token(char* value, int type)
 {
 	t_token*	token;
 	token = ft_calloc(1, sizeof(t_token));
-	token->value = value;
+	token->value = ft_strdup(value);
 	token->type = type;
 
 	return (token);
@@ -28,10 +28,10 @@ const char* token_type_to_str(int type)
 		return "TOKEN_STRING";
 	else if (type == TOKEN_PIPE)
 		return "TOKEN_PIPE";
-	else if (type == TOKEN_DQ)
-		return "TOKEN_DQ";
-	else if (type == TOKEN_SQ)
-		return "TOKEN_SQ";
+	// else if (type == TOKEN_DQ)
+	// 	return "TOKEN_DQ";
+	// else if (type == TOKEN_SQ)
+	// 	return "TOKEN_SQ";
 	else if (type == TOKEN_IN)
 		return "TOKEN_IN";
 	else if (type == TOKEN_HERDOC)

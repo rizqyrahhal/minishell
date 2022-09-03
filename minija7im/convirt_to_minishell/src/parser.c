@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/30 19:35:06 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/03 15:40:53 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,18 @@ t_tac*	ft_rediriction(t_tac* tac)
 	t_token*	next_token;
 	char		*here_doc;
 
+	/* EXAMPLE GHAYKHASSAR LBLAN:   (ls << l > outtttt | cat << y > oufffff < infffff),
+	daba hna kykhass ytkriya outfile 3ad ytprinta error dyal infile, 
+	ALORS ----> makayn 7ata 7al mn ghir ndawoz lhabib ga3 les file bash ykon 3ando tartib dyalhom*/
+	// HERE_DOC ghanakhod akhir file name 9adit wo man ttabi3t l7al ghankon m7it lakhrin wo ghanzido fi l **array dyal infile
+
 	if (tac->token->type == TOKEN_IN)
 	{
 		if(tac->parser->infile != 0){
 			close(tac->parser->infile);
 		}
 		if ((next_token = lexer_next_token(tac->lexer))->type == TOKEN_STRING)
-			tac->parser->infile = open(next_token->value, O_RDONLY , 0600);
+			tac->parser->infile = open(next_token->value, O_RDONLY, 0600);
 	}
 
 	if (tac->token->type == TOKEN_OU)
@@ -64,9 +69,13 @@ t_tac*	ft_rediriction(t_tac* tac)
 			close(tac->parser->outfile);
 		}
 		if ((next_token = lexer_next_token(tac->lexer))->type == TOKEN_STRING)
-			tac->parser->outfile = open(next_token->value, O_CREAT | O_RDWR | O_TRUNC, 0644);
+			tac->parser->outfile = open(next_token->value,  O_CREAT | O_RDWR | O_TRUNC, 0644);
+		// if(tac->parser->name_of_file != NULL)
+		// 	ft_calloc(ft_strlen(tac->parser->name_of_file), sizeof(char));
+		// if ((next_token = lexer_next_token(tac->lexer))->type == TOKEN_STRING)
+		// 	tac->parser->name_of_file = ft_strdup(next_token->value);
 	}
-	
+
 	if (tac->token->type == TOKEN_APPAND)
 	{
 		if(tac->parser->outfile != 1){
@@ -76,10 +85,28 @@ t_tac*	ft_rediriction(t_tac* tac)
 			tac->parser->outfile = open(next_token->value, O_CREAT | O_RDWR | O_APPEND, 0644);
 	}
 
+	/*
+	HERE_DOC kysali ila dart (control + c) wo had lblan ya2ima khasso here_doc ykon f childe prossece ya ima chi 7al akhor b7al kif taydir bash
+	L7AL howa mni nkon fi lhirdoc (cntl + c) OR (cntl + d) ghykono kykhorjo ghi mn here_doc wo appar here_doc ydiro khadmathoom
+	
+	!!!!!!! in bash tout HERE_DOC ktftah 9bal parssing dyal line !!!!!!!!!
+	-----> CTRL+D : est un delemeter de here_doc (ya3ni ghanzid siognal dyalha fi condition bash ywa9f print b7al delimeter wo sf).
+	-----> CTRL+C : kat anelee ay 7aja mn binha here_doc alor madam l here_doc fi bash kythandlo 9bal parsin dyal line,
+	idan fa  khasni mn opnich les outfile ila kan chi here_doc mn ba3d chi wo7din wo 7bas bi CTRL+C.
+
+	(L7OLOL :):) ----__--> 1) (***) ima ghnchiki ila kant ctrl+c wo tfat7o chi filat nm7ihom 
+	(L7OLOL :):) ----__--> 2) (*****) in lexer opning here_doc and save your files with delimitre like name,
+	and handl it apre in parsing like infile  
+
+	// FILE POUR STOCK HERE_DOC "/tmp/sh-thd-1641928925"
+	*/
+
 	if (tac->token->type == TOKEN_HERDOC)
 	{
-		// handl here_doce here	
-		tac->parser->infile = open(".temporere", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		if (tac->parser->infile != 0)
+			close(tac->parser->infile);
+		char*	tmpstr = ft_randstring(8);
+		tac->parser->infile = open(tmpstr, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		// if (tac->parser->infile < 0)
 			// return_error("ERR_HEREDOC");
 		next_token = lexer_next_token(tac->lexer);
@@ -93,7 +120,6 @@ t_tac*	ft_rediriction(t_tac* tac)
 			free(here_doc);
 		}
 		free(here_doc);
-		close(tac->parser->infile);
 	// 	tac->parser->infile = open(".temporere", O_RDONLY);
 	// 	if (tac->parser->infile < 0)
 	// 	{
@@ -125,7 +151,6 @@ t_tac*	simple_command(t_tac* tac)
 	tac->parser->cmd[0] = NULL;
 	tac->parser->infile = 0;
 	tac->parser->outfile = 1;
-
 	while(tac->token->type != TOKEN_PIPE && tac->token->type != TOKEN_EOF)
 	{
 		tac = ft_rediriction(tac);
@@ -141,7 +166,7 @@ t_tac*	simple_command(t_tac* tac)
 		// printf("A la fin de first while in simpele_command\n");
 		// printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(tac->token));
 	}
-	if (tac->parser->infile != -1)
+	if (tac->parser->infile != -1 && tac->parser->cmd[0] != NULL)
 	{
 		new = ft_lstnew(tac->parser->cmd, tac->parser->infile, tac->parser->outfile);
 		ft_addfront(&tac->list, new);
