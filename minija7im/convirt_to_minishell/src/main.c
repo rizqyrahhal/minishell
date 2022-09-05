@@ -6,41 +6,49 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/02 16:22:32 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/05 18:19:11 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 #include "../includes/lexer.h"
 #include "../includes/tac.h"
+#include "../includes/struct.h"
 
 #include <sys/types.h>
 #include <sys/wait.h>
 
-int	main(int argc, char** argv, char** envp)
+int	main(int argc, char** argv, char** env)
 {
 	char	*buf;
-	// char	
+	t_envp*	my_env;
 
-	if (argc > 1)
-	{
+	my_env = (t_envp*)malloc(sizeof(t_envp));
+	my_env->env = (char**)malloc(sizeof(char*) * (ft_d_strlen(env) + 1));
+	fill_env(env, my_env);
+	// printf("||| ---- ENV ---- |||\n");
+	// for (int i = 0; my_env->env[i]; i++){
+	// 	printf("%s\n", my_env->env[i]);
+	// }
+	if (argc == 1)
+	{	
+		while(1)
+		{
+			buf = readline("\033[0;33m minishell > \033[0m");
+			add_history(buf);
+
+			/* functoin  pour check les error comme an while lope in src character par chararcter   (here or in main Function)
+			static int	error_befor_parser(char* src); */
+
+			// here_doc whit change delemeter par name of file
+
+			if (buf)
+				tac_compile(buf);
+			free(buf);
+		}
+	}
+	else
 		printf("error in argemment\n");
-		return (0);
-	}
-	while(1)
-	{
-		buf = readline("\033[0;33m minishell > \033[0m");
-		add_history(buf);
-
-		/* functoin  pour check les error comme an while lope in src character par chararcter   (here or in main Function)
-		static int	error_befor_parser(char* src); */
-
-		// here_doc whit change delemeter par name of file
-
-		if (buf)
-			tac_compile(buf);
-		free(buf);
-	}
 	return 0;
 }
 

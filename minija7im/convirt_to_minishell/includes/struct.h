@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 12:53:58 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/01 00:55:29 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/05 17:57:57 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ typedef struct s_envp
 	char	**env; // hna fin ghanzido ila exporta chi variable bar realooc wola ghanm7iwh ila unseta
 	int		*exit_status;
 }	t_envp;
+
+void	fill_env(char *env[], t_envp *my_env);
 
 #endif

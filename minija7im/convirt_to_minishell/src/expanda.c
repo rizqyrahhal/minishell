@@ -1,5 +1,4 @@
 #include "../includes/libft.h"
-#include "../includes/tac.h"
 
 typedef struct s_exp
 {
@@ -125,14 +124,11 @@ char *ft_exp(char *s, t_exp *exp, char *env[])
 	int i = 0;
 	char *str;
 	char *ss;
-	int k;
 
-//    i = 0;
-	k = 0;
+	i = 0;
 	str = NULL;
 	while (s[i])
 	{
-		k = 0;
 		if (s[i] == '$')
 		{
 			s = exp_and(exp, env, s, &i);

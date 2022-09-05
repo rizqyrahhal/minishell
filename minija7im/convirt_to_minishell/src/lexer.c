@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/03 17:30:48 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/05 17:31:32 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,31 +37,28 @@ void	lexer_advance(t_lexer* lexer)
 t_token* lexer_collect_string(t_lexer* lexer) {
     char *value = ft_calloc(1, sizeof(char));
     unsigned int len = 0;
-printf("---------------------------------------------------\n");
 	while (ft_non_tokenable(lexer->c) && lexer->c != '\0')
 	{
 		if (lexer->c == '\''){ ///////// Single Qoute '\''
     		lexer_advance(lexer);
-			while(ft_non_tokenable(lexer->c) && lexer->c != '\0' && lexer->c != '\''){
-    			while (lexer->c != '\0' && lexer->c != '\'') {
-    	    		value = realloc(value, (len + 1) * sizeof(char)); // change par ft_realloc char*
-    	    		value[len++] = lexer->c;
-    	    		lexer_advance(lexer);
-    			}
-				lexer_advance(lexer);
-			}
+    		while (lexer->c != '\0' && lexer->c != '\'') {
+    	    	value = realloc(value, (len + 1) * sizeof(char)); // change par ft_realloc char*
+    	    	value[len++] = lexer->c;
+    	    	lexer_advance(lexer);
+    		}
+			if (lexer->c == '\'')
+    	    	lexer_advance(lexer);
 		}
 		if (lexer->c == '"'){
-			// Double Qoute '"'  ::: la meme implementation comme single qoute ---->  bil2idafa ila $$$$$$$$$
+			// Double Qoute '"'  ::: la meme implementation comme single qoute ---->  bil2idafa ila $$$$$$$$$   ($_ hna ktafiche awl env) 
 			lexer_advance(lexer);
-			while(ft_non_tokenable(lexer->c) && lexer->c != '\0' && lexer->c != '"'){
-    			while (lexer->c != '\0' && lexer->c != '"') {
-    	    		value = realloc(value, (len + 1) * sizeof(char)); // change par ft_realloc char*
-    	    		value[len++] = lexer->c;
-    	    		lexer_advance(lexer);
-    			}
-	    		lexer_advance(lexer);
-			}
+    		while (lexer->c != '\0' && lexer->c != '"') {
+    	    	value = realloc(value, (len + 1) * sizeof(char)); // change par ft_realloc char*
+    	    	value[len++] = lexer->c;
+    	    	lexer_advance(lexer);
+    		}
+			if (lexer->c == '"')
+		    	lexer_advance(lexer);
 			// if (lexer->c == '$')
 			// {
 			// 	// expande
@@ -76,10 +73,10 @@ printf("---------------------------------------------------\n");
 		if (ft_non_tokenable(lexer->c) && lexer->c != '\'' && lexer->c != '"'){
         	value = realloc(value, (len + 1) * sizeof(char)); // change par ft_realloc char*
 			value[len++] = lexer->c;
-        	lexer_advance(lexer);
+			lexer_advance(lexer);
+			if (lexer->c == ' ')
+				break;
 		}
-		else if (lexer->c != ' ')
-    	    lexer_advance(lexer);
 	}
     value[len] = '\0';
 	return init_token(value, TOKEN_STRING);

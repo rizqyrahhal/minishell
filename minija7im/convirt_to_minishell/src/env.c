@@ -1,32 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tac.h                                              :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/17 17:10:30 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/03 19:35:45 by rarahhal         ###   ########.fr       */
+/*   Created: 2022/09/05 17:33:47 by rarahhal          #+#    #+#             */
+/*   Updated: 2022/09/05 17:57:35 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TAC_H
-#define TAC_H
+#include "../includes/libft.h"
+#include "../includes/struct.h"
 
-#include "libft.h"
-#include "lexer.h"
-#include "parser.h"
-
-typedef struct s_tac
+char    *ft_cpy(char *s, int k)
 {
-	t_lexer*	lexer;
-	t_token*	token;
-	t_command*	list;
-	t_parser*	parser;
-} t_tac;
+	char    *var;
+	int     i;
+	i = 0;
+	var = malloc(k + 1);
+	var[k] = 0;
+	while (i < k)
+	{
+		var[i] = s[i];
+		i++;
+	}
+	return (var);
+}
 
+void	fill_env(char *env[], t_envp *my_env)
+{
+	int i;
 
-void	tac_compile(char* src);
-void	print_node(t_command *lst);
-
-#endif
+	i = 0;
+	while (env[i])
+	{
+		my_env->env[i] = ft_cpy(env[i], ft_strlen(env[i]));
+		i++;
+	}
+	my_env->env[i] = 0;
+}
