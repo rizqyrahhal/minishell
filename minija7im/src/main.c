@@ -6,11 +6,34 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/06 15:29:15 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/06 17:57:37 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	ft_check_error(char *src, t_envp* my_env)
+{
+	t_lexer*	lexer;
+	t_token*	token;
+	t_token*	next_token;
+
+	lexer = init_lexer(src);
+	lexer->my_env = my_env;
+	token = lexer_next_token(lexer);
+	while(token->type != TOKEN_EOF)
+	{
+		printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(token));
+		next_token = lexer_next_token(lexer);
+		if ((token->type == TOKEN_HERDOC || token->type == TOKEN_IN || token->type == TOKEN_OU || token->type == TOKEN_APPAND) && (next_token->type == TOKEN_HERDOC || next_token->type == TOKEN_IN || next_token->type == TOKEN_OU || next_token->type == TOKEN_APPAND  || next_token->type == TOKEN_PIPE || next_token->type == TOKEN_R))
+		{	
+			printf("minishell: syntax error near unexpected token `%s'\n", next_token->value);
+			return (-1);
+		}
+		token = lexer_next_token(lexer);
+	}
+	return (0);
+}
 
 int	main(int argc, char** argv, char** env)
 {
@@ -21,16 +44,17 @@ int	main(int argc, char** argv, char** env)
 	my_env->env = (char**)malloc(sizeof(char*) * (ft_d_strlen(env) + 1));
 	fill_env(env, my_env);
 	if (argc == 1)
-	{	
+	{
 		while(1)
 		{
 			buf = readline("\033[0;33m minishell > \033[0m");
 			add_history(buf);
+			// ft_check_error(buf);
 
 			/* functoin  pour check les error comme an while lope in src character par chararcter   (here or in main Function)
 			static int	error_befor_parser(char* src);         ((( token tab3aha token wola \n error))) */
 
-			// here_doc whit change delemeter par name of file
+			// here_doc whit change delemeter par name of file          {in cas de syntax error bash apre print error opning tout here_doc after this ERROR}
 
 			if (buf)
 				tac_compile(buf, my_env);

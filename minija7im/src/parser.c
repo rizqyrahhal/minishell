@@ -6,28 +6,11 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/06 15:32:00 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/06 17:02:45 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-// #include "../includes/libft.h"
-// #include "../includes/parser.h"
-// #include "../includes/tac.h"
-// #include "../includes/lexer.h"
-// #include "../include/struct.h"
-// #include <stdlib.h>
-
-// //open
-// #include <sys/types.h>
-// #include <sys/stat.h>
-// #include <fcntl.h>
-// // close
-// #include <unistd.h>
-
-// // strdup
-// #include <string.h>
 
 /*   After break =======>> 
 est apre n9ad lallocation dyal t_parser (outfile et infile ===== kaykhorjo 3la ranj chi marrat)

@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/06 15:29:35 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/06 17:50:02 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	free_list(t_command* list)
 	free(list);
 }
 
+int	ft_check_error(char *src, t_envp* my_env); /// ajoute ou part tac.h
+
 void	tac_compile(char* src, t_envp* my_env)
 {
 	t_lexer*	lexer;
@@ -60,16 +62,12 @@ void	tac_compile(char* src, t_envp* my_env)
 	// function  pour check les error comme an while lope in src character par chararcter   (here or in main Function)
 	// static int	error_befor_parser(char* src);  (function roturn exite status)
 	lexer = init_lexer(src);
+	lexer->my_env = my_env;
 	token = lexer_next_token(lexer);
 	list = (t_command*)malloc(sizeof(t_command));
 	list = NULL;
-	lexer->my_env = malloc(sizeof(t_envp*));
-	lexer->my_env = my_env;
-	printf("||| ---- ENV ---- |||\n");
-	for (int i = 0; lexer->my_env->env[i]; i++){
-		printf("%s\n", lexer->my_env->env[i]);
-	}
-	printf("|||||||||||||||||||||||||||||||||| ----------------- END ------------- ||||||||||||||||||||||||||||||||||\n");
+	if (ft_check_error(src, my_env) == -1)
+		return;
 	while(token->type != TOKEN_EOF)
 	{
 		printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(token));

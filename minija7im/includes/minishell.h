@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/06 16:00:41 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/06 17:55:27 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_token
 		TOKEN_HERDOC, // << her_doc
 		TOKEN_OU, // > output redirection
 		TOKEN_APPAND, // >> appandade output redirection
-		//  \n
+		TOKEN_R, // \n
 		TOKEN_EOF, // \0 end of file
 	} type;
 } t_token;
