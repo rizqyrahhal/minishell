@@ -6,17 +6,11 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/06 14:26:51 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/06 15:29:15 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
-#include "../includes/lexer.h"
-#include "../includes/tac.h"
-#include "../includes/struct.h"
-
-#include <sys/types.h>
-#include <sys/wait.h>
+#include "../includes/minishell.h"
 
 int	main(int argc, char** argv, char** env)
 {

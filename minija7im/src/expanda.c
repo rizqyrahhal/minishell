@@ -1,4 +1,4 @@
-#include "../includes/libft.h"
+#include "../includes/minishell.h"
 
 typedef struct s_exp
 {

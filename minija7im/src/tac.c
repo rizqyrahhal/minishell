@@ -6,14 +6,11 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/06 14:24:46 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/06 15:29:35 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/tac.h"
-#include "../includes/lexer.h"
-#include "../include/struct.h"
-#include <stdlib.h>
+#include "../includes/minishell.h"
 
 // print All data of linked list 
 void	print_node(t_command *lst)

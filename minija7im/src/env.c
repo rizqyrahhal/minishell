@@ -6,12 +6,12 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 17:33:47 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/05 17:57:35 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/06 15:30:21 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
-#include "../includes/struct.h"
+#include "../includes/minishell.h"
+
 
 char    *ft_cpy(char *s, int k)
 {
