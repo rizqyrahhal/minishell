@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tac.h                                              :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/17 17:10:30 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/03 19:35:45 by rarahhal         ###   ########.fr       */
+/*   Created: 2022/08/17 17:59:32 by rarahhal          #+#    #+#             */
+/*   Updated: 2022/09/06 14:01:32 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TAC_H
-#define TAC_H
+#include "../includes/libft.h"
 
-#include "libft.h"
-#include "lexer.h"
-#include "parser.h"
-
-typedef struct s_tac
+size_t	ft_strlen(const char *s)
 {
-	t_lexer*	lexer;
-	t_token*	token;
-	t_command*	list;
-	t_parser*	parser;
-} t_tac;
+	size_t	i;
 
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i])
+		i++;
+	return (i);
+}
 
-void	tac_compile(char* src);
-void	print_node(t_command *lst);
+size_t	ft_d_strlen(char **s)
+{
+	size_t	i;
 
-#endif
+	i = 0;
+	if (!s)
+		return (0);
+	while(s[i])
+		i++;
+	return (i);
+}

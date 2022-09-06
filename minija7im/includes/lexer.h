@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:08:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/03 19:35:53 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/06 14:09:26 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 #include "libft.h"
 #include "token.h"
+#include "struct.h"
 // #include "parser.h"
 
 typedef struct s_lexer
@@ -29,7 +30,8 @@ typedef struct s_lexer
 	size_t			src_size;
 	char			c;
 	unsigned int	i;
-	t_token*			token;
+	t_token*		token;
+	t_envp*			my_env;
 } t_lexer;
 
 t_lexer*	init_lexer(char* src);

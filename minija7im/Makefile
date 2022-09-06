@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/07/28 12:36:19 by rarahhal          #+#    #+#              #
-#    Updated: 2022/08/17 13:21:24 by rarahhal         ###   ########.fr        #
+#    Created: 2022/08/17 17:12:13 by rarahhal          #+#    #+#              #
+#    Updated: 2022/09/05 17:51:20 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,14 +16,21 @@ CC = cc
 
 SRCS = 	src/main.c \
 		src/lexer.c \
-		src/tac.c \
 		src/token.c \
-		src/io.c \
+		src/tac.c \
 		src/parser.c \
-		src/AST.c \
-		src/list.c \
+		src/env.c \
 
-# LIBFT = 
+LIBFT = libft/ft_calloc.c \
+		libft/ft_realloc.c \
+		libft/ft_strlen.c \
+		libft/ft_non_tokenable.c \
+		libft/ft_strjoin.c \
+		libft/ft_strdup.c \
+		libft/ft_strncmp.c \
+		libft/linked_list.c \
+		libft/ft_randstring.c\
+		
 
 OBJS = $(SRCS:.c=.o)
 OBJS_L = $(LIBFT:.c=.o)
@@ -35,7 +42,7 @@ all: $(NAME)
 
 clean:
 	@rm -rf src/*.o
-
+	@rm -rf libft/*.o
 
 fclean: clean
 	@rm -f $(NAME)
