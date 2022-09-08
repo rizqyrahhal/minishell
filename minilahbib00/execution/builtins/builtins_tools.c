@@ -1,30 +1,4 @@
-#include "../Includes/minishell.h"
-
-int check_var(char *var, int a)
-{
-	int i;
-	int	k;
-
-	k = 0;
-	while (var[k] && var[k] != '=')
-		k++;
-	if (var[k - 1] == '+' && a == 1)
-		k--;
-	i = 0;
-	if (var[i] == '"')
-	{
-		while (var[i] && var[i] == '"')
-			i++;
-	}
-	while (i < k)
-	{
-		if (!ft_isvalid(var[i])) {
-			return (0);
-		}
-		i++;
-	}
-	return (1);
-}
+#include "../../Includes/minishell.h"
 
 char *new_var(char *var)
 {
@@ -47,6 +21,22 @@ char *new_var(char *var)
 	return (new_var);
 }
 
+int check_oldv(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] && s[i] != '=')
+		i++;
+	if (s[i] != '=')
+		return 1;
+	else{
+		if (s[i + 1] == '\0')
+			return (1);
+	}
+	return (0);
+}
+
 char**	ft_add2env(char *my_env[], char *var)
 {
 	int k;
@@ -54,28 +44,34 @@ char**	ft_add2env(char *my_env[], char *var)
 	char **s;
 
 
-	if (!check_var(var, 1) || ft_isdigit(var[0])) {
+	if (!check_export(var)) {
 		fprintf(stderr, "minishell: export: `%s': not a valid identifier\n", var);
 		r = 1;
-		exit (1);
+		return (my_env);
 	}
 	k = arr_size(my_env);
 	i = 0;
-	while (my_env[i]) {
-		if (arr_s(my_env[i], var)) {
-			k--;
-			break ;
-		}
-		i++;
-	}
+	if (arr_s(my_env, var) != -1)
+		k--;
 	s = malloc((k + 2) * sizeof (char*));
 	i = 0;
+	k = arr_s(my_env, var);
+	if (k != -1 && check_oldv(my_env[k])) {
+		my_env[k] = ft_strdup(new_var(var));
+		return (my_env);
+	}
 	while (var[i] && var[i] != '=')
 		i++;
-	if (var[i - 1] == '+')
+	if (var[i - 1] == '+') {
+		if (k != -1 && (var[i] != '=' || var[i + 1] == '\0'))
+			return (my_env);
 		arr_app(my_env, s, new_var(var));
-	else
+	}
+	else {
+		if (k != -1 && (var[i] != '=' || var[i + 1] == '\0'))
+			return (my_env);
 		arr_cpy(my_env, s, var);
+	}
 	r = 0;
 	return (s);
 }
@@ -85,12 +81,13 @@ char**	ft_remove(char *my_env[], char *var)
 	int k;
 	char **s;
 
-	if (!check_var(var, 0)) {
-		fprintf(stderr, "minishell: unset: `%s': not a valid identifier\n", var);
+	if (!check_unset(var)) {
+		printf("minishell: unset: `%s': not a valid identifier\n", var);
 		r = 1;
-		exit (1);
+		return (my_env);
 	}
-
+	if (arr_s(my_env, var))
+		return (my_env);
 	k = arr_size(my_env);
 	s = malloc(k * sizeof (char*));
 	arr_delete(my_env, s, var);

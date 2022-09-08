@@ -44,7 +44,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!s1)
 		return (ft_strdup(s2));
 	if (!s2)
-		return (0);
+		return (ft_strdup(s1));
 	y = ft_strlen(s1) + ft_strlen(s2);
 	p = malloc(y + 1);
 	if (p == NULL)

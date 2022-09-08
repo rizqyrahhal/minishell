@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = minishell
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -ILibft/libft
 CC = cc
 
 SRCS =  Mandatory/minishell.c \
@@ -22,8 +22,14 @@ SRCS =  Mandatory/minishell.c \
 		execution/execute.c \
 		execution/ex_tools.c \
 		execution/ex_tools2.c \
-		execution/builtins.c \
-		execution/builtins_tools.c \
+		execution/builtins/cd.c \
+		execution/builtins/echo.c \
+		execution/builtins/env.c \
+		execution/builtins/exit.c \
+		execution/builtins/export.c \
+		execution/builtins/pwd.c \
+		execution/builtins/unset.c \
+		execution/builtins/builtins_tools.c \
 		execution/put_error.c \
 
 LIBFT = Libft/libft/ft_split.c \
@@ -50,9 +56,13 @@ $(NAME): $(OBJS) $(OBJS_L)
 
 all: $(NAME)
 
+%.o: %.c
+	$(CC) -ILibft/libft -c $< -o $@
+
 clean:
 	@rm -rf Mandatory/*.o
 	@rm -rf execution/*.o
+	@rm -rf execution/builtins/*.o
 	@rm -f Libft/libft/*.o
 
 fclean: clean

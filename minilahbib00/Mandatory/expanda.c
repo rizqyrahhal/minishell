@@ -3,12 +3,6 @@
 #include <string.h>
 #include <ctype.h>
 
-typedef struct s_exp
-{
-	char	*var;
-	char    *value;// alloca nmbr of command
-}   t_exp;
-
 void ft_getVar(char *env[], t_exp **exp)
 {
 	int i;
@@ -34,9 +28,7 @@ int	ft_isvalid(int c)
 {
 	if ((c <= 'z' && c >= 'a') || (c >= 'A' && c <= 'Z') || c == '_'
 		|| (c >= '0' && c <= '9'))
-	{
 		return (1);
-	}
 	return (0);
 }
 
@@ -149,7 +141,7 @@ void	get_string(char **env, char *s)
 {
 	t_exp *exp;
 
-	exp = malloc((ft_d_strlen(env) + 1) * sizeof (t_exp));
+	exp = malloc((arr_size(env) + 1) * sizeof (t_exp));
 	ft_getVar(env, &exp);
 	ft_exp(s, exp, env);
 }

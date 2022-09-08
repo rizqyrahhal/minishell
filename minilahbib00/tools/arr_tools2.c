@@ -16,20 +16,45 @@ void	print_ar(char **arr)
 	}
 }
 
-int arr_s(char *s, char *str)
+int arr_s(char **s, char *str)
 {
 	int i;
+	int j;
 	int k;
 
 	i = 0;
-	k = ft_strlen(str);
-	while (s[i] && s[i] != '=')
-		i++;
+	k = 0;
+	while (str[k] && str[k] != '=')
+		k++;
 	if (str[k - 1] == '+')
 		k--;
-	if (ft_strncmp(s, str, k) == 0 && k == i)
-		return (1);
-	return (0);
+	while (s[i]) {
+		j = 0;
+		while (s[i][j] && s[i][j] != '=')
+			j++;
+		if (ft_strncmp(s[i], str, k) == 0 && k == j)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+char **spl(char *s)
+{
+	int		i;
+	char**	sp;
+
+	sp = malloc(3 * sizeof (char*));
+	i = 0;
+	while (s[i] && s[i] != '=')
+		i++;
+	sp[0] = ft_substr(s, 0, i);
+	if (s[i] && s[i + 1])
+		sp[1] = ft_substr(s, i + 1, ft_strlen(s) - i - 1);
+	else
+		sp[1] = NULL;
+	sp[2] = NULL;
+	return (sp);
 }
 
 void	arr_cpy(char **my_env, char **s, char *str)
@@ -43,15 +68,8 @@ void	arr_cpy(char **my_env, char **s, char *str)
 	j = 0;
 	k = -1;
 
-	sp = ft_split(str, '=');
-	while (my_env[i]) {
-		if (arr_s(my_env[i], sp[0])) {
-			k = i;
-			break ;
-		}
-		i++;
-	}
-	i = 0;
+	sp = spl(str);
+	k = arr_s(my_env, sp[0]);
 	while (my_env[j])
 	{
 		if (k != -1 && j == k) {
@@ -76,16 +94,8 @@ void	arr_app(char **my_env, char **s, char *str)
 
 	i = 0;
 	j = 0;
-	k = -1;
-
-	sp = ft_split(str, '=');
-	while (my_env[i]) {
-		if (arr_s(my_env[i], sp[0])) {
-			k = i;
-			break ;
-		}
-		i++;
-	}
+	sp = spl(str);
+	k = arr_s(my_env, sp[0]);
 	i = 0;
 	while (my_env[j])
 	{
@@ -106,14 +116,15 @@ void	arr_delete(char **my_env, char **s, char *str)
 {
 	int i;
 	int j;
+	int k;
 
 	i = 0;
 	j = 0;
+	k = arr_s(my_env, str);
 	while (my_env[j])
 	{
-		if (arr_s(my_env[j], str)) {
+		if (j == k)
 			j++;
-		}
 		else
 			s[i++] = ft_strdup(my_env[j++]);
 	}

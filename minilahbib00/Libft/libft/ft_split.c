@@ -29,6 +29,8 @@ static int	hmuch_calc(char *str, char c)
 
 	i = 0;
 	hmuch = 0;
+	if (str[0] == '\0')
+		return (0);
 	while (str[i])
 	{
 		if (str[i] == c)
@@ -99,6 +101,11 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (0);
 	arr = (char **)malloc(sizeof(char *) * (hmuch_calc((char *)s, c) + 1));
+	if (s[0] == '\0')
+	{
+		arr[0] = 0;
+		return (arr);
+	}
 	if (arr == NULL)
 		return (0);
 	while (s[i] && m < hmuch_calc((char *)s, c))

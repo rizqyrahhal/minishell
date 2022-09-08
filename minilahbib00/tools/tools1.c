@@ -54,20 +54,20 @@ void	print_q(char *s)
 {
 	int i;
 
-	i = 0;
+	i = -1;
 	printf("declare -x ");
-	while (s[i])
-	{
-		if (s[i] == '=')
-		{
+	while (s[++i] && s[i] != '=')
+		printf("%c", s[i]);
+	printf("%c", s[i]);
+	if (sea_rch(s, '=')) {
+		printf("\"");
+		while (s[++i])
 			printf("%c", s[i]);
-			printf("\"");
-		}
-		else
-			printf("%c", s[i]);
-		i++;
+		printf("\"\n");
 	}
-	printf("\"\n");
+	else
+		printf("\n");
+
 }
 
 void	export_(char **arr)

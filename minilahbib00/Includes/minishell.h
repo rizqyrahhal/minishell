@@ -17,11 +17,12 @@
 # include <readline/readline.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include "../Libft/libft/libft.h"
+# include "libft.h"
 # include <unistd.h>
 # include <sys/wait.h>
 # include <fcntl.h>
 
+# define SIGHEREDOC 1337
 
 int r;
 typedef struct s_command
@@ -48,8 +49,7 @@ typedef struct s_redirection
 typedef struct s_envp
 {
 	char	**env;
-	char	*path;
-	char	*variabls;
+	char	*PWD;
 }	t_envp;
 
 typedef struct s_minishell
@@ -81,6 +81,7 @@ void	ex_env(char **sp, t_envp *my_env);
 void	ex_export(char **sp, t_envp *my_env);
 void	ex_unset(char **sp, t_envp *my_env);
 void	ex_pwd(char **sp, t_envp *my_env);
+void	ex_echo(char **sp);
 void	ex_exit(char **sp);
 int		is_built(char *s);
 void	__builtins(char **sp, t_envp *my_env);
@@ -89,22 +90,25 @@ void	__builtins(char **sp, t_envp *my_env);
 char**	ft_remove(char *my_env[], char *var);
 char**	ft_add2env(char *my_env[], char *var);
 int 	check_var(char *var, int a);
+int		check_unset(char *var);
+int		check_export(char *var);
+
 
 
 //expand
 char *ft_exp(char *s, t_exp *exp, char *env[]);
 
 
-int is_str(char *s);
+int		is_str(char *s);
 int		ft_isvalid(int c);
 void	arr_app(char **my_env, char **s, char *str);
 void	export_(char **arr);
 void	print_ar(char **arr);
-int 	arr_s(char *s, char *str);
+int 	arr_s(char **s, char *str);
 void	arr_cpy(char **my_env, char **s, char *str);
 void	arr_delete(char **my_env, char **s, char *str);
 char    *ft_cpy(char *s, int k);
-size_t		arr_size(char *env[]);
+size_t	arr_size(char *env[]);
 void	fill_arr(char *env[], char *s[]);
 int		pipes(int ac, t_command *cmd, t_envp	*my_env);
 char	*get_path(char *s, char *cmd);

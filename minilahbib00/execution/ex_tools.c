@@ -12,20 +12,6 @@
 
 #include "../Includes/minishell.h"
 
-int	is_accept(char *s)
-{
-	int i;
-
-	i = 1;
-	while (s[i])
-	{
-		if (s[i] != 'n')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 void	ex_ecu(char *path, char *sp[], t_envp *my_env)
 {
 
@@ -64,19 +50,10 @@ int all_len(t_command *cmd)
 
 void	frst_cmd(t_envp *my_env, int *fd, t_command *cmd)
 {
-	char	**sp;
 	char	*path;
 
 	close(fd[0]);
-	if (ft_strncmp(cmd->cmd[0], "echo", 4) == 0 && ft_strlen(cmd->cmd[0]) == 4)
-	{
-		if (cmd->cmd[1][0] == '-') {
-			if (is_accept(cmd->cmd[1])) {
-				cmd->cmd[1] = ft_strdup("-n");
-			}
-		}
-	}
-	path = get_path(handle_env(my_env->env), cmd->cmd[0]);
+		path = get_path(handle_env(my_env->env), cmd->cmd[0]);
 	if (cmd->infile != 0)
 		dup2(cmd->infile, 0);
 	if (cmd->outfile != 1)
@@ -90,22 +67,16 @@ void	frst_cmd(t_envp *my_env, int *fd, t_command *cmd)
 	ex_ecu(path, cmd->cmd, my_env);
 }
 
-
+// echo -nnnn -nnnn skip all -nnn
+// echo - prints
+// export "=" -> segfault
 void	one_cmd(t_envp *my_env, t_command *cmd)
 {
-	char	**sp;
 	char	*path;
 	int 	i;
 
 	i = 0;
-	if (ft_strncmp(cmd->cmd[0], "echo", 4) == 0 && ft_strlen(cmd->cmd[0]) == 4)
-	{
-		if (cmd->cmd[1][0] == '-') {
-			if (is_accept(cmd->cmd[1])) {
-				cmd->cmd[1] = ft_strdup("-n");
-			}
-		}
-	}
+	printf("hello\n");
 	path = get_path(handle_env(my_env->env), cmd->cmd[0]);
 	if (cmd->infile != 0) {
 		dup2(cmd->infile, 0);
@@ -120,7 +91,6 @@ void	one_cmd(t_envp *my_env, t_command *cmd)
 
 void	next_cmd(t_envp *my_env, t_pipe *p, int i, t_command *cmd)
 {
-	char	**sp;
 	char	*path;
 
 	(*p).id[i] = fork();
@@ -128,13 +98,6 @@ void	next_cmd(t_envp *my_env, t_pipe *p, int i, t_command *cmd)
 	{
 		close((*p).fd[i + 1][0]);
 		close((*p).fd[i][1]);
-		if (ft_strncmp(cmd->cmd[0], "echo", 4) == 0 && ft_strlen(cmd->cmd[0]) == 4)
-		{
-			if (cmd->cmd[1][0] == '-') {
-				if (is_accept(cmd->cmd[1]))
-					cmd->cmd[1] = ft_strdup("-n");
-			}
-		}
 		cmd->cmd[0] = skip_sl(cmd->cmd[0]);
 		path = get_path(handle_env(my_env->env), cmd->cmd[0]);
 		if (cmd->infile != 0)
@@ -145,27 +108,21 @@ void	next_cmd(t_envp *my_env, t_pipe *p, int i, t_command *cmd)
 			dup2(cmd->outfile, 1);
 		else
 			dup2((*p).fd[i + 1][1], 1);
-		close((*p).fd[i + 1][1]);
 		close((*p).fd[i][0]);
-		close(cmd->infile);
-		close(cmd->outfile);
+		close((*p).fd[i][1]);
+		close((*p).fd[i + 1][0]);
+		close((*p).fd[i + 1][1]);
+//		close(cmd->infile);
+//		close(cmd->outfile);
 		ex_ecu(path, cmd->cmd, my_env);
 	}
 }
 
 void	last_cmd(t_envp *my_env, int *fd, t_command *cmd)
 {
-	char	**sp;
 	char	*path;
 
 	close(fd[1]);
-	if (ft_strncmp(cmd->cmd[0], "echo", 4) == 0 && ft_strlen(cmd->cmd[0]) == 4)
-	{
-		if (cmd->cmd[1][0] == '-') {
-			if (is_accept(cmd->cmd[1]))
-				cmd->cmd[1] = ft_strdup("-n");
-		}
-	}
 	cmd->cmd[0] = skip_sl(cmd->cmd[0]);
 	path = get_path(handle_env(my_env->env), cmd->cmd[0]);
 	if (cmd->infile != 0)

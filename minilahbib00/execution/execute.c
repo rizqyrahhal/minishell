@@ -28,8 +28,6 @@ int is_str(char *s)
 
 void	__builtins(char **sp, t_envp *my_env)
 {
-	int status;
-
 	if (ft_strncmp(sp[0], "cd", 2) == 0 && ft_strlen(sp[0]) == 2)
 		ex_cd(sp, my_env);
 	if (ft_strncmp(sp[0], "export", 6) == 0 && ft_strlen(sp[0]) == 6)
@@ -40,6 +38,9 @@ void	__builtins(char **sp, t_envp *my_env)
 		ex_pwd(sp, my_env);
 	if (ft_strncmp(sp[0], "unset", 5) == 0 && ft_strlen(sp[0]) == 5)
 		ex_unset(sp, my_env);
+	if (ft_strncmp(sp[0], "echo", 4) == 0 && ft_strlen(sp[0]) == 4)
+		ex_echo(sp);
+
 	if (ft_strncmp(sp[0], "exit", 4) == 0 && ft_strlen(sp[0]) == 4)
 		ex_exit(sp);
 }
@@ -115,6 +116,8 @@ int is_built(char *s)
 		return (1);
 	if (ft_strncmp(s, "pwd", 3) == 0 && ft_strlen(s) == 3)
 		return (1);
+	if (ft_strncmp(s, "echo", 4) == 0 && ft_strlen(s) == 4)
+		return (1);
 	if (ft_strncmp(s, "exit", 4) == 0 && ft_strlen(s) == 4)
 		return (1);
 	return (0);
@@ -157,6 +160,8 @@ int	pipes(int k, t_command *cmd, t_envp *my_env)
 		p.fd[i] = malloc(2 * sizeof(int));
 		pipe(p.fd[i]);
 	}
+	if (k < 0)
+		return (0);
 //	if (ft_strncmp(av[1], "here_doc\0", 9) == 0)
 //		p.file1 = here_doc(av[2], &p, av[ac - 1]);
 //	else
@@ -165,6 +170,7 @@ int	pipes(int k, t_command *cmd, t_envp *my_env)
 //	}
 //	if (p.file1 == -1)
 //		put_error(ft_strjoin(av[1], " : No such file or directory\n"), 1);
+
 	child(p, k, cmd, my_env);
 	return (0);
 }
