@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/08 15:50:51 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/08 16:14:58 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,26 @@ int	ft_check_error(char *src, t_envp* my_env)
 	lexer = init_lexer(src);
 	next_lexer = init_lexer(src);
 	lexer->my_env = my_env;
+	next_lexer->my_env = my_env;
 	token = lexer_next_token(lexer);
+	if (token->type == TOKEN_PIPE)
+	{
+		printf("minishell: syntax error near unexpected token `|'\n");
+		return (-1);
+	}
 	next_token = lexer_next_token(next_lexer);
 	while(token->type != TOKEN_EOF)
 	{
-		printf("------\n");
-		// if (token->type == TOKEN_STRING){
-		// 	// next_token = lexer_next_token(lexer);
-		// 	token = lexer_next_token(lexer);
-		// }
-		printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(token));
+		printf("%d\n\n\n", lexer->i);
+		// printf("----------\n");
+		// printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(token));
 		next_token = lexer_next_token(next_lexer);
-		printf("\033[0;32m|---__LEXER__---###\033[0m NEXT %s NEXT \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(next_token));
+		// printf("\033[0;32m|---__LEXER__---###\033[0m NEXT %s NEXT \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(next_token));
+		if (token->type == TOKEN_PIPE && (next_token->type == TOKEN_PIPE || !next_token->value))
+		{
+			printf("minishell: syntax error near unexpected token `|'\n");
+			return (-1);
+		}
 		if ((token->type == TOKEN_HERDOC || token->type == TOKEN_IN || token->type == TOKEN_OU || token->type == TOKEN_APPAND || token->type == TOKEN_PIPE) &&
 				(!next_token->value))
 		{
@@ -42,19 +50,14 @@ int	ft_check_error(char *src, t_envp* my_env)
 		}
 		if ((token->type == TOKEN_HERDOC || token->type == TOKEN_IN || token->type == TOKEN_OU || token->type == TOKEN_APPAND) &&
 				(next_token->type == TOKEN_HERDOC || next_token->type == TOKEN_IN || next_token->type == TOKEN_OU ||
-					next_token->type == TOKEN_APPAND  || next_token->type == TOKEN_PIPE || token->type == TOKEN_R))
-		{
-			printf("minishell: syntax error near unexpected token `%s'\n", next_token->value);
-			return (-1);
-		}
-		if (token->type == TOKEN_PIPE && next_token->type == TOKEN_PIPE)
+					next_token->type == TOKEN_APPAND  || next_token->type == TOKEN_PIPE))
 		{
 			printf("minishell: syntax error near unexpected token `%s'\n", next_token->value);
 			return (-1);
 		}
 		token = lexer_next_token(lexer);
 	}
-	printf("FINISH\n");
+	// printf("FINISH\n");
 	return (0);
 }
 

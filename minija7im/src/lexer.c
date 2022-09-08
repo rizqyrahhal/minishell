@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/08 15:54:23 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/08 16:02:07 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,11 @@ void	lexer_advance(t_lexer* lexer)
 }
 
 t_token* lexer_collect_string(t_lexer* lexer) {
-
+	// printf("||| ---- ENV ---- |||\n");
+	// for (int i = 0; lexer->my_env->env[i]; i++){
+	// 	printf("%s\n", lexer->my_env->env[i]);
+	// }
+	// printf("|||||||||||||||||||||||||||||||||| ----------------- END ------------- ||||||||||||||||||||||||||||||||||\n");
     char *value = ft_calloc(1, sizeof(char));
     unsigned int len = 0;
 	while (ft_non_tokenable(lexer->c) && lexer->c != '\0')
@@ -139,11 +143,6 @@ t_token*	lexer_advance_current(t_lexer* lexer, int type)
 
 t_token*	lexer_next_token(t_lexer* lexer)
 {
-	// printf("||| ---- ENV ---- |||\n");
-	// for (int i = 0; lexer->my_env->env[i]; i++){
-	// 	printf("%s\n", lexer->my_env->env[i]);
-	// }
-	// printf("|||||||||||||||||||||||||||||||||| ----------------- END ------------- ||||||||||||||||||||||||||||||||||\n");
 	while(lexer->c != '\0')
 	{
 		lexer_skip_whitespace(lexer);
@@ -175,8 +174,6 @@ t_token*	lexer_next_token(t_lexer* lexer)
 		}
 		else if (lexer->c == '|')
 			return lexer_advance_current(lexer, TOKEN_PIPE);
-		else if (lexer->c == '\n')
-			return lexer_advance_current(lexer, TOKEN_R);
 		else if (lexer->c == '\0')
 			break;
 	}

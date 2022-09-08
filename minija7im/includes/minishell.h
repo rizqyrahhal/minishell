@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/06 17:55:27 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/08 16:01:16 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,10 @@ typedef struct s_token
 	{
 		TOKEN_STRING, // cmd, argment, files, any other tokents ...
 		TOKEN_PIPE, // | pipe
-		// TOKEN_DQ, // " double qoute
-		// TOKEN_SQ, // ' single qoute
 		TOKEN_IN, // < inpute redirection
 		TOKEN_HERDOC, // << her_doc
 		TOKEN_OU, // > output redirection
 		TOKEN_APPAND, // >> appandade output redirection
-		TOKEN_R, // \n
 		TOKEN_EOF, // \0 end of file
 	} type;
 } t_token;
