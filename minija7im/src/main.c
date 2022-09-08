@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/08 16:14:58 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/08 16:17:11 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	ft_check_error(char *src, t_envp* my_env)
 	next_token = lexer_next_token(next_lexer);
 	while(token->type != TOKEN_EOF)
 	{
-		printf("%d\n\n\n", lexer->i);
 		// printf("----------\n");
 		// printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(token));
 		next_token = lexer_next_token(next_lexer);
