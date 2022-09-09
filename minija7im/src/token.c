@@ -1,46 +1,60 @@
-#include "include/token.h"
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   token.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/17 17:12:08 by rarahhal          #+#    #+#             */
+/*   Updated: 2022/09/06 17:02:54 by rarahhal         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-token_T*	init_token(char* value, int type)
+#include "../includes/minishell.h"
+
+t_token*	init_token(char* value, int type)
 {
-	token_T*	token = calloc(1, sizeof(struct TOKEN_STRUCT));
-	token->value = value;
+	t_token*	token;
+	token = ft_calloc(1, sizeof(t_token));
+	token->value = ft_strdup(value);
 	token->type = type;
 
-	return(token);
+	return (token);
 }
 
 const char* token_type_to_str(int type)
 {
-	switch (type)
-	{
-		case TOKEN_ID: return "TOKEN_ID";
-		case TOKEN_EQUALS: return "TOKEN_EQUALS";
-		case TOKEN_LPAREN: return "TOKEN_LPAREN";
-		case TOKEN_RPAREN: return "TOKEN_RPAREN";
-		case TOKEN_LBRACE: return "TOKEN_LBRACE";
-		case TOKEN_RBRACE: return "TOKEN_RBRACE";
-		case TOKEN_COLON: return "TOKEN_COLON";
-		case TOKEN_COMMA: return "TOKEN_COMMA";
-		case TOKEN_LT: return "TOKEN_LT";
-		case TOKEN_GT: return "TOKEN_GT";
-		case TOKEN_ARROW_RIGHT: return "TOKEN_ARROW_RIGHT";
-		case TOKEN_INT: return "TOKEN_INT";
-		case TOKEN_SEMI: return "TOKEN_SEMI";
-		case TOKEN_EOF: return "TOKEN_EOF";
-	}
-
-	return "not_stringable";
+	if (type == TOKEN_STRING)
+		return "TOKEN_STRING";
+	else if (type == TOKEN_PIPE)
+		return "TOKEN_PIPE";
+	// else if (type == TOKEN_DQ)
+	// 	return "TOKEN_DQ";
+	// else if (type == TOKEN_SQ)
+	// 	return "TOKEN_SQ";
+	else if (type == TOKEN_IN)
+		return "TOKEN_IN";
+	else if (type == TOKEN_HERDOC)
+		return "TOKEN_HERDOC";
+	else if (type == TOKEN_OU)
+		return "TOKEN_OU";
+	else if (type == TOKEN_APPAND)
+		return "TOKEN_APPAND";
+	else if (type == TOKEN_EOF)
+		return "TOKEN_EOF";
+	else
+		return "not_stringable";
 }
 
-char* token_to_str(token_T* token)
+char*	token_to_str(t_token* token)
 {
-	const char* type_str = token_type_to_str(token->type);
-	const char* template = "type = %s,	int_type = %d,	value = %s";
+	const char* type_str;
+	const char* template;
+	char* str;
 
-	char* str = calloc(strlen(type_str) + strlen(template) + 8, sizeof(char));
+	type_str = token_type_to_str(token->type);
+	template = "type = %s,	int_type = %d,	value = %s";
+	str = ft_calloc(ft_strlen(type_str) + ft_strlen(template) + 8, sizeof(char));
 	sprintf(str, template, type_str, token->type, token->value);
 
 	return str;

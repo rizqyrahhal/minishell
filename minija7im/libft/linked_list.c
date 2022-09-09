@@ -6,12 +6,12 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 01:12:19 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/02 15:44:17 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/06 15:52:54 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/minishell.h"
 #include "../includes/libft.h"
-#include "../includes/struct.h"
 
 t_command*	ft_lstlast(t_command* list)
 {
