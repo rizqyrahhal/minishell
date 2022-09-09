@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/08 16:17:11 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/09 20:27:19 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,21 @@ int	ft_check_error(char *src, t_envp* my_env)
 	t_lexer*	next_lexer;
 	t_token*	token;
 	t_token*	next_token;
+	// int			i;
 
 	lexer = init_lexer(src);
 	next_lexer = init_lexer(src);
 	lexer->my_env = my_env;
 	next_lexer->my_env = my_env;
 	token = lexer_next_token(lexer);
+	// i = 0;
+	// while(src[i])                          " and '    non closing  aw ndirha fi l main
+	//  {
+	// 	while(src[i] != '\'')
+	// 	{
+	// 		i++;
+	// 	}
+	// }
 	if (token->type == TOKEN_PIPE)
 	{
 		printf("minishell: syntax error near unexpected token `|'\n");
@@ -76,7 +85,7 @@ int	main(int argc, char** argv, char** env)
 			add_history(buf);
 			// ft_check_error(buf);
 
-			/* functoin  pour check les error comme an while lope in src character par chararcter   (here or in main Function)
+			/* functoin  pour check les error comme an while lope in src character par chararcter   (here or in main Function) change par qoute non closing
 			static int	error_befor_parser(char* src);         ((( token tab3aha token wola \n error))) */
 
 			// here_doc whit change delemeter par name of file          {in cas de syntax error bash apre print error opning tout here_doc after this ERROR}
