@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/08 15:44:25 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/08 18:41:19 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ void	tac_compile(char* src, t_envp* my_env)
 	token = lexer_next_token(lexer);
 	list = (t_command*)malloc(sizeof(t_command));
 	list = NULL;
-	if (ft_check_error(src, my_env) == -1){
-		return;
-	}
+	// if (ft_check_error(src, my_env) == -1){
+	// 	return;
+	// }
 	while(token->type != TOKEN_EOF)
 	{
 		printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(token));

@@ -6,7 +6,7 @@
 #    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 17:12:13 by rarahhal          #+#    #+#              #
-#    Updated: 2022/09/05 17:51:20 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/09/08 17:05:02 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS = 	src/main.c \
 		src/tac.c \
 		src/parser.c \
 		src/env.c \
+		src/expanda.c \
 
 LIBFT = libft/ft_calloc.c \
 		libft/ft_realloc.c \
@@ -29,7 +30,8 @@ LIBFT = libft/ft_calloc.c \
 		libft/ft_strdup.c \
 		libft/ft_strncmp.c \
 		libft/linked_list.c \
-		libft/ft_randstring.c\
+		libft/ft_strnstr.c \
+		libft/ft_randstring.c \
 		
 
 OBJS = $(SRCS:.c=.o)

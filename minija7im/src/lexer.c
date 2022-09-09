@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/08 16:02:07 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/08 18:44:45 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,14 @@ void	lexer_advance(t_lexer* lexer)
 	}
 }
 
+char*	get_string(char **env, char *s); ////// move to hedre
+
 t_token* lexer_collect_string(t_lexer* lexer) {
-	// printf("||| ---- ENV ---- |||\n");
-	// for (int i = 0; lexer->my_env->env[i]; i++){
-	// 	printf("%s\n", lexer->my_env->env[i]);
-	// }
-	// printf("|||||||||||||||||||||||||||||||||| ----------------- END ------------- ||||||||||||||||||||||||||||||||||\n");
     char *value = ft_calloc(1, sizeof(char));
     unsigned int len = 0;
 	while (ft_non_tokenable(lexer->c) && lexer->c != '\0')
 	{
+		// single qoute
 		if (lexer->c == '\''){ ///////// Single Qoute '\''
     		lexer_advance(lexer);
     		while (lexer->c != '\0' && lexer->c != '\'') {
@@ -54,33 +52,35 @@ t_token* lexer_collect_string(t_lexer* lexer) {
 			if (lexer->c == '\'')
     	    	lexer_advance(lexer);
 		}
+		
+		// double qoute
 		if (lexer->c == '"'){
 			// Double Qoute '"'  ::: la meme implementation comme single qoute ---->  bil2idafa ila $$$$$$$$$   ($_ hna ktafiche awl env) 
 			lexer_advance(lexer);
     		while (lexer->c != '\0' && lexer->c != '"') {
     	    	value = realloc(value, (len + 1) * sizeof(char)); // change par ft_realloc char*
     	    	value[len++] = lexer->c;
+				value[len] = '\0';
     	    	lexer_advance(lexer);
     		}
 			if (lexer->c == '"')
 		    	lexer_advance(lexer);
-			// if (lexer->c == '$')
-			// {
-			// 	// expande
-			// }
+			if (lexer->c == '\0')
+			printf("----------------\n");
+			value = get_string(lexer->my_env->env, value);
+			len = ft_strlen(value);
 		}
-		if (lexer->c == '\0')
-			break;
-		// if (lexer->c == '$')
-		// {
-		// 	// expande
-		// }
-		if (ft_non_tokenable(lexer->c) && lexer->c != '\'' && lexer->c != '"'){
-        	value = realloc(value, (len + 1) * sizeof(char)); // change par ft_realloc char*
-			value[len++] = lexer->c;
-			lexer_advance(lexer);
-			if (lexer->c == ' ')
-				break;
+
+		// not qouting
+		if (ft_non_tokenable(lexer->c) && lexer->c != '\'' && lexer->c != '"' && lexer->c != '\0'){
+			while(ft_non_tokenable(lexer->c) && lexer->c != '\'' && lexer->c != '"' && lexer->c != '\0'){
+        		value = realloc(value, (len + 1) * sizeof(char)); // change par ft_realloc char*
+				value[len++] = lexer->c;
+				value[len] = '\0';
+				lexer_advance(lexer);
+			}
+			value = get_string(lexer->my_env->env, value);
+			len = ft_strlen(value);
 		}
 	}
     value[len] = '\0';
@@ -148,7 +148,7 @@ t_token*	lexer_next_token(t_lexer* lexer)
 		lexer_skip_whitespace(lexer);
 
 		if (ft_non_tokenable(lexer->c)){
-            	return lexer_collect_string(lexer);
+            return lexer_collect_string(lexer);
 			// return lexer_parse_id(lexer);
 		}
 

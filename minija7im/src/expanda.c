@@ -1,5 +1,8 @@
 #include "../includes/minishell.h"
 
+
+char    *ft_cpy(char *s, int k); ////move to hedre
+
 typedef struct s_exp
 {
 	char	*var;
@@ -37,7 +40,7 @@ int	ft_isvalid(int c)
 	return (0);
 }
 
-char* ft_replace(char* s, char* old, char* new)
+char* ft_replace(char* s, char* old, char* new, int	*z)
 {
 	char*	result;
 	int 	i;
@@ -62,6 +65,7 @@ char* ft_replace(char* s, char* old, char* new)
 		{
 			strcpy(&result[i], new);
 			i += ft_strlen(new);
+			*z = i;
 			s += ft_strlen(old);
 		}
 		else
@@ -77,7 +81,7 @@ int ft_getidx(t_exp *exp, char *s, char *env[])
 	int j;
 
 	i = 0;
-	while (i < arr_size(env))
+	while (i < ft_d_strlen(env))
 	{
 		if (ft_strncmp(exp[i].var, s, ft_strlen(s)) == 0 && ft_strlen(s) == ft_strlen(exp[i].var))
 			return (i);
@@ -94,8 +98,6 @@ char*	exp_and(t_exp *exp, char **env, char *s, int *j)
 
 	k = 0;
 	i = *j;
-	while (s[i] == '$')
-		i++;
 	while (s[i] && ft_isvalid(s[i]))
 	{
 		i++;
@@ -106,16 +108,15 @@ char*	exp_and(t_exp *exp, char **env, char *s, int *j)
 		str = ft_cpy(&s[i - k], k);
 		k = ft_getidx(exp, str, env);
 		if (k > -1) {
-			s = ft_replace(s, str, exp[k].value);
+			s = ft_replace(s, str, exp[k].value, j);
 			i += ft_strlen(exp[k].value) - ft_strlen(str);
 		}
 		else {
-			s = ft_replace(s, str, "\0");
+			s = ft_replace(s, str, "\0", j);
 			i -= ft_strlen(str);
 		}
 	}
-	*j = i;
-	printf("+++%s\n", str);
+	printf("+++%s\n", s);
 	return (s);
 }
 
@@ -131,19 +132,23 @@ char *ft_exp(char *s, t_exp *exp, char *env[])
 	{
 		if (s[i] == '$')
 		{
+			while (s[i] == '$' && s[i])
+				i++;
+			i--;
 			s = exp_and(exp, env, s, &i);
 		}
-		if (s[i] != '$')
-			i++;
+		// else
+		// 	i++;
 	}
 	return (s);
 }
 
-void	get_string(char **env, char *s)
+char*	get_string(char **env, char *s)
 {
 	t_exp *exp;
 
+	printf("%s++\n", s);
 	exp = malloc((ft_d_strlen(env) + 1) * sizeof (t_exp));
 	ft_getVar(env, &exp);
-	ft_exp(s, exp, env);
+	return (ft_exp(s, exp, env));
 }

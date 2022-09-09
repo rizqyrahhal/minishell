@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:35:14 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/06 15:57:58 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/08 17:05:26 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int			ft_non_tokenable(int c);
 char*		ft_strjoin(char const* s1, char const* s2);
 char*		ft_strdup(const char *s1);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
+char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char*		ft_randstring(size_t length);
 
 // hulper function for use linked_list    move to minishell.h
