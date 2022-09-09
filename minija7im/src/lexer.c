@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/08 18:44:45 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/09 19:03:30 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,14 @@ void	lexer_advance(t_lexer* lexer)
 	}
 }
 
-char*	get_string(char **env, char *s); ////// move to hedre
+char*	get_string(char **env, char *s, int count); ////// move to hedre
 
 t_token* lexer_collect_string(t_lexer* lexer) {
     char *value = ft_calloc(1, sizeof(char));
     unsigned int len = 0;
+	int		count;
+
+	count = 0;
 	while (ft_non_tokenable(lexer->c) && lexer->c != '\0')
 	{
 		// single qoute
@@ -65,10 +68,9 @@ t_token* lexer_collect_string(t_lexer* lexer) {
     		}
 			if (lexer->c == '"')
 		    	lexer_advance(lexer);
-			if (lexer->c == '\0')
-			printf("----------------\n");
-			value = get_string(lexer->my_env->env, value);
+			value = get_string(lexer->my_env->env, value, count);
 			len = ft_strlen(value);
+			count = len;
 		}
 
 		// not qouting
@@ -79,8 +81,9 @@ t_token* lexer_collect_string(t_lexer* lexer) {
 				value[len] = '\0';
 				lexer_advance(lexer);
 			}
-			value = get_string(lexer->my_env->env, value);
+			value = get_string(lexer->my_env->env, value, count);
 			len = ft_strlen(value);
+			count = len;
 		}
 	}
     value[len] = '\0';

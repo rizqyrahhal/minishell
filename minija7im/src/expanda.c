@@ -122,13 +122,13 @@ char*	exp_and(t_exp *exp, char **env, char *s, int *j)
 	return (s);
 }
 
-char *ft_exp(char *s, t_exp *exp, char *env[])
+char *ft_exp(char *s, t_exp *exp, char *env[], int count)
 {
 	int i = 0;
 	char *str;
 	char *ss;
 
-	i = 0;
+	i = count;
 	str = NULL;
 	while (s[i])
 	{
@@ -144,11 +144,11 @@ char *ft_exp(char *s, t_exp *exp, char *env[])
 	return (s);
 }
 
-char*	get_string(char **env, char *s)
+char*	get_string(char **env, char *s, int count)
 {
 	t_exp *exp;
 
 	exp = malloc((ft_d_strlen(env) + 1) * sizeof (t_exp));
 	ft_getVar(env, &exp);
-	return (ft_exp(s, exp, env));
+	return (ft_exp(s, exp, env, count));
 }
