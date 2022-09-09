@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/08 16:01:16 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/09 21:07:24 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include <string.h>
 
 #include "libft.h"
+#include "execution.h"
 
 #define MAX(a, b)\
    a > b ? a : b
@@ -57,16 +58,18 @@ typedef struct s_command_node
 {
 	char**	cmd;
 	
-	int		infile; // < if input != 0
-	int		outfile; // > if output != 1
-	char*	name_of_file; // last output file name
+	int	infile; // < if input != 0
+	int	outfile; // > if output != 1
+	// char*	name_of_file; // last output file name
+	int	status;
 	struct s_command_node *next;
 } t_command;
 
 typedef struct s_envp
 {
 	char	**env; // hna fin ghanzido ila exporta chi variable bar realooc wola ghanm7iwh ila unseta
-	int		*exit_status;
+	// int		*exit_status;
+	char	*PWD;
 }	t_envp;
 
 //************************************************* lexer.h
@@ -119,4 +122,7 @@ void	print_node(t_command *lst);
 // function of linked list
 t_command*	ft_lstnew(char** s, int infile, int outfile);
 void		ft_addfront(t_command** list, t_command* new);
+
+void	execution(t_command* list, t_envp* my_env);
+
 #endif
