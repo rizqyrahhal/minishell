@@ -11,5 +11,6 @@ void	ex_env(char **sp, t_envp *my_env)
 		print_ar(my_env->env);
 	else
 		fprintf(stderr, "options or arguments not required\n");
+	my_env->status = 0;
 }
 

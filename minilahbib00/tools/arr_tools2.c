@@ -57,62 +57,56 @@ char **spl(char *s)
 	return (sp);
 }
 
-void	arr_cpy(char **my_env, char **s, char *str)
+void	arr_cpy(t_envp *my_env, char *str)
 {
-	char	**sp;
+	char	**s;
 	int		i;
 	int		j;
-	int 	k;
 
 	i = 0;
 	j = 0;
-	k = -1;
-
-	sp = spl(str);
-	k = arr_s(my_env, sp[0]);
-	while (my_env[j])
+	s = malloc((arr_size(my_env->env) + 1) * sizeof (char*));
+	while (my_env->env[j])
 	{
-		if (k != -1 && j == k) {
-			s[i] = ft_strdup(str);
-			j++;
-		}
-		else if (i == 5 && k == -1)
+		if (i == 5)
 			s[i] = ft_strdup(str);
 		else
-			s[i] = ft_strdup(my_env[j++]);
+			s[i] = ft_strdup(my_env->env[j++]);
 		i++;
 	}
 	s[i] = NULL;
+	free(my_env->env);
+	my_env->env = s;
 }
 
-void	arr_app(char **my_env, char **s, char *str)
-{
-	char	**sp;
-	int		i;
-	int		j;
-	int 	k;
+//void	arr_app(t_envp *my_env, char *str)
+//{
+//	char	**s;
+//	int		i;
+//	int		j;
+//	int 	k;
+//
+//	i = 0;
+//	j = 0;
+//
+//	sp = spl(str);
+//	i = 0;
+//	while (my_env->env[j])
+//	{
+//		if (k != -1 && j == k) {
+//			s[i] = ft_strjoin(my_env->env[j], sp[1]);
+//			j++;
+//		}
+//		else if (i == 5 && k == -1)
+//			s[i] = ft_strdup(str);
+//		else
+//			s[i] = ft_strdup(my_env->env[j++]);
+//		i++;
+//	}
+//	s[i] = NULL;
+//}
 
-	i = 0;
-	j = 0;
-	sp = spl(str);
-	k = arr_s(my_env, sp[0]);
-	i = 0;
-	while (my_env[j])
-	{
-		if (k != -1 && j == k) {
-			s[i] = ft_strjoin(my_env[j], sp[1]);
-			j++;
-		}
-		else if (i == 5 && k == -1)
-			s[i] = ft_strdup(str);
-		else
-			s[i] = ft_strdup(my_env[j++]);
-		i++;
-	}
-	s[i] = NULL;
-}
-
-void	arr_delete(char **my_env, char **s, char *str)
+void	arr_delete(t_envp *my_env, char **s, char *str)
 {
 	int i;
 	int j;
@@ -120,13 +114,13 @@ void	arr_delete(char **my_env, char **s, char *str)
 
 	i = 0;
 	j = 0;
-	k = arr_s(my_env, str);
-	while (my_env[j])
+	k = arr_s(my_env->env, str);
+	while (my_env->env[j])
 	{
 		if (j == k)
 			j++;
 		else
-			s[i++] = ft_strdup(my_env[j++]);
+			s[i++] = ft_strdup(my_env->env[j++]);
 	}
 	s[i] = NULL;
 }

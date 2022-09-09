@@ -18,7 +18,7 @@ void	ex_ecu(char *path, char *sp[], t_envp *my_env)
 //	fprintf(stderr, "----%s-----%s---\n", env[0], path);
 	if (is_built(sp[0])) {
 		__builtins(sp, my_env);
-		exit (0);
+		exit (my_env->status);
 	}
 	else if (execve(path, sp, my_env->env) == -1)
 	{

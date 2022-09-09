@@ -49,6 +49,7 @@ typedef struct s_redirection
 typedef struct s_envp
 {
 	char	**env;
+	int		status;
 	char	*PWD;
 }	t_envp;
 
@@ -81,14 +82,14 @@ void	ex_env(char **sp, t_envp *my_env);
 void	ex_export(char **sp, t_envp *my_env);
 void	ex_unset(char **sp, t_envp *my_env);
 void	ex_pwd(char **sp, t_envp *my_env);
-void	ex_echo(char **sp);
-void	ex_exit(char **sp);
+void	ex_echo(char **sp, t_envp *my_env);
+void	ex_exit(char **sp, t_envp *my_env);
 int		is_built(char *s);
 void	__builtins(char **sp, t_envp *my_env);
 
 //builtins_tools
-char**	ft_remove(char *my_env[], char *var);
-char**	ft_add2env(char *my_env[], char *var);
+int		ft_remove(t_envp *myenv, char *var);
+int		ft_add2env(t_envp *myenv, char *var);
 int 	check_var(char *var, int a);
 int		check_unset(char *var);
 int		check_export(char *var);
@@ -101,12 +102,12 @@ char *ft_exp(char *s, t_exp *exp, char *env[]);
 
 int		is_str(char *s);
 int		ft_isvalid(int c);
-void	arr_app(char **my_env, char **s, char *str);
+//void	arr_app(t_envp *my_env, char **s, char *str);
 void	export_(char **arr);
 void	print_ar(char **arr);
 int 	arr_s(char **s, char *str);
-void	arr_cpy(char **my_env, char **s, char *str);
-void	arr_delete(char **my_env, char **s, char *str);
+void	arr_cpy(t_envp *my_env, char *str);
+void	arr_delete(t_envp *my_env, char **s, char *str);
 char    *ft_cpy(char *s, int k);
 size_t	arr_size(char *env[]);
 void	fill_arr(char *env[], char *s[]);

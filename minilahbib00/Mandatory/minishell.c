@@ -144,7 +144,7 @@ int	main(int ac, char *av[], char *env[])
 	my_env->env = malloc((arr_size(env) + 1) * sizeof(char *));
 	fill_env(env, my_env);
 	k = arr_s(my_env->env, "PWD");
-	my_env->PWD = ft_substr(my_env->env[k], 4, ft_strlen(my_env->env[k]) - 4);
+	my_env->PWD = getcwd(my_env->PWD, sizeof (my_env->PWD));
 	while (1) {
 
 		command = malloc(sizeof(t_command));
@@ -175,7 +175,7 @@ int	main(int ac, char *av[], char *env[])
 		if (k < 0)
 			continue ;
 		pipes(k, command, my_env);
-		printf("%d\n", r);
+		printf("%d\n", my_env->status);
 		j = 0;
 		while (command->cmd[j])
 		{

@@ -40,36 +40,36 @@ int	ft_isvalid(int c)
 	return (0);
 }
 
-char* ft_replace(char* s, char* old, char* new, int	*z)
+char* ft_replace(char* s, char* old, char* new)
 {
 	char*	result;
 	int 	i;
-	int		count;
+	int 	j;
+	int		idx;
 
-	count = 0;
 	i = 0;
 	while (s[i] != '\0')
 	{
 		if (ft_strnstr(&s[i], old, ft_strlen(&s[i])) == &s[i])
 		{
-			count++;
-			i += ft_strlen(old) - 1;
+			idx = i;
+			break;
 		}
 		i++;
 	}
-	result = (char*)malloc(i + count * (ft_strlen(new) - ft_strlen(old)) + 1);
+	result = (char*)malloc(ft_strlen(s) + (ft_strlen(new) - ft_strlen(old)) + 1);
 	i = 0;
-	while (*s)
+	j = 0;
+	while (s[j])
 	{
-		if (ft_strnstr(s, old, ft_strlen(s)) == s)
+		if (j == idx)
 		{
 			strcpy(&result[i], new);
 			i += ft_strlen(new);
-			*z = i;
-			s += ft_strlen(old);
+			j += ft_strlen(old);
 		}
 		else
-			result[i++] = *s++;
+			result[i++] = s[j++];
 	}
 	result[i] = '\0';
 	return result;
@@ -108,15 +108,17 @@ char*	exp_and(t_exp *exp, char **env, char *s, int *j)
 		str = ft_cpy(&s[i - k], k);
 		k = ft_getidx(exp, str, env);
 		if (k > -1) {
-			s = ft_replace(s, str, exp[k].value, j);
+			s = ft_replace(s, str, exp[k].value);
 			i += ft_strlen(exp[k].value) - ft_strlen(str);
 		}
 		else {
-			s = ft_replace(s, str, "\0", j);
+			s = ft_replace(s, str, "\0");
 			i -= ft_strlen(str);
 		}
+		(*j) = i;
 	}
-	printf("+++%s\n", s);
+	else
+		(*j)++;
 	return (s);
 }
 
@@ -134,11 +136,10 @@ char *ft_exp(char *s, t_exp *exp, char *env[])
 		{
 			while (s[i] == '$' && s[i])
 				i++;
-			i--;
 			s = exp_and(exp, env, s, &i);
 		}
-		// else
-		// 	i++;
+		else
+			i++;
 	}
 	return (s);
 }
@@ -147,7 +148,6 @@ char*	get_string(char **env, char *s)
 {
 	t_exp *exp;
 
-	printf("%s++\n", s);
 	exp = malloc((ft_d_strlen(env) + 1) * sizeof (t_exp));
 	ft_getVar(env, &exp);
 	return (ft_exp(s, exp, env));

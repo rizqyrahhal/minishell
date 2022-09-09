@@ -39,10 +39,10 @@ void	__builtins(char **sp, t_envp *my_env)
 	if (ft_strncmp(sp[0], "unset", 5) == 0 && ft_strlen(sp[0]) == 5)
 		ex_unset(sp, my_env);
 	if (ft_strncmp(sp[0], "echo", 4) == 0 && ft_strlen(sp[0]) == 4)
-		ex_echo(sp);
+		ex_echo(sp, my_env);
 
 	if (ft_strncmp(sp[0], "exit", 4) == 0 && ft_strlen(sp[0]) == 4)
-		ex_exit(sp);
+		ex_exit(sp, my_env);
 }
 
 void	ex_comm(t_pipe p, int k, t_command **cmd, t_envp *my_env)
@@ -98,7 +98,7 @@ void	multiple_p(t_pipe p, int k, t_command *cmd, t_envp *my_env)
 			while (wait(NULL) != -1);
 //			wait(NULL);
 //			WIFEXITED(st);
-			r = WEXITSTATUS(st);
+			my_env->status = WEXITSTATUS(st);
 		}
 	}
 
@@ -141,9 +141,8 @@ void	child(t_pipe p, int k, t_command *cmd, t_envp *my_env)
 		}
 		else {
 			waitpid(p.pid1, &status, 0);
-			cmd->status = WEXITSTATUS(status);
+			my_env->status = WEXITSTATUS(status);
 			__builtins(cmd->cmd, my_env);
-			r = WEXITSTATUS(status);
 		}
 	}
 }

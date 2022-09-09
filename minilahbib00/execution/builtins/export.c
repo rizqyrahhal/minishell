@@ -35,7 +35,8 @@ void	ex_export(char **sp, t_envp *my_env)
 	if (sp[1] == NULL)
 		export_(my_env->env);
 	while (sp[i]) {
-		my_env->env = ft_add2env(my_env->env, sp[i]);
+		my_env->status = ft_add2env(my_env, sp[i]);
 		i++;
 	}
+	printf("hello\n");
 }

@@ -26,7 +26,7 @@ void	ex_unset(char **sp, t_envp *my_env)
 		printf("options not required\n");
 	else {
 		while (sp[i]) {
-			my_env->env = ft_remove(my_env->env, sp[i]);
+			my_env->status = ft_remove(my_env, sp[i]);
 			i++;
 		}
 	}

@@ -1,22 +1,20 @@
 #include "../../Includes/minishell.h"
 
-void	ex_exit(char **sp)
+void	ex_exit(char **sp, t_envp *myenv)
 {
 	if (sp[1] && sp[2] != NULL) {
 		fprintf(stderr, "exit\nminishell: exit: too many arguments\n");
-		r = 1;
-		fprintf(stderr, "%d\n", r);
+		myenv->status = 1;
 		exit (1);
 	}
 	else if (sp[1] && !is_str(sp[1])) {
-		fprintf(stderr, "exit\nminishell: exit: %s: numeric argument required\n", sp[1]);
-		r = 255;
-		fprintf(stderr, "%d\n", r);
+		printf("exit\nminishell: exit: %s: numeric argument required\n", sp[1]);
+		myenv->status = 255;
 		exit (255);
 	}
-	fprintf(stderr, "exit\n");
+	printf("exit\n");
 	if (sp[1])
-		r = ft_atoi(sp[1]) % 256;
+		myenv->status = ft_atoi(sp[1]) % 256;
 	fprintf(stderr, "%d\n", r);
 	exit(0);
 }

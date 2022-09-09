@@ -7,9 +7,14 @@ char *new_var(char *var)
 	int		j;
 
 	i = 0;
+	j = ft_strlen(var);
+	while (var[i] && var[i] != '=')
+		i++;
+	if (var[i - 1] == '+')
+		j--;
+	new_var = malloc(j + 1);
+	i = 0;
 	j = 0;
-	new_var = malloc(ft_strlen(var));
-	new_var[ft_strlen(var) - 1] = 0;
 	while (var[i])
 	{
 		if (var[i] == '+')
@@ -18,79 +23,81 @@ char *new_var(char *var)
 		j++;
 		i++;
 	}
+	new_var[j] = 0;
 	return (new_var);
 }
 
-int check_oldv(char *s)
+char*	new_value(char* s, char* old)
 {
-	int	i;
+	int		i;
+	char	*val;
 
 	i = 0;
 	while (s[i] && s[i] != '=')
 		i++;
-	if (s[i] != '=')
-		return 1;
-	else{
-		if (s[i + 1] == '\0')
-			return (1);
-	}
-	return (0);
+	if (!sea_rch(old, '='))
+		return (ft_substr(s, i, ft_strlen(s) - i));
+	return (ft_substr(s, i + 1, ft_strlen(s) - i - 1));
 }
 
-char**	ft_add2env(char *my_env[], char *var)
+char *get_wich(char* old, char* new)
+{
+	int i;
+
+	i = 0;
+	if (sea_rch(new, '=')) {
+		while (new[i] && new[i] != '=')
+			i++;
+		if (new[i - 1] == '+' && new[i + 1])
+			return (ft_strjoin(old, new_value(new, old)));
+		else if (new[i - 1] == '+' && !new[i + 1]) {
+			if (sea_rch(old, '='))
+				return (ft_strdup(old));
+			else
+				return (new_var(new));
+		}
+		printf("z3ma\n");
+		return (ft_strdup(new));
+	}
+	else
+		return (old);
+}
+
+int	ft_add2env(t_envp *my_env, char *var)
 {
 	int k;
 	int i;
-	char **s;
 
-
+	i = 0;
 	if (!check_export(var)) {
-		fprintf(stderr, "minishell: export: `%s': not a valid identifier\n", var);
-		r = 1;
-		return (my_env);
+		printf("minishell: export: `%s': not a valid identifier\n", var);
+		return (1);
 	}
-	k = arr_size(my_env);
-	i = 0;
-	if (arr_s(my_env, var) != -1)
-		k--;
-	s = malloc((k + 2) * sizeof (char*));
-	i = 0;
-	k = arr_s(my_env, var);
-	if (k != -1 && check_oldv(my_env[k])) {
-		my_env[k] = ft_strdup(new_var(var));
-		return (my_env);
+	k = arr_s(my_env->env, var);
+	if (k != -1) {
+		my_env->env[k] = get_wich(my_env->env[k], var);
+		printf("what  %s\n", my_env->env[k]);
 	}
-	while (var[i] && var[i] != '=')
-		i++;
-	if (var[i - 1] == '+') {
-		if (k != -1 && (var[i] != '=' || var[i + 1] == '\0'))
-			return (my_env);
-		arr_app(my_env, s, new_var(var));
-	}
-	else {
-		if (k != -1 && (var[i] != '=' || var[i + 1] == '\0'))
-			return (my_env);
-		arr_cpy(my_env, s, var);
-	}
-	r = 0;
-	return (s);
+	else
+		arr_cpy(my_env, new_var(var));
+	return (0);
 }
 
-char**	ft_remove(char *my_env[], char *var)
+int	ft_remove(t_envp *my_env, char *var)
 {
 	int k;
 	char **s;
 
 	if (!check_unset(var)) {
 		printf("minishell: unset: `%s': not a valid identifier\n", var);
-		r = 1;
-		return (my_env);
+		return (1);
 	}
-	if (arr_s(my_env, var))
-		return (my_env);
-	k = arr_size(my_env);
+	if (!arr_s(my_env->env, var))
+		return (0);
+	k = arr_size(my_env->env);
 	s = malloc(k * sizeof (char*));
 	arr_delete(my_env, s, var);
+	my_env->env = s;
 	r = 0;
-	return (s);
+	return (0);
 }
