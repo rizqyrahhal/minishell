@@ -1,4 +1,4 @@
-#include "../../includes/minishell.h"
+#include "../../includes/execution.h"
 
 
 void	arr_deletee(char **my_env, char **s, char *str)

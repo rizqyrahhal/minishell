@@ -24,8 +24,6 @@
 #include <string.h>
 
 #include "libft.h"
-#include "execution.h"
-
 #define MAX(a, b)\
    a > b ? a : b
 
@@ -57,18 +55,18 @@ char*		token_to_str(t_token* token);
 typedef struct s_command_node
 {
 	char**	cmd;
-	
+
 	int	infile; // < if input != 0
 	int	outfile; // > if output != 1
 	// char*	name_of_file; // last output file name
-	int	status;
+//	int	status;
 	struct s_command_node *next;
 } t_command;
 
 typedef struct s_envp
 {
 	char	**env; // hna fin ghanzido ila exporta chi variable bar realooc wola ghanm7iwh ila unseta
-	// int		*exit_status;
+	int		status;
 	char	*PWD;
 }	t_envp;
 
@@ -124,5 +122,6 @@ t_command*	ft_lstnew(char** s, int infile, int outfile);
 void		ft_addfront(t_command** list, t_command* new);
 
 void	execution(t_command* list, t_envp* my_env);
+int		pipes(int k, t_command *cmd, t_envp *my_env);
 
 #endif

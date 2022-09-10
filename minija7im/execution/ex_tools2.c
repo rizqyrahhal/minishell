@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/execution.h"
 
 char	*skip_sl(char	*cmd)
 {

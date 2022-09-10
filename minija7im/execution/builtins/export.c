@@ -1,4 +1,4 @@
-#include "../../includes/minishell.h"
+#include "../../includes/execution.h"
 
 int check_export(char *var)
 {
@@ -38,5 +38,4 @@ void	ex_export(char **sp, t_envp *my_env)
 		my_env->status = ft_add2env(my_env, sp[i]);
 		i++;
 	}
-	printf("hello\n");
 }

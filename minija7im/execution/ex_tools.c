@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/execution.h"
 
 void	ex_ecu(char *path, char *sp[], t_envp *my_env)
 {
@@ -76,7 +76,7 @@ void	one_cmd(t_envp *my_env, t_command *cmd)
 	int 	i;
 
 	i = 0;
-	printf("hello\n");
+//	printf("hello\n");
 	path = get_path(handle_env(my_env->env), cmd->cmd[0]);
 	if (cmd->infile != 0) {
 		dup2(cmd->infile, 0);

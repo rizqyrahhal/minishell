@@ -1,4 +1,4 @@
-#include "../../includes/minishell.h"
+#include "../../includes/execution.h"
 
 
 size_t	arr_size(char *env[])
@@ -11,21 +11,6 @@ size_t	arr_size(char *env[])
 	return (i);
 }
 
-char    *ft_cpy(char *s, int k)
-{
-	char    *var;
-	int     i;
-	i = 0;
-	var = malloc(k + 1);
-	var[k] = 0;
-	while (i < k)
-	{
-		var[i] = s[i];
-		i++;
-	}
-	return (var);
-}
-
 void	fill_arr(char *env[], char *s[])
 {
 	int i;
@@ -33,7 +18,7 @@ void	fill_arr(char *env[], char *s[])
 	i = 0;
 	while (env[i])
 	{
-		s[i] = ft_cpy(env[i], ft_strlen(env[i]));
+		s[i] = ft_strdup(env[i]);
 		i++;
 	}
 	s[i] = 0;

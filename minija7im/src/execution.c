@@ -11,35 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-char    *ft_cpy(char *s, int k); //move to hedr
-
-void	fill_env(char *env[], t_envp *my_env)
-{
-	int i;
-
-	i = 0;
-	while (env[i])
-	{
-		my_env->env[i] = ft_cpy(env[i], ft_strlen(env[i]));
-		i++;
-	}
-	my_env->env[i] = 0;
-}
-
-
-void	print_a(char **arr)
-{
-	int i;
-
-	i = 0;
-	while (arr[i])
-	{
-		printf("%s\n", arr[i]);
-		i++;
-	}
-}
-
+#include "../includes/execution.h"
 int	sea_rrch(char *s, int a)
 {
 	int		i;
@@ -80,32 +52,8 @@ void free_arr(char **s)
 		free(s[i]);
 		i++;
 	}
+	free(s);
 }
-
-t_command*	get_data(t_command* command, char** cmd, int infile, int outfile)
-{
-	t_command	*tmp;
-
-//	command->cmd = malloc((ft_d_strlen(cmd) + 1) * sizeof(char*));
-	tmp = ft_lstnew(cmd, infile, outfile);
-
-	ft_addfront(&command, tmp);
-
-	return (command);
-}
-
-void red () {
-	printf("\033[1;31m");
-}
-
-void yellow() {
-		printf("\033[1;33m");
-}
-
-void reset () {
-	printf("\033[0m");
-}
-
 //void signal_ctrl_c(int sig)
 //{
 //	rl_on_new_line();
@@ -126,6 +74,21 @@ void reset () {
 //		signal(SIGINT, signal_ctrl_c_heredoc);
 //}
 
+int	struct_size(t_command *cmd)
+{
+	t_command	*tmp;
+	int			k;
+
+	k = 0;
+	tmp = cmd;
+	while (tmp)
+	{
+		k++;
+		tmp = tmp->next;
+	}
+	return (k);
+}
+
 void	execution(t_command* list, t_envp* my_env)
 {
 	char		**s;
@@ -134,8 +97,8 @@ void	execution(t_command* list, t_envp* my_env)
 	// t_envp		*my_env;
 	char		*buf;
 
-	k = arr_s(my_env->env, "PWD");
+//	printf("----> cmd00 %s\n", list->cmd[0]);
 	my_env->PWD = getcwd(my_env->PWD, sizeof (my_env->PWD));
-	
+	k = struct_size(list) - 1;
 	pipes(k, list, my_env);
 }

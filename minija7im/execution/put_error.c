@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/execution.h"
 
 int	sea_rch(char *s, int a)
 {

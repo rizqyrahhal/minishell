@@ -10,15 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef EXECUTION_H
+# define EXECUTION_H
 
 
 # include <fcntl.h>
 # include <readline/readline.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include "libft.h"
+# include "../execut_libft/libft.h"
+# include "minishell.h"
 # include <unistd.h>
 # include <sys/wait.h>
 # include <fcntl.h>
@@ -77,8 +78,6 @@ typedef struct s_pipe
 }	t_pipe;
 
 
-void	execution(t_command* list, t_envp* my_env);
-
 // builtins
 void	ex_cd(char **sp, t_envp *my_env);
 void	ex_env(char **sp, t_envp *my_env);
@@ -100,8 +99,6 @@ int		check_export(char *var);
 
 
 //expand
-char *ft_exp(char *s, t_exp *exp, char *env[]);
-
 
 int		is_str(char *s);
 int		ft_isvalid(int c);
@@ -126,11 +123,6 @@ char	*handle_env(char *env[]);
 char	*skip_sl(char	*cmd);
 char	*get_path(char *s, char *cmd);
 void	ft_exit(char *sp[]);
-int		here_doc(char *str, t_pipe *p, char *file);
-
-//linked list
-t_command*	ft_lstlast(t_command* list);
-void	ft_addfront(t_command**	list, t_command *new);
-t_command*	ft_lstnew(char** cmd_data, int infile, int outfile);
+void	free_arr(char **s);
 
 #endif

@@ -1,4 +1,4 @@
-#include "../Inclu#include "../../includes/minishell.h"
+#include "../../includes/execution.h"
 
 
 void	print_ar(char **arr)

@@ -1,4 +1,4 @@
-#include "../../includes/minishell.h"
+#include "../../includes/execution.h"
 
 void	ex_exit(char **sp, t_envp *myenv)
 {
