@@ -7,10 +7,10 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
  
-make: *** No rule to make target `all'.  Stop.
+make: *** No rule to make target `src/main.o', needed by `minishell'.  Stop.
 
 
-# Make data base, printed on Sat Sep 10 15:09:35 2022
+# Make data base, printed on Sat Sep 10 19:50:11 2022
 
 # Variables
 
@@ -32,14 +32,18 @@ SHELL = /bin/sh
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
-# makefile
-MAKEFILE_LIST := 
+# makefile (from `Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# makefile (from `Makefile', line 17)
+SRCS = src/main.c src/lexer.c src/token.c src/tac.c src/parser.c src/env.c src/expanda.c src/execution.c execution/tools/tools1.c execution/tools/arr_tools.c execution/tools/arr_tools2.c execution/execute.c execution/ex_tools.c execution/ex_tools2.c execution/builtins/cd.c execution/builtins/echo.c execution/builtins/env.c execution/builtins/exit.c execution/builtins/export.c execution/builtins/pwd.c execution/builtins/unset.c execution/builtins/builtins_tools.c execution/put_error.c 
+# makefile (from `Makefile', line 64)
+OBJS = $(SRCS:.c=.o)
 # environment
 VSCODE_CWD = /
 # environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.JpL9YEbgzg/Render
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.Hnh5FpeDQ3/Render
 # environment
-PATH = /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Applications/Visual Studio Code.app/Contents/Resources/app/bin
+PATH = /Users/rarahhal/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Applications/Visual Studio Code.app/Contents/Resources/app/bin
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
@@ -47,9 +51,11 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.feH3TTVtc6/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.sYTQpLn90S/Listeners
 # automatic
 %F = $(notdir $%)
+# environment
+HOMEBREW_TEMP = /tmp/rarahhal/Homebrew/Temp
 # environment
 PWD = /Users/rarahhal/Desktop/minishell
 # environment
@@ -72,6 +78,8 @@ ZSH = /Users/rarahhal/.oh-my-zsh
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
+# makefile (from `Makefile', line 52)
+EXECUT_LIBFT = execut_libft/ft_split.c execut_libft/ft_atoi.c execut_libft/ft_strcmp.c execut_libft/ft_strchr.c execut_libft/ft_strlcpy.c execut_libft/ft_isalpha.c execut_libft/ft_isdigit.c execut_libft/ft_putstr_fd.c execut_libft/ft_itoa.c execut_libft/ft_substr.c
 # environment
 XPC_FLAGS = 0x0
 # default
@@ -79,13 +87,21 @@ MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # environment
+HOMEBREW_CACHE = /tmp/rarahhal/Homebrew/Caches
+# environment
 SHLVL = 1
+# makefile (from `Makefile', line 41)
+LIBFT = libft/ft_calloc.c libft/ft_realloc.c libft/ft_strlen.c libft/ft_non_tokenable.c libft/ft_strjoin.c libft/ft_strdup.c libft/ft_strncmp.c libft/linked_list.c libft/ft_strnstr.c libft/ft_randstring.c 
+# makefile (from `Makefile', line 15)
+CC = cc
 # default
 MAKE_VERSION := 3.81
 # environment
 USER = rarahhal
 # makefile
-.DEFAULT_GOAL := 
+.DEFAULT_GOAL := minishell
+# makefile (from `Makefile', line 13)
+NAME = minishell
 # environment
 LESS = -R
 # automatic
@@ -101,7 +117,6 @@ TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n0000jvr0004fy/T/
 # environment
 VSCODE_IPC_HOOK = /Users/rarahhal/Library/Application Support/Code/1.71.0-main.sock
 # environment
- 
 MallocNanoZone = 0
 # makefile
 MAKEFLAGS = Rrqp
@@ -110,13 +125,15 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.1196
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000002.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
 # environment
 __CF_USER_TEXT_ENCODING = 0x11DE:0x0:0x0
+# environment
+COMMAND_MODE = unix2003
 # default
 MAKEFILES := 
 # automatic
@@ -125,20 +142,28 @@ MAKEFILES :=
 PAGER = less
 # environment
 LC_ALL = C
+# environment
+SECURITYSESSIONID = 186aa
 # automatic
 ^F = $(notdir $^)
 # default
 SUFFIXES := 
+# makefile (from `Makefile', line 14)
+FLAGS = -Wall -Werror -Wextra
 # default
 .INCLUDE_DIRS = /usr/local/include
+# makefile (from `Makefile', line 66)
+OBJS_EL = $(EXECUT_LIBFT:.c=.o)
 # environment
 MAKELEVEL := 0
+# makefile (from `Makefile', line 65)
+OBJS_L = $(LIBFT:.c=.o)
 # environment
 LANG = C
 # environment
-VSCODE_PID = 53428
+VSCODE_PID = 19099
 # variable set hash-table stats:
-# Load=61/1024=6%, Rehash=0, Collisions=1/82=1%
+# Load=74/1024=7%, Rehash=0, Collisions=5/105=5%
 
 # Pattern-specific Variable Values
 
@@ -146,9 +171,9 @@ VSCODE_PID = 53428
 
 # Directories
 
-# . (device 16777227, inode 1323675): 6 files, no impossibilities.
+# . (device 16777227, inode 1323675): 14 files, no impossibilities.
 
-# 6 files, no impossibilities in 1 directories.
+# 14 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -157,13 +182,104 @@ VSCODE_PID = 53428
 # Files
 
 # Not a target:
-all:
+execution/builtins/pwd.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+execution/builtins/cd.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+execut_libft/ft_atoi.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+execution/tools/arr_tools2.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+all: minishell
+#  Phony target (prerequisite of .PHONY).
 #  Command-line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+execution/builtins/echo.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+.PHONY: all clean fclean re
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+libft/ft_strlen.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/main.o:
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has not been updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+execution/builtins/export.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/tac.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+execut_libft/ft_itoa.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+execution/tools/tools1.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+execut_libft/ft_isdigit.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/lexer.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+execut_libft/ft_strchr.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .SUFFIXES:
@@ -173,23 +289,92 @@ all:
 
 # Not a target:
 Makefile:
-#  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-09-10 18:27:05
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
-makefile:
-#  A default, MAKEFILES, or -include/sinclude makefile.
-#  Implicit rule search has been done.
+execution/ex_tools2.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+execut_libft/ft_split.c:
+#  Implicit rule search has not been done.
+ 
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+libft/ft_strjoin.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/expanda.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+minishell: src/main.o src/lexer.o src/token.o src/tac.o src/parser.o src/env.o src/expanda.o src/execution.o execution/tools/tools1.o execution/tools/arr_tools.o execution/tools/arr_tools2.o execution/execute.o execution/ex_tools.o execution/ex_tools2.o execution/builtins/cd.o execution/builtins/echo.o execution/builtins/env.o execution/builtins/exit.o execution/builtins/export.o execution/builtins/pwd.o execution/builtins/unset.o execution/builtins/builtins_tools.o execution/put_error.o libft/ft_calloc.o libft/ft_realloc.o libft/ft_strlen.o libft/ft_non_tokenable.o libft/ft_strjoin.o libft/ft_strdup.o libft/ft_strncmp.o libft/linked_list.o libft/ft_strnstr.o libft/ft_randstring.o execut_libft/ft_split.c execut_libft/ft_atoi.c execut_libft/ft_strcmp.c execut_libft/ft_strchr.c execut_libft/ft_strlcpy.c execut_libft/ft_isalpha.c execut_libft/ft_isdigit.c execut_libft/ft_putstr_fd.c execut_libft/ft_itoa.c execut_libft/ft_substr.c
+#  Implicit rule search has not been done.
 #  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
+#  File has not been updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 69):
+	$(CC) -lreadline $(FLAGS) $(OBJS) $(OBJS_L) $(EXECUT_LIBFT) -o $(NAME)
+	
+
+# Not a target:
+execution/put_error.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+execution/builtins/env.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+execution/builtins/exit.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+fclean: clean
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 79):
+	@rm -f $(NAME)
+	
+
+# Not a target:
+src/token.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+libft/ft_non_tokenable.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+libft/ft_calloc.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .DEFAULT:
@@ -198,28 +383,152 @@ makefile:
 #  File has not been updated.
 
 # Not a target:
-GNUmakefile:
-#  A default, MAKEFILES, or -include/sinclude makefile.
-#  Implicit rule search has been done.
+execution/builtins/unset.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+execution/execute.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/execution.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+execut_libft/ft_substr.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+execution/tools/arr_tools.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+re: fclean
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
 #  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 82):
+	@make all
+	
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 74):
+	@rm -rf src/*.o
+	@rm -rf libft/*.o
+	@rm -rf execut_libft/*.o
+	
+
+# Not a target:
+execut_libft/ft_isalpha.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+libft/ft_strncmp.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+execution/builtins/builtins_tools.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+execut_libft/ft_strlcpy.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+libft/ft_realloc.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+libft/linked_list.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+libft/ft_strdup.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/env.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+execut_libft/ft_strcmp.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+libft/ft_randstring.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+execution/ex_tools.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+libft/ft_strnstr.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+execut_libft/ft_putstr_fd.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/parser.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # files hash-table stats:
-# Load=6/1024=1%, Rehash=0, Collisions=0/17=0%
+# Load=52/1024=5%, Rehash=0, Collisions=5/115=4%
 # VPATH Search Paths
 
 # No `vpath' search paths.
 
 # No general (`VPATH' variable) search path.
 
-# # of strings in strcache: 0
-# # of strcache buffers: 0
-# strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
-# strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
+# # of strings in strcache: 1
+# # of strcache buffers: 1
+# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
+# strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sat Sep 10 15:09:35 2022
+# Finished Make data base on Sat Sep 10 19:50:11 2022
 
  

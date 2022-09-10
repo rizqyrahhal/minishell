@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/10 18:21:59 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/10 20:27:27 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,8 @@ t_tac*	simple_command(t_tac* tac)
 	tac->parser->outfile = 1;
 	while(tac->token->type != TOKEN_PIPE && tac->token->type != TOKEN_EOF)
 	{
+		if (tac->lexer->c == ' ')
+			lexer_skip_whitespace(tac->lexer);
 		tac = ft_rediriction(tac);
 		if (tac->token->type == TOKEN_STRING)
 		{
@@ -148,8 +150,8 @@ t_tac*	simple_command(t_tac* tac)
 			i++;
 			tac->parser->cmd[i] = 0;
 		}
-			if (tac->token->type != TOKEN_EOF && tac->token->type != TOKEN_PIPE)
-				tac->token = lexer_next_token(tac->lexer);
+		if (tac->token->type != TOKEN_EOF && tac->token->type != TOKEN_PIPE)
+			tac->token = lexer_next_token(tac->lexer);
 		// printf("A la fin de first while in simpele_command\n");
 		// printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(tac->token));
 	}
@@ -175,12 +177,7 @@ t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
 		// printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(tac->token));
 		tac = simple_command(tac);
 		if (tac->token->type == TOKEN_PIPE)
-		{
-			// printf("\n\nAFTER:  %s\n\n", tac->token->value);
 			tac->token = lexer_next_token(tac->lexer);
-		
-			// printf("\n\nAPRE:   %s\n\n", tac->token->value);
-		}
 		if (tac->parser)
 			free_parser(tac->parser);
 	}

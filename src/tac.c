@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/10 15:20:38 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/10 20:28:29 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@ void	print_node(t_command *lst)
 
 	if (lst == NULL)
 		return;
-//	list = lst;
-//	printf("\033[0;31m|--__---### All Data of Linked List Structre ###---__--|\033[0m\n");
-//	while (list != NULL)
-//	{
-//		i = 0;
-//		printf("COMMAND: ");
-//		while (list->cmd[i])
-//		{
-//			printf("[%s] ", list->cmd[i]);
-//			i++;
-//		}
-//		printf(", INfile: %d, OUTfile: %d", list->infile, list->outfile);
-//		printf("\n");
-//		list = list->next;
-//	}
+	list = lst;
+	printf("\033[0;31m|--__---### All Data of Linked List Structre ###---__--|\033[0m\n");
+	while (list != NULL)
+	{
+		i = 0;
+		printf("COMMAND: ");
+		while (list->cmd[i])
+		{
+			printf("[%s] ", list->cmd[i]);
+			i++;
+		}
+		printf(", INfile: %d, OUTfile: %d", list->infile, list->outfile);
+		printf("\n");
+		list = list->next;
+	}
 
 }
 
@@ -62,6 +62,8 @@ void	tac_compile(char* src, t_envp* my_env)
 	// function  pour check les error comme an while lope in src character par chararcter   (here or in main Function)
 	// static int	error_befor_parser(char* src);  (function roturn exite status)
 	lexer = init_lexer(src);
+	if (lexer->c == ' ')
+			lexer_skip_whitespace(lexer);
 	lexer->my_env = my_env;
 	token = lexer_next_token(lexer);
 	list = (t_command*)malloc(sizeof(t_command));
@@ -84,8 +86,8 @@ void	tac_compile(char* src, t_envp* my_env)
 
 	// printf("LOGNEM=%s\n", getenv("LOGNAME"));
 	// execution part HERE!!z
-//	printf("\033[0;34m                     ---------------------\n                     | LINKED_LIST FINAL |\n                     ---------------------\n\033[0m");
-//	print_node(list);
+	// printf("\033[0;34m                     ---------------------\n                     | LINKED_LIST FINAL |\n                     ---------------------\n\033[0m");
+	// print_node(list);
 	execution(list, my_env);
 	if (list)
 		free_list(list);   // ndya khss nrja3 m3a lcod wo nfrii li khas ytfriya ms 7ata ntchiki readline achman lik filha

@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/10 15:25:17 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/10 20:12:56 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,8 @@ t_token*	lexer_next_token(t_lexer* lexer)
 		}
 		else if (lexer->c == '|')
 			return lexer_advance_current(lexer, TOKEN_PIPE);
+		else if (lexer->c == ' ')
+			printf("---------------\n");
 		else if (lexer->c == '\0')
 			break;
 	}
