@@ -5,80 +5,128 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/28 12:43:36 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/22 02:14:34 by rarahhal         ###   ########.fr       */
+/*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
+/*   Updated: 2022/09/10 17:10:27 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
-# define MINISHELL_H
+#define MINISHELL_H
 
-# include <unistd.h>
-# include <stdio.h>
-# include <sys/wait.h>
-# include <sys/types.h>
-# include <fcntl.h>
-# include <readline/readline.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <errno.h>
-# include "../mini_pipex/includs/pipex.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
+#include <fcntl.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+// #include "../readline/8.1.2/include/readline/readline.h"
+// #include "../readline/8.1.2/include/readline/history.h"
+#include <unistd.h>
+#include <string.h>
 
-// typedef struct s_rediriction_node
-// {
-// 	int	type;
-// 	char*	file;
-// 	struct s_rediriction_node *next;
-// } t_redirection;
+#include "libft.h"
 
-// typedef struct s_redirection
-// {
-// 	int		input; // < if input != 0
-// 	int		output; // > if output != 1
-// 	// int		type;
-// 	// char*		file_name;
-// }	t_redirection;
+#define MAX(a, b)\
+   a > b ? a : b
 
+#define MIN(a, b)\
+   a < b ? a : b
+
+// ********************************************* token.h
+
+typedef struct s_token
+{
+	char* value;
+	enum
+	{
+		TOKEN_STRING, // cmd, argment, files, any other tokents ...
+		TOKEN_PIPE, // | pipe
+		TOKEN_IN, // < inpute redirection
+		TOKEN_HERDOC, // << her_doc
+		TOKEN_OU, // > output redirection
+		TOKEN_APPAND, // >> appandade output redirection
+		TOKEN_EOF, // \0 end of file
+	} type;
+} t_token;
+
+t_token*	init_token(char* value, int type);
+char*		token_to_str(t_token* token);
+
+
+// ******************************************************** struct.h
 typedef struct s_command_node
 {
-	char*	cmd;
-	int		input; // < if input != 0
-	int		output; // > if output != 1
+	char**	cmd;
+
+	int	infile; // < if input != 0
+	int	outfile; // > if output != 1
+	// char*	name_of_file; // last output file name
+//	int	status;
 	struct s_command_node *next;
 } t_command;
 
 typedef struct s_envp
 {
-	char	**env; // hna fin ghanzido ila exporta chi variable bar realooc wola ghanm7iwh 
-	// char	*path; ///// bach nstoki hna path !!!!!!!!WALAKIN KHASNA NRODO LBAL LA UNSITE LINA LPATH WO NB9AW KHADAMIN BHADA!!!!!!!
-	// char	*variabls; ///// nstoki hna variablse li exportaw est apre nzido fi envp
+	char	**env; // hna fin ghanzido ila exporta chi variable bar realooc wola ghanm7iwh ila unseta
+	int		status;
+	char	*PWD;
 }	t_envp;
 
-typedef struct s_minishell
+//************************************************* lexer.h
+
+typedef struct s_lexer
 {
-	char			*buf;
-	size_t			buf_sizeline;
-	t_command		*command; // reallooc pour chaque cmd trete
-	int 			nbr_command;
-}   t_minishell;
+	char*			src;
+	size_t			src_size;
+	char			c;
+	unsigned int	i;
+	t_token*		token;
+	t_envp*			my_env;
+} t_lexer;
 
-// parsing
-void	prsing(t_minishell *minishell);
+t_lexer*	init_lexer(char* src);
+void		lexer_advance(t_lexer* lexer);
+void		lexer_skip_whitespace(t_lexer* lexer);
+char		lexer_peek(t_lexer* lexer, int offset);
+t_token*	lexer_advance_with(t_lexer* lexer, t_token* token);
+t_token*	lexer_advance_current(t_lexer* lexer, int type);
+t_token*	lexer_next_token(t_lexer* lexer);
 
 
-/*
-pipe
-< >
+void	fill_env(char *env[], t_envp *my_env);
 
-comd
-int indx nmbre_cmd
-**ary [0].cmd ....argm
+// ************************************************ parser.h
+typedef struct s_parser
+{
+	char**	cmd;
+	int		infile;
+	int		outfile;
+	char	*name_of_file;
+} t_parser;
 
-rediriction
-< >
+t_command*	parser(t_lexer* lexer, t_token* token, t_command* list);
 
-signals
-*/
+// *********************************************** tac.h
+typedef struct s_tac
+{
+	t_lexer*	lexer;
+	t_token*	token;
+	t_command*	list;
+	t_parser*	parser;
+} t_tac;
+
+
+void	tac_compile(char* src, t_envp* my_env);
+void	print_node(t_command *lst);
+
+// function of linked list
+t_command*	ft_lstnew(char** s, int infile, int outfile);
+void		ft_addfront(t_command** list, t_command* new);
+
+void	execution(t_command* list, t_envp* my_env);
+int		pipes(int k, t_command *cmd, t_envp *my_env);
+
 
 #endif
