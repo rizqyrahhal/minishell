@@ -36,7 +36,6 @@ SRCS = 	src/main.c \
         execution/builtins/pwd.c \
         execution/builtins/unset.c \
         execution/builtins/builtins_tools.c \
-        execution/put_error.c \
 
 LIBFT = libft/ft_calloc.c \
 		libft/ft_realloc.c \

@@ -15,36 +15,18 @@
 void	ex_ecu(char *path, char *sp[], t_envp *my_env)
 {
 
-//	fprintf(stderr, "----%s-----%s---\n", env[0], path);
 	if (is_built(sp[0])) {
 		__builtins(sp, my_env);
 		exit (my_env->status);
 	}
 	else if (execve(path, sp, my_env->env) == -1)
 	{
-//		fprintf(stderr, "----s-----s---\n");
 		if (sea_rch(sp[0], '/'))
 			printf("minishell: %s: No such file or directory\n", sp[0]);
 		else
 			printf("minishell: %s: Command not found\n", sp[0]);
 		exit (127);
 	}
-}
-
-int all_len(t_command *cmd)
-{
-	int k;
-	int i;
-
-	i = 0;
-	k = 0;
-	while (cmd->cmd[i])
-	{
-		k += ft_strlen(cmd->cmd[i]);
-		i++;
-	}
-	k += i - 1;
-	return (k);
 }
 
 void	frst_cmd(t_envp *my_env, int *fd, t_command *cmd)
@@ -61,25 +43,13 @@ void	frst_cmd(t_envp *my_env, int *fd, t_command *cmd)
 		dup2(fd[1], 1);
 	close(fd[0]);
 	close(fd[1]);
-	//close(cmd->infile);
-	//close(cmd->outfile);
 	ex_ecu(path, cmd->cmd, my_env);
 }
 
-// echo -nnnn -nnnn skip all -nnn
-// echo - prints
-// export "=" -> segfault
 void	one_cmd(t_envp *my_env, t_command *cmd)
 {
 	char	*path;
-	int 	i;
 
-	i = 0;
-	// printf("hello%d\n", cmd->infile);
-	// char	buf[10];
-	// read(cmd->infile, buf, 9);
-	// buf[9] = 0;
-	// printf("buf --> %s\n", buf);
 	path = get_path(handle_env(my_env->env), cmd->cmd[0]);
 	if (cmd->infile != 0) {
 		dup2(cmd->infile, 0);
@@ -115,8 +85,6 @@ void	next_cmd(t_envp *my_env, t_pipe *p, int i, t_command *cmd)
 		close((*p).fd[i][1]);
 		close((*p).fd[i + 1][0]);
 		close((*p).fd[i + 1][1]);
-//		close(cmd->infile);
-//		close(cmd->outfile);
 		ex_ecu(path, cmd->cmd, my_env);
 	}
 }
@@ -132,11 +100,9 @@ void	last_cmd(t_envp *my_env, int *fd, t_command *cmd)
 		dup2(cmd->infile, 0);
 	else
 		dup2(fd[0], 0);
-	//close(cmd->infile);
-	close(fd[0]);
 	if (cmd->outfile != 1)
 		dup2(cmd->outfile, 1);
-	//close(cmd->outfile);
+	close(fd[0]);
 	close(fd[1]);
 	ex_ecu(path, cmd->cmd, my_env);
 }

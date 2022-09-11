@@ -1,5 +1,18 @@
 #include "../../includes/execution.h"
 
+int	sea_rch(char *s, int a)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == a)
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 void	arr_deletee(char **my_env, char **s, char *str)
 {

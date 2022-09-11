@@ -37,8 +37,9 @@ char	*get_path(char *s, char *cmd)
 
 	sp = ft_split(s, ':');
 	i = -1;
-	tmp = skip_sl(cmd);
-	tmp = ft_strjoin("/", tmp);
+	if (sea_rch(cmd, '/'))
+		return (cmd);
+	tmp = ft_strjoin("/", cmd);
 	while (sp[++i])
 	{
 		n_cmd = ft_strjoin(sp[i], tmp);
@@ -63,17 +64,4 @@ char	*handle_env(char *env[])
 		i++;
 	}
 	return ("error");
-}
-
-void	ft_exit(char *sp[])
-{
-	if (sp[1] != NULL)
-	{
-		if (!sp[2])
-			exit(1);
-		else
-			put_error("exit: too many arguments\n", 0);
-	}
-	else
-		exit(1);
 }

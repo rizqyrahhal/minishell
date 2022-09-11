@@ -40,7 +40,6 @@ void	__builtins(char **sp, t_envp *my_env)
 		ex_unset(sp, my_env);
 	if (ft_strncmp(sp[0], "echo", 4) == 0 && ft_strlen(sp[0]) == 4)
 		ex_echo(sp, my_env);
-
 	if (ft_strncmp(sp[0], "exit", 4) == 0 && ft_strlen(sp[0]) == 4)
 		ex_exit(sp, my_env);
 }
@@ -49,13 +48,11 @@ void	ex_comm(t_pipe p, int k, t_command **cmd, t_envp *my_env)
 {
 	int	i;
 	int	a;
-//	if (k == 4)
-//		ac--;
+
 	i = -1;
 	a = 1;
 	while (++i < k - 1)
 	{
-//		fprintf(stderr, "********%s\n", (*cmd)->cmd[0]);
 		next_cmd(my_env, &p, i, *cmd);
 		close(p.fd[i][0]);
 		close(p.fd[i][1]);
@@ -87,8 +84,6 @@ void	multiple_p(t_pipe p, int k, t_command *cmd, t_envp *my_env)
 	}
 	else {
 		ex_comm(p, k, &cmd->next, my_env);
-//		fprintf(stderr, "+++%s\n", cmd->cmd[0]);
-		//fprintf(stderr, "%s\n", cmd->next->next->cmd[0]);
 		p.pid2 = fork();
 		if (p.pid2 == 0)
 			last_cmd(my_env, p.fd[k - 1], cmd->next);
@@ -96,8 +91,6 @@ void	multiple_p(t_pipe p, int k, t_command *cmd, t_envp *my_env)
 			f_close(p, k);
 			waitpid(p.pid2, &st, 0);
 			while (wait(NULL) != -1);
-//			wait(NULL);
-//			WIFEXITED(st);
 			my_env->status = WEXITSTATUS(st);
 		}
 	}

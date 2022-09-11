@@ -10,37 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
 #include "../includes/execution.h"
-int	sea_rrch(char *s, int a)
-{
-	int		i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == a)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	ft_countt(char *s, int a)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (s && s[i])
-	{
-		if (s[i] == a)
-			count++;
-		i++;
-	}
-	return (count);
-}
 
 void free_arr(char **s)
 {
@@ -89,16 +59,47 @@ int	struct_size(t_command *cmd)
 	return (k);
 }
 
+char**	fix_cmd(char** s)
+{
+	char**	str;
+	char**	sp;
+	int 	i;
+
+	i = 1;
+	sp = ft_split(s[0], ' ');
+	str = malloc((arr_size(s) + 2) * sizeof (char*));
+	str[0] = ft_strdup(sp[0]);
+	str[1] = ft_strdup(sp[1]);
+	while (s[i])
+	{
+		str[i + 1] = ft_strdup(s[i]);
+		i++;
+	}
+	str[i + 1] = NULL;
+
+	return (str);
+}
+
+void	check_list(t_command** list)
+{
+	t_command*	tmp;
+
+	tmp = *list;
+	while (tmp)
+	{
+		if (sea_rch(tmp->cmd[0], ' ')) {
+			tmp->cmd = fix_cmd(tmp->cmd);
+		}
+		printf("-- %s --\n", tmp->cmd[0]);
+		tmp = tmp->next;
+	}
+}
+
 void	execution(t_command* list, t_envp* my_env)
 {
-	char		**s;
-	int 		k, j;
-	char		**sp;
-	// t_envp		*my_env;
-	char		*buf;
+	int	k;
 
-//	printf("----> cmd00 %s\n", list->cmd[0]);
-	// my_env->PWD = getcwd(my_env->PWD, sizeof (my_env->PWD));
 	k = struct_size(list) - 1;
+	check_list(&list);
 	pipes(k, list, my_env);
 }
