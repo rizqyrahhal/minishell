@@ -97,7 +97,7 @@ int	ft_remove(t_envp *my_env, char *var)
 	k = arr_size(my_env->env);
 	s = malloc(k * sizeof (char*));
 	arr_delete(my_env, s, var);
-	free_arr(my_env->env);
+	//free_arr(my_env->env);
 	my_env->env = s;
 	r = 0;
 	return (0);

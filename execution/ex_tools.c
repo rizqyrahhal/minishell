@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:42:10 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/10 17:57:37 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/11 18:06:13 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ex_ecu(char *path, char *sp[], t_envp *my_env)
 {
-
 	if (is_built(sp[0])) {
 		__builtins(sp, my_env);
 		exit (my_env->status);
@@ -22,9 +21,19 @@ void	ex_ecu(char *path, char *sp[], t_envp *my_env)
 	else if (execve(path, sp, my_env->env) == -1)
 	{
 		if (sea_rch(sp[0], '/'))
-			printf("minishell: %s: No such file or directory\n", sp[0]);
+		{
+			write(2, "minishell: ", 11);
+			write(2, sp[0], ft_strlen(sp[0]));
+			write(2, ": No such file or directory\n", 28);
+		// printf("minishell: %s: No such file or directory\n", sp[0]);
+		}
 		else
-			printf("minishell: %s: Command not found\n", sp[0]);
+		{
+			write(2, "minishell: ", 11);
+			write(2, sp[0], ft_strlen(sp[0]));
+			write(2, ": Command not found\n", 20);
+			// printf("minishell: %s: Command not found\n", sp[0]);
+		}
 		exit (127);
 	}
 }
@@ -71,7 +80,6 @@ void	next_cmd(t_envp *my_env, t_pipe *p, int i, t_command *cmd)
 	{
 		close((*p).fd[i + 1][0]);
 		close((*p).fd[i][1]);
-		cmd->cmd[0] = skip_sl(cmd->cmd[0]);
 		path = get_path(handle_env(my_env->env), cmd->cmd[0]);
 		if (cmd->infile != 0)
 			dup2(cmd->infile, 0);
@@ -94,7 +102,6 @@ void	last_cmd(t_envp *my_env, int *fd, t_command *cmd)
 	char	*path;
 
 	close(fd[1]);
-	cmd->cmd[0] = skip_sl(cmd->cmd[0]);
 	path = get_path(handle_env(my_env->env), cmd->cmd[0]);
 	if (cmd->infile != 0)
 		dup2(cmd->infile, 0);

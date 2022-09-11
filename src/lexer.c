@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/10 20:12:56 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/11 21:21:11 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ t_token* lexer_collect_string(t_lexer* lexer) {
 		if (lexer->c == '"'){
 			// Double Qoute '"'  ::: la meme implementation comme single qoute ---->  bil2idafa ila $$$$$$$$$   ($_ hna ktafiche awl env) 
 			lexer_advance(lexer);
+			//  && lexer->c != ' '
     		while (lexer->c != '\0' && lexer->c != '"') {
     	    	value = realloc(value, (len + 1) * sizeof(char)); // change par ft_realloc char*
     	    	value[len++] = lexer->c;
@@ -82,6 +83,7 @@ t_token* lexer_collect_string(t_lexer* lexer) {
 				lexer_advance(lexer);
 			}
 			value = get_string(lexer->my_env, value, count);
+			// printf("value :%s\n", value);              splite here
 			len = ft_strlen(value);
 			count = len;
 		}

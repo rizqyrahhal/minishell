@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:42:12 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/09 21:05:11 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/11 18:06:27 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ex_comm(t_pipe p, int k, t_command **cmd, t_envp *my_env)
 	i = -1;
 	a = 1;
 	while (++i < k - 1)
-	{
+	{		
 		next_cmd(my_env, &p, i, *cmd);
 		close(p.fd[i][0]);
 		close(p.fd[i][1]);

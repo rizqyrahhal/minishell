@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:42:37 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/10 14:44:03 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/11 20:27:29 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	check_list(t_command** list)
 		if (sea_rch(tmp->cmd[0], ' ')) {
 			tmp->cmd = fix_cmd(tmp->cmd);
 		}
-		printf("-- %s --\n", tmp->cmd[0]);
+		// printf("--first    %s --\n", tmp->cmd[0]);
 		tmp = tmp->next;
 	}
 }

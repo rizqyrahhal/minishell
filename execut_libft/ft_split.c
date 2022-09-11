@@ -3,24 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsemlali <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 08:03:28 by lsemlali          #+#    #+#             */
-/*   Updated: 2021/11/29 10:41:27 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/09/11 18:49:34 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
-
-int skip__(char* s, char k, int i)
-{
-	if (k == '{')
-		k = '}';
-	while (s[i] != k)
-		i++;
-	return (i + 1);
-}
 
 static int	hmuch_calc(char *str, char c)
 {
@@ -29,8 +20,6 @@ static int	hmuch_calc(char *str, char c)
 
 	i = 0;
 	hmuch = 0;
-	if (str[0] == '\0')
-		return (0);
 	while (str[i])
 	{
 		if (str[i] == c)
@@ -41,8 +30,6 @@ static int	hmuch_calc(char *str, char c)
 		hmuch++;
 		while (str[i] && str[i] != c)
 		{
-			if (str[i] == '\'' || str[i] == '\"' || str[i] == '{')
-				i = skip__(str, str[i], i + 1);
 			i++;
 		}
 	}
@@ -58,11 +45,8 @@ static int	ft_fill(char **arr, char *s, int i, char c)
 	while (s[i] == c)
 		i++;
 	p = i;
-	while (s[i] && s[i] != c) {
-		if (s[i] == '\'' || s[i] == '\"' || s[i] == '{')
-			i = skip__(s, s[i], i + 1) - 1;
+	while (s[i] && s[i] != c)
 		i++;
-	}
 	arr[0] = malloc(i - p + 1);
 	n = 0;
 	while (p < i)
@@ -101,11 +85,6 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (0);
 	arr = (char **)malloc(sizeof(char *) * (hmuch_calc((char *)s, c) + 1));
-	if (s[0] == '\0')
-	{
-		arr[0] = 0;
-		return (arr);
-	}
 	if (arr == NULL)
 		return (0);
 	while (s[i] && m < hmuch_calc((char *)s, c))
