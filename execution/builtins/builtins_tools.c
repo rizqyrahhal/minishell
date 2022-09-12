@@ -56,7 +56,6 @@ char *get_wich(char* old, char* new)
 			else
 				return (new_var(new));
 		}
-		printf("z3ma\n");
 		return (ft_strdup(new));
 	}
 	else
@@ -76,7 +75,6 @@ int	ft_add2env(t_envp *my_env, char *var)
 	k = arr_s(my_env->env, var);
 	if (k != -1) {
 		my_env->env[k] = get_wich(my_env->env[k], var);
-		printf("what  %s\n", my_env->env[k]);
 	}
 	else
 		arr_cpy(my_env, new_var(var));
@@ -92,7 +90,7 @@ int	ft_remove(t_envp *my_env, char *var)
 		printf("minishell: unset: `%s': not a valid identifier\n", var);
 		return (1);
 	}
-	if (!arr_s(my_env->env, var))
+	if (arr_s(my_env->env, var) == -1)
 		return (0);
 	k = arr_size(my_env->env);
 	s = malloc(k * sizeof (char*));

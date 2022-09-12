@@ -63,7 +63,7 @@ void	arr_cpy(t_envp *my_env, char *str)
 
 	i = 0;
 	j = 0;
-	s = malloc((arr_size(my_env->env) + 1) * sizeof (char*));
+	s = malloc((arr_size(my_env->env) + 2) * sizeof (char*));
 	while (my_env->env[j])
 	{
 		if (i == 5)
@@ -73,36 +73,9 @@ void	arr_cpy(t_envp *my_env, char *str)
 		i++;
 	}
 	s[i] = NULL;
-	free(my_env->env);
+	free_arr(my_env->env);
 	my_env->env = s;
 }
-
-//void	arr_app(t_envp *my_env, char *str)
-//{
-//	char	**s;
-//	int		i;
-//	int		j;
-//	int 	k;
-//
-//	i = 0;
-//	j = 0;
-//
-//	sp = spl(str);
-//	i = 0;
-//	while (my_env->env[j])
-//	{
-//		if (k != -1 && j == k) {
-//			s[i] = ft_strjoin(my_env->env[j], sp[1]);
-//			j++;
-//		}
-//		else if (i == 5 && k == -1)
-//			s[i] = ft_strdup(str);
-//		else
-//			s[i] = ft_strdup(my_env->env[j++]);
-//		i++;
-//	}
-//	s[i] = NULL;
-//}
 
 void	arr_delete(t_envp *my_env, char **s, char *str)
 {

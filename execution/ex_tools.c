@@ -12,6 +12,13 @@
 
 #include "../includes/execution.h"
 
+void	er_ror(char* err, char* s)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(s, 2);
+	ft_putstr_fd(err, 2);
+}
+
 void	ex_ecu(char *path, char *sp[], t_envp *my_env)
 {
 	if (is_built(sp[0])) {
@@ -21,19 +28,9 @@ void	ex_ecu(char *path, char *sp[], t_envp *my_env)
 	else if (execve(path, sp, my_env->env) == -1)
 	{
 		if (sea_rch(sp[0], '/'))
-		{
-			write(2, "minishell: ", 11);
-			write(2, sp[0], ft_strlen(sp[0]));
-			write(2, ": No such file or directory\n", 28);
-		// printf("minishell: %s: No such file or directory\n", sp[0]);
-		}
+			er_ror(": No such file or directory\n", sp[0]);
 		else
-		{
-			write(2, "minishell: ", 11);
-			write(2, sp[0], ft_strlen(sp[0]));
-			write(2, ": Command not found\n", 20);
-			// printf("minishell: %s: Command not found\n", sp[0]);
-		}
+			er_ror(": Command not found\n", sp[0]);
 		exit (127);
 	}
 }
