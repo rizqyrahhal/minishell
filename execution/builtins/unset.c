@@ -19,7 +19,7 @@ int check_unset(char *var)
 void	ex_unset(char **sp, t_envp *my_env)
 {
 	int		i;
-	int 	status;
+	// int 	status;
 
 	i = 1;
 	if (sp[1] && sp[1][0] == '-')

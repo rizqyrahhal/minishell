@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:42:37 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/11 20:27:29 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/13 18:05:12 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,47 +59,76 @@ int	struct_size(t_command *cmd)
 	return (k);
 }
 
+char**	spli_ted(char* s)
+{
+	
+}
+
 char**	fix_cmd(char** s)
 {
 	char**	str;
 	char**	sp;
 	int 	i;
+	int 	j;
 
-	i = 1;
-	sp = ft_split(s[0], ' ');
-	str = malloc((arr_size(s) + 2) * sizeof (char*));
-	str[0] = ft_strdup(sp[0]);
-	str[1] = ft_strdup(sp[1]);
+	i = 0;
+	j = 0;
 	while (s[i])
 	{
-		str[i + 1] = ft_strdup(s[i]);
-		i++;
+		j = 0;
+		if (sea_rch(s[i], ' '))
+			sp = spli_ted(s[i]);
+		while (sp[j])
+		{
+			
+		}
+		// sp = ft_split(s[i], ' ');
+		// str = malloc((arr_size(s) + 2) * sizeof (char*));
+		// while (sp[i])
+		// {
+		// 	str[i] = ft_strdup(sp[i]);
+		// 	i++;
+		// }
+		// j = 1;
+		// while (s[j])
+		// {
+		// 	str[i] = ft_strdup(s[j]);
+		// 	i++;
+		// 	j++;
+		// }
+		// str[i] = NULL;
 	}
-	str[i + 1] = NULL;
 
 	return (str);
 }
 
-void	check_list(t_command** list)
+void	check_list(t_command** list, t_envp* my_env)
 {
 	t_command*	tmp;
 
 	tmp = *list;
 	while (tmp)
 	{
-		if (sea_rch(tmp->cmd[0], ' ')) {
+		if (my_env->splite == -404) {
 			tmp->cmd = fix_cmd(tmp->cmd);
 		}
+		// if (sea_rch(tmp->cmd[0], ' ')) {
+		// 	tmp->cmd = fix_cmd(tmp->cmd);
+		// }
 		// printf("--first    %s --\n", tmp->cmd[0]);
 		tmp = tmp->next;
 	}
 }
+
+/////////echo redirections in one_cmd
+///////// SEGFAULT
 
 void	execution(t_command* list, t_envp* my_env)
 {
 	int	k;
 
 	k = struct_size(list) - 1;
-	check_list(&list);
+	check_list(&list, my_env);
+	my_env->splite = 0;
 	pipes(k, list, my_env);
 }

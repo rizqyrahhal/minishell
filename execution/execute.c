@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:42:12 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/11 18:06:27 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:50:33 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void	multiple_p(t_pipe p, int k, t_command *cmd, t_envp *my_env)
 {
 	int st;
 	p.pid1 = fork();
+	if (p.pid1 == -1)
+		return ;
 	if (p.pid1 == 0) {
 		if (cmd->infile != -1) {
 			frst_cmd(my_env, p.fd[0], cmd);
@@ -85,6 +87,8 @@ void	multiple_p(t_pipe p, int k, t_command *cmd, t_envp *my_env)
 	else {
 		ex_comm(p, k, &cmd->next, my_env);
 		p.pid2 = fork();
+		if (p.pid2 == -1)
+			return ;
 		if (p.pid2 == 0)
 			last_cmd(my_env, p.fd[k - 1], cmd->next);
 		else {

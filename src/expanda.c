@@ -79,10 +79,10 @@ char* ft_replace(char* s, char* old, char* new)
 int ft_getidx(t_exp *exp, char *s, char *env[])
 {
 	int i;
-	int j;
+	// int j;
 
 	i = 0;
-	while (i < ft_d_strlen(env))
+	while (i < (int)ft_d_strlen(env))
 	{
 		if (ft_strncmp(exp[i].var, s, ft_strlen(s)) == 0 && ft_strlen(s) == ft_strlen(exp[i].var))
 			return (i);
@@ -127,7 +127,7 @@ char *ft_exp(char *s, t_exp *exp, t_envp *my_env, int count)
 {
 	int i = 0;
 	char *str;
-	char *ss;
+	// char *ss;
 
 	i = count;
 	str = NULL;

@@ -4,7 +4,7 @@
 void	ex_env(char **sp, t_envp *my_env)
 {
 	int		i;
-	int 	status;
+	// int 	status;
 
 	i = 1;
 	if (sp[1] == NULL)

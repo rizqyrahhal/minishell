@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/11 15:56:12 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/13 18:02:29 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@
 #include <fcntl.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-// #include "../readline/8.1.2/include/readline/readline.h"
-// #include "../readline/8.1.2/include/readline/history.h"
+// #include "readline/readline.h"
 #include <unistd.h>
 #include <string.h>
 
@@ -59,9 +58,8 @@ char*		token_to_str(t_token* token);
 typedef struct s_command_node
 {
 	char**	cmd;
-
-	int	infile; // < if input != 0
-	int	outfile; // > if output != 1
+	int		infile; // < if input != 0
+	int		outfile; // > if output != 1
 	// char*	name_of_file; // last output file name
 //	int	status;
 	struct s_command_node *next;
@@ -71,6 +69,8 @@ typedef struct s_envp
 {
 	char	**env; // hna fin ghanzido ila exporta chi variable bar realooc wola ghanm7iwh ila unseta
 	int		status;
+	int		num_argement;
+	int		splite[262144];
 	char	*PWD;
 }	t_envp;
 

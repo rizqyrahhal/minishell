@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/10 20:27:27 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:23:35 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ t_tac*	ft_rediriction(t_tac* tac)
 t_tac*	simple_command(t_tac* tac)
 {
 	t_command*	new;
-	t_token*	next_token;
+	// t_token*	next_token;
 	int			i;
 
 	i = 0;
@@ -143,7 +143,7 @@ t_tac*	simple_command(t_tac* tac)
 		if (tac->lexer->c == ' ')
 			lexer_skip_whitespace(tac->lexer);
 		tac = ft_rediriction(tac);
-		if (tac->token->type == TOKEN_STRING)
+		if (tac->token->type == TOKEN_STRING && tac->token->value[0] != 15)
 		{
 			tac->parser->cmd = ft_realloc(tac->parser->cmd);
 			tac->parser->cmd[i] = ft_strdup(tac->token->value);

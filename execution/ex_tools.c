@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:42:10 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/11 18:06:13 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/13 15:55:10 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	next_cmd(t_envp *my_env, t_pipe *p, int i, t_command *cmd)
 	char	*path;
 
 	(*p).id[i] = fork();
+	if ((*p).id[i] == -1)
+		return ;
 	if ((*p).id[i] == 0)
 	{
 		close((*p).fd[i + 1][0]);

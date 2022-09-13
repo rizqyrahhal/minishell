@@ -6,7 +6,7 @@
 #    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 17:12:13 by rarahhal          #+#    #+#              #
-#    Updated: 2022/09/10 18:27:05 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/09/13 17:01:19 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS = 	src/main.c \
 		src/lexer.c \
 		src/token.c \
 		src/tac.c \
+		src/syntax_error.c \
 		src/parser.c \
 		src/env.c \
 		src/expanda.c \
@@ -64,15 +65,18 @@ OBJS = $(SRCS:.c=.o)
 OBJS_L = $(LIBFT:.c=.o)
 OBJS_EL = $(EXECUT_LIBFT:.c=.o)
 
-$(NAME): $(OBJS) $(OBJS_L) $(EXECUT_LIBFT)
-	$(CC) -lreadline $(FLAGS) $(OBJS) $(OBJS_L) $(EXECUT_LIBFT) -o $(NAME)
+$(NAME):  $(OBJS) $(OBJS_L) $(OBJS_EL)
+	$(CC) -lreadline $(FLAGS) $(OBJS) $(OBJS_L) $(OBJS_EL) -o $(NAME)
+
+%.o: %.c
+	$(CC) $(FLAGS) -c $< -o $@
 
 all: $(NAME)
 
 clean:
-	@rm -rf src/*.o
-	@rm -rf libft/*.o
-	@rm -rf execut_libft/*.o
+	@rm -rf $(OBJS)
+	@rm -rf $(OBJS_L)
+	@rm -rf $(OBJS_EL)
 
 fclean: clean
 	@rm -f $(NAME)
@@ -82,6 +86,4 @@ re: fclean
 
 .PHONY: all clean fclean re
 
-
-
-# flageeeeeeeeeeeeeeeeeeeeeg
+#  -L readline/8.1.2/lib -I readline/8.1.2/include 

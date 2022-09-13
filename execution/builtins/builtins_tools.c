@@ -30,7 +30,7 @@ char *new_var(char *var)
 char*	new_value(char* s, char* old)
 {
 	int		i;
-	char	*val;
+	// char	*val;
 
 	i = 0;
 	while (s[i] && s[i] != '=')

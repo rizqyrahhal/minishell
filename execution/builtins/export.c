@@ -26,9 +26,9 @@ int check_export(char *var)
 
 void	ex_export(char **sp, t_envp *my_env)
 {
-	char **s;
+	// char **s;
 	int		i;
-	int		status;
+	// int		status;
 	// oldpwd at first
 	i = 1;
 
