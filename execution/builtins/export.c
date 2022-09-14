@@ -24,7 +24,7 @@ int check_export(char *var)
 	return (1);
 }
 
-void	ex_export(char **sp, t_envp *my_env)
+void	ex_export(char **sp, t_envp *my_env, int out)
 {
 	// char **s;
 	int		i;
@@ -33,7 +33,7 @@ void	ex_export(char **sp, t_envp *my_env)
 	i = 1;
 
 	if (sp[1] == NULL)
-		export_(my_env->env);
+		export_(my_env->env, out);
 	while (sp[i]) {
 		my_env->status = ft_add2env(my_env, sp[i]);
 		i++;

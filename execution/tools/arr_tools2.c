@@ -1,15 +1,17 @@
 #include "../../includes/execution.h"
 
 
-void	print_ar(char **arr)
+void	print_ar(char **arr, int out)
 {
 	int i;
 
 	i = 0;
 	while (arr[i])
 	{
-		if (sea_rch(arr[i], '='))
-			printf("%s\n", arr[i]);
+		if (sea_rch(arr[i], '=')) {
+            ft_putstr_fd(arr[i], out);
+            write(out, "\n", 2);
+        }
 		i++;
 	}
 }

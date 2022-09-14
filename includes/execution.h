@@ -74,7 +74,7 @@ typedef struct s_pipe
 	pid_t 	pid1;
 	pid_t 	pid2;
 	int	**fd;
-	int	id[99];
+	pid_t 	id[1024];
 	int	check;
 	int	cm;
 }	t_pipe;
@@ -82,14 +82,14 @@ typedef struct s_pipe
 
 // builtins
 void	ex_cd(char **sp, t_envp *my_env);
-void	ex_env(char **sp, t_envp *my_env);
-void	ex_export(char **sp, t_envp *my_env);
+void	ex_env(char **sp, t_envp *my_env, int out);
+void	ex_export(char **sp, t_envp *my_env, int out);
 void	ex_unset(char **sp, t_envp *my_env);
-void	ex_pwd(char **sp, t_envp *my_env);
-void	ex_echo(char **sp, t_envp *my_env);
+void	ex_pwd(char **sp, t_envp *my_env, int out);
+void	ex_echo(char **sp, t_envp *my_env, int out);
 void	ex_exit(char **sp, t_envp *my_env);
 int		is_built(char *s);
-void	__builtins(char **sp, t_envp *my_env);
+void	__builtins(char **sp, t_envp *my_env, int out);
 
 //builtins_tools
 int		ft_remove(t_envp *myenv, char *var);
@@ -105,15 +105,15 @@ int		check_export(char *var);
 int		is_str(char *s);
 int		ft_isvalid(int c);
 //void	arr_app(t_envp *my_env, char **s, char *str);
-void	export_(char **arr);
-void	print_ar(char **arr);
+void	export_(char **arr, int out);
+void	print_ar(char **arr, int out);
 int 	arr_s(char **s, char *str);
 void	arr_cpy(t_envp *my_env, char *str);
 void	arr_delete(t_envp *my_env, char **s, char *str);
 char    *ft_cpy(char *s, int k);
 size_t	arr_size(char *env[]);
 void	fill_arr(char *env[], char *s[]);
-int		pipes(int ac, t_command *cmd, t_envp	*my_env);
+int		pipes(int ac, t_command *cmd, t_envp *my_env);
 char	*get_path(char *s, char *cmd);
 void	one_cmd(t_envp *my_env, t_command *cmd);
 void	frst_cmd(t_envp *my_env, int *fd, t_command *cmd);

@@ -82,13 +82,13 @@ t_token* lexer_collect_string(t_lexer* lexer) {
 				value[len] = '\0';
 				lexer_advance(lexer);
 			}
-			for (int i = 0; value[i] ; i++)
-			{
-				if (value[i] == '$'){
-					lexer->my_env->splite[] = ; //////////////////////////////       cmd agr1 $arg2 arg3 $arg4
-					break;                                                        //  [   0   1      0    1  ]
-				}
-			}
+//			for (int i = 0; value[i] ; i++)
+//			{
+//				if (value[i] == '$'){
+//					lexer->my_env->splite[] = ; //////////////////////////////       cmd agr1 $arg2 arg3 $arg4
+//					break;                                                        //  [   0   1      0    1  ]
+//				}
+//			}
 			value = get_string(lexer->my_env, value, count);
 			if (value[0] == '\0')
 				value[0] = 15;

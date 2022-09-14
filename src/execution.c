@@ -59,66 +59,67 @@ int	struct_size(t_command *cmd)
 	return (k);
 }
 
-char**	spli_ted(char* s)
-{
-	
-}
+//char**	spli_ted(char* s)
+//{
+//
+//}
 
-char**	fix_cmd(char** s)
-{
-	char**	str;
-	char**	sp;
-	int 	i;
-	int 	j;
+//char**	fix_cmd(char** s)
+//{
+//	char**	str;
+//	char**	sp;
+//	int 	i;
+//	int 	j;
+//
+//	i = 0;
+//	j = 0;
+//    str =
+//	while (s[i])
+//	{
+//		j = 0;
+//		if (sea_rch(s[i], ' '))
+//			sp = spli_ted(s[i]);
+//		while (sp[j])
+//		{
+//
+//		}
+//		// sp = ft_split(s[i], ' ');
+//		// str = malloc((arr_size(s) + 2) * sizeof (char*));
+//		// while (sp[i])
+//		// {
+//		// 	str[i] = ft_strdup(sp[i]);
+//		// 	i++;
+//		// }
+//		// j = 1;
+//		// while (s[j])
+//		// {
+//		// 	str[i] = ft_strdup(s[j]);
+//		// 	i++;
+//		// 	j++;
+//		// }
+//		// str[i] = NULL;
+//	}
+//
+//	return (str);
+//}
 
-	i = 0;
-	j = 0;
-	while (s[i])
-	{
-		j = 0;
-		if (sea_rch(s[i], ' '))
-			sp = spli_ted(s[i]);
-		while (sp[j])
-		{
-			
-		}
-		// sp = ft_split(s[i], ' ');
-		// str = malloc((arr_size(s) + 2) * sizeof (char*));
-		// while (sp[i])
-		// {
-		// 	str[i] = ft_strdup(sp[i]);
-		// 	i++;
-		// }
-		// j = 1;
-		// while (s[j])
-		// {
-		// 	str[i] = ft_strdup(s[j]);
-		// 	i++;
-		// 	j++;
-		// }
-		// str[i] = NULL;
-	}
-
-	return (str);
-}
-
-void	check_list(t_command** list, t_envp* my_env)
-{
-	t_command*	tmp;
-
-	tmp = *list;
-	while (tmp)
-	{
-		if (my_env->splite == -404) {
-			tmp->cmd = fix_cmd(tmp->cmd);
-		}
-		// if (sea_rch(tmp->cmd[0], ' ')) {
-		// 	tmp->cmd = fix_cmd(tmp->cmd);
-		// }
-		// printf("--first    %s --\n", tmp->cmd[0]);
-		tmp = tmp->next;
-	}
-}
+//void	check_list(t_command** list, t_envp* my_env)
+//{
+//	t_command*	tmp;
+//
+//	tmp = *list;
+//	while (tmp)
+//	{
+//		if (my_env->splite == -404) {
+//			tmp->cmd = fix_cmd(tmp->cmd);
+//		}
+//		// if (sea_rch(tmp->cmd[0], ' ')) {
+//		// 	tmp->cmd = fix_cmd(tmp->cmd);
+//		// }
+//		// printf("--first    %s --\n", tmp->cmd[0]);
+//		tmp = tmp->next;
+//	}
+//}
 
 /////////echo redirections in one_cmd
 ///////// SEGFAULT
@@ -126,9 +127,10 @@ void	check_list(t_command** list, t_envp* my_env)
 void	execution(t_command* list, t_envp* my_env)
 {
 	int	k;
-
+    (void)list;
+    (void)my_env;
 	k = struct_size(list) - 1;
-	check_list(&list, my_env);
-	my_env->splite = 0;
+//	check_list(&list, my_env);
+//	my_env->splite = 0;
 	pipes(k, list, my_env);
 }

@@ -19,10 +19,10 @@ void	er_ror(char* err, char* s)
 	ft_putstr_fd(err, 2);
 }
 
-void	ex_ecu(char *path, char *sp[], t_envp *my_env)
+void	ex_ecu(char *path, char *sp[], t_envp *my_env, int out)
 {
 	if (is_built(sp[0])) {
-		__builtins(sp, my_env);
+		__builtins(sp, my_env, out);
 		exit (my_env->status);
 	}
 	else if (execve(path, sp, my_env->env) == -1)
@@ -49,7 +49,7 @@ void	frst_cmd(t_envp *my_env, int *fd, t_command *cmd)
 		dup2(fd[1], 1);
 	close(fd[0]);
 	close(fd[1]);
-	ex_ecu(path, cmd->cmd, my_env);
+	ex_ecu(path, cmd->cmd, my_env, cmd->outfile);
 }
 
 void	one_cmd(t_envp *my_env, t_command *cmd)
@@ -65,7 +65,7 @@ void	one_cmd(t_envp *my_env, t_command *cmd)
 		dup2(cmd->outfile, 1);
 		close(cmd->outfile);
 	}
-	ex_ecu(path, cmd->cmd, my_env);
+	ex_ecu(path, cmd->cmd, my_env, cmd->outfile);
 }
 
 void	next_cmd(t_envp *my_env, t_pipe *p, int i, t_command *cmd)
@@ -73,34 +73,36 @@ void	next_cmd(t_envp *my_env, t_pipe *p, int i, t_command *cmd)
 	char	*path;
 
 	(*p).id[i] = fork();
-	if ((*p).id[i] == -1)
-		return ;
-	if ((*p).id[i] == 0)
-	{
-		close((*p).fd[i + 1][0]);
-		close((*p).fd[i][1]);
-		path = get_path(handle_env(my_env->env), cmd->cmd[0]);
-		if (cmd->infile != 0)
-			dup2(cmd->infile, 0);
-		else
-			dup2((*p).fd[i][0], 0);
-		if (cmd->outfile != 1)
-			dup2(cmd->outfile, 1);
-		else
-			dup2((*p).fd[i + 1][1], 1);
-		close((*p).fd[i][0]);
-		close((*p).fd[i][1]);
-		close((*p).fd[i + 1][0]);
-		close((*p).fd[i + 1][1]);
-		ex_ecu(path, cmd->cmd, my_env);
-	}
+	if ((*p).id[i] == -1) {
+        ft_putstr_fd("minishell: fork: Resource temporarily unavailable\n", 2);
+
+        return;
+    }
+	if ((*p).id[i] == 0) {
+        close((*p).fd[i + 1][0]);
+        close((*p).fd[i][1]);
+        path = get_path(handle_env(my_env->env), cmd->cmd[0]);
+        if (cmd->infile != 0)
+            dup2(cmd->infile, 0);
+        else
+            dup2((*p).fd[i][0], 0);
+        if (cmd->outfile != 1)
+            dup2(cmd->outfile, 1);
+        else
+            dup2((*p).fd[i + 1][1], 1);
+        close((*p).fd[i][0]);
+        close((*p).fd[i][1]);
+        close((*p).fd[i + 1][0]);
+        close((*p).fd[i + 1][1]);
+        ex_ecu(path, cmd->cmd, my_env, cmd->outfile);
+    }
 }
 
 void	last_cmd(t_envp *my_env, int *fd, t_command *cmd)
 {
 	char	*path;
 
-	close(fd[1]);
+    close(fd[1]);
 	path = get_path(handle_env(my_env->env), cmd->cmd[0]);
 	if (cmd->infile != 0)
 		dup2(cmd->infile, 0);
@@ -110,5 +112,5 @@ void	last_cmd(t_envp *my_env, int *fd, t_command *cmd)
 		dup2(cmd->outfile, 1);
 	close(fd[0]);
 	close(fd[1]);
-	ex_ecu(path, cmd->cmd, my_env);
+	ex_ecu(path, cmd->cmd, my_env, cmd->outfile);
 }
