@@ -64,73 +64,91 @@ int	struct_size(t_command *cmd)
 	
 // }
 
-// char**	fix_cmd(char** s)
-// {
-// 	char**	str;
-// 	char**	sp;
-// 	int 	i;
-// 	int 	j;
 
-// 	i = 0;
-// 	j = 0;
-// 	while (s[i])
-// 	{
-// 		j = 0;
-// 		if (sea_rch(s[i], ' '))
-// 			sp = spli_ted(s[i]);
-// 		while (sp[j])
-// 		{
-			
-// 		}
-// 		// sp = ft_split(s[i], ' ');
-// 		// str = malloc((arr_size(s) + 2) * sizeof (char*));
-// 		// while (sp[i])
-// 		// {
-// 		// 	str[i] = ft_strdup(sp[i]);
-// 		// 	i++;
-// 		// }
-// 		// j = 1;
-// 		// while (s[j])
-// 		// {
-// 		// 	str[i] = ft_strdup(s[j]);
-// 		// 	i++;
-// 		// 	j++;
-// 		// }
-// 		// str[i] = NULL;
-// 	}
+void	printage(char **arr)
+{
+	int i;
 
-// 	return (str);
-// }
+	i = 0;
+	while (arr[i])
+	{
+		printf("-- %s\n", arr[i]);
+		i++;
+	}
+}
 
-// void	check_list(t_command** list, t_envp* my_env)
-// {
-// 	t_command*	tmp;
+char**	fix_cmd(char** s, int *i)
+{
+	char**	str;
+	char**	sp;
+	int 	j;
+	int 	k;
+	int		z;
 
-// 	tmp = *list;
-// 	while (tmp)
-// 	{
-// 		if (my_env->splite == -404) {
-// 			tmp->cmd = fix_cmd(tmp->cmd);
-// 			my_env->splite = 0;
-// 		}
-// 		// if (sea_rch(tmp->cmd[0], ' ')) {
-// 		// 	tmp->cmd = fix_cmd(tmp->cmd);
-// 		// }
-// 		// printf("--first    %s --\n", tmp->cmd[0]);
-// 		tmp = tmp->next;
-// 	}
-// }
+	j = 0;
+	z = 0;
+	k = *i + 1;
+    sp = ft_split(s[*i], ' ');
+    str = malloc((arr_size(s) + arr_size(sp)) * sizeof (char*));
+	while (j < *i)
+	{
+		str[j] = s[j];
+		j++;
+	}
+    while (sp[z])
+    {
+        str[j] = ft_strdup(sp[z]);
+        j++;
+		z++;
+    }
+	*i = j;
+    k = 1;
+    while (s[k])
+    {
+		str[j] = ft_strdup(s[k]);
+		k++;
+        j++;
+    }
+    str[j] = NULL;
+//	free_arr(s);
+ 	return (str);
+ }
+
+ void	check_list(t_command** list)
+ {
+	t_command*	tmp;
+	int         i;
+
+	i = 0;
+	tmp = *list;
+	while (tmp)
+	{
+		i = 0;
+		while (tmp->cmd[i])
+		{
+			if (tmp->splite[i] == 1 && sea_rch(tmp->cmd[i], ' '))
+				tmp->cmd = fix_cmd(tmp->cmd, &i);
+			else
+				i++;
+		}
+		tmp = tmp->next;
+	}
+ }
 
 /////////echo redirections in one_cmd
 ///////// SEGFAULT
 
+//minishell > export var1=str
+//minishell > echo $var1
+//str
+//		minishell > export var1+=$var
 void	execution(t_command* list, t_envp* my_env)
 {
 	int	k;
     (void)list;
     (void)my_env;
 	k = struct_size(list) - 1;
-//	check_list(&list, my_env);
+    check_list(&list);
 //	my_env->splite = 0;
 	pipes(k, list, my_env);
 //    free_arr(list->cmd);
