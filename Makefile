@@ -55,18 +55,21 @@ EXECUT_LIBFT = execut_libft/ft_split.c \
 		execut_libft/ft_strchr.c \
 		execut_libft/ft_strlcpy.c \
 		execut_libft/ft_isalpha.c \
+		execut_libft/ft_tolower.c \
 		execut_libft/ft_isdigit.c \
 		execut_libft/ft_putstr_fd.c \
 		execut_libft/ft_itoa.c \
 		execut_libft/ft_substr.c
 		
-
+#READLINE = ~/.brew/opt/readline/
 OBJS = $(SRCS:.c=.o)
 OBJS_L = $(LIBFT:.c=.o)
 OBJS_EL = $(EXECUT_LIBFT:.c=.o)
 
 $(NAME):  $(OBJS) $(OBJS_L) $(OBJS_EL)
-	$(CC) -lreadline $(FLAGS) $(OBJS) $(OBJS_L) $(OBJS_EL) -o $(NAME)
+	$(CC) -lreadline -L $(READLINE)/lib -I $(READLINE)/include $(FLAGS) $(OBJS) $(OBJS_L) $(OBJS_EL) -o $(NAME)
+#$(NAME):  $(SRCS) $(LIBFT) $(EXECUT_LIBFT)
+#	$(CC) -lreadline -L $(READLINE)/lib -I $(READLINE)/include $(FLAGS) $(SRCS) $(LIBFT) $(EXECUT_LIBFT) -o $(NAME)
 
 %.o: %.c
 	$(CC) $(FLAGS) -c $< -o $@

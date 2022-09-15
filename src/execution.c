@@ -22,7 +22,7 @@ void free_arr(char **s)
 		free(s[i]);
 		i++;
 	}
-	free(s);
+//    free(s[i]);
 }
 //void signal_ctrl_c(int sig)
 //{
@@ -133,4 +133,5 @@ void	execution(t_command* list, t_envp* my_env)
 //	check_list(&list, my_env);
 //	my_env->splite = 0;
 	pipes(k, list, my_env);
+//    free_arr(list->cmd);
 }

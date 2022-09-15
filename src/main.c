@@ -36,6 +36,7 @@ int	main(int argc, char** argv, char** env)
 	{
 		while(1)
 		{
+
 			buf = readline("\033[0;33mminishell > \033[0m");
 			add_history(buf);
 			// ft_check_error(buf);

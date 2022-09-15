@@ -23,8 +23,7 @@ void	ex_cd(char **sp, t_envp *my_env)
 		}
 		if (chdir(sp[1]) == 0 && k == 0){
 			getcwd(cwd, sizeof(cwd));
-			printf("----->  %s\n", cwd);
-			ft_add2env(my_env, ft_strjoin("PWD=", cwd));
+            ft_add2env(my_env, ft_strjoin("PWD=", cwd));
 			my_env->PWD = ft_strdup(cwd);
 			ft_add2env(my_env, ft_strjoin("OLDPWD=", old_cwd));
 		}

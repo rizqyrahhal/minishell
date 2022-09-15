@@ -25,20 +25,37 @@ int is_str(char *s)
 	}
 	return (1);
 }
+char*   lo_wer(char *s)
+{
+    int     i;
+    char*   low;
 
+    i = 0;
+    low = malloc(ft_strlen(s) + 1);
+    while (s[i])
+    {
+        if (ft_isalpha(s[i]))
+            low[i] = ft_tolower(s[i]);
+        else
+            low[i] = s[i];
+        i++;
+    }
+    low[i] = 0;
+    return (low);
+}
 void	__builtins(char **sp, t_envp *my_env, int out)
 {
 	if (ft_strncmp(sp[0], "cd", 2) == 0 && ft_strlen(sp[0]) == 2)
 		ex_cd(sp, my_env);
 	if (ft_strncmp(sp[0], "export", 6) == 0 && ft_strlen(sp[0]) == 6)
 		ex_export(sp, my_env, out);
-	if (ft_strncmp(sp[0], "env", 3) == 0 && ft_strlen(sp[0]) == 3)
+	if (ft_strncmp(lo_wer(sp[0]), "env", 3) == 0 && ft_strlen(sp[0]) == 3)
 		ex_env(sp, my_env, out);
-	if (ft_strncmp(sp[0], "pwd", 3) == 0 && ft_strlen(sp[0]) == 3)
+	if (ft_strncmp(lo_wer(sp[0]), "pwd", 3) == 0 && ft_strlen(sp[0]) == 3)
 		ex_pwd(sp, my_env, out);
 	if (ft_strncmp(sp[0], "unset", 5) == 0 && ft_strlen(sp[0]) == 5)
 		ex_unset(sp, my_env);
-	if (ft_strncmp(sp[0], "echo", 4) == 0 && ft_strlen(sp[0]) == 4)
+	if (ft_strncmp(lo_wer(sp[0]), "echo", 4) == 0 && ft_strlen(sp[0]) == 4)
 		ex_echo(sp, my_env, out);
 	if (ft_strncmp(sp[0], "exit", 4) == 0 && ft_strlen(sp[0]) == 4)
 		ex_exit(sp, my_env);
@@ -114,11 +131,11 @@ int is_built(char *s)
 		return (1);
 	if (ft_strncmp(s, "unset", 5) == 0 && ft_strlen(s) == 5)
 		return (1);
-	if (ft_strncmp(s, "env", 3) == 0 && ft_strlen(s) == 3)
+	if (ft_strncmp(lo_wer(s), "env", 3) == 0 && ft_strlen(s) == 3)
 		return (1);
-	if (ft_strncmp(s, "pwd", 3) == 0 && ft_strlen(s) == 3)
+	if (ft_strncmp(lo_wer(s), "pwd", 3) == 0 && ft_strlen(s) == 3)
 		return (1);
-	if (ft_strncmp(s, "echo", 4) == 0 && ft_strlen(s) == 4)
+	if (ft_strncmp(lo_wer(s), "echo", 4) == 0 && ft_strlen(s) == 4)
 		return (1);
 	if (ft_strncmp(s, "exit", 4) == 0 && ft_strlen(s) == 4)
 		return (1);
