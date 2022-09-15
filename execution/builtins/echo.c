@@ -16,7 +16,7 @@ int	is_accept(char *s)
 	return (1);
 }
 
-void	ex_echo(char **cmd, t_envp *myenv)
+void	ex_echo(char **cmd, t_envp *myenv, int out)
 {
 	int i;
 	int k;
@@ -34,10 +34,11 @@ void	ex_echo(char **cmd, t_envp *myenv)
 	i = k;
 	while (cmd[i])
 	{
-		printf("%s ", cmd[i]);
+		ft_putstr_fd(cmd[i], out);
+        write(out, " ", 1);
 		i++;
 	}
 	if (k == 1)
-		printf("\n");
+		ft_putstr_fd("\n", out);
 	myenv->status = 0;
 }

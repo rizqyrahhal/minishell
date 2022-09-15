@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/14 22:15:35 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/15 12:45:35 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ t_token* lexer_collect_string(t_lexer* lexer) {
 			// {
 			// 	if (value[i] == '$' && lexer->my_env->arg_num != -1){
 			// 		lexer->my_env->splite[lexer->my_env->arg_num] = 1; //////////////////////////////       cmd agr1 $arg2 arg3 $arg4
-            //         break;                                                                                     //  [   0   1      0    1  ]
+            //         break;                                                                            //  [   0   1      0    1  ]
 			// 	}
 			// 	// else
 			// 	// 	lexer->my_env->splite[lexer->my_env->arg_num] = 0;

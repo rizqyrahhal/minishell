@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:42:37 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/15 11:32:18 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/15 12:47:03 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,10 @@ int	struct_size(t_command *cmd)
 void	execution(t_command* list, t_envp* my_env)
 {
 	int	k;
-
+    (void)list;
+    (void)my_env;
 	k = struct_size(list) - 1;
-	// check_list(&list, my_env);
+//	check_list(&list, my_env);
+//	my_env->splite = 0;
 	pipes(k, list, my_env);
 }

@@ -26,20 +26,20 @@ int is_str(char *s)
 	return (1);
 }
 
-void	__builtins(char **sp, t_envp *my_env)
+void	__builtins(char **sp, t_envp *my_env, int out)
 {
 	if (ft_strncmp(sp[0], "cd", 2) == 0 && ft_strlen(sp[0]) == 2)
 		ex_cd(sp, my_env);
 	if (ft_strncmp(sp[0], "export", 6) == 0 && ft_strlen(sp[0]) == 6)
-		ex_export(sp, my_env);
+		ex_export(sp, my_env, out);
 	if (ft_strncmp(sp[0], "env", 3) == 0 && ft_strlen(sp[0]) == 3)
-		ex_env(sp, my_env);
+		ex_env(sp, my_env, out);
 	if (ft_strncmp(sp[0], "pwd", 3) == 0 && ft_strlen(sp[0]) == 3)
-		ex_pwd(sp, my_env);
+		ex_pwd(sp, my_env, out);
 	if (ft_strncmp(sp[0], "unset", 5) == 0 && ft_strlen(sp[0]) == 5)
 		ex_unset(sp, my_env);
 	if (ft_strncmp(sp[0], "echo", 4) == 0 && ft_strlen(sp[0]) == 4)
-		ex_echo(sp, my_env);
+		ex_echo(sp, my_env, out);
 	if (ft_strncmp(sp[0], "exit", 4) == 0 && ft_strlen(sp[0]) == 4)
 		ex_exit(sp, my_env);
 }
@@ -47,12 +47,11 @@ void	__builtins(char **sp, t_envp *my_env)
 void	ex_comm(t_pipe p, int k, t_command **cmd, t_envp *my_env)
 {
 	int	i;
-	int	a;
 
 	i = -1;
-	a = 1;
 	while (++i < k - 1)
-	{		
+	{
+        pipe(p.fd[i + 1]);
 		next_cmd(my_env, &p, i, *cmd);
 		close(p.fd[i][0]);
 		close(p.fd[i][1]);
@@ -64,11 +63,12 @@ void	f_close(t_pipe p, int k)
 {
 	int	i;
 
-	i = -1;
-	while (++i < k)
+	i = 0;
+	while (i < k)
 	{
 		close(p.fd[i][0]);
 		close(p.fd[i][1]);
+        i++;
 	}
 }
 
@@ -76,21 +76,26 @@ void	f_close(t_pipe p, int k)
 void	multiple_p(t_pipe p, int k, t_command *cmd, t_envp *my_env)
 {
 	int st;
+    pipe(p.fd[0]);
 	p.pid1 = fork();
-	if (p.pid1 == -1)
-		return ;
-	if (p.pid1 == 0) {
-		if (cmd->infile != -1) {
+	if (p.pid1 == -1) {
+        ft_putstr_fd("minishell: fork: Resource temporarily unavailable\n", 2);
+        return;
+    }
+	else if (p.pid1 == 0) {
+		if (cmd->infile != -1)
 			frst_cmd(my_env, p.fd[0], cmd);
-		}
 	}
 	else {
 		ex_comm(p, k, &cmd->next, my_env);
 		p.pid2 = fork();
-		if (p.pid2 == -1)
-			return ;
-		if (p.pid2 == 0)
-			last_cmd(my_env, p.fd[k - 1], cmd->next);
+		if (p.pid2 == -1) {
+            ft_putstr_fd("minishell: fork: Resource temporarily unavailable\n", 2);
+            return;
+        }
+		if (p.pid2 == 0) {
+            last_cmd(my_env, p.fd[k - 1], cmd->next);
+        }
 		else {
 			f_close(p, k);
 			waitpid(p.pid2, &st, 0);
@@ -130,7 +135,12 @@ void	child(t_pipe p, int k, t_command *cmd, t_envp *my_env)
 	else
 	{
 		p.pid1 = fork();
-		if (p.pid1 == 0) {
+
+		if (p.pid1 == -1) {
+            ft_putstr_fd("minishell: fork: Resource temporarily unavailable\n", 2);
+
+        }
+        if (p.pid1 == 0) {
 			if (!is_built(cmd->cmd[0]))
 				one_cmd(my_env, cmd);
 			else
@@ -139,7 +149,7 @@ void	child(t_pipe p, int k, t_command *cmd, t_envp *my_env)
 		else {
 			waitpid(p.pid1, &status, 0);
 			my_env->status = WEXITSTATUS(status);
-			__builtins(cmd->cmd, my_env);
+			__builtins(cmd->cmd, my_env, cmd->outfile);
 		}
 	}
 }
@@ -152,10 +162,7 @@ int	pipes(int k, t_command *cmd, t_envp *my_env)
 	i = -1;
 	p.fd = malloc(k * sizeof(int *));
 	while (++i < k)
-	{
 		p.fd[i] = malloc(2 * sizeof(int));
-		pipe(p.fd[i]);
-	}
 	if (k < 0)
 		return (0);
 //	if (ft_strncmp(av[1], "here_doc\0", 9) == 0)

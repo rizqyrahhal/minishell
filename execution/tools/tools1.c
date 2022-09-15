@@ -61,27 +61,27 @@ char**	ft_removee(char *my_env[], char *var)
 	return (s);
 }
 
-void	print_q(char *s)
+void	print_q(char *s, int out)
 {
 	int i;
 
 	i = -1;
-	printf("declare -x ");
+	ft_putstr_fd("declare -x ", out);
 	while (s[++i] && s[i] != '=')
-		printf("%c", s[i]);
-	printf("%c", s[i]);
+		write(out, &s[i], 1);
+    write(out, &s[i], 1);
 	if (sea_rch(s, '=')) {
-		printf("\"");
+		write(out, "\"", 1);
 		while (s[++i])
-			printf("%c", s[i]);
-		printf("\"\n");
+			write(out, &s[i], 1);
+		write(out, "\"\n", 2);
 	}
 	else
-		printf("\n");
+		write(out, "\n", 1);
 
 }
 
-void	export_(char **arr)
+void	export_(char **arr, int out)
 {
 	int i;
 	int c;
@@ -94,7 +94,7 @@ void	export_(char **arr)
 	while (arr_size(s) > 0)
 	{
 		c = __sort(s);
-		print_q(s[c]);
+		print_q(s[c], out);
 		s = ft_removee(s, s[c]);
 		i++;
 	}
