@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:35:14 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/10 17:10:19 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/15 17:27:22 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 // Function
 void*		ft_calloc(size_t count, size_t size);
 char**		ft_realloc(char	**s);
+char*		ft_d_realloc(char	*s);
 size_t		ft_strlen(const char* s);
 size_t		ft_d_strlen(char** s);
 int			ft_non_tokenable(int c);

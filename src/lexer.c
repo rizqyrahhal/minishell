@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/15 15:14:00 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/15 17:32:21 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_token* lexer_collect_string(t_lexer* lexer) {
 		if (lexer->c == '\''){ ///////// Single Qoute '\''
     		lexer_advance(lexer);
     		while (lexer->c != '\0' && lexer->c != '\'') {
-    	    	value = realloc(value, (len + 1) * sizeof(char)); // change par ft_realloc char*
+        		value = ft_d_realloc(value);
     	    	value[len++] = lexer->c;
     	    	lexer_advance(lexer);
     		}
@@ -63,7 +63,7 @@ t_token* lexer_collect_string(t_lexer* lexer) {
 			lexer_advance(lexer);
 			//  && lexer->c != ' '
     		while (lexer->c != '\0' && lexer->c != '"') {
-    	    	value = realloc(value, (len + 1) * sizeof(char)); // change par ft_realloc char*
+        		value = ft_d_realloc(value);
     	    	value[len++] = lexer->c;
 				value[len] = '\0';
     	    	lexer_advance(lexer);
@@ -78,7 +78,7 @@ t_token* lexer_collect_string(t_lexer* lexer) {
 		// not qouting
 		if (ft_non_tokenable(lexer->c) && lexer->c != '\'' && lexer->c != '"' && lexer->c != '\0'){
 			while(ft_non_tokenable(lexer->c) && lexer->c != '\'' && lexer->c != '"' && lexer->c != '\0'){
-        		value = realloc(value, (len + 1) * sizeof(char)); // change par ft_realloc char*
+        		value = ft_d_realloc(value);
 				value[len++] = lexer->c;
 				value[len] = '\0';
 				lexer_advance(lexer);
@@ -91,15 +91,13 @@ t_token* lexer_collect_string(t_lexer* lexer) {
                     break;
 				}
 			}
-			
 			value = get_string(lexer->my_env, value, count);
 			if (value[0] == '\0')
-				value[0] = 15;
+				value[0] = 15;	
 			len = ft_strlen(value);
 			count = len;
 		}
 	}
-
     value[len] = '\0';
 	return init_token(value, TOKEN_STRING);
 }

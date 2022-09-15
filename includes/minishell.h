@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/15 14:19:08 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/15 18:27:05 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,8 @@ typedef struct s_parser
 	char**	cmd;
 	int		infile;
 	int		outfile;
-	// int 	arg_num;
+	int 	no_assign;
 	int		splite[262144];
-	// char	*name_of_file;
 } t_parser;
 
 t_command*	parser(t_lexer* lexer, t_token* token, t_command* list);
