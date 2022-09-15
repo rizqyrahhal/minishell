@@ -6,19 +6,13 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/13 16:43:06 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/15 15:16:03 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /*des cas non working
-INV_vide: $a $s $f $g  export L=" " $L
-"ls -la" 'ls -la' work but in bash not work
-
-::: echo "" > FILE       cat -e FILE 
-::: echo " "     echo " " aaa
-
 */
 
 int	main(int argc, char** argv, char** env)

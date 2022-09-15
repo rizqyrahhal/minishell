@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/14 12:30:24 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/15 14:19:08 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ typedef struct s_envp
 	char	**env; // hna fin ghanzido ila exporta chi variable bar realooc wola ghanm7iwh ila unseta
 	int		status;
 	char	*PWD;
-	int 	arg_num;
-	int		splite[262144];
 }	t_envp;
 
 //************************************************* lexer.h
@@ -85,6 +83,7 @@ typedef struct s_lexer
 	unsigned int	i;
 	t_token*		token;
 	t_envp*			my_env;
+	int				spliter;
 } t_lexer;
 
 t_lexer*	init_lexer(char* src);
@@ -104,6 +103,8 @@ typedef struct s_parser
 	char**	cmd;
 	int		infile;
 	int		outfile;
+	// int 	arg_num;
+	int		splite[262144];
 	// char	*name_of_file;
 } t_parser;
 

@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/15 14:08:07 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/15 15:10:20 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,13 +175,14 @@ t_tac*	simple_command(t_tac* tac)
 		lexer_skip_whitespace(tac->lexer);
 		if (tac->token->type == TOKEN_STRING && tac->token->value[0] != 15)
 		{
+			tac->parser->splite[i] = 0;
 			tac->parser->cmd = ft_realloc(tac->parser->cmd);
 			tac->parser->cmd[i] = ft_strdup(tac->token->value);
+			if (tac->lexer->spliter == -1)
+				tac->parser->splite[i] = 1;
 			i++;
-			tac->lexer->my_env->splite[i] = -2;
 			tac->parser->cmd[i] = 0;
-			// if (tac->lexer->my_env->arg_num != -1)
-			// 	tac->lexer->my_env->arg_num++;
+			tac->parser->splite[i] = -2;
 		}
 		if (tac->token->type != TOKEN_EOF && tac->token->type != TOKEN_PIPE)
 			tac->token = lexer_next_token(tac->lexer);
@@ -190,13 +191,14 @@ t_tac*	simple_command(t_tac* tac)
 	}
 	if (tac->parser->infile != -1 && tac->parser->cmd[0] != NULL)
 	{
-		// for (int l = 0; tac->lexer->my_env->splite[l] != -2; l++){
-		// 	tac->list->splite[l] = tac->lexer->my_env->splite[l];
-		// 	// printf("slpeter_node %d\n", tac->list->splite[]);
-		// }
 		new = ft_lstnew(tac->parser->cmd, tac->parser->infile, tac->parser->outfile);
+		for (int l = 0; tac->parser->splite[l] != -2; l++){
+			new->splite[l] = tac->parser->splite[l];
+		}
 		ft_addfront(&tac->list, new);
+		
 	}
+	
 	return (tac);
 }
 
@@ -215,11 +217,11 @@ t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
 		// tac->lexer->my_env->arg_num = 0;
 		tac = simple_command(tac);
 		if (tac->token->type == TOKEN_PIPE){
-			// tac->lexer->my_env->arg_num = 0;
 			tac->token = lexer_next_token(tac->lexer);
 		}
-		if (tac->parser)
+		if (tac->parser){
 			free_parser(tac->parser);
+		}
 	}
 
 	return (tac->list);

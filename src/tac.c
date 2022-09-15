@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/15 14:08:15 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/15 15:14:43 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,11 @@ void	tac_compile(char* src, t_envp* my_env)
 	lexer = init_lexer(src);
 	lexer_skip_whitespace(lexer);
 	lexer->my_env = my_env;
-	// lexer->my_env->arg_num = -1;
+	lexer->spliter = 0;
 	if (check_syntax_error(src, my_env) == -1){
 		return;
 	}
-	// lexer->my_env->arg_num = 0;
-	// printf("arg_num after check error : %d\n", lexer->my_env->arg_num);
+	lexer->spliter = 0;
 	token = lexer_next_token(lexer);
 	list = (t_command*)malloc(sizeof(t_command));
 	list = NULL;
@@ -89,8 +88,8 @@ void	tac_compile(char* src, t_envp* my_env)
 
 	// printf("LOGNEM=%s\n", getenv("LOGNAME"));
 	// execution part HERE!!z
-	printf("\033[0;34m                     ---------------------\n                     | LINKED_LIST FINAL |\n                     ---------------------\n\033[0m");
-	print_node(list, my_env);
+	// printf("\033[0;34m                     ---------------------\n                     | LINKED_LIST FINAL |\n                     ---------------------\n\033[0m");
+	// print_node(list, my_env);
 	execution(list, my_env);
 	if (list)
 		free_list(list);   // ndya khss nrja3 m3a lcod wo nfrii li khas ytfriya ms 7ata ntchiki readline achman lik filha
