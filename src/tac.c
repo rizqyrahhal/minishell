@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/15 12:35:50 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/15 14:08:15 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ void	tac_compile(char* src, t_envp* my_env)
 	// function  pour check les error comme an while lope in src character par chararcter   (here or in main Function)
 	// static int	error_befor_parser(char* src);  (function roturn exite status)
 	lexer = init_lexer(src);
-	if (lexer->c == ' ' || lexer->c == '\t')
-		lexer_skip_whitespace(lexer);
+	lexer_skip_whitespace(lexer);
 	lexer->my_env = my_env;
 	// lexer->my_env->arg_num = -1;
 	if (check_syntax_error(src, my_env) == -1){

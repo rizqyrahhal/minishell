@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/15 12:35:55 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/15 14:08:07 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,9 +171,8 @@ t_tac*	simple_command(t_tac* tac)
 	tac->parser->outfile = 1;
 	while(tac->token->type != TOKEN_PIPE && tac->token->type != TOKEN_EOF)
 	{
-		if (tac->lexer->c == ' ' || tac->lexer->c == '\t')
-			lexer_skip_whitespace(tac->lexer);
 		tac = ft_rediriction(tac);
+		lexer_skip_whitespace(tac->lexer);
 		if (tac->token->type == TOKEN_STRING && tac->token->value[0] != 15)
 		{
 			tac->parser->cmd = ft_realloc(tac->parser->cmd);
@@ -216,7 +215,7 @@ t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
 		// tac->lexer->my_env->arg_num = 0;
 		tac = simple_command(tac);
 		if (tac->token->type == TOKEN_PIPE){
-			tac->lexer->my_env->arg_num = 0;
+			// tac->lexer->my_env->arg_num = 0;
 			tac->token = lexer_next_token(tac->lexer);
 		}
 		if (tac->parser)

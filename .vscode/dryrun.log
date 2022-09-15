@@ -1,5 +1,51 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/rarahhal/Desktop/minishell'
-make: `minishell' is up to date.
+cc -Wall -Werror -Wextra -c src/main.c -o src/main.o
+ 
+cc -Wall -Werror -Wextra -c src/lexer.c -o src/lexer.o
+cc -Wall -Werror -Wextra -c src/token.c -o src/token.o
+cc -Wall -Werror -Wextra -c src/tac.c -o src/tac.o
+cc -Wall -Werror -Wextra -c src/syntax_error.c -o src/syntax_error.o
+cc -Wall -Werror -Wextra -c src/parser.c -o src/parser.o
+cc -Wall -Werror -Wextra -c src/env.c -o src/env.o
+cc -Wall -Werror -Wextra -c src/expanda.c -o src/expanda.o
+cc -Wall -Werror -Wextra -c src/execution.c -o src/execution.o
+cc -Wall -Werror -Wextra -c execution/tools/tools1.c -o execution/tools/tools1.o
+cc -Wall -Werror -Wextra -c execution/tools/arr_tools.c -o execution/tools/arr_tools.o
+cc -Wall -Werror -Wextra -c execution/tools/arr_tools2.c -o execution/tools/arr_tools2.o
+cc -Wall -Werror -Wextra -c execution/execute.c -o execution/execute.o
+cc -Wall -Werror -Wextra -c execution/ex_tools.c -o execution/ex_tools.o
+cc -Wall -Werror -Wextra -c execution/ex_tools2.c -o execution/ex_tools2.o
+cc -Wall -Werror -Wextra -c execution/builtins/cd.c -o execution/builtins/cd.o
+cc -Wall -Werror -Wextra -c execution/builtins/echo.c -o execution/builtins/echo.o
+cc -Wall -Werror -Wextra -c execution/builtins/env.c -o execution/builtins/env.o
+cc -Wall -Werror -Wextra -c execution/builtins/exit.c -o execution/builtins/exit.o
+cc -Wall -Werror -Wextra -c execution/builtins/export.c -o execution/builtins/export.o
+cc -Wall -Werror -Wextra -c execution/builtins/pwd.c -o execution/builtins/pwd.o
+cc -Wall -Werror -Wextra -c execution/builtins/unset.c -o execution/builtins/unset.o
+cc -Wall -Werror -Wextra -c execution/builtins/builtins_tools.c -o execution/builtins/builtins_tools.o
+ 
+cc -Wall -Werror -Wextra -c libft/ft_calloc.c -o libft/ft_calloc.o
+cc -Wall -Werror -Wextra -c libft/ft_realloc.c -o libft/ft_realloc.o
+cc -Wall -Werror -Wextra -c libft/ft_strlen.c -o libft/ft_strlen.o
+cc -Wall -Werror -Wextra -c libft/ft_non_tokenable.c -o libft/ft_non_tokenable.o
+cc -Wall -Werror -Wextra -c libft/ft_strjoin.c -o libft/ft_strjoin.o
+ 
+cc -Wall -Werror -Wextra -c libft/ft_strdup.c -o libft/ft_strdup.o
+cc -Wall -Werror -Wextra -c libft/ft_strncmp.c -o libft/ft_strncmp.o
+cc -Wall -Werror -Wextra -c libft/linked_list.c -o libft/linked_list.o
+cc -Wall -Werror -Wextra -c libft/ft_strnstr.c -o libft/ft_strnstr.o
+cc -Wall -Werror -Wextra -c libft/ft_randstring.c -o libft/ft_randstring.o
+cc -Wall -Werror -Wextra -c execut_libft/ft_split.c -o execut_libft/ft_split.o
+cc -Wall -Werror -Wextra -c execut_libft/ft_atoi.c -o execut_libft/ft_atoi.o
+cc -Wall -Werror -Wextra -c execut_libft/ft_strcmp.c -o execut_libft/ft_strcmp.o
+cc -Wall -Werror -Wextra -c execut_libft/ft_strchr.c -o execut_libft/ft_strchr.o
+cc -Wall -Werror -Wextra -c execut_libft/ft_strlcpy.c -o execut_libft/ft_strlcpy.o
+cc -Wall -Werror -Wextra -c execut_libft/ft_isalpha.c -o execut_libft/ft_isalpha.o
+cc -Wall -Werror -Wextra -c execut_libft/ft_isdigit.c -o execut_libft/ft_isdigit.o
+cc -Wall -Werror -Wextra -c execut_libft/ft_putstr_fd.c -o execut_libft/ft_putstr_fd.o
+cc -Wall -Werror -Wextra -c execut_libft/ft_itoa.c -o execut_libft/ft_itoa.o
+cc -Wall -Werror -Wextra -c execut_libft/ft_substr.c -o execut_libft/ft_substr.o
+cc -lreadline -Wall -Werror -Wextra src/main.o src/lexer.o src/token.o src/tac.o src/syntax_error.o src/parser.o src/env.o src/expanda.o src/execution.o execution/tools/tools1.o execution/tools/arr_tools.o execution/tools/arr_tools2.o execution/execute.o execution/ex_tools.o execution/ex_tools2.o execution/builtins/cd.o execution/builtins/echo.o execution/builtins/env.o execution/builtins/exit.o execution/builtins/export.o execution/builtins/pwd.o execution/builtins/unset.o execution/builtins/builtins_tools.o libft/ft_calloc.o libft/ft_realloc.o libft/ft_strlen.o libft/ft_non_tokenable.o libft/ft_strjoin.o libft/ft_strdup.o libft/ft_strncmp.o libft/linked_list.o libft/ft_strnstr.o libft/ft_randstring.o execut_libft/ft_split.o execut_libft/ft_atoi.o execut_libft/ft_strcmp.o execut_libft/ft_strchr.o execut_libft/ft_strlcpy.o execut_libft/ft_isalpha.o execut_libft/ft_isdigit.o execut_libft/ft_putstr_fd.o execut_libft/ft_itoa.o execut_libft/ft_substr.o -o minishell
 make: Leaving directory `/Users/rarahhal/Desktop/minishell'
  
