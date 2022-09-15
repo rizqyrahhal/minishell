@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/13 18:03:48 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/14 22:15:35 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ t_token* lexer_collect_string(t_lexer* lexer) {
 	int		count;
 
 	count = 0;
+	// printf("arg_num in first one : %d\n", lexer->my_env->arg_num);
+	// if (lexer->my_env->arg_num != -1)
+	// 	lexer->my_env->splite[lexer->my_env->arg_num] = 0;
 	while (ft_non_tokenable(lexer->c) && lexer->c != '\0')
 	{
 		// single qoute
@@ -82,13 +85,18 @@ t_token* lexer_collect_string(t_lexer* lexer) {
 				value[len] = '\0';
 				lexer_advance(lexer);
 			}
-			for (int i = 0; value[i] ; i++)
-			{
-				if (value[i] == '$'){
-					lexer->my_env->splite[] = ; //////////////////////////////       cmd agr1 $arg2 arg3 $arg4
-					break;                                                        //  [   0   1      0    1  ]
-				}
-			}
+			// printf("%d\n", lexer->my_env->arg_num);
+			
+			// for (int i = 0; value[i] ; i++)
+			// {
+			// 	if (value[i] == '$' && lexer->my_env->arg_num != -1){
+			// 		lexer->my_env->splite[lexer->my_env->arg_num] = 1; //////////////////////////////       cmd agr1 $arg2 arg3 $arg4
+            //         break;                                                                                     //  [   0   1      0    1  ]
+			// 	}
+			// 	// else
+			// 	// 	lexer->my_env->splite[lexer->my_env->arg_num] = 0;
+			// }
+			// printf("spliter %d\n", lexer->my_env->splite[lexer->my_env->arg_num]);
 			value = get_string(lexer->my_env, value, count);
 			if (value[0] == '\0')
 				value[0] = 15;
@@ -97,6 +105,7 @@ t_token* lexer_collect_string(t_lexer* lexer) {
 			count = len;
 		}
 	}
+
     value[len] = '\0';
 	return init_token(value, TOKEN_STRING);
 }
@@ -188,8 +197,8 @@ t_token*	lexer_next_token(t_lexer* lexer)
 		}
 		else if (lexer->c == '|')
 			return lexer_advance_current(lexer, TOKEN_PIPE);
-		else if (lexer->c == ' ')
-			printf("---------------\n");
+		// else if (lexer->c == ' ')
+		// 	printf("---------------\n");
 		else if (lexer->c == '\0')
 			break;
 	}

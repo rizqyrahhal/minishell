@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/13 16:23:35 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/15 12:35:55 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	free_parser(t_parser* parser)
 	free(parser);
 }
 
+char*	get_string(t_envp *my_env, char *s, int count);
+
 t_tac*	ft_rediriction(t_tac* tac)
 {
 	t_token*	next_token;
@@ -38,6 +40,28 @@ t_tac*	ft_rediriction(t_tac* tac)
 	daba hna kykhass ytkriya outfile 3ad ytprinta error dyal infile, 
 	ALORS ----> makayn 7ata 7al mn ghir ndawoz lhabib ga3 les file bash ykon 3ando tartib dyalhom*/
 	// HERE_DOC ghanakhod akhir file name 9adit wo man ttabi3t l7al ghankon m7it lakhrin wo ghanzido fi l **array dyal infile
+
+
+
+	int k = tac->lexer->i;
+	char *str = NULL;
+
+	int f = 0;
+	while (tac->lexer->src[k] == ' ' && tac->lexer->src[k])
+		k++;
+	int p = k;
+	if (tac->lexer->src[k] == '$')
+	{
+		while(tac->lexer->src[p] != ' ' && tac->lexer->src[p])
+			p++;
+		str = malloc(p - k + 1);
+		while(tac->lexer->src[k] != ' ' && tac->lexer->src[k])
+			str[f++] = tac->lexer->src[k++];
+	}
+
+
+
+
 
 	if (tac->token->type == TOKEN_IN)
 	{
@@ -116,7 +140,14 @@ t_tac*	ft_rediriction(t_tac* tac)
 
 	if (tac->parser->infile == -1)
 	{
-		printf("minishell: %s: No such file or directory\n", next_token->value);
+		char* value;
+		value = get_string(tac->lexer->my_env, str, 0);
+		if (value && value[0])
+			printf("minishell: %s: No such file or directory\n", value);
+		else if (str)
+			printf("minishell: %s: ambiguous redirect\n", str);
+		else
+			printf("minishell: %s: No such file or directory\n", next_token->value);
 		tac->lexer->my_env->status = 1;
 		while (tac->token->type != TOKEN_PIPE && tac->token->type != TOKEN_EOF) // move to next command after pipe |
 		{
@@ -140,7 +171,7 @@ t_tac*	simple_command(t_tac* tac)
 	tac->parser->outfile = 1;
 	while(tac->token->type != TOKEN_PIPE && tac->token->type != TOKEN_EOF)
 	{
-		if (tac->lexer->c == ' ')
+		if (tac->lexer->c == ' ' || tac->lexer->c == '\t')
 			lexer_skip_whitespace(tac->lexer);
 		tac = ft_rediriction(tac);
 		if (tac->token->type == TOKEN_STRING && tac->token->value[0] != 15)
@@ -148,7 +179,10 @@ t_tac*	simple_command(t_tac* tac)
 			tac->parser->cmd = ft_realloc(tac->parser->cmd);
 			tac->parser->cmd[i] = ft_strdup(tac->token->value);
 			i++;
+			tac->lexer->my_env->splite[i] = -2;
 			tac->parser->cmd[i] = 0;
+			// if (tac->lexer->my_env->arg_num != -1)
+			// 	tac->lexer->my_env->arg_num++;
 		}
 		if (tac->token->type != TOKEN_EOF && tac->token->type != TOKEN_PIPE)
 			tac->token = lexer_next_token(tac->lexer);
@@ -157,6 +191,10 @@ t_tac*	simple_command(t_tac* tac)
 	}
 	if (tac->parser->infile != -1 && tac->parser->cmd[0] != NULL)
 	{
+		// for (int l = 0; tac->lexer->my_env->splite[l] != -2; l++){
+		// 	tac->list->splite[l] = tac->lexer->my_env->splite[l];
+		// 	// printf("slpeter_node %d\n", tac->list->splite[]);
+		// }
 		new = ft_lstnew(tac->parser->cmd, tac->parser->infile, tac->parser->outfile);
 		ft_addfront(&tac->list, new);
 	}
@@ -175,9 +213,12 @@ t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
 	{
 		// printf("DEMARE::::::::::::::::::::::::::::\n");
 		// printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(tac->token));
+		// tac->lexer->my_env->arg_num = 0;
 		tac = simple_command(tac);
-		if (tac->token->type == TOKEN_PIPE)
+		if (tac->token->type == TOKEN_PIPE){
+			tac->lexer->my_env->arg_num = 0;
 			tac->token = lexer_next_token(tac->lexer);
+		}
 		if (tac->parser)
 			free_parser(tac->parser);
 	}

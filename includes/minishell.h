@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/13 18:02:29 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/14 12:30:24 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_command_node
 	int		outfile; // > if output != 1
 	// char*	name_of_file; // last output file name
 //	int	status;
+	int		splite[262144];
 	struct s_command_node *next;
 } t_command;
 
@@ -69,9 +70,9 @@ typedef struct s_envp
 {
 	char	**env; // hna fin ghanzido ila exporta chi variable bar realooc wola ghanm7iwh ila unseta
 	int		status;
-	int		num_argement;
-	int		splite[262144];
 	char	*PWD;
+	int 	arg_num;
+	int		splite[262144];
 }	t_envp;
 
 //************************************************* lexer.h
@@ -103,7 +104,7 @@ typedef struct s_parser
 	char**	cmd;
 	int		infile;
 	int		outfile;
-	char	*name_of_file;
+	// char	*name_of_file;
 } t_parser;
 
 t_command*	parser(t_lexer* lexer, t_token* token, t_command* list);
@@ -119,7 +120,7 @@ typedef struct s_tac
 
 
 void	tac_compile(char* src, t_envp* my_env);
-void	print_node(t_command *lst);
+void	print_node(t_command *lst, t_envp* my_env);
 
 // function of linked list
 t_command*	ft_lstnew(char** s, int infile, int outfile);
