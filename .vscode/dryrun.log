@@ -1,6 +1,7 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/rarahhal/Desktop/minishell'
 cc -Wall -Werror -Wextra -c src/main.c -o src/main.o
+ 
 cc -Wall -Werror -Wextra -c src/lexer.c -o src/lexer.o
 cc -Wall -Werror -Wextra -c src/token.c -o src/token.o
 cc -Wall -Werror -Wextra -c src/tac.c -o src/tac.o
@@ -23,8 +24,8 @@ cc -Wall -Werror -Wextra -c execution/builtins/export.c -o execution/builtins/ex
 cc -Wall -Werror -Wextra -c execution/builtins/pwd.c -o execution/builtins/pwd.o
 cc -Wall -Werror -Wextra -c execution/builtins/unset.c -o execution/builtins/unset.o
 cc -Wall -Werror -Wextra -c execution/builtins/builtins_tools.c -o execution/builtins/builtins_tools.o
-cc -Wall -Werror -Wextra -c libft/ft_calloc.c -o libft/ft_calloc.o
  
+cc -Wall -Werror -Wextra -c libft/ft_calloc.c -o libft/ft_calloc.o
 cc -Wall -Werror -Wextra -c libft/ft_realloc.c -o libft/ft_realloc.o
 cc -Wall -Werror -Wextra -c libft/ft_strlen.c -o libft/ft_strlen.o
 cc -Wall -Werror -Wextra -c libft/ft_non_tokenable.c -o libft/ft_non_tokenable.o

@@ -157,6 +157,12 @@ char*	get_string(t_envp *my_env, char *s, int count)
 {
 	t_exp *exp;
 
+	// for (int i = 0; my_env->env[i]; i++){
+	// 	printf("%s\n", my_env->env[i]);
+	// }
+	// printf("| _----------------------_ |\n");
+	if (!s)
+		return (NULL);
 	exp = malloc((ft_d_strlen(my_env->env) + 1) * sizeof (t_exp));
 	ft_getVar(my_env->env, &exp);
 	return (ft_exp(s, exp, my_env, count));
