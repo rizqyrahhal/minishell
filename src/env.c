@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 17:33:47 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/06 15:30:21 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/15 17:18:10 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ char    *ft_cpy(char *s, int k)
 	int     i;
 	i = 0;
 	var = malloc(k + 1);
-	var[k] = 0;
 	while (i < k)
 	{
 		var[i] = s[i];
 		i++;
 	}
+	var[i] = 0;
 	return (var);
 }
 
