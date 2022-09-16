@@ -90,7 +90,8 @@ void	tac_compile(char* src, t_envp* my_env)
 	// execution part HERE!!z
 	// printf("\033[0;34m                     ---------------------\n                     | LINKED_LIST FINAL |\n                     ---------------------\n\033[0m");
 	// print_node(list, my_env);
-	execution(list, my_env);
+	if (list)
+		execution(list, my_env);
 	if (list)
 		free_list(list);   // ndya khss nrja3 m3a lcod wo nfrii li khas ytfriya ms 7ata ntchiki readline achman lik filha
 }

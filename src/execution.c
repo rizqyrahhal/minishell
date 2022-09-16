@@ -102,7 +102,6 @@ char**	fix_cmd(char** s, int *i)
 		z++;
     }
 	*i = j;
-    k = 1;
     while (s[k])
     {
 		str[j] = ft_strdup(s[k]);
@@ -121,6 +120,8 @@ char**	fix_cmd(char** s, int *i)
 
 	i = 0;
 	tmp = *list;
+	if (ft_strncmp((*list)->cmd[0], "export", 6) == 0 && ft_strlen((*list)->cmd[0]) == 6)
+		 return ;
 	while (tmp)
 	{
 		i = 0;
