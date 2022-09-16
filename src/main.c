@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/15 19:49:57 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/16 13:25:17 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 /*des cas non working
 cd Makefile
+ls $USER | $HOME ls
 */
 
 int	main(int argc, char** argv, char** env)

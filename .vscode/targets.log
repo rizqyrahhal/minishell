@@ -8,11 +8,10 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Thu Sep 15 19:28:41 2022
+# Make data base, printed on Fri Sep 16 13:09:34 2022
 
 # Variables
 
- 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
@@ -23,6 +22,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 @D = $(patsubst %/,%,$(dir $@))
 # automatic
 @F = $(notdir $@)
+ 
 # makefile
 CURDIR := /Users/rarahhal/Desktop/minishell
 # makefile
@@ -40,7 +40,7 @@ OBJS = $(SRCS:.c=.o)
 # environment
 VSCODE_CWD = /
 # environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.QuUx3c8X99/Render
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.KugreKwhFK/Render
 # environment
 PATH = /Users/rarahhal/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Applications/Visual Studio Code.app/Contents/Resources/app/bin
 # environment
@@ -50,7 +50,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.ZRo3CxEu0B/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.r4YbNrIjev/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -160,7 +160,7 @@ OBJS_L = $(LIBFT:.c=.o)
 # environment
 LANG = C
 # environment
-VSCODE_PID = 1519
+VSCODE_PID = 4275
 # variable set hash-table stats:
 # Load=74/1024=7%, Rehash=0, Collisions=5/110=5%
 
@@ -170,10 +170,10 @@ VSCODE_PID = 1519
 
 # Directories
 
-# . (device 16777227, inode 1363652): 16 files, no impossibilities.
+# . (device 16777227, inode 1363652): 15 files, no impossibilities.
 # src (device 16777227, inode 1363935): 7 files, no impossibilities so far.
 
-# 23 files, no impossibilities in 2 directories.
+# 22 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
@@ -199,7 +199,6 @@ execution/builtins/cd.o:
 #  File has not been updated.
 
 # Not a target:
- 
 execution/tools/arr_tools2.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -320,6 +319,7 @@ libft/ft_strjoin.o:
 # Not a target:
 execut_libft/ft_isalpha.o:
 #  Implicit rule search has not been done.
+ 
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -382,7 +382,7 @@ fclean: clean
 # Not a target:
 src/main.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-15 15:16:03
+#  Last modified 2022-09-15 19:49:57
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -493,7 +493,6 @@ src/syntax_error.o:
 #  File has not been updated.
 
 # Not a target:
- 
 libft/ft_realloc.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -566,6 +565,6 @@ execut_libft/ft_split.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu Sep 15 19:28:41 2022
+# Finished Make data base on Fri Sep 16 13:09:34 2022
 
  

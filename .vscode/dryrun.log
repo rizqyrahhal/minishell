@@ -5,17 +5,16 @@ cc -Wall -Werror -Wextra -c src/lexer.c -o src/lexer.o
 cc -Wall -Werror -Wextra -c src/token.c -o src/token.o
 cc -Wall -Werror -Wextra -c src/tac.c -o src/tac.o
 cc -Wall -Werror -Wextra -c src/syntax_error.c -o src/syntax_error.o
- 
 cc -Wall -Werror -Wextra -c src/parser.c -o src/parser.o
 cc -Wall -Werror -Wextra -c src/env.c -o src/env.o
 cc -Wall -Werror -Wextra -c src/expanda.c -o src/expanda.o
 cc -Wall -Werror -Wextra -c src/execution.c -o src/execution.o
 cc -Wall -Werror -Wextra -c execution/tools/tools1.c -o execution/tools/tools1.o
 cc -Wall -Werror -Wextra -c execution/tools/arr_tools.c -o execution/tools/arr_tools.o
- 
 cc -Wall -Werror -Wextra -c execution/tools/arr_tools2.c -o execution/tools/arr_tools2.o
 cc -Wall -Werror -Wextra -c execution/execute.c -o execution/execute.o
 cc -Wall -Werror -Wextra -c execution/ex_tools.c -o execution/ex_tools.o
+ 
 cc -Wall -Werror -Wextra -c execution/ex_tools2.c -o execution/ex_tools2.o
 cc -Wall -Werror -Wextra -c execution/builtins/cd.c -o execution/builtins/cd.o
 cc -Wall -Werror -Wextra -c execution/builtins/echo.c -o execution/builtins/echo.o
@@ -31,6 +30,7 @@ cc -Wall -Werror -Wextra -c libft/ft_strlen.c -o libft/ft_strlen.o
 cc -Wall -Werror -Wextra -c libft/ft_non_tokenable.c -o libft/ft_non_tokenable.o
 cc -Wall -Werror -Wextra -c libft/ft_strjoin.c -o libft/ft_strjoin.o
 cc -Wall -Werror -Wextra -c libft/ft_strdup.c -o libft/ft_strdup.o
+ 
 cc -Wall -Werror -Wextra -c libft/ft_strncmp.c -o libft/ft_strncmp.o
 cc -Wall -Werror -Wextra -c libft/linked_list.c -o libft/linked_list.o
 cc -Wall -Werror -Wextra -c libft/ft_strnstr.c -o libft/ft_strnstr.o

@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/15 19:45:27 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/16 13:46:21 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,16 @@ t_tac*	ft_rediriction(t_tac* tac)
 		}
 		char* value;
 		value = get_string(tac->lexer->my_env, str, 0);
-		if (value && value[0])
+		if (value && value[0]){
 			tac->parser->outfile = open(value,  O_CREAT | O_RDWR | O_TRUNC , 0644);
+			lexer_next_token(tac->lexer);
+			if (tac->parser->outfile == -1)
+			{
+				perror(ft_strjoin("minishell: ", value));
+				tac->lexer->my_env->status = 1;
+				tac->parser->no_assign = -404;
+			}
+		}
 		else if (str){
 			printf("minishell: %s: ambiguous redirect\n", str);
 			tac->lexer->my_env->status = 1;
@@ -91,7 +99,7 @@ t_tac*	ft_rediriction(t_tac* tac)
 		}
 		else if ((next_token = lexer_next_token(tac->lexer))->type == TOKEN_STRING)
 			tac->parser->outfile = open(next_token->value,  O_CREAT | O_RDWR | O_TRUNC , 0644);
-		if (tac->parser->outfile == -1 && tac->parser->no_assign != -1)
+		if (tac->parser->outfile == -1 && tac->parser->no_assign > 0)
 		{
 			perror(ft_strjoin("minishell: ", next_token->value));
 			// printf("minishell: %s: No such file or directory\n", next_token->value);
@@ -102,13 +110,22 @@ t_tac*	ft_rediriction(t_tac* tac)
 
 	if (tac->token->type == TOKEN_APPAND)
 	{
+		tac->parser->no_assign = 0;
 		if(tac->parser->outfile != 1){
 			close(tac->parser->outfile);
 		}
 				char* value;
 		value = get_string(tac->lexer->my_env, str, 0);
-		if (value && value[0])
+		if (value && value[0]){
 			tac->parser->outfile = open(value,  O_CREAT | O_RDWR | O_APPEND , 0644);
+			lexer_next_token(tac->lexer);
+			if (tac->parser->outfile == -1)
+			{
+				perror(ft_strjoin("minishell: ", value));
+				tac->lexer->my_env->status = 1;
+				tac->parser->no_assign = -404;
+			}
+		}
 		else if (str){
 			printf("minishell: %s: ambiguous redirect\n", str);
 			tac->lexer->my_env->status = 1;
@@ -117,7 +134,7 @@ t_tac*	ft_rediriction(t_tac* tac)
 		}
 		else if ((next_token = lexer_next_token(tac->lexer))->type == TOKEN_STRING)
 			tac->parser->outfile = open(next_token->value,  O_CREAT | O_RDWR | O_APPEND , 0644);
-		if (tac->parser->outfile == -1 && tac->parser->no_assign != -1)
+		if (tac->parser->outfile == -1 && tac->parser->no_assign > -1)
 		{
 			// printf("minishell: %s: ", next_token->value);
 			perror(ft_strjoin("minishell: ", next_token->value));
@@ -230,7 +247,7 @@ t_tac*	simple_command(t_tac* tac)
 		// printf("A la fin de first while in simpele_command\n");
 		// printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(tac->token));
 	}
-	if (tac->parser->infile != -1 && tac->parser->cmd[0] != NULL && tac->parser->no_assign != -1)
+	if (tac->parser->infile != -1 && tac->parser->cmd[0] != NULL && tac->parser->no_assign > -1)
 	{
 		new = ft_lstnew(tac->parser->cmd, tac->parser->infile, tac->parser->outfile);
 		for (int l = 0; tac->parser->splite[l] != -2; l++){
