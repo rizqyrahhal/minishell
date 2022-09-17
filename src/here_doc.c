@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/17 17:44:54 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/17 20:07:24 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char*	here_doc(char* src)
 
 	i = 0;
 	j = 0;
-	del_to_name = NULL;
+	// del_to_name = NULL;
 	str = malloc(1);
 	here_doc = NULL;
 	while(src && src[i])
@@ -37,30 +37,38 @@ char*	here_doc(char* src)
 		if (src[i] == '<' && src[i + 1] == '<')
 		{
 			str = ft_d_realloc(str);
-			str[j++] = src[i++];
 			str = ft_d_realloc(str);
 			str[j++] = src[i++];
+			str[j++] = src[i++];
+			str[j] = '\0';
 			while ((src[i] == ' ' || src[i] == '\t') && src[i]){
 				str = ft_d_realloc(str);
-				str[j++] = src[i++];	
+				str[j++] = src[i++];
+				str[j] = '\0';	
 			}
 			
+
+
 			del_to_name = ft_randstring(8);
 			fd = open(del_to_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
+
+
 
 			while (del_to_name && del_to_name[k])
 			{
 				str = ft_d_realloc(str);
 				str[j++] = del_to_name[k++];
-				if ((src[i] != ' ' && src[i] != '\t' && src[i] != '>' && src[i] != '<' && src[i] != '|') && src[i])//// adding non_tokenabel apres
-				{
-					delemeter = ft_d_realloc(delemeter);
-					delemeter[l++] = src[i++];
-					delemeter[l] = '\0';
-				}
+				str[j] = '\0';
 			}
+			while ((src[i] != ' ' && src[i] != '\t' && src[i] != '>' && src[i] != '<' && src[i] != '|') && src[i])//// adding non_tokenabel apres
+			{
+				delemeter = ft_d_realloc(delemeter);
+				delemeter[l++] = src[i++];
+				delemeter[l] = '\0';
+			}
+			
 
-
+			
 			while (1)
 			{
 				here_doc = readline("> ");
@@ -80,11 +88,13 @@ char*	here_doc(char* src)
 			close(fd);
 
 
+			
 		}
 		else
 		{
 			str = ft_d_realloc(str);
 			str[j++] = src[i++];
+			str[j] = '\0';
 		}
 		free(delemeter);
 	}
