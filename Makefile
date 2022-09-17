@@ -6,7 +6,7 @@
 #    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 17:12:13 by rarahhal          #+#    #+#              #
-#    Updated: 2022/09/16 17:30:16 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/09/17 16:16:24 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ OBJS_L = $(LIBFT:.c=.o)
 OBJS_EL = $(EXECUT_LIBFT:.c=.o)
 
 $(NAME):  $(OBJS) $(OBJS_L) $(OBJS_EL)
-	$(CC) -lreadline -L $(READLINE)/lib -I $(READLINE)/include $(FLAGS) $(OBJS) $(OBJS_L) $(OBJS_EL) -o $(NAME)
+	$(CC) -lreadline $(FLAGS) $(OBJS) $(OBJS_L) $(OBJS_EL) -o $(NAME)
 #$(NAME):  $(SRCS) $(LIBFT) $(EXECUT_LIBFT)
 #	$(CC) -lreadline -L $(READLINE)/lib -I $(READLINE)/include $(FLAGS) $(SRCS) $(LIBFT) $(EXECUT_LIBFT) -o $(NAME)
 

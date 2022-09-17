@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/17 14:45:31 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/17 17:02:13 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,10 @@ void	tac_compile(char* src, t_envp* my_env)
 	}
 
 	
-	// src = here_doc(src);
-	// printf("---> %s\n-+--+-> %zu\n", src, ft_strlen(src));
-	// return;
+	src = here_doc(src);
+	printf("---> %s\n-+--+-> %zu\n", src, ft_strlen(src));
+	return;
+
 	
 	lexer = init_lexer(src);
 	lexer_skip_whitespace(lexer);
