@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/16 13:48:19 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/17 14:45:31 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ void	free_list(t_command* list)
 	free(list);
 }
 
-int	check_syntax_error(char *src, t_envp* my_env); /// ajoute ou part tac.h
+int		check_syntax_error(char *src, t_envp* my_env); /// ajoute ou part tac.h
+char*	here_doc(char* src);   /// ajoute ou part tac.h
 
 void	tac_compile(char* src, t_envp* my_env)
 {
@@ -62,14 +63,20 @@ void	tac_compile(char* src, t_envp* my_env)
 
 	// function  pour check les error comme an while lope in src character par chararcter   (here or in main Function)
 	// static int	error_befor_parser(char* src);  (function roturn exite status)
+	if (check_syntax_error(src, my_env) == -1){
+		// printf("%d,   %c\n", lexer->i, lexer->c);
+    	/* herdoc hna ghanraj3 l lexer->i  wo ila kan kykhalf size dyal src rah error tama nfta7 les heredoc hta l3ando*/
+		return;
+	}
+
+	
+	// src = here_doc(src);
+	// printf("---> %s\n-+--+-> %zu\n", src, ft_strlen(src));
+	// return;
+	
 	lexer = init_lexer(src);
 	lexer_skip_whitespace(lexer);
 	lexer->my_env = my_env;
-	// lexer->spliter = 0;
-	if (check_syntax_error(src, my_env) == -1){
-		return;
-	}
-	// lexer->spliter = 0;
 	token = lexer_next_token(lexer);
 	list = (t_command*)malloc(sizeof(t_command));
 	list = NULL;

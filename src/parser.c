@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/16 13:46:21 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/16 13:58:41 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ t_tac*	ft_rediriction(t_tac* tac)
 		if (tac->parser->outfile == -1 && tac->parser->no_assign > 0)
 		{
 			perror(ft_strjoin("minishell: ", next_token->value));
-			// printf("minishell: %s: No such file or directory\n", next_token->value);
 			tac->lexer->my_env->status = 1;
 			tac->parser->no_assign = -1;
 		}
@@ -136,9 +135,7 @@ t_tac*	ft_rediriction(t_tac* tac)
 			tac->parser->outfile = open(next_token->value,  O_CREAT | O_RDWR | O_APPEND , 0644);
 		if (tac->parser->outfile == -1 && tac->parser->no_assign > -1)
 		{
-			// printf("minishell: %s: ", next_token->value);
 			perror(ft_strjoin("minishell: ", next_token->value));
-			// printf("\n");
 			tac->lexer->my_env->status = 1;
 			tac->parser->no_assign = -1;
 		}

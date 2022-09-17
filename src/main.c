@@ -6,16 +6,36 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/16 13:25:17 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/16 18:06:25 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /*des cas non working
-cd Makefile
-ls $USER | $HOME ls
+))) cd Makefile
+))) ls $USER | $HOME ls
+))) export a="-l      		->   -a"   and exucute ca (ls $a)
 */
+
+
+// void signal_ctrl_c(int sig)
+// {
+// 	rl_on_new_line();
+// 	rl_replace_line("", 0);
+// 	rl_redisplay();
+// }
+
+// void handle_signals(int sig)
+// {
+// 	if (sig == SIGINT)
+// 		signal(SIGINT, signal_ctrl_c);
+// 	else if (sig == SIGQUIT)
+// 		signal(SIGQUIT, SIG_IGN);
+// 	// else if (sig == SIGHEREDOC)
+// 	// 	signal(SIGINT, signal_ctrl_c_heredoc);
+// }
+
 
 int	main(int argc, char** argv, char** env)
 {

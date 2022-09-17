@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:59:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/13 17:02:44 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/16 17:17:59 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,8 +166,6 @@ int	check_syntax_error(char *src, t_envp* my_env)
 	next_lexer->my_env = my_env;
 	token = lexer_next_token(lexer);
 
-	if (unclosed_quotes(src, my_env) == -1)
-		return(-1);
 
 	if (token->type == TOKEN_PIPE)
 	{
@@ -202,11 +200,13 @@ int	check_syntax_error(char *src, t_envp* my_env)
 					next_token->type == TOKEN_APPAND  || next_token->type == TOKEN_PIPE))
 		{
 			printf("minishell: syntax error near unexpected token `%s'\n", next_token->value);
-			my_env->status = 258;	
+			my_env->status = 258;
 			return (-1);
 		}
 		token = lexer_next_token(lexer);
 	}
+	if (unclosed_quotes(src, my_env) == -1)
+		return(-1);
 	// printf("FINISH\n");
 	return (0);
 }
