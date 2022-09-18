@@ -28,6 +28,7 @@ char*	here_doc(char* src)
 	j = 0;
 	// del_to_name = NULL;
 	str = malloc(1);
+	str[0] = 0;
 	here_doc = NULL;
 	while(src && src[i])
 	{
@@ -66,9 +67,6 @@ char*	here_doc(char* src)
 				delemeter[l++] = src[i++];
 				delemeter[l] = '\0';
 			}
-			
-
-			
 			while (1)
 			{
 				here_doc = readline("> ");
