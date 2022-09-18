@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/17 16:48:18 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/18 17:06:16 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	main(int argc, char** argv, char** env)
 		{
 
 			buf = readline("\033[0;33mminishell > \033[0m");
+			if (!buf)
+				exit (1);
 			add_history(buf);
 			// ft_check_error(buf);
 

@@ -6,13 +6,13 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/17 20:07:24 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/18 17:31:42 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char*	here_doc(char* src)
+char*	here_doc(char* src, int stop)
 {
 	int 	i;
 	char*	str;
@@ -60,16 +60,14 @@ char*	here_doc(char* src)
 				str[j++] = del_to_name[k++];
 				str[j] = '\0';
 			}
-			while ((src[i] != ' ' && src[i] != '\t' && src[i] != '>' && src[i] != '<' && src[i] != '|') && src[i])//// adding non_tokenabel apres
-			{
+			while ((src[i] != ' ' && src[i] != '\t' && src[i] != '>' && src[i] != '<' && src[i] != '|') && src[i] && i < stop)//// adding non_tokenabel apres
+			{//// ghankhadame lexer ghi bach njib delemeter awla n7awol lojik dyal single qoute wo double qoute hna
 				delemeter = ft_d_realloc(delemeter);
 				delemeter[l++] = src[i++];
 				delemeter[l] = '\0';
 			}
 			
-
-			
-			while (1)
+			while (delemeter[0])
 			{
 				here_doc = readline("> ");
 				if (!here_doc || !ft_strncmp(delemeter, here_doc, ft_strlen(delemeter) + 1))

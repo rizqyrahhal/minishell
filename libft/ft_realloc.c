@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:29:41 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/15 17:28:58 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/18 18:28:57 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char*	ft_d_realloc(char	*s)
 	i = 0;
 	k = ft_strlen(s);
 	str = malloc((k + 2) * sizeof(char));
-	while (s[i])
+	while (i < k)
 	{
 		str[i] = s[i];
 		i++;

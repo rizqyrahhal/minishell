@@ -41,14 +41,14 @@ int	ft_isvalid(int c)
 	return (0);
 }
 
-char* ft_replace(char* s, char* old, char* new)
+char* ft_replace(char* s, char* old, char* new, int *k)
 {
 	char*	result;
 	int 	i;
 	int 	j;
 	int		idx;
 
-	i = 0;
+	i = *k - 1;
 	while (s[i] != '\0')
 	{
 		if (ft_strnstr(&s[i], old, ft_strlen(&s[i])) == &s[i])
@@ -109,11 +109,11 @@ char*	exp_and(t_exp *exp, char **env, char *s, int *j)
 		str = ft_cpy(&s[i - k], k);
 		k = ft_getidx(exp, str, env);
 		if (k > -1) {
-			s = ft_replace(s, str, exp[k].value);
+			s = ft_replace(s, str, exp[k].value, j);
 			i += ft_strlen(exp[k].value) - ft_strlen(str);
 		}
 		else {
-			s = ft_replace(s, str, "\0");
+			s = ft_replace(s, str, "\0", j);
 			i -= ft_strlen(str);
 		}
 		(*j) = i;
@@ -141,7 +141,7 @@ char *ft_exp(char *s, t_exp *exp, t_envp *my_env, int count)
 			{
 				str = ft_cpy(&s[i - 1], 2);
 				// printf("----> str %s\n", str);
-				s = ft_replace(s, str, ft_itoa(my_env->status));
+				s = ft_replace(s, str, ft_itoa(my_env->status), &i);
 				// i++;
 			}
 			else

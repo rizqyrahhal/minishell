@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:59:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/17 21:20:08 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/18 14:27:06 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ int	unclosed_quotes(char* src, t_envp* my_env)
 	return (0);
 }
 
-int	check_syntax_error(char *src, t_envp* my_env)
+int	check_syntax_error(char *src, t_envp* my_env, int *i)
 {
 	t_lexer*	lexer;
 	t_lexer*	next_lexer;
@@ -171,6 +171,7 @@ int	check_syntax_error(char *src, t_envp* my_env)
 	{
 		printf("minishell: syntax error near unexpected token `|'\n");
 		my_env->status = 258;
+		*i = next_lexer->i;
 		return (-1);
 	}
 	next_token = lexer_next_token(next_lexer);
@@ -186,6 +187,7 @@ int	check_syntax_error(char *src, t_envp* my_env)
 		{
 			printf("minishell: syntax error near unexpected token `|'\n");
 			my_env->status = 258;
+			*i = next_lexer->i;
 			return (-1);
 		}
 		if ((token->type == TOKEN_HERDOC || token->type == TOKEN_IN || token->type == TOKEN_OU || token->type == TOKEN_APPAND || token->type == TOKEN_PIPE) &&
@@ -193,6 +195,7 @@ int	check_syntax_error(char *src, t_envp* my_env)
 		{
 			printf("minishell: syntax error near unexpected token `newline'\n");
 			my_env->status = 258;
+			*i = next_lexer->i;
 			return (-1);
 		}
 		if ((token->type == TOKEN_HERDOC || token->type == TOKEN_IN || token->type == TOKEN_OU || token->type == TOKEN_APPAND) &&
@@ -231,7 +234,7 @@ int	check_syntax_error(char *src, t_envp* my_env)
 			// 	else
 			// 		i++;
 			// }  ///// here pour open here_doc after sentax_error
-			
+			*i = next_lexer->i;
 			return (-1);
 		}
 		token = lexer_next_token(lexer);

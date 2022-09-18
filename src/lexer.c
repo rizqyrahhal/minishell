@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/15 17:32:21 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/18 19:30:40 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ t_token* lexer_collect_string(t_lexer* lexer) {
     		}
 			if (lexer->c == '\'')
     	    	lexer_advance(lexer);
+			len = ft_strlen(value);
+			count = len;
 		}
 		
 		// double qoute
@@ -77,11 +79,17 @@ t_token* lexer_collect_string(t_lexer* lexer) {
 
 		// not qouting
 		if (ft_non_tokenable(lexer->c) && lexer->c != '\'' && lexer->c != '"' && lexer->c != '\0'){
-			while(ft_non_tokenable(lexer->c) && lexer->c != '\'' && lexer->c != '"' && lexer->c != '\0'){
-        		value = ft_d_realloc(value);
-				value[len++] = lexer->c;
-				value[len] = '\0';
-				lexer_advance(lexer);
+			while(ft_non_tokenable(lexer->c) && lexer->c != '\'' && lexer->c != '"' && lexer->c != '\0')
+			{
+				if (lexer->c == '$' && (lexer->src[lexer->i + 1] == '"' || lexer->src[lexer->i + 1] == '\''))
+					lexer_advance(lexer);
+				else
+        		{
+					value = ft_d_realloc(value);
+					value[len++] = lexer->c;
+					value[len] = '\0';
+					lexer_advance(lexer);
+				}			
 			}
 			
 			for (int i = 0; value[i] ; i++)
@@ -92,8 +100,10 @@ t_token* lexer_collect_string(t_lexer* lexer) {
 				}
 			}
 			value = get_string(lexer->my_env, value, count);
-			if (value[0] == '\0')
-				value[0] = 15;	
+			if (lexer->c != '\'' && lexer->c != '"'){	
+				if (value[0] == '\0')
+					value[0] = 15;
+			}
 			len = ft_strlen(value);
 			count = len;
 		}
