@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/16 13:46:21 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/17 21:06:25 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char*	get_string(t_envp *my_env, char *s, int count);
 t_tac*	ft_rediriction(t_tac* tac)
 {
 	t_token*	next_token;
-	char		*here_doc;
+	// char		*here_doc;
 
 	/* EXAMPLE GHAYKHASSAR LBLAN:   (ls << l > outtttt | cat << y > oufffff < infffff),
 	daba hna kykhass ytkriya outfile 3ad ytprinta error dyal infile, 
@@ -63,7 +63,7 @@ t_tac*	ft_rediriction(t_tac* tac)
 
 
 
-	if (tac->token->type == TOKEN_IN)
+	if (tac->token->type == TOKEN_IN || tac->token->type == TOKEN_HERDOC)
 	{
 		if(tac->parser->infile != 0){
 			close(tac->parser->infile);
@@ -102,7 +102,6 @@ t_tac*	ft_rediriction(t_tac* tac)
 		if (tac->parser->outfile == -1 && tac->parser->no_assign > 0)
 		{
 			perror(ft_strjoin("minishell: ", next_token->value));
-			// printf("minishell: %s: No such file or directory\n", next_token->value);
 			tac->lexer->my_env->status = 1;
 			tac->parser->no_assign = -1;
 		}
@@ -136,9 +135,7 @@ t_tac*	ft_rediriction(t_tac* tac)
 			tac->parser->outfile = open(next_token->value,  O_CREAT | O_RDWR | O_APPEND , 0644);
 		if (tac->parser->outfile == -1 && tac->parser->no_assign > -1)
 		{
-			// printf("minishell: %s: ", next_token->value);
 			perror(ft_strjoin("minishell: ", next_token->value));
-			// printf("\n");
 			tac->lexer->my_env->status = 1;
 			tac->parser->no_assign = -1;
 		}
@@ -163,32 +160,32 @@ t_tac*	ft_rediriction(t_tac* tac)
 	*/
 
 
-	if (tac->token->type == TOKEN_HERDOC)
-	{
-		if (tac->parser->infile != 0)
-			close(tac->parser->infile);
-		char*	tmpstr = ft_randstring(8);
-		tac->parser->infile = open(tmpstr, O_CREAT | O_RDWR | O_TRUNC, 0644);
-		// if (tac->parser->infile < 0)
-			// return_error("ERR_HEREDOC");
-		next_token = lexer_next_token(tac->lexer);
-		while (1)
-		{
-			here_doc = readline("> ");
-			if (!here_doc || !ft_strncmp(next_token->value, here_doc, ft_strlen(next_token->value) + 1))
-				break ;
-			write(tac->parser->infile, here_doc, ft_strlen(here_doc));
-			write(tac->parser->infile, "\n", 1);
-			free(here_doc);
-		}
-		free(here_doc);
-		tac->parser->infile = open(tmpstr , O_RDONLY, 0600);
-		if (tac->parser->infile < 0)
-		{
-			unlink(tmpstr);
-			printf("ERR_heredoc_infile\n");
-		}
-	}
+	// if (tac->token->type == TOKEN_HERDOC)
+	// {
+	// 	if (tac->parser->infile != 0)
+	// 		close(tac->parser->infile);
+	// 	char*	tmpstr = ft_randstring(8);
+	// 	tac->parser->infile = open(tmpstr, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	// 	// if (tac->parser->infile < 0)
+	// 		// return_error("ERR_HEREDOC");
+	// 	next_token = lexer_next_token(tac->lexer);
+	// 	while (1)
+	// 	{
+	// 		here_doc = readline("> ");
+	// 		if (!here_doc || !ft_strncmp(next_token->value, here_doc, ft_strlen(next_token->value) + 1))
+	// 			break ;
+	// 		write(tac->parser->infile, here_doc, ft_strlen(here_doc));
+	// 		write(tac->parser->infile, "\n", 1);
+	// 		free(here_doc);
+	// 	}
+	// 	free(here_doc);
+	// 	tac->parser->infile = open(tmpstr , O_RDONLY, 0600);
+	// 	if (tac->parser->infile < 0)
+	// 	{
+	// 		unlink(tmpstr);
+	// 		printf("ERR_heredoc_infile\n");
+	// 	}
+	// }
 
 	if (tac->parser->infile == -1)
 	{

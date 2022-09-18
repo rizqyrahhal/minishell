@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:42:37 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/15 12:47:03 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/16 18:18:34 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,26 @@ void free_arr(char **s)
 	}
 //    free(s[i]);
 }
-//void signal_ctrl_c(int sig)
-//{
-//	rl_on_new_line();
-//	rl_replace_line("", 0);
-//}
-//
-//void signal_ctrl_c_heredoc(int sig)
-//{
-//}
-//
-//void handle_signals(int sig)
-//{
-//	if (sig == SIGINT)
-//		signal(SIGINT, signal_ctrl_c);
-//	else if (sig == SIGQUIT)
-//		signal(SIGQUIT, SIG_IGN);
-//	else if (sig == SIGHEREDOC)
-//		signal(SIGINT, signal_ctrl_c_heredoc);
-//}
+
+// void signal_ctrl_c(int sig)
+// {
+// 	rl_on_new_line();
+// 	rl_replace_line("", 0);
+// }
+
+// void signal_ctrl_c_heredoc(int sig)
+// {
+// }
+
+// void handle_signals(int sig)
+// {
+// 	if (sig == SIGINT)
+// 		signal(SIGINT, signal_ctrl_c);
+// 	else if (sig == SIGQUIT)
+// 		signal(SIGQUIT, SIG_IGN);
+// 	else if (sig == SIGHEREDOC)
+// 		signal(SIGINT, signal_ctrl_c_heredoc);
+// }
 
 int	struct_size(t_command *cmd)
 {

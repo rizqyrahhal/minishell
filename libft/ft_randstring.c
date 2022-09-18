@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 05:00:53 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/13 15:38:31 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/17 16:43:11 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,3 +63,24 @@ char *ft_randstring(size_t length)
 
     return randomString;
 }
+
+// char *ft_randstring(size_t length) {
+
+//     static char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.-#'?!";        
+//     char *randomString = NULL;
+
+//     if (length) {
+//         randomString = malloc(sizeof(char) * (length +1));
+
+//         if (randomString) {            
+//             for (int n = 0;n < (int)length;n++) {            
+//                 int key = rand() % (int)(sizeof(charset) -1);
+//                 randomString[n] = charset[key];
+//             }
+
+//             randomString[length] = '\0';
+//         }
+//     }
+
+//     return randomString;
+// }

@@ -6,7 +6,7 @@
 #    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 17:12:13 by rarahhal          #+#    #+#              #
-#    Updated: 2022/09/15 12:30:54 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/09/17 18:48:17 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS = 	src/main.c \
 		src/token.c \
 		src/tac.c \
 		src/syntax_error.c \
+		src/here_doc.c \
 		src/parser.c \
 		src/env.c \
 		src/expanda.c \
@@ -70,6 +71,8 @@ $(NAME):  $(OBJS) $(OBJS_L) $(OBJS_EL)
 	$(CC) -lreadline $(FLAGS) $(OBJS) $(OBJS_L) $(OBJS_EL) -o $(NAME)
 #$(NAME):  $(SRCS) $(LIBFT) $(EXECUT_LIBFT)
 #	$(CC) -lreadline -L $(READLINE)/lib -I $(READLINE)/include $(FLAGS) $(SRCS) $(LIBFT) $(EXECUT_LIBFT) -o $(NAME)
+#  -g -fsanitize=address
+
 
 %.o: %.c
 	$(CC) $(FLAGS) -c $< -o $@

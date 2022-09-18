@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:59:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/13 17:02:44 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/17 21:20:08 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,8 +166,6 @@ int	check_syntax_error(char *src, t_envp* my_env)
 	next_lexer->my_env = my_env;
 	token = lexer_next_token(lexer);
 
-	if (unclosed_quotes(src, my_env) == -1)
-		return(-1);
 
 	if (token->type == TOKEN_PIPE)
 	{
@@ -202,11 +200,44 @@ int	check_syntax_error(char *src, t_envp* my_env)
 					next_token->type == TOKEN_APPAND  || next_token->type == TOKEN_PIPE))
 		{
 			printf("minishell: syntax error near unexpected token `%s'\n", next_token->value);
-			my_env->status = 258;	
+			my_env->status = 258;
+			// for(int i = 0; i <= (int)lexer->i; i++)
+			// {
+			// 	char*	delemeter = malloc(1);
+			// 	char*	here_doc;
+			// 	int l = 0;
+			// 	if (src[i] == '<' && src[i + 1] == '<'){
+			// 		while ((src[i] == ' ' || src[i] == '\t') && src[i])
+			// 			i++;
+			// 		while ((src[i] != ' ' && src[i] != '\t' && src[i] != '>' && src[i] != '<' && src[i] != '|') && src[i])//// adding non_tokenabel apres
+			// 		{
+			// 			delemeter = ft_d_realloc(delemeter);
+			// 			delemeter[l++] = src[i++];
+			// 			delemeter[l] = '\0';
+			// 		}
+			// 		int fd = open("./temp", O_CREAT | O_RDWR | O_TRUNC, 0644);
+			// 		while (1)
+			// 		{
+			// 			here_doc = readline("> ");
+			// 			if (!here_doc || !ft_strncmp(delemeter, here_doc, ft_strlen(delemeter) + 1))
+			// 				break ;
+			// 			write(fd, here_doc, ft_strlen(here_doc));
+			// 			write(fd, "\n", 1);
+			// 			free(here_doc);
+			// 		}
+			// 		free(here_doc);
+			// 		unlink("./temp");
+			// 	}
+			// 	else
+			// 		i++;
+			// }  ///// here pour open here_doc after sentax_error
+			
 			return (-1);
 		}
 		token = lexer_next_token(lexer);
 	}
+	if (unclosed_quotes(src, my_env) == -1)
+		return(-1);
 	// printf("FINISH\n");
 	return (0);
 }
