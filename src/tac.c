@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/18 17:31:52 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/18 20:04:44 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ void	tac_compile(char* src, t_envp* my_env)
 	// static int	error_befor_parser(char* src);  (function roturn exite status)
 	if (check_syntax_error(src, my_env, &i) == -1){
 		// printf("%d\n", i);
-		// src = here_doc(src, i);
+		src = here_doc(src, i);
     	/* herdoc hna ghanraj3 l lexer->i  wo ila kan kykhalf size dyal src rah error tama nfta7 les heredoc hta l3ando*/
 		return;
 	}
-
-	src = here_doc(src, i);  // "" and '' qoute mochkil
+	else
+		src = here_doc(src, ft_strlen(src));  // "" and '' qoute mochkil
 	// printf("---> %s\n-+--+-> %zu\n", src, ft_strlen(src));
 	// return;
 
