@@ -61,69 +61,65 @@ void	__builtins(char **sp, t_envp *my_env, int out)
 		ex_exit(sp, my_env);
 }
 
-void	ex_comm(t_pipe *p, int k, t_command **cmd, t_envp *my_env)
+void	ex_comm(t_pipe p, int k, t_command **cmd, t_envp *my_env)
 {
 	int	i;
 
 	i = -1;
 	while (++i < k - 1)
 	{
-		pipe(p->fd[i + 1]);
-		if (p->check == -1)
-			return ;
-		next_cmd(my_env, p, i, *cmd);
-		close(p->fd[i][0]);
-		close(p->fd[i][1]);
+		pipe(p.fd[i + 1]);
+		next_cmd(my_env, &p, i, *cmd);
+		close(p.fd[i][0]);
+		close(p.fd[i][1]);
 		*cmd = (*cmd)->next;
 	}
 }
 
-void	f_close(t_pipe *p, int k)
+void	f_close(t_pipe p, int k)
 {
 	int	i;
 
 	i = 0;
 	while (i < k)
 	{
-		close(p->fd[i][0]);
-		close(p->fd[i][1]);
+		close(p.fd[i][0]);
+		close(p.fd[i][1]);
 		i++;
 	}
 }
 
 
-void	multiple_p(t_pipe *p, int k, t_command *cmd, t_envp *my_env)
+void	multiple_p(t_pipe p, int k, t_command *cmd, t_envp *my_env)
 {
 	int st;
 	int i;
 
-	pipe(p->fd[0]);
-	p->pid1 = fork();
-	if (p->pid1 == -1) {
+	pipe(p.fd[0]);
+	p.pid1 = fork();
+	if (p.pid1 == -1) {
 		ft_putstr_fd("minishell: fork: Resource temporarily unavailable\n", 2);
 		return;
 	}
-	if (p->pid1 == 0) {
-		frst_cmd(my_env, p->fd[0], cmd);
+	if (p.pid1 == 0) {
+		frst_cmd(my_env, p.fd[0], cmd);
 	}
 	else {
 		ex_comm(p, k, &cmd->next, my_env);
-		if (p->check == -1)
-			return ;
-		p->pid2 = fork();
-		if (p->pid2 == -1) {
+		p.pid2 = fork();
+		if (p.pid2 == -1) {
 			ft_putstr_fd("minishell: fork: Resource temporarily unavailable\n", 2);
 			return;
 		}
-		if (p->pid2 == 0) {
-			last_cmd(my_env, p->fd[k - 1], cmd->next);
+		if (p.pid2 == 0) {
+			last_cmd(my_env, p.fd[k - 1], cmd->next);
 		}
 		else {
 			i = 0;
 			f_close(p, k);
-			waitpid(p->pid1, NULL, 0);
-			while (waitpid(p->id[i++], NULL, 0) != -1);
-			waitpid(p->pid2, &st, 0);
+			waitpid(p.pid1, NULL, 0);
+			while (waitpid(p.id[i++], NULL, 0) != -1);
+			waitpid(p.pid2, &st, 0);
 			my_env->status = WEXITSTATUS(st);
 		}
 	}
@@ -149,7 +145,7 @@ int is_built(char *s)
 	return (0);
 }
 
-void	child(t_pipe *p, int k, t_command *cmd, t_envp *my_env)
+void	child(t_pipe p, int k, t_command *cmd, t_envp *my_env)
 {
 	int status;
 //	if (p.cm == 3)
@@ -158,20 +154,20 @@ void	child(t_pipe *p, int k, t_command *cmd, t_envp *my_env)
 		multiple_p(p, k, cmd, my_env);
 	else
 	{
-		p->pid1 = fork();
+		p.pid1 = fork();
 
-		if (p->pid1 == -1) {
+		if (p.pid1 == -1) {
 			ft_putstr_fd("minishell: fork: Resource temporarily unavailable\n", 2);
 
 		}
-		if (p->pid1 == 0) {
+		if (p.pid1 == 0) {
 			if (!is_built(cmd->cmd[0]))
 				one_cmd(my_env, cmd);
 			else
 				exit (0);
 		}
 		else {
-			waitpid(p->pid1, &status, 0);
+			waitpid(p.pid1, &status, 0);
 			my_env->status = WEXITSTATUS(status);
 			__builtins(cmd->cmd, my_env, cmd->outfile);
 		}
@@ -180,15 +176,13 @@ void	child(t_pipe *p, int k, t_command *cmd, t_envp *my_env)
 
 int	pipes(int k, t_command *cmd, t_envp *my_env)
 {
-	t_pipe	*p;
+	t_pipe	p;
 	int		i;
 
 	i = -1;
-	p = malloc(sizeof (t_pipe));
-	p->check = 0;
-	p->fd = malloc(k * sizeof(int *));
+	p.fd = malloc(k * sizeof(int *));
 	while (++i < k)
-		p->fd[i] = malloc(2 * sizeof(int));
+		p.fd[i] = malloc(2 * sizeof(int));
 	if (k < 0)
 		return (0);
 //	if (ft_strncmp(av[1], "here_doc\0", 9) == 0)
@@ -200,6 +194,24 @@ int	pipes(int k, t_command *cmd, t_envp *my_env)
 //	if (p.file1 == -1)
 //		put_error(ft_strjoin(av[1], " : No such file or directory\n"), 1);
 
-	child(p, k, cmd, my_env);
+	//child(p, k, cmd, my_env);
 	return (0);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

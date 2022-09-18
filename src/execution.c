@@ -146,8 +146,6 @@ char**	fix_cmd(char** s, int *i)
 void	execution(t_command* list, t_envp* my_env)
 {
 	int	k;
-    (void)list;
-    (void)my_env;
 	k = struct_size(list) - 1;
     check_list(&list);
 //	my_env->splite = 0;

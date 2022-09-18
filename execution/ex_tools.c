@@ -11,12 +11,15 @@
 /* ************************************************************************** */
 
 #include "../includes/execution.h"
+#include <dirent.h>
+
 
 void	er_ror(char* err, char* s)
 {
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(s, 2);
-	ft_putstr_fd(err, 2);
+	s = ft_strjoin("minishell: ", s);
+//	ft_putstr_fd("minishell: ", 2);
+//	ft_putstr_fd(s, 2);
+	ft_putstr_fd(ft_strjoin(s, err), 2);
 }
 
 void	ex_ecu(char *path, char *sp[], t_envp *my_env, int out)
@@ -27,8 +30,14 @@ void	ex_ecu(char *path, char *sp[], t_envp *my_env, int out)
 	}
 	else if (execve(path, sp, my_env->env) == -1)
 	{
-		if (sea_rch(sp[0], '/'))
-			er_ror(": No such file or directory\n", sp[0]);
+		if (sea_rch(sp[0], '/')) {
+			if (opendir(sp[0]) == NULL)
+				er_ror(": No such file or directory\n", sp[0]);
+			else{
+				er_ror(": is a directory\n", sp[0]);
+				exit (126);
+			}
+		}
 		else
 			er_ror(": Command not found\n", sp[0]);
 		exit (127);
@@ -72,15 +81,15 @@ void	next_cmd(t_envp *my_env, t_pipe *p, int i, t_command *cmd)
 {
 	char	*path;
 
-	(*p).id[i] = fork();
-	if ((*p).id[i] == -1) {
+	p->id[i] = fork();
+	if (p->id[i] == -1) {
         ft_putstr_fd("minishell: fork: Resource temporarily unavailable\n", 2);
-
+		p->check = -1;
         return;
     }
-	if ((*p).id[i] == 0) {
-        close((*p).fd[i + 1][0]);
-        close((*p).fd[i][1]);
+	if (p->id[i] == 0) {
+        close(p->fd[i + 1][0]);
+        close(p->fd[i][1]);
         path = get_path(handle_env(my_env->env), cmd->cmd[0]);
         if (cmd->infile != 0)
             dup2(cmd->infile, 0);
@@ -89,11 +98,11 @@ void	next_cmd(t_envp *my_env, t_pipe *p, int i, t_command *cmd)
         if (cmd->outfile != 1)
             dup2(cmd->outfile, 1);
         else
-            dup2((*p).fd[i + 1][1], 1);
-        close((*p).fd[i][0]);
-        close((*p).fd[i][1]);
-        close((*p).fd[i + 1][0]);
-        close((*p).fd[i + 1][1]);
+            dup2(p->fd[i + 1][1], 1);
+        close(p->fd[i][0]);
+        close(p->fd[i][1]);
+        close(p->fd[i + 1][0]);
+        close(p->fd[i + 1][1]);
         ex_ecu(path, cmd->cmd, my_env, cmd->outfile);
     }
 }

@@ -67,7 +67,7 @@ OBJS_L = $(LIBFT:.c=.o)
 OBJS_EL = $(EXECUT_LIBFT:.c=.o)
 
 $(NAME):  $(OBJS) $(OBJS_L) $(OBJS_EL)
-	$(CC) -lreadline -L $(READLINE)/lib -I $(READLINE)/include $(FLAGS) $(OBJS) $(OBJS_L) $(OBJS_EL) -o $(NAME)
+	$(CC) -lreadline $(FLAGS) $(OBJS) $(OBJS_L) $(OBJS_EL) -o $(NAME)
 #$(NAME):  $(SRCS) $(LIBFT) $(EXECUT_LIBFT)
 #	$(CC) -lreadline -L $(READLINE)/lib -I $(READLINE)/include $(FLAGS) $(SRCS) $(LIBFT) $(EXECUT_LIBFT) -o $(NAME)
 
