@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/18 17:31:42 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/18 19:55:24 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char*	here_doc(char* src, int stop)
 	j = 0;
 	// del_to_name = NULL;
 	str = malloc(1);
+	str[0] = 0;
 	here_doc = NULL;
 	while(src && src[i])
 	{
@@ -66,8 +67,7 @@ char*	here_doc(char* src, int stop)
 				delemeter[l++] = src[i++];
 				delemeter[l] = '\0';
 			}
-			
-			while (delemeter[0])
+			while (1)
 			{
 				here_doc = readline("> ");
 				if (!here_doc || !ft_strncmp(delemeter, here_doc, ft_strlen(delemeter) + 1))
