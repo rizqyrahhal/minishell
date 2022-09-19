@@ -23,8 +23,6 @@ char*	here_doc(char* src, int stop, t_envp* my_env)
 	char*	here_doc;
 	char*	delemeter;
 	int		l;
-	t_lexer *lexer;
-	 t_token *token;
 
 	t_lexer *lexer;
 	t_token *token;
