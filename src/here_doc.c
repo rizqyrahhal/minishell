@@ -23,7 +23,7 @@ char*	here_doc(char* src, int stop)
 	char*	here_doc;
 	char*	delemeter;
 	int		l;
-	t_lexer *lexer;
+//	t_lexer *lexer;
 	// t_token *token;
 
 	i = 0;
@@ -78,14 +78,29 @@ char*	here_doc(char* src, int stop)
 				delemeter[l++] = src[i++];
 				delemeter[l] = '\0';
 			}
-			while (delemeter[0])
+			pid_t pid;
+			int	st;
+			pid = fork();
+			if (pid == 0)
 			{
-				here_doc = readline("> ");
-				if (!here_doc || !ft_strncmp(delemeter, here_doc, ft_strlen(delemeter) + 1))
-					break ;
-				write(fd, here_doc, ft_strlen(here_doc));
-				write(fd, "\n", 1);
-				free(here_doc);
+				while (delemeter[0])
+				{
+					handle_signals(SIGHEREDOC, 0);
+					here_doc = readline("> ");
+					if (!here_doc || !ft_strncmp(delemeter, here_doc, ft_strlen(delemeter) + 1))
+						break ;
+					write(fd, here_doc, ft_strlen(here_doc));
+					write(fd, "\n", 1);
+					free(here_doc);
+				}
+				exit (0);
+			}
+			else
+			{
+				waitpid(pid, &st, 0);
+				st = WEXITSTATUS(st);
+				if (st == 1)
+					return (NULL);
 			}
 			free(here_doc);
 			fd = open(del_to_name, O_RDONLY, 0600);

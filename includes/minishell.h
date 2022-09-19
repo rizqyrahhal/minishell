@@ -19,10 +19,10 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <fcntl.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-//#include "readline/readline.h"
-//#include "readline/history.h"
+//#include <readline/readline.h>
+//#include <readline/history.h>
+#include "readline/readline.h"
+#include "readline/history.h"
 #include <unistd.h>
 #include <string.h>
 
@@ -34,6 +34,8 @@
 #define MIN(a, b)\
    a < b ? a : b
 
+#define SIGCHILD -5
+#define SIGHEREDOC 1337
 // ********************************************* token.h
 
 typedef struct s_token
@@ -130,5 +132,8 @@ void		ft_addfront(t_command** list, t_command* new);
 void	execution(t_command* list, t_envp* my_env);
 int		pipes(int k, t_command *cmd, t_envp *my_env);
 
+//   signals
 
+void	handle_signals(int sig, int option);
+void	signal_ctrl_c();
 #endif

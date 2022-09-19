@@ -75,6 +75,8 @@ void	tac_compile(char* src, t_envp* my_env)
 	// printf("---> %s\n-+--+-> %zu\n", src, ft_strlen(src));
 	// return;
 
+	if (!src)
+		return ;
 	
 	lexer = init_lexer(src);
 	lexer_skip_whitespace(lexer);

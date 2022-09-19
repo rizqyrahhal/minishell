@@ -58,6 +58,7 @@ void	frst_cmd(t_envp *my_env, int *fd, t_command *cmd)
 		dup2(fd[1], 1);
 	close(fd[0]);
 	close(fd[1]);
+	handle_signals(SIGINT, SIGCHILD);
 	ex_ecu(path, cmd->cmd, my_env, cmd->outfile);
 }
 

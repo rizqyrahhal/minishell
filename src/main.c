@@ -19,22 +19,41 @@
 */
 
 
-// void signal_ctrl_c(int sig)
+void signal_ctrl_c()
+{
+	write(2, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("\0", 0);
+	rl_redisplay();
+}
+
+// void signal_ctrl_c_heredoc()
 // {
-// 	rl_on_new_line();
-// 	rl_replace_line("", 0);
-// 	rl_redisplay();
+// 	r
 // }
 
-// void handle_signals(int sig)
-// {
-// 	if (sig == SIGINT)
-// 		signal(SIGINT, signal_ctrl_c);
-// 	else if (sig == SIGQUIT)
-// 		signal(SIGQUIT, SIG_IGN);
-// 	// else if (sig == SIGHEREDOC)
-// 	// 	signal(SIGINT, signal_ctrl_c_heredoc);
-// }
+void signal_child()
+{
+	write(2, "hello\n", 6);
+	exit (130);
+}
+
+void signal_ctrl_c_heredoc()
+{
+	exit(1);
+}
+
+void handle_signals(int sig, int option)
+{
+	if (option == SIGCHILD)
+		signal(SIGINT, signal_child);
+	else if (sig == SIGINT)
+		signal(SIGINT, signal_ctrl_c);
+ 	else if (sig == SIGQUIT)
+ 		signal(SIGQUIT, SIG_IGN);
+	else if (sig == SIGHEREDOC)
+	 	signal(SIGINT, signal_ctrl_c_heredoc);
+}
 
 
 int	main(int argc, char** argv, char** env)
@@ -52,10 +71,11 @@ int	main(int argc, char** argv, char** env)
 	{
 		while(1)
 		{
-
+			handle_signals(SIGINT, 0);
+			handle_signals(SIGQUIT, 0);
 			buf = readline("\033[0;33mminishell > \033[0m");
 			if (!buf)
-				exit (1);
+				exit (0);
 			add_history(buf);
 			// ft_check_error(buf);
 

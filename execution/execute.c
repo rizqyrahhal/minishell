@@ -108,8 +108,10 @@ void	multiple_p(t_pipe *p, int k, t_command *cmd, t_envp *my_env)
 	}
 	else {
 		ex_comm(p, k, &cmd->next, my_env);
-		if (p->check == -1)
-			return ;
+		if (p->check == -1) {
+			f_close(p, k);
+			return;
+		}
 		p->pid2 = fork();
 		if (p->pid2 == -1) {
 			ft_putstr_fd("minishell: fork: Resource temporarily unavailable\n", 2);

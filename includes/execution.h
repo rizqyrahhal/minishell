@@ -26,7 +26,6 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 
-# define SIGHEREDOC 1337
 
 int r;
 // typedef struct s_command

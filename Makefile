@@ -62,20 +62,20 @@ EXECUT_LIBFT = execut_libft/ft_split.c \
 		execut_libft/ft_itoa.c \
 		execut_libft/ft_substr.c
 		
-#READLINE = ~/.brew/opt/readline/
-OBJS = $(SRCS:.c=.o)
-OBJS_L = $(LIBFT:.c=.o)
-OBJS_EL = $(EXECUT_LIBFT:.c=.o)
-
-$(NAME):  $(OBJS) $(OBJS_L) $(OBJS_EL)
-	$(CC) -lreadline $(FLAGS) $(OBJS) $(OBJS_L) $(OBJS_EL) -o $(NAME)
-#$(NAME):  $(SRCS) $(LIBFT) $(EXECUT_LIBFT)
-#	$(CC) -lreadline -L $(READLINE)/lib -I $(READLINE)/include $(FLAGS) $(SRCS) $(LIBFT) $(EXECUT_LIBFT) -o $(NAME)
+READLINE = ~/.brew/opt/readline/
+#OBJS = $(SRCS:.c=.o)
+#OBJS_L = $(LIBFT:.c=.o)
+#OBJS_EL = $(EXECUT_LIBFT:.c=.o)
+#
+#$(NAME):  $(OBJS) $(OBJS_L) $(OBJS_EL)
+#	$(CC) -lreadline $(FLAGS) $(OBJS) $(OBJS_L) $(OBJS_EL) -o $(NAME)
+$(NAME):  $(SRCS) $(LIBFT) $(EXECUT_LIBFT)
+	$(CC) -lreadline -L $(READLINE)/lib -I $(READLINE)/include $(FLAGS) $(SRCS) $(LIBFT) $(EXECUT_LIBFT) -o $(NAME)
 #  -g -fsanitize=address
 
 
-%.o: %.c
-	$(CC) $(FLAGS) -c $< -o $@
+#%.o: %.c
+#	$(CC) $(FLAGS) -c $< -o $@
 
 all: $(NAME)
 
