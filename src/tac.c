@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/18 20:04:44 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/19 14:38:36 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	print_node(t_command *lst, t_envp* my_env)
 		printf("\n");
 		list = list->next;
 	}
-
 }
 
 void	free_list(t_command* list)
@@ -53,7 +52,7 @@ void	free_list(t_command* list)
 }
 
 int		check_syntax_error(char *src, t_envp* my_env, int *i); /// ajoute ou part tac.h
-char*	here_doc(char* src, int stop);   /// ajoute ou part tac.h
+char*	here_doc(char* src, int stop, t_envp* my_env);   /// ajoute ou part tac.h
 
 void	tac_compile(char* src, t_envp* my_env)
 {
@@ -66,19 +65,18 @@ void	tac_compile(char* src, t_envp* my_env)
 	// static int	error_befor_parser(char* src);  (function roturn exite status)
 	if (check_syntax_error(src, my_env, &i) == -1){
 		// printf("%d\n", i);
-		src = here_doc(src, i);
+		src = here_doc(src, i, my_env);
     	/* herdoc hna ghanraj3 l lexer->i  wo ila kan kykhalf size dyal src rah error tama nfta7 les heredoc hta l3ando*/
 		return;
 	}
 	else
-		src = here_doc(src, ft_strlen(src));  // "" and '' qoute mochkil
+		src = here_doc(src, ft_strlen(src), my_env);  // "" and '' qoute mochkil
 	// printf("---> %s\n-+--+-> %zu\n", src, ft_strlen(src));
 	// return;
 
-	if (!src)
-		return ;
-	
+
 	lexer = init_lexer(src);
+	lexer->not_expand = 0;
 	lexer_skip_whitespace(lexer);
 	lexer->my_env = my_env;
 	token = lexer_next_token(lexer);

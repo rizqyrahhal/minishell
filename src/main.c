@@ -6,16 +6,15 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/18 17:06:16 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/19 14:48:46 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /*des cas non working
-))) cd Makefile
-))) ls $USER | $HOME ls
-))) export a="-l      		->   -a"   and exucute ca (ls $a)
+))) cd Makefile     +++++++++++++ Not a directory
+))) pwd in first time not git path of curent directory
 */
 
 

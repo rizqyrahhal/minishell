@@ -8,10 +8,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Sun Sep 18 16:32:34 2022
+# Make data base, printed on Mon Sep 19 14:31:19 2022
 
 # Variables
 
+ 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
@@ -36,13 +37,12 @@ MAKEFILE_LIST :=  Makefile
 SRCS = src/main.c src/lexer.c src/token.c src/tac.c src/syntax_error.c src/here_doc.c src/parser.c src/env.c src/expanda.c src/execution.c execution/tools/tools1.c execution/tools/arr_tools.c execution/tools/arr_tools2.c execution/execute.c execution/ex_tools.c execution/ex_tools2.c execution/builtins/cd.c execution/builtins/echo.c execution/builtins/env.c execution/builtins/exit.c execution/builtins/export.c execution/builtins/pwd.c execution/builtins/unset.c execution/builtins/builtins_tools.c 
 # makefile (from `Makefile', line 66)
 OBJS = $(SRCS:.c=.o)
- 
 # environment
 VSCODE_CWD = /
 # environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.do0Hehd2gl/Render
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.dSYVxCfItc/Render
 # environment
-PATH = /Users/rarahhal/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Applications/Visual Studio Code.app/Contents/Resources/app/bin
+PATH = /Users/rarahhal/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Visual Studio Code.app/Contents/Resources/app/bin
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
@@ -50,7 +50,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.vMCILRS5DS/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.HTrTeo5FwD/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -124,15 +124,13 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000002.Electron
+XPC_SERVICE_NAME = com.microsoft.VSCode.1312
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
 # environment
 __CF_USER_TEXT_ENCODING = 0x11DE:0x0:0x0
-# environment
-COMMAND_MODE = unix2003
 # default
 MAKEFILES := 
 # automatic
@@ -141,8 +139,6 @@ MAKEFILES :=
 PAGER = less
 # environment
 LC_ALL = C
-# environment
-SECURITYSESSIONID = 186aa
 # automatic
 ^F = $(notdir $^)
 # default
@@ -160,9 +156,9 @@ OBJS_L = $(LIBFT:.c=.o)
 # environment
 LANG = C
 # environment
-VSCODE_PID = 26170
+VSCODE_PID = 27737
 # variable set hash-table stats:
-# Load=74/1024=7%, Rehash=0, Collisions=5/110=5%
+# Load=72/1024=7%, Rehash=0, Collisions=5/108=5%
 
 # Pattern-specific Variable Values
 
@@ -170,10 +166,10 @@ VSCODE_PID = 26170
 
 # Directories
 
-# . (device 16777227, inode 1363652): 19 files, no impossibilities.
-# src (device 16777227, inode 1363935): 21 files, no impossibilities so far.
+# . (device 16777227, inode 1363652): 18 files, no impossibilities.
+# src (device 16777227, inode 1363935): 8 files, no impossibilities so far.
 
-# 40 files, no impossibilities in 2 directories.
+# 26 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
@@ -214,6 +210,7 @@ all: minishell
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/4=0%
 
+ 
 # Not a target:
 execution/builtins/echo.o:
 #  Implicit rule search has not been done.
@@ -234,11 +231,27 @@ libft/ft_strlen.o:
 src/main.o: src/main.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `src/main'
-#  Last modified 2022-09-18 14:44:22
+#  File does not exist.
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := src/main.o
+# automatic
+# % := 
+# automatic
+# * := src/main
+# automatic
+# + := src/main.c
+# automatic
+# | := 
+# automatic
+# < := src/main.c
+# automatic
+# ^ := src/main.c
+# automatic
+# ? := src/main.c
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+# Load=8/32=25%, Rehash=0, Collisions=1/14=7%
 #  commands to execute (from `Makefile', line 78):
 	$(CC) $(FLAGS) -c $< -o $@
 	
@@ -249,33 +262,11 @@ execution/builtins/export.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-src/tac.o: src/tac.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `src/tac'
-#  Last modified 2022-09-18 14:44:22
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := src/tac.o
-# automatic
-# % := 
-# automatic
-# * := src/tac
-# automatic
-# + := src/tac.c
-# automatic
-# | := 
-# automatic
-# < := src/tac.c
-# automatic
-# ^ := src/tac.c
-# automatic
-# ? := src/tac.c
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/14=7%
-#  commands to execute (from `Makefile', line 78):
-	$(CC) $(FLAGS) -c $< -o $@
-	
+# Not a target:
+src/tac.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 execution/tools/tools1.o:
@@ -284,25 +275,10 @@ execution/tools/tools1.o:
 #  File has not been updated.
 
 # Not a target:
-src/lexer.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-09-15 17:32:21
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-src/lexer.o: src/lexer.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `src/lexer'
-#  Last modified 2022-09-18 14:44:22
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 78):
-	$(CC) $(FLAGS) -c $< -o $@
-	
+src/lexer.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .SUFFIXES:
@@ -346,7 +322,6 @@ execut_libft/ft_isalpha.o:
 # Not a target:
 execut_libft/ft_isdigit.o:
 #  Implicit rule search has not been done.
- 
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -364,7 +339,7 @@ src/expanda.o:
 
 minishell: src/main.o src/lexer.o src/token.o src/tac.o src/syntax_error.o src/here_doc.o src/parser.o src/env.o src/expanda.o src/execution.o execution/tools/tools1.o execution/tools/arr_tools.o execution/tools/arr_tools2.o execution/execute.o execution/ex_tools.o execution/ex_tools2.o execution/builtins/cd.o execution/builtins/echo.o execution/builtins/env.o execution/builtins/exit.o execution/builtins/export.o execution/builtins/pwd.o execution/builtins/unset.o execution/builtins/builtins_tools.o libft/ft_calloc.o libft/ft_realloc.o libft/ft_strlen.o libft/ft_non_tokenable.o libft/ft_strjoin.o libft/ft_strdup.o libft/ft_strncmp.o libft/linked_list.o libft/ft_strnstr.o libft/ft_randstring.o execut_libft/ft_split.o execut_libft/ft_atoi.o execut_libft/ft_strcmp.o execut_libft/ft_strchr.o execut_libft/ft_strlcpy.o execut_libft/ft_isalpha.o execut_libft/ft_tolower.o execut_libft/ft_isdigit.o execut_libft/ft_putstr_fd.o execut_libft/ft_itoa.o execut_libft/ft_substr.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-09-18 14:44:24
+#  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
@@ -403,16 +378,7 @@ fclean: clean
 # Not a target:
 src/main.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-17 16:48:18
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-src/tac.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-09-18 14:48:23
+#  Last modified 2022-09-18 17:06:16
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -424,17 +390,11 @@ execut_libft/ft_strchr.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-src/token.o: src/token.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `src/token'
-#  Last modified 2022-09-18 14:44:22
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 78):
-	$(CC) $(FLAGS) -c $< -o $@
-	
+# Not a target:
+src/token.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 libft/ft_non_tokenable.o:
@@ -544,6 +504,7 @@ libft/ft_realloc.o:
 libft/linked_list.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
+ 
 #  File has not been updated.
 
 # Not a target:
@@ -583,15 +544,6 @@ libft/ft_strnstr.o:
 #  File has not been updated.
 
 # Not a target:
-src/token.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-09-13 15:32:47
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
 execut_libft/ft_tolower.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -610,7 +562,7 @@ execut_libft/ft_split.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=58/1024=6%, Rehash=0, Collisions=7/135=5%
+# Load=55/1024=5%, Rehash=0, Collisions=4/123=3%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -622,6 +574,6 @@ execut_libft/ft_split.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sun Sep 18 16:32:34 2022
+# Finished Make data base on Mon Sep 19 14:31:19 2022
 
  
