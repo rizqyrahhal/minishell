@@ -6,13 +6,13 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/18 20:30:12 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/19 14:35:18 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char*	here_doc(char* src, int stop)
+char*	here_doc(char* src, int stop, t_envp* my_env)
 {
 	int 	i;
 	char*	str;
@@ -24,8 +24,10 @@ char*	here_doc(char* src, int stop)
 	char*	delemeter;
 	int		l;
 	t_lexer *lexer;
-	// t_token *token;
-
+	t_token *token;
+	lexer = init_lexer(src);
+	lexer->my_env = my_env;
+	lexer->not_expand = -1;
 	i = 0;
 	j = 0;
 	// del_to_name = NULL;
@@ -63,25 +65,26 @@ char*	here_doc(char* src, int stop)
 				str[j++] = del_to_name[k++];
 				str[j] = '\0';
 			}
+
+			while((int)lexer->i < i)
+			{
+				token = lexer_next_token(lexer);
+				// printf("=========> %s\n", token->value);
+			}
+
+			// ghi bash src tahowa yfot delemeter
 			while ((src[i] != ' ' && src[i] != '\t' && src[i] != '>' && src[i] != '<' && src[i] != '|') && src[i])
 			{
-			// lexer = init_lexer(src);
-			// // for  for lop lexer_next_token bash nwsal and src 
-			// lexer->i = i;
-			// printf("=========> %c\n", lexer->c);
-			// // token = lexer_next_token(lexer);
-			// // printf("token_value: %s\n", token->value);
-				
-				
-
 				delemeter = ft_d_realloc(delemeter);
 				delemeter[l++] = src[i++];
 				delemeter[l] = '\0';
 			}
+
+			
 			while (delemeter[0])
 			{
 				here_doc = readline("> ");
-				if (!here_doc || !ft_strncmp(delemeter, here_doc, ft_strlen(delemeter) + 1))
+				if (!here_doc || !ft_strncmp(token->value, here_doc, ft_strlen(token->value) + 1))
 					break ;
 				write(fd, here_doc, ft_strlen(here_doc));
 				write(fd, "\n", 1);

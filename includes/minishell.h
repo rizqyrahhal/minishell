@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/15 18:27:05 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/19 14:34:24 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct s_lexer
 	t_token*		token;
 	t_envp*			my_env;
 	int				spliter;
+	int				not_expand;
 } t_lexer;
 
 t_lexer*	init_lexer(char* src);
