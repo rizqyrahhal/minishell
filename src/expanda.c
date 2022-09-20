@@ -123,6 +123,33 @@ char*	exp_and(t_exp *exp, char **env, char *s, int *j)
 	return (s);
 }
 
+char*	special_vars(char* s, int c, int *k, t_envp * my_env)
+{
+	char*	str;
+	int 	i;
+
+	i = *k;
+	if (c == '?')
+	{
+		str = ft_cpy(&s[i - 1], 2);
+		// printf("----> str %s\n", str);
+		s = ft_replace(s, str, ft_itoa(my_env->status), &i);
+		// i++;
+	}
+	if (ft_isdigit(c))
+	{
+		str = ft_cpy(&s[i - 1], 2);
+		// printf("----> str %s\n", str);
+		if (c == 48)
+			s = ft_replace(s, str, "minishell", &i);
+		else
+			s = ft_replace(s, str, "\0", &i);
+		// i++;
+	}
+	*k = i;
+	return (s);
+}
+
 char *ft_exp(char *s, t_exp *exp, t_envp *my_env, int count)
 {
 	int i = 0;
@@ -137,13 +164,8 @@ char *ft_exp(char *s, t_exp *exp, t_envp *my_env, int count)
 		{
 			while (s[i] == '$' && s[i])
 				i++;
-			if (s[i] == '?')
-			{
-				str = ft_cpy(&s[i - 1], 2);
-				// printf("----> str %s\n", str);
-				s = ft_replace(s, str, ft_itoa(my_env->status), &i);
-				// i++;
-			}
+			if (ft_isdigit(s[i]) || s[i] == '?')
+				s = special_vars(s, s[i], &i, my_env);
 			else
 				s = exp_and(exp, my_env->env, s, &i);
 		}

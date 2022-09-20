@@ -87,7 +87,7 @@ char*	here_doc(char* src, int stop, t_envp* my_env)
 			{
 				while (delemeter[0])
 				{
-					handle_signals(SIGHEREDOC, 0);
+					handle_signals(SIGHEREDOC);
 					here_doc = readline("> ");
 					if (!here_doc || !ft_strncmp(delemeter, here_doc, ft_strlen(delemeter) + 1))
 						break ;

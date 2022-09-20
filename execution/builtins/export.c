@@ -43,7 +43,7 @@ void	ex_export(char **sp, t_envp *my_env, int out)
 			ft_putstr_fd("export: usage: export [-nf] [name[=value] ...] or export -p\n", 2);
 			return ;
 		}
-			my_env->status = ft_add2env(my_env, sp[i]);
+		my_env->status = ft_add2env(my_env, sp[i]);
 		i++;
 	}
 }

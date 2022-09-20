@@ -34,8 +34,8 @@
 #define MIN(a, b)\
    a < b ? a : b
 
-#define SIGCHILD -5
 #define SIGHEREDOC 1337
+#define SIGQUIT_INCHILD -1337
 // ********************************************* token.h
 
 typedef struct s_token
@@ -135,6 +135,6 @@ int		pipes(int k, t_command *cmd, t_envp *my_env);
 
 //   signals
 
-void	handle_signals(int sig, int option);
+void	handle_signals(int sig);
 void	signal_ctrl_c();
 #endif

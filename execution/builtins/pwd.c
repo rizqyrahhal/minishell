@@ -6,7 +6,7 @@ void	ex_pwd(char **sp, t_envp *my_env, int out)
 		printf("pwd: too many arguments\n");
 	else {
         if (my_env->PWD == NULL)
-            my_env->PWD = getcwd(my_env->PWD, sizeof(my_env->PWD));
+            my_env->PWD = getcwd(NULL, sizeof(my_env->PWD));
         ft_putstr_fd(my_env->PWD, out);
         write(out, "\n", 1);
     }

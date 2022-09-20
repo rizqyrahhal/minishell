@@ -31,24 +31,25 @@ void signal_ctrl_c()
 // 	r
 // }
 
-void signal_child()
-{
-	write(2, "hello\n", 6);
-	exit (130);
-}
 
-void signal_ctrl_c_heredoc()
+void	signal_ctrl_c_heredoc()
 {
 	exit(1);
 }
 
-void handle_signals(int sig, int option)
+void	signal_quit()
 {
-	if (option == SIGCHILD)
-		signal(SIGINT, signal_child);
-	else if (sig == SIGINT)
+	rl_replace_line("\0", 0);
+}
+
+
+void handle_signals(int sig)
+{
+	if (sig == SIGINT)
 		signal(SIGINT, signal_ctrl_c);
- 	else if (sig == SIGQUIT)
+ 	else if (sig == SIGQUIT_INCHILD)
+ 		signal(SIGQUIT, signal_quit);
+	 else if (sig == SIGQUIT)
  		signal(SIGQUIT, SIG_IGN);
 	else if (sig == SIGHEREDOC)
 	 	signal(SIGINT, signal_ctrl_c_heredoc);
@@ -59,19 +60,22 @@ int	main(int argc, char** argv, char** env)
 {
 	char*	buf;
 	t_envp*	my_env;
+//	char*	s;
 
 	(void)argv;
+//	s = NULL;
 	my_env = (t_envp*)malloc(sizeof(t_envp));
 	my_env->env = (char**)malloc(sizeof(char*) * (ft_d_strlen(env) + 1));
 	fill_env(env, my_env);
-	getcwd(my_env->PWD, sizeof (my_env->PWD));
+	my_env->PWD = getcwd(NULL, 0);
+	printf("%s\n", my_env->PWD);
 	my_env->status = 0;
 	if (argc == 1)
 	{
 		while(1)
 		{
-			handle_signals(SIGINT, 0);
-			handle_signals(SIGQUIT, 0);
+			handle_signals(SIGINT);
+			handle_signals(SIGQUIT);
 			buf = readline("\033[0;33mminishell > \033[0m");
 			if (!buf)
 				exit (0);

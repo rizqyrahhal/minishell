@@ -123,10 +123,15 @@ void	multiple_p(t_pipe *p, int k, t_command *cmd, t_envp *my_env)
 		else {
 			i = 0;
 			f_close(p, k);
-			waitpid(p->pid1, NULL, 0);
-			while (waitpid(p->id[i++], NULL, 0) != -1);
 			waitpid(p->pid2, &st, 0);
-			my_env->status = WEXITSTATUS(st);
+			while (waitpid(p->id[i++], NULL, 0) != -1);
+			waitpid(p->pid1, NULL, 0);
+			if (st == 2)
+				my_env->status = 130;
+			else if (st == 3)
+				my_env->status = 131;
+			else
+				my_env->status = WEXITSTATUS(st);
 		}
 	}
 
@@ -174,7 +179,12 @@ void	child(t_pipe *p, int k, t_command *cmd, t_envp *my_env)
 		}
 		else {
 			waitpid(p->pid1, &status, 0);
-			my_env->status = WEXITSTATUS(status);
+			if (status == 2)
+				my_env->status = 130;
+			else if (status == 3)
+				my_env->status = 131;
+			else
+				my_env->status = WEXITSTATUS(status);
 			__builtins(cmd->cmd, my_env, cmd->outfile);
 		}
 	}
