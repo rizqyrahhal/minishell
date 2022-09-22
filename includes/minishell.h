@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/19 14:34:24 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/21 21:58:37 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <fcntl.h>
-//#include <readline/readline.h>
-//#include <readline/history.h>
-#include "readline/readline.h"
-#include "readline/history.h"
+#include <readline/readline.h>
+#include <readline/history.h>
+// #include "readline/readline.h"
+// #include "readline/history.h"
 #include <unistd.h>
 #include <string.h>
 

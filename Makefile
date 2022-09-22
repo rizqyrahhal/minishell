@@ -6,7 +6,7 @@
 #    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 17:12:13 by rarahhal          #+#    #+#              #
-#    Updated: 2022/09/17 18:48:17 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/09/22 10:54:17 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ EXECUT_LIBFT = execut_libft/ft_split.c \
 		execut_libft/ft_putstr_fd.c \
 		execut_libft/ft_itoa.c \
 		execut_libft/ft_substr.c
-		
+
 READLINE = ~/.brew/opt/readline
 OBJS = $(SRCS:.c=.o)
 OBJS_L = $(LIBFT:.c=.o)

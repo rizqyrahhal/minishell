@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/18 18:47:33 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/21 22:06:14 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ t_tac*	ft_rediriction(t_tac* tac)
 		}
 		else if ((next_token = lexer_next_token(tac->lexer))->type == TOKEN_STRING)
 			tac->parser->outfile = open(next_token->value,  O_CREAT | O_RDWR | O_TRUNC , 0644);
-		if (tac->parser->outfile == -1 && tac->parser->no_assign > 0)
+		if (tac->parser->outfile == -1 && tac->parser->no_assign > -1)
 		{
 			perror(ft_strjoin("minishell: ", next_token->value));
 			tac->lexer->my_env->status = 1;
@@ -113,7 +113,7 @@ t_tac*	ft_rediriction(t_tac* tac)
 		if(tac->parser->outfile != 1){
 			close(tac->parser->outfile);
 		}
-				char* value;
+		char* value;
 		value = get_string(tac->lexer->my_env, str, 0);
 		if (value && value[0]){
 			tac->parser->outfile = open(value,  O_CREAT | O_RDWR | O_APPEND , 0644);
