@@ -6,15 +6,11 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/21 22:06:14 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/22 15:55:25 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-/*   After break =======>> 
-est apre n9ad lallocation dyal t_parser (outfile et infile ===== kaykhorjo 3la ranj chi marrat)
-*/
 
 void	free_parser(t_parser* parser)
 {
@@ -29,23 +25,14 @@ void	free_parser(t_parser* parser)
 	free(parser);
 }
 
-char*	get_string(t_envp *my_env, char *s, int count);
+char*	get_string(t_envp *my_env, char *s, int count);  // move to heder file
 
 t_tac*	ft_rediriction(t_tac* tac)
 {
 	t_token*	next_token;
-	// char		*here_doc;
-
-	/* EXAMPLE GHAYKHASSAR LBLAN:   (ls << l > outtttt | cat << y > oufffff < infffff),
-	daba hna kykhass ytkriya outfile 3ad ytprinta error dyal infile, 
-	ALORS ----> makayn 7ata 7al mn ghir ndawoz lhabib ga3 les file bash ykon 3ando tartib dyalhom*/
-	// HERE_DOC ghanakhod akhir file name 9adit wo man ttabi3t l7al ghankon m7it lakhrin wo ghanzido fi l **array dyal infile
-
-
 
 	int k = tac->lexer->i;
 	char *str = NULL;
-
 	int f = 0;
 	while (tac->lexer->src[k] == ' ' && tac->lexer->src[k])
 		k++;
@@ -58,10 +45,6 @@ t_tac*	ft_rediriction(t_tac* tac)
 		while(tac->lexer->src[k] != ' ' && tac->lexer->src[k])
 			str[f++] = tac->lexer->src[k++];
 	}
-
-
-
-
 
 	if (tac->token->type == TOKEN_IN || tac->token->type == TOKEN_HERDOC)
 	{
@@ -139,53 +122,7 @@ t_tac*	ft_rediriction(t_tac* tac)
 			tac->lexer->my_env->status = 1;
 			tac->parser->no_assign = -1;
 		}
-		// if ((next_token = lexer_next_token(tac->lexer))->type == TOKEN_STRING)
-		// 	tac->parser->outfile = open(next_token->value, O_CREAT | O_RDWR | O_APPEND, 0644);
 	}
-
-	/*
-	HERE_DOC kysali ila dart (control + c) wo had lblan ya2ima khasso here_doc ykon f childe prossece ya ima chi 7al akhor b7al kif taydir bash
-	L7AL howa mni nkon fi lhirdoc (cntl + c) OR (cntl + d) ghykono kykhorjo ghi mn here_doc wo appar here_doc ydiro khadmathoom
-	
-	!!!!!!! in bash tout HERE_DOC ktftah 9bal parssing dyal line !!!!!!!!!
-	-----> CTRL+D : est un delemeter de here_doc (ya3ni ghanzid siognal dyalha fi condition bash ywa9f print b7al delimeter wo sf).
-	-----> CTRL+C : kat anelee ay 7aja mn binha here_doc alor madam l here_doc fi bash kythandlo 9bal parsin dyal line,
-	idan fa  khasni mn opnich les outfile ila kan chi here_doc mn ba3d chi wo7din wo 7bas bi CTRL+C.
-
-	(L7OLOL :):) ----__--> 1) (***) ima ghnchiki ila kant ctrl+c wo tfat7o chi filat nm7ihom 
-	(L7OLOL :):) ----__--> 2) (*****) in lexer opning here_doc and save your files with delimitre like name,
-	and handl it apre in parsing like infile  
-
-	// FILE POUR STOCK HERE_DOC "/tmp/sh-thd-1641928925"
-	*/
-
-
-	// if (tac->token->type == TOKEN_HERDOC)
-	// {
-	// 	if (tac->parser->infile != 0)
-	// 		close(tac->parser->infile);
-	// 	char*	tmpstr = ft_randstring(8);
-	// 	tac->parser->infile = open(tmpstr, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	// 	// if (tac->parser->infile < 0)
-	// 		// return_error("ERR_HEREDOC");
-	// 	next_token = lexer_next_token(tac->lexer);
-	// 	while (1)
-	// 	{
-	// 		here_doc = readline("> ");
-	// 		if (!here_doc || !ft_strncmp(next_token->value, here_doc, ft_strlen(next_token->value) + 1))
-	// 			break ;
-	// 		write(tac->parser->infile, here_doc, ft_strlen(here_doc));
-	// 		write(tac->parser->infile, "\n", 1);
-	// 		free(here_doc);
-	// 	}
-	// 	free(here_doc);
-	// 	tac->parser->infile = open(tmpstr , O_RDONLY, 0600);
-	// 	if (tac->parser->infile < 0)
-	// 	{
-	// 		unlink(tmpstr);
-	// 		printf("ERR_heredoc_infile\n");
-	// 	}
-	// }
 
 	if (tac->parser->infile == -1)
 	{
@@ -200,7 +137,6 @@ t_tac*	ft_rediriction(t_tac* tac)
 		tac->lexer->my_env->status = 1;
 	}
 
-
 	if (tac->parser->infile == -1 || tac->parser->outfile == -1 || tac->parser->no_assign == -1)
 	{
 		while (tac->token->type != TOKEN_PIPE && tac->token->type != TOKEN_EOF) // move to next command after pipe |
@@ -214,7 +150,6 @@ t_tac*	ft_rediriction(t_tac* tac)
 t_tac*	simple_command(t_tac* tac)
 {
 	t_command*	new;
-	// t_token*	next_token;
 	int			i;
 
 	i = 0;
@@ -227,7 +162,6 @@ t_tac*	simple_command(t_tac* tac)
 	{
 		tac = ft_rediriction(tac);
 		lexer_skip_whitespace(tac->lexer);
-		// printf("%s\n", tac->token->value);
 		if (tac->token->type == TOKEN_STRING && tac->token->value[0] != 15)
 		{
 			tac->parser->splite[i] = 0;
@@ -241,8 +175,6 @@ t_tac*	simple_command(t_tac* tac)
 		}
 		if (tac->token->type != TOKEN_EOF && tac->token->type != TOKEN_PIPE)
 			tac->token = lexer_next_token(tac->lexer);
-		// printf("A la fin de first while in simpele_command\n");
-		// printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(tac->token));
 	}
 	if (tac->parser->infile != -1 && tac->parser->cmd[0] != NULL && tac->parser->no_assign > -1)
 	{
@@ -266,9 +198,6 @@ t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
 	tac->list = list;
 	while (tac->token->type != TOKEN_EOF)
 	{
-		// printf("DEMARE::::::::::::::::::::::::::::\n");
-		// printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(tac->token));
-		// tac->lexer->my_env->arg_num = 0;
 		tac = simple_command(tac);
 		if (tac->token->type == TOKEN_PIPE){
 			tac->token = lexer_next_token(tac->lexer);
@@ -277,16 +206,5 @@ t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
 			free_parser(tac->parser);
 		}
 	}
-
 	return (tac->list);
 }
-
-		// printf("COMMAND: %s, INfile: %d, OUTfile: %d\n", list->cmd, list->input, list->output);
-
-
-/*  ::::::::::::::::::::::::::::::::::::: ALGO OF SIMPLE_COMMAND  ::::::::::::::::::::::::::::::::::::::::::
-
-hata nakhad data 3la khatri dyal lcomand kamlha 3ad nzidha fi list ila makan fiha 7ata error 
-ila kan fiha chi error magahndawzhach lih bmara,
-ghanrotirni error wo ndawoz lih ghi les CMD lis khashom ytexsicutaw
-*/

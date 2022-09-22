@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/19 14:38:36 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/22 15:50:15 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,24 +59,17 @@ void	tac_compile(char* src, t_envp* my_env)
 	t_lexer*	lexer;
 	t_token*	token;
 	t_command*	list;
-	int			i = 0;
+	int			i;
 
-	// function  pour check les error comme an while lope in src character par chararcter   (here or in main Function)
-	// static int	error_befor_parser(char* src);  (function roturn exite status)
+	i = 0;
 	if (check_syntax_error(src, my_env, &i) == -1){
-		// printf("%d\n", i);
 		src = here_doc(src, i, my_env);
-    	/* herdoc hna ghanraj3 l lexer->i  wo ila kan kykhalf size dyal src rah error tama nfta7 les heredoc hta l3ando*/
 		return;
 	}
 	else
-		src = here_doc(src, ft_strlen(src), my_env);  // "" and '' qoute mochkil
-	// printf("---> %s\n-+--+-> %zu\n", src, ft_strlen(src));
-	// return;
-
+		src = here_doc(src, ft_strlen(src), my_env);
 	if (!src)
 		return;
-
 	lexer = init_lexer(src);
 	lexer->not_expand = 0;
 	lexer_skip_whitespace(lexer);
@@ -91,22 +84,15 @@ void	tac_compile(char* src, t_envp* my_env)
 		token = lexer_next_token(lexer);
 	}
 
-	// lexer freeeeee
-	free(lexer); /// i7timal ykon more leaks fi ldakhal
-	free(token); //// i7timal ykon more leaks in insind
+	// lexer free ms not just here
+	free(lexer);
+	free(token);
 
-/* LEAKS  : 7ata n7ayd lprantage wo les function dyalo 3ad nchof m3ah */
-
-	// printf("LOGNEM=%s\n", getenv("LOGNAME"));
-	// execution part HERE!!z
 	// printf("\033[0;34m                     ---------------------\n                     | LINKED_LIST FINAL |\n                     ---------------------\n\033[0m");
 	// print_node(list, my_env);
 	if (list)
+	{	
 		execution(list, my_env);
-	if (list)
-		free_list(list);   // ndya khss nrja3 m3a lcod wo nfrii li khas ytfriya ms 7ata ntchiki readline achman lik filha
+		free_list(list);
+	}
 }
-
-/*::::::::::::::::::::::::::::::::::::::::::::::::::::::SEGNAL:::::::::::::::::::::::::::::::::::::;:::::::::::::::::::::::::::::::::::::::
-1) ay while katssana input khas ykono fiha les function li kayhandliw segnal aw l funcion le ktcheke segnal (lmohim chi 7aja b7al haka ):::
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
