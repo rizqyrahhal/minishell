@@ -12,7 +12,7 @@ void	ex_exit(char **sp, t_envp *myenv)
 		myenv->status = 255;
 		exit (255);
 	}
-	printf("exit\n");
+//	printf("exit\n");
 	if (sp[1])
 		myenv->status = ft_atoi(sp[1]) % 256;
 	exit(myenv->status);

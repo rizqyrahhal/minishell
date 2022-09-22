@@ -28,7 +28,9 @@ void	arr_deletee(char **my_env, char **s, char *str)
 		}
 		else
 			s[i++] = ft_strdup(my_env[j++]);
+		free(my_env[j - 1]);
 	}
+	free(my_env);
 	s[i] = NULL;
 }
 
@@ -56,7 +58,6 @@ char**	ft_removee(char *my_env[], char *var)
 
 	k = arr_size(my_env);
 	s = malloc(k * sizeof (char*));
-
 	arr_deletee(my_env, s, var);
 	return (s);
 }

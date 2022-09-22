@@ -34,8 +34,9 @@
 #define MIN(a, b)\
    a < b ? a : b
 
-#define SIGHEREDOC 1337
-#define SIGQUIT_INCHILD -1337
+#define SIGHEREDOC 13
+#define SIGQUIT_INCHILD 37
+#define SIGINT_ 1337
 // ********************************************* token.h
 
 typedef struct s_token

@@ -150,6 +150,19 @@ char*	special_vars(char* s, int c, int *k, t_envp * my_env)
 	return (s);
 }
 
+void	free_exp(t_exp *exp, int k)
+{
+	int i;
+
+	i = 0;
+	while (i < k)
+	{
+		free(exp[i].var);
+		free(exp[i].value);
+		i++;
+	}
+}
+
 char *ft_exp(char *s, t_exp *exp, t_envp *my_env, int count)
 {
 	int i = 0;
@@ -164,6 +177,8 @@ char *ft_exp(char *s, t_exp *exp, t_envp *my_env, int count)
 		{
 			while (s[i] == '$' && s[i])
 				i++;
+			if (s[i] == '\0')
+				break ;
 			if (ft_isdigit(s[i]) || s[i] == '?')
 				s = special_vars(s, s[i], &i, my_env);
 			else
@@ -172,6 +187,7 @@ char *ft_exp(char *s, t_exp *exp, t_envp *my_env, int count)
 		else
 			i++;
 	}
+	//free_exp(exp, arr_size(my_env->env));
 	return (s);
 }
 

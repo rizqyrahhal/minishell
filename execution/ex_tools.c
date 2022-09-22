@@ -20,6 +20,7 @@ void	er_ror(char* err, char* s)
 //	ft_putstr_fd("minishell: ", 2);
 //	ft_putstr_fd(s, 2);
 	ft_putstr_fd(ft_strjoin(s, err), 2);
+	free(s);
 }
 
 void	ex_ecu(char *path, char *sp[], t_envp *my_env, int out)

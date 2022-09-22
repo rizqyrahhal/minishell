@@ -19,6 +19,8 @@ int is_str(char *s)
 	i = 0;
 	while (s[i])
 	{
+		if (i == 0 && s[i] == '-')
+			i++;
 		if (!ft_isdigit(s[i]))
 			return (0);
 		i++;
@@ -211,7 +213,11 @@ int	pipes(int k, t_command *cmd, t_envp *my_env)
 //	}
 //	if (p.file1 == -1)
 //		put_error(ft_strjoin(av[1], " : No such file or directory\n"), 1);
-
+	i = -1;
 	child(p, k, cmd, my_env);
+	while (++i < k)
+		free(p->fd[i]);
+	free(p->fd);
+	free(p);
 	return (0);
 }

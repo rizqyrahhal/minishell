@@ -10,7 +10,7 @@ void	print_ar(char **arr, int out)
 	{
 		if (sea_rch(arr[i], '=')) {
             ft_putstr_fd(arr[i], out);
-            write(out, "\n", 2);
+            write(out, "\n", 1);
         }
 		i++;
 	}
@@ -76,6 +76,8 @@ void	arr_cpy(t_envp *my_env, char *str)
 	}
 	s[i] = NULL;
 	free_arr(my_env->env);
+	free(my_env->env);
+	free(str);
 	my_env->env = s;
 }
 

@@ -47,6 +47,9 @@ char	*get_path(char *s, char *cmd)
 			return (n_cmd);
 		n_cmd = NULL;
 	}
+	free_arr(sp);
+	free(tmp);
+	free(s);
 	if (n_cmd == NULL && access(cmd, X_OK) == 0)
 		return (cmd);
 	return (0);

@@ -110,7 +110,8 @@ char**	fix_cmd(char** s, int *i)
         j++;
     }
     str[j] = NULL;
-//	free_arr(s);
+	free_arr(s);
+	free_arr(sp);
  	return (str);
  }
 
@@ -155,4 +156,5 @@ void	execution(t_command* list, t_envp* my_env)
 	pipes(k, list, my_env);
 //    free_arr(list->cmd);
 	handle_signals(SIGQUIT);
+
 }

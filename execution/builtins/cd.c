@@ -28,7 +28,7 @@ void	ex_cd(char **sp, t_envp *my_env)
 			ft_add2env(my_env, ft_strjoin("OLDPWD=", old_cwd));
 		}
 		else if (k == 0) {
-			printf("minishell: cd: %s: No such file or directory\n", sp[1]);
+			perror(ft_strjoin("minishell: cd: ", sp[1]));
 			my_env->status = 1;
 		}
 	}

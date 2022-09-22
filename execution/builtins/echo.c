@@ -35,7 +35,8 @@ void	ex_echo(char **cmd, t_envp *myenv, int out)
 	while (cmd[i])
 	{
 		ft_putstr_fd(cmd[i], out);
-        write(out, " ", 1);
+		if (cmd[i + 1])
+        	write(out, " ", 1);
 		i++;
 	}
 	if (k == 1)
