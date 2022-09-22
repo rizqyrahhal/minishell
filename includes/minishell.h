@@ -6,75 +6,73 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/21 21:58:37 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:33:03 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
-#define MINISHELL_H
+# define MINISHELL_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/wait.h>
-#include <fcntl.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <sys/wait.h>
+# include <fcntl.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 // #include "readline/readline.h"
 // #include "readline/history.h"
-#include <unistd.h>
-#include <string.h>
+# include <unistd.h>
+# include <string.h>
 
-#include "libft.h"
+# include "libft.h"
 
-#define MAX(a, b)\
+# define MAX(a, b)\
    a > b ? a : b
 
-#define MIN(a, b)\
+# define MIN(a, b)\
    a < b ? a : b
 
-#define SIGHEREDOC 13
-#define SIGQUIT_INCHILD 37
-#define SIGINT_ 1337
+# define SIGHEREDOC 13
+# define SIGQUIT_INCHILD 37
+# define SIGINT_ 1337
 // ********************************************* token.h
 
 typedef struct s_token
 {
-	char* value;
+	char	*value;
 	enum
 	{
-		TOKEN_STRING, // cmd, argment, files, any other tokents ...
-		TOKEN_PIPE, // | pipe
-		TOKEN_IN, // < inpute redirection
-		TOKEN_HERDOC, // << her_doc
-		TOKEN_OU, // > output redirection
-		TOKEN_APPAND, // >> appandade output redirection
-		TOKEN_EOF, // \0 end of file
+		TOKEN_STRING,
+		TOKEN_PIPE,
+		TOKEN_IN,
+		TOKEN_HERDOC,
+		TOKEN_OU,
+		TOKEN_APPAND,
+		TOKEN_EOF,
 	} type;
-} t_token;
+}	t_token;
 
-t_token*	init_token(char* value, int type);
-char*		token_to_str(t_token* token);
-
+t_token	*init_token(char *value, int type);
+char	*token_to_str(t_token *token);
 
 // ******************************************************** struct.h
 typedef struct s_command_node
 {
-	char**	cmd;
-	int		infile; // < if input != 0
-	int		outfile; // > if output != 1
-	// char*	name_of_file; // last output file name
-//	int	status;
-	int		splite[262144];
-	struct s_command_node *next;
-} t_command;
+	char					**cmd;
+	int						infile;
+	int						outfile;
+	int						splite[262144];
+	struct s_command_node	*next;
+}	t_command;
 
 typedef struct s_envp
 {
-	char	**env; // hna fin ghanzido ila exporta chi variable bar realooc wola ghanm7iwh ila unseta
+	char	**env;
 	int		status;
 	char	*PWD;
+	int		num_pipe;
 }	t_envp;
 
 //************************************************* lexer.h
@@ -113,6 +111,7 @@ typedef struct s_parser
 } t_parser;
 
 t_command*	parser(t_lexer* lexer, t_token* token, t_command* list);
+char*		get_string(t_envp *my_env, char *s, int count);
 
 // *********************************************** tac.h
 typedef struct s_tac
@@ -131,11 +130,14 @@ void	print_node(t_command *lst, t_envp* my_env);
 t_command*	ft_lstnew(char** s, int infile, int outfile);
 void		ft_addfront(t_command** list, t_command* new);
 
+int		check_syntax_error(char *src, t_envp* my_env, int *i);
+char*	here_doc(char* src, int stop, t_envp* my_env);
+
 void	execution(t_command* list, t_envp* my_env);
 int		pipes(int k, t_command *cmd, t_envp *my_env);
 
 //   signals
-
 void	handle_signals(int sig);
 void	signal_ctrl_c();
+
 #endif

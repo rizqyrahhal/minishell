@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/22 15:46:34 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:41:05 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	main(int argc, char *argv[], char *env[])
 	fill_env(env, my_env);
 	my_env->PWD = getcwd(NULL, 0);
 	my_env->status = 0;
+	my_env->num_pipe = 0;
 	if (argc == 1)
 	{
 		while (1)

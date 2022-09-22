@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/22 15:55:25 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:17:13 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	free_parser(t_parser* parser)
 	free(parser->cmd);
 	free(parser);
 }
-
-char*	get_string(t_envp *my_env, char *s, int count);  // move to heder file
 
 t_tac*	ft_rediriction(t_tac* tac)
 {
@@ -200,6 +198,7 @@ t_command*	parser(t_lexer* lexer, t_token* token, t_command* list)
 	{
 		tac = simple_command(tac);
 		if (tac->token->type == TOKEN_PIPE){
+			tac->lexer->my_env->num_pipe++;
 			tac->token = lexer_next_token(tac->lexer);
 		}
 		if (tac->parser){
