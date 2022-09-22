@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/19 14:48:46 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/21 21:59:15 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void signal_ctrl_c()
 {
 	write(2, "\n", 1);
 	rl_on_new_line();
-	rl_replace_line("\0", 0);
+	// rl_replace_line("\0", 0);
 	rl_redisplay();
 }
 
@@ -39,7 +39,7 @@ void	signal_ctrl_c_heredoc()
 
 void	signal_quit()
 {
-	rl_replace_line("\0", 0);
+	// rl_replace_line("\0", 0);
 }
 
 
@@ -68,7 +68,6 @@ int	main(int argc, char** argv, char** env)
 	my_env->env = (char**)malloc(sizeof(char*) * (ft_d_strlen(env) + 1));
 	fill_env(env, my_env);
 	my_env->PWD = getcwd(NULL, 0);
-	printf("%s\n", my_env->PWD);
 	my_env->status = 0;
 	if (argc == 1)
 	{
