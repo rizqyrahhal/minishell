@@ -6,147 +6,85 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:59:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/22 16:08:57 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/23 21:41:03 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	single_qoute(char* src, int *i, t_envp* my_env)
+int	single_qoute(char *src, int *i)
 {
 	if (src[*i] == '\'')
 	{
-		i++;
+		*i += 1;
 		if (src[*i] == '\0')
-		{
-			printf("minishell: syntax error near unexpected token `\''\n");
-			my_env->status = 1;
 			return (-1);
-		}
 		if (src[*i] == '\'')
-			i++;
+			*i += 1;
 		else
 		{	
-			while(src[*i] != '\'' && src[*i] != '\0')
+			while (src[*i] != '\'' && src[*i] != '\0')
 			{
-				i++;
+				*i += 1;
 				if (src[*i] == '\0')
-				{
-					printf("minishell: syntax error near unexpected token `\''\n");
-					my_env->status = 1;
 					return (-1);
-				}
 			}
-			i++;
+			*i += 1;
 		}
 	}
 	return (0);
 }
 
-int	double_qoute(char* src, int i, t_envp* my_env)
+int	double_qoute(char *src, int *i)
 {
-	if (src[i] == '"')
+	if (src[*i] == '"')
 	{
-		i++;
-		if (src[i] == '\0')
-		{
-			printf("minishell: syntax error near unexpected token `\"'\n");
-			my_env->status = 1;
+		*i += 1;
+		if (src[*i] == '\0')
 			return (-1);
-		}
-		if (src[i] == '"')
-			i++;
+		if (src[*i] == '"')
+			*i += 1;
 		else
 		{
-			while(src[i] != '"' && src[i] != '\0')
+			while (src[*i] != '"' && src[*i] != '\0')
 			{
-				i++;
-				if (src[i] == '\0')
-				{
-					printf("minishell: syntax error near unexpected token `\"'\n");
-					my_env->status = 1;
+				*i += 1;
+				if (src[*i] == '\0')
 					return (-1);
-				}
 			}	
-			i++;
+			*i += 1;
 		}
 	}
 	return (0);
 }
 
-int	unclosed_quotes(char* src, t_envp* my_env)
+int	unclosed_quotes(char *src, t_envp *my_env, int **k)
 {
 	int	i;
 
 	i = 0;
-	while(src[i])
+	while (src[i])
 	{
-		while(src[i] != '\'' && src[i] != '"' && src[i])
+		while (src[i] != '\'' && src[i] != '"' && src[i])
 			i++;
-
-		// if (single_qoute(src, &i, my_env) == -1)
-		// 	return (-1);
-		// if (double_qoute(src, i, my_env) == -1)
-		// 	return (-1);
-		
-		if (src[i] == '\'')
+		**k = i;
+		if (single_qoute(src, &i) == -1)
 		{
-			i++;
-			if (src[i] == '\0')
-			{
-				printf("minishell: syntax error near unexpected token `\''\n");
-				my_env->status = 1;
-				return (-1);
-			}
-			if (src[i] == '\'')
-				i++;
-			else
-			{	
-				while(src[i] != '\'' && src[i] != '\0')
-				{
-					i++;
-					if (src[i] == '\0')
-					{
-						printf("minishell: syntax error near unexpected token `\''\n");
-						my_env->status = 1;
-						return (-1);
-					}
-				}
-				i++;
-			}
+			printf("minishell: syntax error near unexpected token `\''\n");
+			my_env->status = 258;
+			return (-1);
 		}
-		
-		if (src[i] == '"')
+		if (double_qoute(src, &i) == -1)
 		{
-			i++;
-			if (src[i] == '\0')
-			{
-				printf("minishell: syntax error near unexpected token `\"'\n");
-				my_env->status = 1;
-				return (-1);
-			}
-			if (src[i] == '"')
-				i++;
-			else
-			{
-				while(src[i] != '"' && src[i] != '\0')
-				{
-					i++;
-					if (src[i] == '\0')
-					{
-						printf("minishell: syntax error near unexpected token `\"'\n");
-						my_env->status = 1;
-						return (-1);
-					}
-				}	
-				i++;
-			}
+			printf("minishell: syntax error near unexpected token `\"'\n");
+			my_env->status = 258;
+			return (-1);
 		}
 	}
 	return (0);
 }
 
-int	check_syntax_error(char *src, t_envp* my_env, int *i)
+int	check_syntax_error(char *src, t_envp *my_env, int *i)
 {
 	t_lexer*	lexer;
 	t_lexer*	next_lexer;
@@ -158,8 +96,6 @@ int	check_syntax_error(char *src, t_envp* my_env, int *i)
 	lexer->my_env = my_env;
 	next_lexer->my_env = my_env;
 	token = lexer_next_token(lexer);
-
-
 	if (token->type == TOKEN_PIPE)
 	{
 		printf("minishell: syntax error near unexpected token `|'\n");
@@ -199,7 +135,7 @@ int	check_syntax_error(char *src, t_envp* my_env, int *i)
 		}
 		token = lexer_next_token(lexer);
 	}
-	if (unclosed_quotes(src, my_env) == -1)
+	if (unclosed_quotes(src, my_env, &i) == -1)
 		return(-1);
 	return (0);
 }

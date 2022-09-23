@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/22 19:33:03 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/23 21:28:11 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@
 # define SIGHEREDOC 13
 # define SIGQUIT_INCHILD 37
 # define SIGINT_ 1337
-// ********************************************* token.h
 
+// ********************************************* token.h
 typedef struct s_token
 {
 	char	*value;
@@ -76,7 +76,6 @@ typedef struct s_envp
 }	t_envp;
 
 //************************************************* lexer.h
-
 typedef struct s_lexer
 {
 	char*			src;
@@ -96,7 +95,6 @@ char		lexer_peek(t_lexer* lexer, int offset);
 t_token*	lexer_advance_with(t_lexer* lexer, t_token* token);
 t_token*	lexer_advance_current(t_lexer* lexer, int type);
 t_token*	lexer_next_token(t_lexer* lexer);
-
 
 void	fill_env(char *env[], t_envp *my_env);
 

@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/22 19:17:13 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/23 13:07:48 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,12 +136,8 @@ t_tac*	ft_rediriction(t_tac* tac)
 	}
 
 	if (tac->parser->infile == -1 || tac->parser->outfile == -1 || tac->parser->no_assign == -1)
-	{
 		while (tac->token->type != TOKEN_PIPE && tac->token->type != TOKEN_EOF) // move to next command after pipe |
-		{
 			tac->token = lexer_next_token(tac->lexer);
-		}		
-	}
 	return (tac);
 }
 

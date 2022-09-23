@@ -1,17 +1,17 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/rarahhal/Desktop/minishell'
 cc -Wall -Werror -Wextra -c src/main.c -o src/main.o
- 
 cc -Wall -Werror -Wextra -c src/lexer.c -o src/lexer.o
 cc -Wall -Werror -Wextra -c src/token.c -o src/token.o
 cc -Wall -Werror -Wextra -c src/tac.c -o src/tac.o
+ 
 cc -Wall -Werror -Wextra -c src/syntax_error.c -o src/syntax_error.o
 cc -Wall -Werror -Wextra -c src/here_doc.c -o src/here_doc.o
 cc -Wall -Werror -Wextra -c src/parser.c -o src/parser.o
 cc -Wall -Werror -Wextra -c src/env.c -o src/env.o
 cc -Wall -Werror -Wextra -c src/expanda.c -o src/expanda.o
-cc -Wall -Werror -Wextra -c src/execution.c -o src/execution.o
  
+cc -Wall -Werror -Wextra -c src/execution.c -o src/execution.o
 cc -Wall -Werror -Wextra -c execution/tools/tools1.c -o execution/tools/tools1.o
 cc -Wall -Werror -Wextra -c execution/tools/arr_tools.c -o execution/tools/arr_tools.o
 cc -Wall -Werror -Wextra -c execution/tools/arr_tools2.c -o execution/tools/arr_tools2.o
@@ -44,7 +44,6 @@ cc -Wall -Werror -Wextra -c execut_libft/ft_strlcpy.c -o execut_libft/ft_strlcpy
 cc -Wall -Werror -Wextra -c execut_libft/ft_isalpha.c -o execut_libft/ft_isalpha.o
 cc -Wall -Werror -Wextra -c execut_libft/ft_tolower.c -o execut_libft/ft_tolower.o
 cc -Wall -Werror -Wextra -c execut_libft/ft_isdigit.c -o execut_libft/ft_isdigit.o
- 
 cc -Wall -Werror -Wextra -c execut_libft/ft_putstr_fd.c -o execut_libft/ft_putstr_fd.o
 cc -Wall -Werror -Wextra -c execut_libft/ft_itoa.c -o execut_libft/ft_itoa.o
 cc -Wall -Werror -Wextra -c execut_libft/ft_substr.c -o execut_libft/ft_substr.o
