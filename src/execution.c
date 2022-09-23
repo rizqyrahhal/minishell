@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:42:37 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/16 18:18:34 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:50:19 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,13 +147,13 @@ char**	fix_cmd(char** s, int *i)
 //		minishell > export var1+=$var
 void	execution(t_command* list, t_envp* my_env)
 {
-	int	k;
+	// int	k;
 
 	handle_signals(SIGQUIT_INCHILD);
-	k = struct_size(list) - 1;
+	// k = struct_size(list) - 1;
     check_list(&list);
 //	my_env->splite = 0;
-	pipes(k, list, my_env);
+	pipes(my_env->num_pipe, list, my_env);
 //    free_arr(list->cmd);
 	handle_signals(SIGQUIT);
 

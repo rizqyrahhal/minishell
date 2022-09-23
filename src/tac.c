@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/19 14:38:36 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:13:44 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	print_node(t_command *lst, t_envp* my_env)
 	list = lst;
 	(void)my_env;
 	printf("\033[0;31m|--__---### All Data of Linked List Structre ###---__--|\033[0m\n");
+	printf("pipe_numbere: %d\n", my_env->num_pipe);
 	while (list != NULL)
 	{
 		i = 0;
@@ -51,62 +52,48 @@ void	free_list(t_command* list)
 	free(list);
 }
 
-int		check_syntax_error(char *src, t_envp* my_env, int *i); /// ajoute ou part tac.h
-char*	here_doc(char* src, int stop, t_envp* my_env);   /// ajoute ou part tac.h
-
 void	tac_compile(char* src, t_envp* my_env)
 {
 	t_lexer*	lexer;
 	t_token*	token;
 	t_command*	list;
-	int			i = 0;
+	int			i;
 
-	// function  pour check les error comme an while lope in src character par chararcter   (here or in main Function)
-	// static int	error_befor_parser(char* src);  (function roturn exite status)
-	if (check_syntax_error(src, my_env, &i) == -1){
-		// printf("%d\n", i);
+	i = 0;
+	if (check_syntax_error(src, my_env, &i) == -1)
+	{
 		src = here_doc(src, i, my_env);
-    	/* herdoc hna ghanraj3 l lexer->i  wo ila kan kykhalf size dyal src rah error tama nfta7 les heredoc hta l3ando*/
 		return;
 	}
 	else
-		src = here_doc(src, ft_strlen(src), my_env);  // "" and '' qoute mochkil
-	// printf("---> %s\n-+--+-> %zu\n", src, ft_strlen(src));
-	// return;
-
+		src = here_doc(src, ft_strlen(src), my_env);
 	if (!src)
 		return;
-
 	lexer = init_lexer(src);
 	lexer->not_expand = 0;
 	lexer_skip_whitespace(lexer);
 	lexer->my_env = my_env;
 	token = lexer_next_token(lexer);
-	list = (t_command*)malloc(sizeof(t_command));
+	list = (t_command *)malloc(sizeof(t_command));
 	list = NULL;
 	while(token->type != TOKEN_EOF)
 	{
-//		printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(token));
 		list = parser(lexer, token, list);
 		token = lexer_next_token(lexer);
 	}
+	
+	// lexer free ms not just here
+	free(lexer);
+	free(token);
 
-	// lexer freeeeee
-	free(lexer); /// i7timal ykon more leaks fi ldakhal
-	free(token); //// i7timal ykon more leaks in insind
-
-/* LEAKS  : 7ata n7ayd lprantage wo les function dyalo 3ad nchof m3ah */
-
-	// printf("LOGNEM=%s\n", getenv("LOGNAME"));
-	// execution part HERE!!z
-	// printf("\033[0;34m                     ---------------------\n                     | LINKED_LIST FINAL |\n                     ---------------------\n\033[0m");
-	// print_node(list, my_env);
+	printf("\033[0;34m                     ---------------------\n                     | LINKED_LIST FINAL |\n                     ---------------------\n\033[0m");
+	print_node(list, my_env);
 	if (list)
+	{
 		execution(list, my_env);
-	if (list)
-		free_list(list);   // ndya khss nrja3 m3a lcod wo nfrii li khas ytfriya ms 7ata ntchiki readline achman lik filha
+		my_env->num_pipe = 0;
+		free_list(list);
+	}
 }
 
-/*::::::::::::::::::::::::::::::::::::::::::::::::::::::SEGNAL:::::::::::::::::::::::::::::::::::::;:::::::::::::::::::::::::::::::::::::::
-1) ay while katssana input khas ykono fiha les function li kayhandliw segnal aw l funcion le ktcheke segnal (lmohim chi 7aja b7al haka ):::
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+//		printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(token));

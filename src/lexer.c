@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/19 14:36:25 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/22 15:57:13 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,7 @@ t_token* lexer_collect_string(t_lexer* lexer) {
 		
 		// double qoute
 		if (lexer->c == '"'){
-			// Double Qoute '"'  ::: la meme implementation comme single qoute ---->  bil2idafa ila $$$$$$$$$   ($_ hna ktafiche awl env) 
 			lexer_advance(lexer);
-			//  && lexer->c != ' '
     		while (lexer->c != '\0' && lexer->c != '"') {
         		value = ft_d_realloc(value);
     	    	value[len++] = lexer->c;
@@ -182,6 +180,5 @@ t_token*	lexer_next_token(t_lexer* lexer)
 		else if (lexer->c == '\0')
 			break;
 	}
-
 	return (init_token(0, TOKEN_EOF));
 }
