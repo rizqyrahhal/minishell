@@ -1,5 +1,5 @@
 {
-  "homebrew_version": "3.6.0",
+  "homebrew_version": "3.6.2",
   "used_options": [
 
   ],
@@ -8,10 +8,11 @@
   ],
   "built_as_bottle": false,
   "poured_from_bottle": false,
+  "loaded_from_api": false,
   "installed_as_dependency": false,
   "installed_on_request": true,
   "changed_files": null,
-  "time": 1662825210,
+  "time": 1663836979,
   "source_modified_time": 1605728412,
   "compiler": "clang",
   "aliases": [
@@ -21,9 +22,9 @@
 
   ],
   "source": {
-    "path": "/goinfre/rarahhal/.brew/Library/Taps/homebrew/homebrew-core/Formula/readline.rb",
+    "path": "/Users/lsemlali/.brew/Library/Taps/homebrew/homebrew-core/Formula/readline.rb",
     "tap": "homebrew/core",
-    "tap_git_head": "9a9e6581fe56456478025ed4c345f4552c6a253b",
+    "tap_git_head": "c0bd11c7ee5c61377233a52da8dd09638af03571",
     "spec": "stable",
     "versions": {
       "stable": "8.1.2",
