@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/19 14:35:18 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/23 23:01:31 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ char*	here_doc(char* src, int stop, t_envp* my_env)
 	t_lexer *lexer;
 	t_token *token;
 	lexer = init_lexer(src);
-	lexer->my_env = my_env;
 	lexer->not_expand = -1;
 	i = 0;
 	j = 0;
@@ -91,6 +90,7 @@ char*	here_doc(char* src, int stop, t_envp* my_env)
 					here_doc = readline("> ");
 					if (!here_doc || !ft_strncmp(delemeter, here_doc, ft_strlen(delemeter) + 1))
 						break ;
+					here_doc = get_string(my_env, here_doc, 0);
 					write(fd, here_doc, ft_strlen(here_doc));
 					write(fd, "\n", 1);
 					free(here_doc);

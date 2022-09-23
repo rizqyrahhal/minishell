@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/23 21:28:11 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/24 00:19:43 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,14 +122,15 @@ typedef struct s_tac
 
 
 void	tac_compile(char* src, t_envp* my_env);
+int		check_syntax_error(char *src, int *i);
+int		unclosed_quotes(char *src, int **k);
+char*	here_doc(char* src, int stop, t_envp* my_env);
 void	print_node(t_command *lst, t_envp* my_env);
 
 // function of linked list
 t_command*	ft_lstnew(char** s, int infile, int outfile);
 void		ft_addfront(t_command** list, t_command* new);
 
-int		check_syntax_error(char *src, t_envp* my_env, int *i);
-char*	here_doc(char* src, int stop, t_envp* my_env);
 
 void	execution(t_command* list, t_envp* my_env);
 int		pipes(int k, t_command *cmd, t_envp *my_env);
