@@ -6,7 +6,7 @@
 #    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 17:12:13 by rarahhal          #+#    #+#              #
-#    Updated: 2022/09/22 10:54:17 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/09/24 00:18:56 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS = 	src/main.c \
 		src/token.c \
 		src/tac.c \
 		src/syntax_error.c \
+		src/unclosed_quotes.c \
 		src/here_doc.c \
 		src/parser.c \
 		src/env.c \

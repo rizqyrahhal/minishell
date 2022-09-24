@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/22 19:13:44 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/23 22:51:48 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,9 @@ void	tac_compile(char* src, t_envp* my_env)
 	int			i;
 
 	i = 0;
-	if (check_syntax_error(src, my_env, &i) == -1)
+	if (check_syntax_error(src, &i) == -1)
 	{
+		my_env->status = 258;
 		src = here_doc(src, i, my_env);
 		return;
 	}
