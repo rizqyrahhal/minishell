@@ -6,7 +6,7 @@
 #    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 17:12:13 by rarahhal          #+#    #+#              #
-#    Updated: 2022/09/24 00:18:56 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/09/24 18:00:23 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ EXECUT_LIBFT = execut_libft/ft_split.c \
 #
 #$(NAME):  $(OBJS) $(OBJS_L) $(OBJS_EL)
 #	$(CC) -lreadline $(FLAGS) $(OBJS) $(OBJS_L) $(OBJS_EL) -o $(NAME)
+
 $(NAME):  $(SRCS) $(LIBFT) $(EXECUT_LIBFT)
 	$(sig_remove_ctr_c)
 	$(CC) -lreadline -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include $(FLAGS) $(SRCS) $(LIBFT) $(EXECUT_LIBFT) -o $(NAME)
