@@ -16,71 +16,31 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-unsigned int	MyRand(unsigned int start_range,unsigned int end_range)
+int	rand__(void)
 {
-    static unsigned int	rand;
+	static unsigned long int	next;
 
-	rand += 44257; /* Any nonzero start state will work. */
-    /*check for valid range.*/
-	if(start_range == end_range)
-		return start_range;
-
-    /*get the random in end-range.*/
-    rand += 941;
-    rand %= end_range;
-
-    /*get the random in start-range.*/
-    while(rand < start_range)
-        rand = rand + end_range - start_range;
-	// printf("rand --- : %u\n", rand);
-	return (rand);
+	next += 1;
+	next = next * 1103515245 + 12345;
+	return ((unsigned int)(next / 65536) % 32768);
 }
 
-int	ft_rand(void)
+char	*ft_randstring(size_t length)
 {
-	return ((int)MyRand(0, 1000));
-}
+	char	*s;
+	char	*str;
+	size_t	i;
+	int		k;
 
-char *ft_randstring(size_t length)
-{
-    static char	*charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.-#'?!";
-    char		*randomString;
-	// int			n;
-
-	randomString = NULL;
-	if (length)
+	s = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	i = 0;
+	str = malloc(length + 1);
+	while (i < length)
 	{
-		randomString = malloc(sizeof(char) * (length +1));
-        if (randomString)
-		{
-            for (int n = 0;n < (int)length;n++) {            
-                int key = ft_rand() % (int)(sizeof(charset) -1);
-                randomString[n] = charset[key];
-            }
-            randomString[length] = '\0';
-        }
-    }
-
-    return randomString;
+		k = rand__() % 62;
+		str[i] = s[k];
+		i++;
+	}
+	str[i] = 0;
+	return (str);
 }
-
-// char *ft_randstring(size_t length) {
-
-//     static char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.-#'?!";        
-//     char *randomString = NULL;
-
-//     if (length) {
-//         randomString = malloc(sizeof(char) * (length +1));
-
-//         if (randomString) {            
-//             for (int n = 0;n < (int)length;n++) {            
-//                 int key = rand() % (int)(sizeof(charset) -1);
-//                 randomString[n] = charset[key];
-//             }
-
-//             randomString[length] = '\0';
-//         }
-//     }
-
-//     return randomString;
-// }

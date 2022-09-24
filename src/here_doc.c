@@ -153,6 +153,5 @@ char	*here_doc(char *src, int stop, t_envp *my_env)
 		}
 	}
 	str[j] = '\0';
-	printf("src after change : %s\n", str);
 	return (str);
 }
