@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/23 13:07:48 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/24 17:00:02 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ t_tac*	simple_command(t_tac* tac)
 	}
 	else
 	{
-		new = ft_lstnew(NULL, -1, -1);
+		new = ft_lstnew(NULL, 0, 1);
 		new->madir_walo = -404;
 		ft_addfront(&tac->list, new);
 	}

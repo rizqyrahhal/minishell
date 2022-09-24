@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/22 17:41:05 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/24 16:51:04 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void signal_ctrl_c()
 {
 	write(2, "\n", 1);
 	rl_on_new_line();
-	rl_replace_line("\0", 0);
+	// rl_replace_line("\0", 0);
 	rl_redisplay();
 }
 
@@ -39,13 +39,13 @@ void	signal_ctrl_c_heredoc()
 void	signal_quit()
 {
 	printf("Quit: 3\n");
-	rl_replace_line("\0", 0);
+	// rl_replace_line("\0", 0);
 }
 
 void	signal_()
 {
 	printf("\n");
-	rl_replace_line("\0", 0);
+	// rl_replace_line("\0", 0);
 }
 
 

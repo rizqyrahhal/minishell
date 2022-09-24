@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/23 22:51:48 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/24 17:01:00 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	print_node(t_command *lst, t_envp* my_env)
 	printf("pipe_numbere: %d\n", my_env->num_pipe);
 	while (list != NULL)
 	{
-		printf("madir walo >>>>> \n");
 		printf("madir walo > %d\n", list->madir_walo);
 		if (list->madir_walo == -404) {
 			list = list->next;
