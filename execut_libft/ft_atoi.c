@@ -11,31 +11,31 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+//#include <limits.h>
+//static int	my_atoi(const char *str)
+//{
+//	long	n;
+//	long	i;
+//
+//	i = 0;
+//	n = 0;
+//	while (str[i] >= '0' && str[i] <= '9' && str[i])
+//	{
+//		n = n * 10 + (str[i] - '0');
+//		i++;
+//	}
+//	return (n);
+//}
 
-static int	my_atoi(const char *str)
-{
-	int	n;
-	int	i;
-
-	i = 0;
-	n = 0;
-	while (str[i] >= '0' && str[i] <= '9' && str[i])
-	{
-		n = n * 10 + (str[i] - '0');
-		i++;
-	}
-	return (n);
-}
-
-static int	my_strlen(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] >= '0' && str[i] <= '9')
-		i++;
-	return (i);
-}
+//static int	my_strlen(const char *str)
+//{
+//	int	i;
+//
+//	i = 0;
+//	while (str[i] && str[i] >= '0' && str[i] <= '9')
+//		i++;
+//	return (i);
+//}
 
 static int	my_skip(const char *str)
 {
@@ -56,9 +56,9 @@ static int	my_skip(const char *str)
 
 int	ft_atoi(const char *str)
 {
-	int	i;
-	int	p;
-	int	n;
+	long	i;
+	long	p;
+	long	n;
 
 	p = 1;
 	i = my_skip(str);
@@ -66,12 +66,6 @@ int	ft_atoi(const char *str)
 	{
 		i = -i;
 		p = -1;
-	}
-	if (my_atoi(&str[i]) > 2147483647 || my_strlen(&str[i]) > 10)
-	{
-		if (p == -1)
-			return (0);
-		return (-1);
 	}
 	n = 0;
 	while (str[i] >= '0' && str[i] <= '9' && str[i])

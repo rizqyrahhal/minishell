@@ -48,6 +48,8 @@ char**	fill_t(char** s)
 	char**	str;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	str = malloc((ft_d_strlen(s) + 1) * sizeof(char*));
 	while (s[i])
 	{
@@ -92,6 +94,8 @@ t_command*	ft_lstnew(char** cmd_data, int infile, int outfile)
 		n1->cmd = (char**)malloc(sizeof(char*) * ft_d_strlen(s) + 1);
 		n1->cmd = s;
 	}
+	else
+		n1->cmd = NULL;
 	n1->infile = infile;
 	n1->outfile = outfile;
 	n1->next = NULL;

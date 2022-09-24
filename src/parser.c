@@ -180,6 +180,13 @@ t_tac*	simple_command(t_tac* tac)
 		for (int l = 0; tac->parser->splite[l] != -2; l++){
 			new->splite[l] = tac->parser->splite[l];
 		}
+		new->madir_walo = 0;
+		ft_addfront(&tac->list, new);
+	}
+	else
+	{
+		new = ft_lstnew(NULL, -1, -1);
+		new->madir_walo = -404;
 		ft_addfront(&tac->list, new);
 	}
 	tac->parser->no_assign = 0;

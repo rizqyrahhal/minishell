@@ -19,7 +19,7 @@ int is_str(char *s)
 	i = 0;
 	while (s[i])
 	{
-		if (i == 0 && s[i] == '-')
+		if (i == 0 && (s[i] == '-' || s[i] == '+'))
 			i++;
 		if (!ft_isdigit(s[i]))
 			return (0);
@@ -106,6 +106,9 @@ void	multiple_p(t_pipe *p, int k, t_command *cmd, t_envp *my_env)
 		return;
 	}
 	if (p->pid1 == 0) {
+		if (cmd->madir_walo == -404) {
+			cmd = cmd->next;
+		}
 		frst_cmd(my_env, p->fd[0], cmd);
 	}
 	else {
@@ -163,9 +166,10 @@ void	child(t_pipe *p, int k, t_command *cmd, t_envp *my_env)
 	int status;
 //	if (p.cm == 3)
 //		k = ac - 6;
-	if (k > 0)
+	if (k > 0) {
 		multiple_p(p, k, cmd, my_env);
-	else
+	}
+	else if (cmd->madir_walo == 0)
 	{
 		p->pid1 = fork();
 
@@ -215,8 +219,10 @@ int	pipes(int k, t_command *cmd, t_envp *my_env)
 //		put_error(ft_strjoin(av[1], " : No such file or directory\n"), 1);
 	i = -1;
 	child(p, k, cmd, my_env);
-	while (++i < k)
+
+	while (++i < k) {
 		free(p->fd[i]);
+	}
 	free(p->fd);
 	free(p);
 	return (0);

@@ -122,19 +122,21 @@ char**	fix_cmd(char** s, int *i)
 
 	i = 0;
 	tmp = *list;
-	if (ft_strncmp((*list)->cmd[0], "export", 6) == 0 && ft_strlen((*list)->cmd[0]) == 6)
-		 return ;
 	while (tmp)
 	{
 		i = 0;
-		while (tmp->cmd[i])
+		if (tmp->madir_walo == -404 || (ft_strncmp(tmp->cmd[0], "export", 6) == 0 && ft_strlen(tmp->cmd[0]) == 6))
+			tmp = tmp->next;
+		else
 		{
-			if (tmp->splite[i] == 1 && sea_rch(tmp->cmd[i], ' '))
-				tmp->cmd = fix_cmd(tmp->cmd, &i);
-			else
-				i++;
+			while (tmp->cmd[i]) {
+				if (tmp->splite[i] == 1 && sea_rch(tmp->cmd[i], ' '))
+					tmp->cmd = fix_cmd(tmp->cmd, &i);
+				else
+					i++;
+			}
+			tmp = tmp->next;
 		}
-		tmp = tmp->next;
 	}
  }
 
@@ -151,10 +153,9 @@ void	execution(t_command* list, t_envp* my_env)
 
 	handle_signals(SIGQUIT_INCHILD);
 	// k = struct_size(list) - 1;
-    check_list(&list);
+	check_list(&list);
 //	my_env->splite = 0;
 	pipes(my_env->num_pipe, list, my_env);
 //    free_arr(list->cmd);
 	handle_signals(SIGQUIT);
-
 }

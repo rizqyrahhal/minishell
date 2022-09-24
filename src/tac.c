@@ -26,16 +26,22 @@ void	print_node(t_command *lst, t_envp* my_env)
 	printf("pipe_numbere: %d\n", my_env->num_pipe);
 	while (list != NULL)
 	{
-		i = 0;
-		printf("COMMAND: ");
-		while (list->cmd[i])
-		{
-			printf("[%s]=%d  ", list->cmd[i], list->splite[i]);
-			i++;
+		printf("madir walo >>>>> \n");
+		printf("madir walo > %d\n", list->madir_walo);
+		if (list->madir_walo == -404) {
+			list = list->next;
 		}
-		printf(", INfile: %d, OUTfile: %d", list->infile, list->outfile);
-		printf("\n");
-		list = list->next;
+		else {
+			i = 0;
+			printf("COMMAND: ");
+			while (list->cmd[i]) {
+				printf("[%s]=%d  ", list->cmd[i], list->splite[i]);
+				i++;
+			}
+			printf(", INfile: %d, OUTfile: %d", list->infile, list->outfile);
+			printf("\n");
+			list = list->next;
+		}
 	}
 }
 
@@ -44,7 +50,7 @@ void	free_list(t_command* list)
 	int	i;
 
 	i = 0;
-	while (list->cmd[i]){
+	while (list && list->madir_walo == 0 && list->cmd[i]){
 		free(list->cmd[i]);
 		i++;
 	}
@@ -81,13 +87,13 @@ void	tac_compile(char* src, t_envp* my_env)
 		list = parser(lexer, token, list);
 		token = lexer_next_token(lexer);
 	}
-	
+
 	// lexer free ms not just here
 	free(lexer);
 	free(token);
-
-	printf("\033[0;34m                     ---------------------\n                     | LINKED_LIST FINAL |\n                     ---------------------\n\033[0m");
-	print_node(list, my_env);
+////
+//	printf("\033[0;34m                     ---------------------\n                     | LINKED_LIST FINAL |\n                     ---------------------\n\033[0m");
+//	print_node(list, my_env);
 	if (list)
 	{
 		execution(list, my_env);

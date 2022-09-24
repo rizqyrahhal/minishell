@@ -32,7 +32,6 @@ void	ex_export(char **sp, t_envp *my_env, int out)
 	// int		status;
 	// oldpwd at first
 	i = 1;
-
 	if (sp[1] == NULL)
 		export_(my_env->env, out);
 	while (sp[i]) {

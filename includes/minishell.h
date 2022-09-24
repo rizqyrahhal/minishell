@@ -19,10 +19,10 @@
 # include <sys/stat.h>
 # include <sys/wait.h>
 # include <fcntl.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-// #include "readline/readline.h"
-// #include "readline/history.h"
+//# include <readline/readline.h>
+//# include <readline/history.h>
+ #include "readline/readline.h"
+ #include "readline/history.h"
 # include <unistd.h>
 # include <string.h>
 
@@ -61,6 +61,7 @@ char	*token_to_str(t_token *token);
 typedef struct s_command_node
 {
 	char					**cmd;
+	int 					madir_walo;
 	int						infile;
 	int						outfile;
 	int						splite[262144];
