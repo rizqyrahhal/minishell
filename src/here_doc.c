@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/24 17:59:17 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/24 20:32:02 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	open_heredoc(int fd, char *delemeter, t_envp *my_env)
 	{
 		handle_signals(SIGHEREDOC);
 		here_doc = readline("> ");
-		if (!here_doc || !ft_strncmp(delemeter, here_doc, ft_strlen(delemeter) + 1))
+		if (!here_doc || !ft_strncmp(delemeter, here_doc,
+				ft_strlen(delemeter) + 1))
 			break ;
 		here_doc = get_string(my_env, here_doc, 0);
 		write(fd, here_doc, ft_strlen(here_doc));
@@ -51,107 +52,78 @@ int	creat_heredoc(int fd, char *delemeter, t_envp *my_env)
 	return (0);
 }
 
-int	creat__file(char *src, int *i, char *str, int *j)
+
+t_heredoc	*init__(t_heredoc *here, char *src)
 {
-	char	*del_to_name;
-	int		k;
-	int		fd;
-	int 	a;
-	int		b;
-
-	a = *i;
-	b = *j;
-	del_to_name = ft_randstring(8);
-	fd = open(del_to_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	str = ft_d_realloc(str);
-	str = ft_d_realloc(str);
-	printf("---------%d---------------\n", (*i));
-	str[b++] = src[a++];
-	str[b++] = src[a++];
-	str[b] = '\0';
-	while ((src[a] == ' ' || src[a] == '\t') && src[a]){
-		str = ft_d_realloc(str);
-		str[b++] = src[a++];
-		str[b] = '\0';
-	}
-	k = 0;
-	while (del_to_name && del_to_name[k])
-	{
-		str = ft_d_realloc(str);
-		str[b++] = del_to_name[k++];
-		str[b] = '\0';
-	}
-	*i = a;
-	*j = b;
-	return (fd);
+	here = malloc(sizeof(t_heredoc));
+	here->lexer = init_lexer(src);
+	here->lexer->not_expand = -1;
+	here->i = 0;
+	here->j = 0;
+	here->str = malloc(1);
+	here->str[0] = 0;
+	return (here);
 }
-
-
-
-
 
 char	*here_doc(char *src, int stop, t_envp *my_env)
 {
-	int		i;
-	char*	str;
-	int		j;
-	char*	del_to_name;
-	int		k;
-	int		fd;
+	t_heredoc	*here;
 
-	t_lexer *lexer;
-	t_token *token;
-	lexer = init_lexer(src);
-	lexer->not_expand = -1;
-	i = 0;
-	j = 0;
-	str = malloc(1);
-	str[0] = 0;
-	while(src && src[i] && i < stop)
+	here = malloc(sizeof(t_heredoc));
+	here = init__(here, src);
+	while (src && src[here->i] && here->i < stop)
 	{
-		k = 0;
-		if (src[i] == '<' && src[i + 1] == '<')
+		if (src[here->i] == '<' && src[here->i + 1] == '<')
 		{
-			// fd = creat__file(src, &i, str, &j);
-			del_to_name = ft_randstring(8);
-			fd = open(del_to_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
-			
-			str = ft_d_realloc(str);
-			str = ft_d_realloc(str);
-			str[j++] = src[i++];
-			str[j++] = src[i++];		
-			str[j] = '\0';
-			while (src[i] && (src[i] == ' ' || src[i] == '\t')){
-				str = ft_d_realloc(str);
-				str[j++] = src[i++];
-				str[j] = '\0';
-			}
-
-			while (del_to_name && del_to_name[k])
-			{
-				str = ft_d_realloc(str);
-				str[j++] = del_to_name[k++];
-				str[j] = '\0';
-			}
-			// printf("src after change : %s\n size_src %zu\n i: %d\n", src, ft_strlen(src), i);
-			// printf("str after change : %s\n size_str %zu\n j: %d\n", str, ft_strlen(str), j);
-
-			while ((int)lexer->i <= i)
-				token = lexer_next_token(lexer);
-
-			while (src[i] && (src[i] != ' ' && src[i] != '\t' && src[i] != '>' && src[i] != '<' && src[i] != '|'))
-				i++;
-			if (creat_heredoc(fd, token->value, my_env) == -1)
-				return (NULL);
+			here = creat__file(here, src);
+			here = get_delemeter(here, src);
+			if (here->token->type == TOKEN_STRING)
+				if (creat_heredoc(here->fd, here->token->value, my_env) == -1)
+					return (NULL);
 		}
 		else
 		{
-			str = ft_d_realloc(str);
-			str[j++] = src[i++];
-			str[j] = '\0';
+			here->str = ft_d_realloc(here->str);
+			here->str[here->j++] = src[here->i++];
+			here->str[here->j] = '\0';
 		}
 	}
-	str[j] = '\0';
-	// printf("src after change : %s\n", str);
-	return (str);
+	here->str[here->j] = '\0';
+	return (here->str);
 }
+
+// t_heredoc	*creat__file(t_heredoc *here, char *src)
+// {
+// 	here->del_to_name = ft_randstring(8);
+// 	here->fd = open(here->del_to_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
+// 	here->str = ft_d_realloc(here->str);
+// 	here->str = ft_d_realloc(here->str);
+// 	here->str[here->j++] = src[here->i++];
+// 	here->str[here->j++] = src[here->i++];
+// 	here->str[here->j] = '\0';
+// 	while ((src[here->i] == ' ' || src[here->i] == '\t') && src[here->i])
+// 	{
+// 		here->str = ft_d_realloc(here->str);
+// 		here->str[here->j++] = src[here->i++];
+// 		here->str[here->j] = '\0';
+// 	}
+// 	here->k = 0;
+// 	while (here->del_to_name && here->del_to_name[here->k])
+// 	{
+// 		here->str = ft_d_realloc(here->str);
+// 		here->str[here->j++] = here->del_to_name[here->k++];
+// 		here->str[here->j] = '\0';
+// 	}
+// 	return (here);
+// }
+
+// t_heredoc	*get_delemeter(t_heredoc *here, char *src)
+// {
+// 	while ((int)here->lexer->i < here->i)
+// 		here->token = lexer_next_token(here->lexer);
+// 	while (src[here->i] && (src[here->i] != ' ' && src[here->i] != '\t'
+// 			&& src[here->i] != '>' && src[here->i] != '<'
+// 			&& src[here->i] != '|'))
+// 		here->i++;
+// 	return (here);
+// }

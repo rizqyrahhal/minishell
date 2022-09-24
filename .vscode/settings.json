@@ -5,6 +5,7 @@
 		"readline.h": "c",
 		"history.h": "c",
 		"rlstdc.h": "c",
-		"errno.h": "c"
+		"errno.h": "c",
+		"sstream": "c"
 	}
 }

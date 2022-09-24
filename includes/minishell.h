@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/24 00:19:43 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/24 20:31:35 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,12 +121,35 @@ typedef struct s_tac
 	t_parser*	parser;
 } t_tac;
 
+typedef struct s_heredoc
+{
+	int		i;
+	char*	str;
+	int		j;
+	char*	del_to_name;
+	int		k;
+	int		fd;
+	t_lexer *lexer;
+	t_token *token;
+}	t_heredoc;
+
 
 void	tac_compile(char* src, t_envp* my_env);
 int		check_syntax_error(char *src, int *i);
 int		unclosed_quotes(char *src, int **k);
 char*	here_doc(char* src, int stop, t_envp* my_env);
 void	print_node(t_command *lst, t_envp* my_env);
+
+//heredoc
+char		*here_doc(char *src, int stop, t_envp *my_env);
+t_heredoc	*init__(t_heredoc *here, char *src);
+int			creat_heredoc(int fd, char *delemeter, t_envp *my_env);
+void		open_heredoc(int fd, char *delemeter, t_envp *my_env);
+
+
+t_heredoc	*creat__file(t_heredoc *here, char *src);
+t_heredoc	*get_delemeter(t_heredoc *here, char *src);
+
 
 // function of linked list
 t_command*	ft_lstnew(char** s, int infile, int outfile);
