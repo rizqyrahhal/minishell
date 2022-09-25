@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:42:37 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/22 17:50:19 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/25 14:15:14 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ void	execution(t_command* list, t_envp* my_env)
 	// k = struct_size(list) - 1;
 	check_list(&list);
 //	my_env->splite = 0;
+
 	pipes(my_env->num_pipe, list, my_env);
 //    free_arr(list->cmd);
 	handle_signals(SIGQUIT);

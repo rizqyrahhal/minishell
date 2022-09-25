@@ -8,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Sat Sep 24 14:19:34 2022
+# Make data base, printed on Sun Sep 25 13:49:26 2022
 
 # Variables
 
@@ -33,16 +33,13 @@ _ = /usr/bin/make
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # makefile (from `Makefile', line 18)
-SRCS = src/main.c src/lexer.c src/token.c src/tac.c src/syntax_error.c src/unclosed_quotes.c src/here_doc.c src/parser.c src/env.c src/expanda.c src/execution.c execution/tools/tools1.c execution/tools/arr_tools.c execution/tools/arr_tools2.c execution/execute.c execution/ex_tools.c execution/ex_tools2.c execution/builtins/cd.c execution/builtins/echo.c execution/builtins/env.c execution/builtins/exit.c execution/builtins/export.c execution/builtins/pwd.c execution/builtins/unset.c execution/builtins/builtins_tools.c 
-# makefile (from `Makefile', line 68)
-OBJS = $(SRCS:.c=.o)
-# makefile (from `Makefile', line 67)
-READLINE = ~/.brew/opt/readline
+SRCS = src/main.c src/lexer.c src/token.c src/tac.c src/syntax_error.c src/unclosed_quotes.c src/here_doc.c src/here_doc_helper.c src/parser.c src/env.c src/expanda.c src/execution.c execution/tools/tools1.c execution/tools/arr_tools.c execution/tools/arr_tools2.c execution/execute.c execution/ex_tools.c execution/ex_tools2.c execution/builtins/cd.c execution/builtins/echo.c execution/builtins/env.c execution/builtins/exit.c execution/builtins/export.c execution/builtins/pwd.c execution/builtins/unset.c execution/builtins/builtins_tools.c 
 # environment
 VSCODE_CWD = /
 # environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.rOZNPuNdWT/Render
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.iv74BZYEkZ/Render
 # environment
+ 
 PATH = /Users/rarahhal/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Applications/Visual Studio Code.app/Contents/Resources/app/bin
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
@@ -51,7 +48,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.Mzd9CZQ043/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.MZwIfiNHY9/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -78,7 +75,7 @@ ZSH = /Users/rarahhal/.oh-my-zsh
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
-# makefile (from `Makefile', line 55)
+# makefile (from `Makefile', line 56)
 EXECUT_LIBFT = execut_libft/ft_split.c execut_libft/ft_atoi.c execut_libft/ft_strcmp.c execut_libft/ft_strchr.c execut_libft/ft_strlcpy.c execut_libft/ft_isalpha.c execut_libft/ft_tolower.c execut_libft/ft_isdigit.c execut_libft/ft_putstr_fd.c execut_libft/ft_itoa.c execut_libft/ft_substr.c
 # environment
 XPC_FLAGS = 0x0
@@ -90,7 +87,7 @@ MAKECMDGOALS := all
 HOMEBREW_CACHE = /tmp/rarahhal/Homebrew/Caches
 # environment
 SHLVL = 1
-# makefile (from `Makefile', line 44)
+# makefile (from `Makefile', line 45)
 LIBFT = libft/ft_calloc.c libft/ft_realloc.c libft/ft_strlen.c libft/ft_non_tokenable.c libft/ft_strjoin.c libft/ft_strdup.c libft/ft_strncmp.c libft/linked_list.c libft/ft_strnstr.c libft/ft_randstring.c 
 # makefile (from `Makefile', line 16)
 CC = cc
@@ -125,7 +122,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000003.Electron
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x1000000e.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -145,7 +142,7 @@ PAGER = less
 # environment
 LC_ALL = C
 # environment
-SECURITYSESSIONID = 186a8
+SECURITYSESSIONID = 187fc
 # automatic
 ^F = $(notdir $^)
 # default
@@ -154,18 +151,14 @@ SUFFIXES :=
 FLAGS = -Wall -Werror -Wextra
 # default
 .INCLUDE_DIRS = /usr/local/include
-# makefile (from `Makefile', line 70)
-OBJS_EL = $(EXECUT_LIBFT:.c=.o)
 # environment
 MAKELEVEL := 0
-# makefile (from `Makefile', line 69)
-OBJS_L = $(LIBFT:.c=.o)
 # environment
 LANG = C
 # environment
-VSCODE_PID = 3964
+VSCODE_PID = 95806
 # variable set hash-table stats:
-# Load=76/1024=7%, Rehash=0, Collisions=5/108=5%
+# Load=72/1024=7%, Rehash=0, Collisions=3/101=3%
 
 # Pattern-specific Variable Values
 
@@ -173,50 +166,15 @@ VSCODE_PID = 3964
 
 # Directories
 
-# . (device 16777227, inode 1497321): 19 files, no impossibilities.
-# execution (device 16777227, inode 1497437): 8 files, no impossibilities so far.
-# execution/builtins (device 16777227, inode 1497438): 17 files, no impossibilities so far.
-# execution/tools (device 16777227, inode 1497450): 7 files, no impossibilities so far.
-# src (device 16777227, inode 1497536): 23 files, no impossibilities so far.
-# execut_libft (device 16777227, inode 1497398): 47 files, no impossibilities so far.
-# libft (device 16777227, inode 1497459): 21 files, no impossibilities so far.
+# . (device 16777227, inode 1497321): 17 files, no impossibilities.
 
-# 142 files, no impossibilities in 7 directories.
+# 17 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
-%.o: %.c
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-# 1 implicit rules, 0 (0.0%) terminal.
+# No implicit rules.
 
 # Files
-
-execution/builtins/pwd.o: execution/builtins/pwd.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execution/builtins/pwd'
-#  Last modified 2022-09-24 14:15:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-execution/builtins/cd.o: execution/builtins/cd.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execution/builtins/cd'
-#  Last modified 2022-09-24 14:15:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
 
 # Not a target:
 src/unclosed_quotes.c:
@@ -245,18 +203,6 @@ execution/builtins/builtins_tools.c:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-execution/tools/arr_tools2.o: execution/tools/arr_tools2.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execution/tools/arr_tools2'
-#  Last modified 2022-09-24 14:15:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
 # Not a target:
 src/syntax_error.c:
 #  Implicit rule search has been done.
@@ -269,10 +215,9 @@ src/syntax_error.c:
 # Not a target:
 src/here_doc.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-24 11:45:00
+#  Last modified 2022-09-24 20:32:02
 #  File has been updated.
 #  Successfully updated.
- 
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
@@ -295,22 +240,10 @@ libft/ft_realloc.c:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-execution/builtins/echo.o: execution/builtins/echo.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execution/builtins/echo'
-#  Last modified 2022-09-24 14:15:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
 # Not a target:
 libft/linked_list.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-24 11:42:28
+#  Last modified 2022-09-24 16:49:03
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -330,18 +263,6 @@ libft/ft_strdup.c:
 #  Modification time never checked.
 #  File has not been updated.
 
-libft/ft_strlen.o: libft/ft_strlen.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `libft/ft_strlen'
-#  Last modified 2022-09-24 14:15:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
 # Not a target:
 src/env.c:
 #  Implicit rule search has been done.
@@ -350,42 +271,6 @@ src/env.c:
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-src/main.o: src/main.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `src/main'
-#  Last modified 2022-09-24 14:15:34
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-execution/builtins/export.o: execution/builtins/export.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execution/builtins/export'
-#  Last modified 2022-09-24 14:15:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-src/tac.o: src/tac.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `src/tac'
-#  Last modified 2022-09-24 14:15:34
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
 
 # Not a target:
 execut_libft/ft_itoa.c:
@@ -396,22 +281,10 @@ execut_libft/ft_itoa.c:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-execution/tools/tools1.o: execution/tools/tools1.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execution/tools/tools1'
-#  Last modified 2022-09-24 14:15:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
 # Not a target:
 libft/ft_randstring.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-24 11:42:28
+#  Last modified 2022-09-24 18:05:51
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -420,35 +293,14 @@ libft/ft_randstring.c:
 # Not a target:
 execution/ex_tools.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-24 11:42:28
+#  Last modified 2022-09-24 16:49:03
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
-src/lexer.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-09-24 11:42:29
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-src/lexer.o: src/lexer.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `src/lexer'
-#  Last modified 2022-09-24 14:15:34
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-# Not a target:
-execut_libft/ft_strchr.c:
+libft/ft_strnstr.c:
 #  Implicit rule search has been done.
 #  Last modified 2022-09-24 11:42:28
 #  File has been updated.
@@ -465,23 +317,11 @@ execut_libft/ft_strchr.c:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-24 11:42:28
+#  Last modified 2022-09-24 20:32:22
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-execut_libft/ft_substr.o: execut_libft/ft_substr.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execut_libft/ft_substr'
-#  Last modified 2022-09-24 14:15:36
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
 
 # Not a target:
 execut_libft/ft_isdigit.c:
@@ -501,22 +341,11 @@ execut_libft/ft_tolower.c:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-execution/ex_tools2.o: execution/ex_tools2.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execution/ex_tools2'
-#  Last modified 2022-09-24 14:15:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
 # Not a target:
 src/parser.c:
+ 
 #  Implicit rule search has been done.
-#  Last modified 2022-09-24 11:42:29
+#  Last modified 2022-09-24 17:00:02
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -531,47 +360,10 @@ execut_libft/ft_split.c:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-libft/ft_strjoin.o: libft/ft_strjoin.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `libft/ft_strjoin'
-#  Last modified 2022-09-24 14:15:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-execut_libft/ft_isalpha.o: execut_libft/ft_isalpha.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execut_libft/ft_isalpha'
-#  Last modified 2022-09-24 14:15:36
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
- 
-execut_libft/ft_isdigit.o: execut_libft/ft_isdigit.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execut_libft/ft_isdigit'
-#  Last modified 2022-09-24 14:15:36
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
 # Not a target:
 execution/builtins/pwd.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-24 11:42:28
+#  Last modified 2022-09-24 16:49:03
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -580,54 +372,22 @@ execution/builtins/pwd.c:
 # Not a target:
 execution/builtins/cd.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-24 11:42:28
+#  Last modified 2022-09-24 16:49:03
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-execut_libft/ft_strlcpy.o: execut_libft/ft_strlcpy.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execut_libft/ft_strlcpy'
-#  Last modified 2022-09-24 14:15:36
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-# Not a target:
-execut_libft/ft_putstr_fd.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-09-24 11:42:28
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-src/expanda.o: src/expanda.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `src/expanda'
-#  Last modified 2022-09-24 14:15:34
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-minishell: src/main.o src/lexer.o src/token.o src/tac.o src/syntax_error.o src/unclosed_quotes.o src/here_doc.o src/parser.o src/env.o src/expanda.o src/execution.o execution/tools/tools1.o execution/tools/arr_tools.o execution/tools/arr_tools2.o execution/execute.o execution/ex_tools.o execution/ex_tools2.o execution/builtins/cd.o execution/builtins/echo.o execution/builtins/env.o execution/builtins/exit.o execution/builtins/export.o execution/builtins/pwd.o execution/builtins/unset.o execution/builtins/builtins_tools.o libft/ft_calloc.o libft/ft_realloc.o libft/ft_strlen.o libft/ft_non_tokenable.o libft/ft_strjoin.o libft/ft_strdup.o libft/ft_strncmp.o libft/linked_list.o libft/ft_strnstr.o libft/ft_randstring.o execut_libft/ft_split.o execut_libft/ft_atoi.o execut_libft/ft_strcmp.o execut_libft/ft_strchr.o execut_libft/ft_strlcpy.o execut_libft/ft_isalpha.o execut_libft/ft_tolower.o execut_libft/ft_isdigit.o execut_libft/ft_putstr_fd.o execut_libft/ft_itoa.o execut_libft/ft_substr.o
+minishell: src/main.c src/lexer.c src/token.c src/tac.c src/syntax_error.c src/unclosed_quotes.c src/here_doc.c src/here_doc_helper.c src/parser.c src/env.c src/expanda.c src/execution.c execution/tools/tools1.c execution/tools/arr_tools.c execution/tools/arr_tools2.c execution/execute.c execution/ex_tools.c execution/ex_tools2.c execution/builtins/cd.c execution/builtins/echo.c execution/builtins/env.c execution/builtins/exit.c execution/builtins/export.c execution/builtins/pwd.c execution/builtins/unset.c execution/builtins/builtins_tools.c libft/ft_calloc.c libft/ft_realloc.c libft/ft_strlen.c libft/ft_non_tokenable.c libft/ft_strjoin.c libft/ft_strdup.c libft/ft_strncmp.c libft/linked_list.c libft/ft_strnstr.c libft/ft_randstring.c execut_libft/ft_split.c execut_libft/ft_atoi.c execut_libft/ft_strcmp.c execut_libft/ft_strchr.c execut_libft/ft_strlcpy.c execut_libft/ft_isalpha.c execut_libft/ft_tolower.c execut_libft/ft_isdigit.c execut_libft/ft_putstr_fd.c execut_libft/ft_itoa.c execut_libft/ft_substr.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-09-24 14:15:36
+#  Last modified 2022-09-24 20:32:25
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 73):
-	$(CC) -lreadline $(FLAGS) $(OBJS) $(OBJS_L) $(OBJS_EL) -o $(NAME)
+#  commands to execute (from `Makefile', line 76):
+	$(sig_remove_ctr_c)
+	$(CC) -lreadline -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include $(FLAGS) $(SRCS) $(LIBFT) $(EXECUT_LIBFT) -o $(NAME)
 	
 
 # Not a target:
@@ -639,18 +399,6 @@ execution/tools/arr_tools2.c:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-execution/builtins/env.o: execution/builtins/env.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execution/builtins/env'
-#  Last modified 2022-09-24 14:15:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
 # Not a target:
 execution/builtins/echo.c:
 #  Implicit rule search has been done.
@@ -659,30 +407,6 @@ execution/builtins/echo.c:
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-execut_libft/ft_strcmp.o: execut_libft/ft_strcmp.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execut_libft/ft_strcmp'
-#  Last modified 2022-09-24 14:15:36
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-execution/builtins/exit.o: execution/builtins/exit.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execution/builtins/exit'
-#  Last modified 2022-09-24 14:15:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
 
 fclean: clean
 #  Phony target (prerequisite of .PHONY).
@@ -705,7 +429,7 @@ libft/ft_strlen.c:
 # Not a target:
 src/main.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-24 11:42:29
+#  Last modified 2022-09-24 16:51:04
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -714,7 +438,7 @@ src/main.c:
 # Not a target:
 execution/builtins/export.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-24 11:42:28
+#  Last modified 2022-09-24 16:49:03
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -723,35 +447,11 @@ execution/builtins/export.c:
 # Not a target:
 src/tac.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-24 11:42:29
+#  Last modified 2022-09-24 19:21:11
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-execut_libft/ft_strchr.o: execut_libft/ft_strchr.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execut_libft/ft_strchr'
-#  Last modified 2022-09-24 14:15:36
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-src/token.o: src/token.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `src/token'
-#  Last modified 2022-09-24 14:15:34
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
 
 # Not a target:
 execution/tools/tools1.c:
@@ -762,42 +462,14 @@ execution/tools/tools1.c:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-libft/ft_non_tokenable.o: libft/ft_non_tokenable.c
+# Not a target:
+src/lexer.c:
 #  Implicit rule search has been done.
-#  Implicit/static pattern stem: `libft/ft_non_tokenable'
-#  Last modified 2022-09-24 14:15:35
+#  Last modified 2022-09-24 11:42:29
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-libft/ft_calloc.o: libft/ft_calloc.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `libft/ft_calloc'
-#  Last modified 2022-09-24 14:15:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-execut_libft/ft_putstr_fd.o: execut_libft/ft_putstr_fd.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execut_libft/ft_putstr_fd'
-#  Last modified 2022-09-24 14:15:36
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
- 
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
 
 # Not a target:
 .DEFAULT:
@@ -814,42 +486,6 @@ libft/ft_strjoin.c:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-execution/builtins/unset.o: execution/builtins/unset.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execution/builtins/unset'
-#  Last modified 2022-09-24 14:15:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-execution/execute.o: execution/execute.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execution/execute'
-#  Last modified 2022-09-24 14:15:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-src/execution.o: src/execution.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `src/execution'
-#  Last modified 2022-09-24 14:15:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
 # Not a target:
 execut_libft/ft_substr.c:
 #  Implicit rule search has been done.
@@ -858,18 +494,6 @@ execut_libft/ft_substr.c:
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-execution/tools/arr_tools.o: execution/tools/arr_tools.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execution/tools/arr_tools'
-#  Last modified 2022-09-24 14:15:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
 
 re: fclean
 #  Phony target (prerequisite of .PHONY).
@@ -883,7 +507,7 @@ re: fclean
 # Not a target:
 execution/ex_tools2.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-24 11:42:28
+#  Last modified 2022-09-24 16:49:03
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -900,65 +524,23 @@ clean:
 	@rm -rf $(OBJS_EL)
 	
 
-src/unclosed_quotes.o: src/unclosed_quotes.c
+# Not a target:
+execut_libft/ft_isalpha.c:
 #  Implicit rule search has been done.
-#  Implicit/static pattern stem: `src/unclosed_quotes'
-#  Last modified 2022-09-24 14:15:34
+#  Last modified 2022-09-24 11:42:28
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
 
-libft/ft_strncmp.o: libft/ft_strncmp.c
+# Not a target:
+src/here_doc_helper.c:
 #  Implicit rule search has been done.
-#  Implicit/static pattern stem: `libft/ft_strncmp'
-#  Last modified 2022-09-24 14:15:36
+#  Last modified 2022-09-24 20:29:50
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-execution/builtins/builtins_tools.o: execution/builtins/builtins_tools.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execution/builtins/builtins_tools'
-#  Last modified 2022-09-24 14:15:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-src/syntax_error.o: src/syntax_error.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `src/syntax_error'
-#  Last modified 2022-09-24 14:15:34
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-src/here_doc.o: src/here_doc.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `src/here_doc'
-#  Last modified 2022-09-24 14:15:34
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
 
 # Not a target:
 execut_libft/ft_strlcpy.c:
@@ -977,63 +559,6 @@ src/expanda.c:
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-libft/ft_realloc.o: libft/ft_realloc.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `libft/ft_realloc'
-#  Last modified 2022-09-24 14:15:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-libft/linked_list.o: libft/linked_list.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `libft/linked_list'
-#  Last modified 2022-09-24 14:15:36
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-# Not a target:
-execut_libft/ft_isalpha.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-09-24 11:42:28
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-libft/ft_strdup.o: libft/ft_strdup.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `libft/ft_strdup'
-#  Last modified 2022-09-24 14:15:36
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-src/env.o: src/env.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `src/env'
-#  Last modified 2022-09-24 14:15:34
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
 
 # Not a target:
 execution/builtins/env.c:
@@ -1056,60 +581,20 @@ execut_libft/ft_strcmp.c:
 # Not a target:
 execution/builtins/exit.c:
 #  Implicit rule search has been done.
+#  Last modified 2022-09-24 16:49:03
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+execut_libft/ft_strchr.c:
+#  Implicit rule search has been done.
 #  Last modified 2022-09-24 11:42:28
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-execut_libft/ft_itoa.o: execut_libft/ft_itoa.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execut_libft/ft_itoa'
-#  Last modified 2022-09-24 14:15:36
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
- 
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-libft/ft_randstring.o: libft/ft_randstring.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `libft/ft_randstring'
-#  Last modified 2022-09-24 14:15:36
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-execution/ex_tools.o: execution/ex_tools.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execution/ex_tools'
-#  Last modified 2022-09-24 14:15:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-libft/ft_strnstr.o: libft/ft_strnstr.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `libft/ft_strnstr'
-#  Last modified 2022-09-24 14:15:36
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
 
 # Not a target:
 src/token.c:
@@ -1123,16 +608,8 @@ src/token.c:
 # Not a target:
 execut_libft/ft_atoi.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-24 11:42:28
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-libft/ft_strnstr.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-09-24 11:42:28
+ 
+#  Last modified 2022-09-24 16:49:03
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -1156,29 +633,14 @@ libft/ft_calloc.c:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-execut_libft/ft_atoi.o: execut_libft/ft_atoi.c
+# Not a target:
+execut_libft/ft_putstr_fd.c:
 #  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execut_libft/ft_atoi'
-#  Last modified 2022-09-24 14:15:36
+#  Last modified 2022-09-24 11:42:28
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
-execut_libft/ft_tolower.o: execut_libft/ft_tolower.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execut_libft/ft_tolower'
-#  Last modified 2022-09-24 14:15:36
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
 
 # Not a target:
 execution/builtins/unset.c:
@@ -1189,43 +651,19 @@ execution/builtins/unset.c:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-src/parser.o: src/parser.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `src/parser'
-#  Last modified 2022-09-24 14:15:34
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
-
 # Not a target:
 execution/execute.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-24 11:42:28
+#  Last modified 2022-09-24 16:49:03
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-execut_libft/ft_split.o: execut_libft/ft_split.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `execut_libft/ft_split'
-#  Last modified 2022-09-24 14:15:36
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 81):
-	$(CC) $(FLAGS) -c $< -o $@
-	
 
 # Not a target:
 src/execution.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-24 11:42:29
+#  Last modified 2022-09-24 16:49:03
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -1241,7 +679,7 @@ execution/tools/arr_tools.c:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # files hash-table stats:
-# Load=101/1024=10%, Rehash=0, Collisions=27/305=9%
+# Load=56/1024=5%, Rehash=0, Collisions=10/123=8%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -1253,6 +691,6 @@ execution/tools/arr_tools.c:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sat Sep 24 14:19:34 2022
+# Finished Make data base on Sun Sep 25 13:49:26 2022
 
  

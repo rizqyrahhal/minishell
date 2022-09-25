@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/22 15:57:13 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/25 13:55:33 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	lexer_advance(t_lexer* lexer)
 
 char*	get_string(t_envp *my_env, char *s, int count); ////// move to hedre
 
-t_token* lexer_collect_string(t_lexer* lexer) {
+t_token* lexer_collect_string(t_lexer* lexer)
+{
     char *value = ft_calloc(1, sizeof(char));
     unsigned int len = 0;
 	int		count;
@@ -58,7 +59,7 @@ t_token* lexer_collect_string(t_lexer* lexer) {
 			len = ft_strlen(value);
 			count = len;
 		}
-		
+
 		// double qoute
 		if (lexer->c == '"'){
 			lexer_advance(lexer);

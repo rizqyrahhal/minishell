@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 01:12:19 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/06 15:52:54 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/25 14:00:57 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,26 +59,6 @@ char**	fill_t(char** s)
 	str[i] = NULL;
 	return (str);
 }
-
-// char*	name_f(char* s)
-// {
-// 	int 	i;
-// 	char*	str;
-
-// 	i = 0;
-// 	if (s)
-// 	{
-// 		str = malloc((ft_strlen(s) + 1) * sizeof(char));
-// 		while (s[i])
-// 		{
-// 			str[i] = s[i];
-// 			i++;
-// 		}
-// 		str[i] = '\0';
-// 			return (str);
-// 	}
-// 	return(NULL);
-// }
 
 t_command*	ft_lstnew(char** cmd_data, int infile, int outfile)
 {

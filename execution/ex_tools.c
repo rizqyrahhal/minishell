@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:42:10 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/13 15:55:10 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/25 14:19:49 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ex_ecu(char *path, char *sp[], t_envp *my_env, int out)
 	if (is_built(sp[0]))
 	{
 		__builtins(sp, my_env, out);
-		exit (my_env->status);
+		exit (my_env->status);		
 	}
 	else if (execve(path, sp, my_env->env) == -1)
 	{
@@ -65,6 +65,7 @@ void	frst_cmd(t_envp *my_env, int *fd, t_command *cmd)
 void	one_cmd(t_envp *my_env, t_command *cmd)
 {
 	char	*path;
+
 
 	path = get_path(handle_env(my_env->env), cmd->cmd[0]);
 	if (cmd->infile != 0)

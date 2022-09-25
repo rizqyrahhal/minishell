@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 11:01:02 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/09 21:05:03 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/25 14:19:42 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char	*get_path(char *s, char *cmd)
 	char	*n_cmd;
 	int		i;
 
+	if (!s)
+		return (NULL);
 	sp = ft_split(s, ':');
 	i = -1;
 	if (sea_rch(cmd, '/'))
@@ -66,5 +68,5 @@ char	*handle_env(char *env[])
 			return (ft_substr(env[i], 5, ft_strlen(env[i]) - 5));
 		i++;
 	}
-	return ("error");
+	return (NULL);
 }
