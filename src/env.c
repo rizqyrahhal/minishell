@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 17:33:47 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/15 17:18:10 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:51:11 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	fill_env(char *env[], t_envp *my_env)
 	i = 0;
 	while (env[i])
 	{
-		my_env->env[i] = ft_cpy(env[i], ft_strlen(env[i]));
+		my_env->env[i] = ft_strdup(env[i]);
 		i++;
 	}
 	my_env->env[i] = 0;

@@ -6,12 +6,11 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 08:03:28 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/11 18:49:34 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/25 21:37:10 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
+#include "ex_libft.h"
 
 static int	hmuch_calc(char *str, char c)
 {

@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/25 14:09:16 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/26 20:25:56 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,7 @@ void	tac_compile(char* src, t_envp* my_env)
 	// lexer free ms not just here
 	free(lexer);
 	free(token);
-////
-	printf("\033[0;34m                     ---------------------\n                     | LINKED_LIST FINAL |\n                     ---------------------\n\033[0m");
-	print_node(list, my_env);
+
 	if (list)
 	{
 		execution(list, my_env);
@@ -102,4 +100,6 @@ void	tac_compile(char* src, t_envp* my_env)
 	}
 }
 
-//		printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(token));
+	// printf("\033[0;34m                     ---------------------\n                     | LINKED_LIST FINAL |\n                     ---------------------\n\033[0m");
+	// print_node(list, my_env);
+		// printf("\033[0;32m|---__LEXER__---###\033[0m %s \033[0;32m###---__LEXER__---|\033[0m\n", token_to_str(token));

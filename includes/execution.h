@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:43:36 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/10 17:04:29 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/25 21:34:23 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 // #include "../readline/8.1.2/include/readline/history.h"
 # include <stdio.h>
 # include <stdlib.h>
-# include "../execut_libft/libft.h"
+# include "../execut_libft/ex_libft.h"
 # include "minishell.h"
 # include <unistd.h>
 # include <sys/wait.h>

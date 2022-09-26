@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:42:37 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/25 14:15:14 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/25 19:01:51 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void free_arr(char **s)
 		free(s[i]);
 		i++;
 	}
-//    free(s[i]);
+   free(s);
 }
 
 // void signal_ctrl_c(int sig)
@@ -110,7 +110,6 @@ char**	fix_cmd(char** s, int *i)
         j++;
     }
     str[j] = NULL;
-	free_arr(s);
 	free_arr(sp);
  	return (str);
  }
@@ -130,8 +129,9 @@ char**	fix_cmd(char** s, int *i)
 		else
 		{
 			while (tmp->cmd[i]) {
-				if (tmp->splite[i] == 1 && sea_rch(tmp->cmd[i], ' '))
+				if (tmp->splite[i] == 1 && sea_rch(tmp->cmd[i], ' ')){
 					tmp->cmd = fix_cmd(tmp->cmd, &i);
+				}
 				else
 					i++;
 			}

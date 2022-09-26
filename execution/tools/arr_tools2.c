@@ -76,7 +76,6 @@ void	arr_cpy(t_envp *my_env, char *str)
 	}
 	s[i] = NULL;
 	free_arr(my_env->env);
-	free(my_env->env);
 	free(str);
 	my_env->env = s;
 }

@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/24 16:51:04 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/26 21:58:42 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 /*des cas non working
 ))) pwd if cd whit non option
+))) << l 'wfwfwfwfwe << l       segmentetion fault par fois   hadchi y9dar ykon andi
+))) export a="-l   -a"     and ls $a      errrooor par fois freeed
 */
-
 
 void signal_ctrl_c()
 {
 	write(2, "\n", 1);
 	rl_on_new_line();
-	// rl_replace_line("\0", 0);
+	rl_replace_line("\0", 0);
 	rl_redisplay();
 }
 
@@ -39,13 +40,13 @@ void	signal_ctrl_c_heredoc()
 void	signal_quit()
 {
 	printf("Quit: 3\n");
-	// rl_replace_line("\0", 0);
+	rl_replace_line("\0", 0);
 }
 
 void	signal_()
 {
 	printf("\n");
-	// rl_replace_line("\0", 0);
+	rl_replace_line("\0", 0);
 }
 
 
@@ -84,7 +85,7 @@ int	main(int argc, char *argv[], char *env[])
 			buf = readline("\033[0;33mminishell > \033[0m");
 			handle_signals(SIGINT_);
 			if (!buf)
-				exit (0);
+				exit (my_env->status);
 			add_history(buf);
 			if (buf)
 				tac_compile(buf, my_env);
@@ -94,5 +95,5 @@ int	main(int argc, char *argv[], char *env[])
 	}
 	else
 		printf("execute as fallows: ./minishell (! whilt no argement)\n");
-	return (0);
+	return (my_env->status);
 }

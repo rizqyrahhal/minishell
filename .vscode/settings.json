@@ -6,6 +6,7 @@
 		"history.h": "c",
 		"rlstdc.h": "c",
 		"errno.h": "c",
-		"sstream": "c"
+		"sstream": "c",
+		"ex_libft.h": "c"
 	}
 }

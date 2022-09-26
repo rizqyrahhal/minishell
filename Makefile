@@ -6,7 +6,7 @@
 #    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 17:12:13 by rarahhal          #+#    #+#              #
-#    Updated: 2022/09/24 20:32:22 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/09/26 22:07:01 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,8 @@ CC = cc
 
 SRCS = 	src/main.c \
 		src/lexer.c \
+		src/lexer_help.c \
+		src/collect_string.c \
 		src/token.c \
 		src/tac.c \
 		src/syntax_error.c \
@@ -24,6 +26,7 @@ SRCS = 	src/main.c \
 		src/here_doc.c \
 		src/here_doc_helper.c \
 		src/parser.c \
+		src/rediriction.c \
 		src/env.c \
 		src/expanda.c \
 		src/execution.c \
@@ -65,20 +68,22 @@ EXECUT_LIBFT = execut_libft/ft_split.c \
 		execut_libft/ft_itoa.c \
 		execut_libft/ft_substr.c
 
-#OBJS = $(SRCS:.c=.o)
-#OBJS_L = $(LIBFT:.c=.o)
-#OBJS_EL = $(EXECUT_LIBFT:.c=.o)
-#
-#$(NAME):  $(OBJS) $(OBJS_L) $(OBJS_EL)
-#	$(CC) -lreadline $(FLAGS) $(OBJS) $(OBJS_L) $(OBJS_EL) -o $(NAME)
+# OBJS = $(SRCS:.c=.o)
+# OBJS_L = $(LIBFT:.c=.o)
+# OBJS_EL = $(EXECUT_LIBFT:.c=.o)
+
+# $(NAME):  $(OBJS) $(OBJS_L) $(OBJS_EL)
+# 	$(CC) -lreadline $(FLAGS) $(OBJS) $(OBJS_L) $(OBJS_EL) -o $(NAME)
+
+READLINE = ~/.brew/opt/readline
 
 $(NAME):  $(SRCS) $(LIBFT) $(EXECUT_LIBFT)
-	$(sig_remove_ctr_c)
-	$(CC) -lreadline -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include $(FLAGS) $(SRCS) $(LIBFT) $(EXECUT_LIBFT) -o $(NAME)
+	@$(sig_remove_ctr_c)
+	@$(CC) -lreadline -L $(READLINE)/lib -I $(READLINE)/include $(FLAGS) $(SRCS) $(LIBFT) $(EXECUT_LIBFT) -o $(NAME)
 
 
-#%.o: %.c
-#	$(CC) $(FLAGS) -c $< -o $@
+# %.o: %.c
+# 	$(CC) $(FLAGS) -c $< -o $@
 
 all: $(NAME)
 

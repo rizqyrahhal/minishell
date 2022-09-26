@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/24 20:31:35 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/26 21:59:06 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@
 # include <sys/stat.h>
 # include <sys/wait.h>
 # include <fcntl.h>
-//# include <readline/readline.h>
-//# include <readline/history.h>
- #include "readline/readline.h"
- #include "readline/history.h"
+# include "readline/readline.h"
+# include "readline/history.h"
 # include <unistd.h>
 # include <string.h>
 
@@ -96,6 +94,9 @@ char		lexer_peek(t_lexer* lexer, int offset);
 t_token*	lexer_advance_with(t_lexer* lexer, t_token* token);
 t_token*	lexer_advance_current(t_lexer* lexer, int type);
 t_token*	lexer_next_token(t_lexer* lexer);
+t_token		*help1_next_token(t_lexer *lexer);
+t_token		*help2_next_token(t_lexer *lexer);
+t_token		*lexer_collect_string(t_lexer *lexer);
 
 void	fill_env(char *env[], t_envp *my_env);
 
@@ -109,8 +110,8 @@ typedef struct s_parser
 	int		splite[262144];
 } t_parser;
 
-t_command*	parser(t_lexer* lexer, t_token* token, t_command* list);
-char*		get_string(t_envp *my_env, char *s, int count);
+t_command	*parser(t_lexer *lexer, t_token *token, t_command *list);
+char		*get_string(t_envp *my_env, char *s, int count);
 
 // *********************************************** tac.h
 typedef struct s_tac
@@ -146,6 +147,7 @@ t_heredoc	*init__(t_heredoc *here, char *src);
 int			creat_heredoc(int fd, char *delemeter, t_envp *my_env);
 void		open_heredoc(int fd, char *delemeter, t_envp *my_env);
 
+t_tac		*ft_rediriction(t_tac *tac);
 
 t_heredoc	*creat__file(t_heredoc *here, char *src);
 t_heredoc	*get_delemeter(t_heredoc *here, char *src);
