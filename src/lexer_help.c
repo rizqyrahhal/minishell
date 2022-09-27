@@ -6,16 +6,25 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:47:21 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/25 17:52:36 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/27 21:30:29 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+int	get_min(int a, int b)
+{
+	if (a < b)
+		return (a);
+	else
+		return (b);
+}
+
 char	lexer_peek(t_lexer *lexer, int offset)
 {
 	//  bash man9alabch kharj man size         //   here macroos
-	return (lexer->src[MIN(lexer->i + offset, lexer->src_size)]);
+	return (lexer->src[get_min(lexer->i + offset, lexer->src_size)]);
+	// return (lexer->src[MIN(lexer->i + offset, lexer->src_size)]);
 	// return lexer->src[i + 1] if exist or '\0'
 }
 

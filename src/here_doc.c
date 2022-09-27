@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/27 18:20:07 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/27 21:38:09 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,14 +95,12 @@ char	*here_doc(char *src, int stop, t_envp *my_env)
 
 	here = malloc(sizeof(t_heredoc));
 	here = init__(here, src);
-
 	while (src && src[here->i] && here->i < stop)
 	{
 		here = skip_qouting(here, src);
 		if (src[here->i] == '<' && src[here->i + 1] == '<')
 		{
 			here = creat__file(here, src, stop);
-			here = get_delemeter(here, src);
 			if (!here)
 				return (NULL);
 			if (here->token->e_type == TOKEN_STRING)
@@ -116,6 +114,6 @@ char	*here_doc(char *src, int stop, t_envp *my_env)
 			here->str[here->j] = '\0';
 		}
 	}
-	here->str[here->j] = '\0';
+	printf("---> %s\n", here->str);
 	return (here->str);
 }

@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/27 17:20:28 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/27 21:30:30 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 
 # include "libft.h"
 
-# define MAX(a, b)\
-   a > b ? a : b
+// # define MAX(a, b)\
+//    a > b ? a : b
 
 # define MIN(a, b)\
    a < b ? a : b

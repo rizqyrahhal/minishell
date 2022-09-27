@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 20:28:49 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/27 18:20:00 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/27 21:49:32 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,20 @@ t_heredoc	*creat__file(t_heredoc *here, char *src, int stop)
 		here->str[here->j++] = here->del_to_name[here->k++];
 		here->str[here->j] = '\0';
 	}
-	return (here);
+	return (get_delemeter(here, src));
 }
 
 t_heredoc	*get_delemeter(t_heredoc *here, char *src)
 {
+	int	qout;
+
+	qout = 0;
+	if (src[here->i] == '"' || src[here->i] == '\'')
+		qout = 2;
 	while (src[here->i] && (int)here->lexer->i <= here->i)
 		here->token = lexer_next_token(here->lexer);
 	if (!src[here->i])
 		return (NULL);
-	here->i += ft_strlen(here->token->value) + 2;
+	here->i += ft_strlen(here->token->value) + qout;
 	return (here);
 }
