@@ -6,13 +6,13 @@
 #    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 17:12:13 by rarahhal          #+#    #+#              #
-#    Updated: 2022/09/26 22:07:01 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/09/27 18:21:49 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 sig_remove_ctr_c = `stty -echoctl`
 NAME = minishell
-FLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 CC = cc
 
 SRCS = 	src/main.c \
@@ -68,22 +68,14 @@ EXECUT_LIBFT = execut_libft/ft_split.c \
 		execut_libft/ft_itoa.c \
 		execut_libft/ft_substr.c
 
-# OBJS = $(SRCS:.c=.o)
-# OBJS_L = $(LIBFT:.c=.o)
-# OBJS_EL = $(EXECUT_LIBFT:.c=.o)
-
-# $(NAME):  $(OBJS) $(OBJS_L) $(OBJS_EL)
-# 	$(CC) -lreadline $(FLAGS) $(OBJS) $(OBJS_L) $(OBJS_EL) -o $(NAME)
-
 READLINE = ~/.brew/opt/readline
+OBJS = $(SRCS:.c=.o)
+OBJS_L = $(LIBFT:.c=.o)
+OBJS_EL = $(EXECUT_LIBFT:.c=.o)
 
-$(NAME):  $(SRCS) $(LIBFT) $(EXECUT_LIBFT)
+$(NAME):  $(OBJS) $(OBJS_L) $(OBJS_EL)
 	@$(sig_remove_ctr_c)
-	@$(CC) -lreadline -L $(READLINE)/lib -I $(READLINE)/include $(FLAGS) $(SRCS) $(LIBFT) $(EXECUT_LIBFT) -o $(NAME)
-
-
-# %.o: %.c
-# 	$(CC) $(FLAGS) -c $< -o $@
+	$(CC) -lreadline -L $(READLINE)/lib -I $(READLINE)/include $(CFLAGS) $(OBJS) $(OBJS_L) $(OBJS_EL) -o $(NAME)
 
 all: $(NAME)
 

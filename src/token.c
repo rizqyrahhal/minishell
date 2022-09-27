@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:08 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/22 15:58:32 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/27 14:04:29 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_token*	init_token(char* value, int type)
 	t_token*	token;
 	token = ft_calloc(1, sizeof(t_token));
 	token->value = ft_strdup(value);
-	token->type = type;
+	token->e_type = type;
 
 	return (token);
 }
@@ -48,10 +48,10 @@ char*	token_to_str(t_token* token)
 	const char* template;
 	char* str;
 
-	type_str = token_type_to_str(token->type);
+	type_str = token_type_to_str(token->e_type);
 	template = "type = %s,	int_type = %d,	value = %s";
 	str = ft_calloc(ft_strlen(type_str) + ft_strlen(template) + 8, sizeof(char));
-	sprintf(str, template, type_str, token->type, token->value);
+	sprintf(str, template, type_str, token->e_type, token->value);
 
 	return str;
 }

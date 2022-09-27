@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 20:21:06 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/26 20:21:37 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/27 14:01:57 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_tac	*ouftile_tokens(t_tac *tac, char *str, int flag)
 	value = get_string(tac->lexer->my_env, str, 0);
 	if ((value && value[0]) || str)
 		help_outfile(tac, str, value, flag);
-	else if (next_token->type == TOKEN_STRING)
+	else if (next_token->e_type == TOKEN_STRING)
 		tac->parser->outfile = open(next_token->value, O_CREAT
 				| O_RDWR | flag, 0644);
 	if (tac->parser->outfile == -1 && tac->parser->no_assign > -1)
@@ -108,22 +108,22 @@ t_tac	*ft_rediriction(t_tac *tac)
 
 	str = file_name(tac->lexer);
 	next_token = tac->token;
-	if (tac->token->type == TOKEN_IN || tac->token->type == TOKEN_HERDOC)
+	if (tac->token->e_type == TOKEN_IN || tac->token->e_type == TOKEN_HERDOC)
 	{
 		if (tac->parser->infile != 0)
 			close(tac->parser->infile);
 		next_token = lexer_next_token(tac->lexer);
-		if (next_token->type == TOKEN_STRING)
+		if (next_token->e_type == TOKEN_STRING)
 			tac->parser->infile = open(next_token->value, O_RDONLY, 0600);
 	}
-	if (tac->token->type == TOKEN_OU)
+	if (tac->token->e_type == TOKEN_OU)
 		tac = ouftile_tokens(tac, str, O_TRUNC);
-	if (tac->token->type == TOKEN_APPAND)
+	if (tac->token->e_type == TOKEN_APPAND)
 		tac = ouftile_tokens(tac, str, O_APPEND);
 	tac = infile_error(tac, str, next_token->value);
 	if (tac->parser->infile == -1 || tac->parser->outfile == -1
 		|| tac->parser->no_assign == -1)
-		while (tac->token->type != TOKEN_PIPE && tac->token->type != TOKEN_EOF)
+		while (tac->token->e_type != TOKEN_PIPE && tac->token->e_type != TOKEN_EOF)
 			tac->token = lexer_next_token(tac->lexer);
 	free(str);
 	return (tac);

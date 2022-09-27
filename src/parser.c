@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/26 20:25:10 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/27 14:01:20 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ t_tac	*parese_command(t_tac *tac)
 	int	i;
 
 	i = 0;
-	while (tac->token->type != TOKEN_PIPE && tac->token->type != TOKEN_EOF)
+	while (tac->token->e_type != TOKEN_PIPE && tac->token->e_type != TOKEN_EOF)
 	{
 		tac = ft_rediriction(tac);
 		lexer_skip_whitespace(tac->lexer);
-		if (tac->token->type == TOKEN_STRING && tac->token->value[0] != 15)
+		if (tac->token->e_type == TOKEN_STRING && tac->token->value[0] != 15)
 		{
 			tac->parser->splite[i] = 0;
 			tac->parser->cmd = ft_realloc(tac->parser->cmd);
@@ -46,7 +46,7 @@ t_tac	*parese_command(t_tac *tac)
 			tac->parser->cmd[i] = 0;
 			tac->parser->splite[i] = -2;
 		}
-		if (tac->token->type != TOKEN_EOF && tac->token->type != TOKEN_PIPE)
+		if (tac->token->e_type != TOKEN_EOF && tac->token->e_type != TOKEN_PIPE)
 			tac->token = lexer_next_token(tac->lexer);
 	}
 	return (tac);
@@ -101,10 +101,10 @@ t_command	*parser(t_lexer *lexer, t_token *token, t_command *list)
 	tac->lexer = lexer;
 	tac->token = token;
 	tac->list = list;
-	while (tac->token->type != TOKEN_EOF)
+	while (tac->token->e_type != TOKEN_EOF)
 	{
 		tac = simple_command(tac);
-		if (tac->token->type == TOKEN_PIPE)
+		if (tac->token->e_type == TOKEN_PIPE)
 		{
 			tac->lexer->my_env->num_pipe++;
 			tac->token = lexer_next_token(tac->lexer);

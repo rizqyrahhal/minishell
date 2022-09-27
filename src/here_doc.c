@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/25 14:03:39 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/27 18:20:07 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	open_heredoc(int fd, char *delemeter, t_envp *my_env)
 	char	*here_doc;
 
 	here_doc = NULL;
-	while (delemeter[0])
+	while (1)
 	{
 		handle_signals(SIGHEREDOC);
 		here_doc = readline("> ");
@@ -64,19 +64,48 @@ t_heredoc	*init__(t_heredoc *here, char *src)
 	return (here);
 }
 
+t_heredoc	*skip_qouting(t_heredoc *here, char *src)
+{
+	if (src[here->i] == '"')
+	{
+		here->str = ft_d_realloc(here->str);
+		here->str[here->j++] = src[here->i++];
+		while (src[here->i] != '"')
+		{
+			here->str = ft_d_realloc(here->str);
+			here->str[here->j++] = src[here->i++];
+		}
+	}
+	if (src[here->i] == '\'')
+	{
+		here->str = ft_d_realloc(here->str);
+		here->str[here->j++] = src[here->i++];
+		while (src[here->i] != '\'')
+		{
+			here->str = ft_d_realloc(here->str);
+			here->str[here->j++] = src[here->i++];
+		}
+	}
+	return (here);
+}
+
 char	*here_doc(char *src, int stop, t_envp *my_env)
 {
 	t_heredoc	*here;
 
 	here = malloc(sizeof(t_heredoc));
 	here = init__(here, src);
+
 	while (src && src[here->i] && here->i < stop)
 	{
+		here = skip_qouting(here, src);
 		if (src[here->i] == '<' && src[here->i + 1] == '<')
 		{
-			here = creat__file(here, src);
+			here = creat__file(here, src, stop);
 			here = get_delemeter(here, src);
-			if (here->token->type == TOKEN_STRING)
+			if (!here)
+				return (NULL);
+			if (here->token->e_type == TOKEN_STRING)
 				if (creat_heredoc(here->fd, here->token->value, my_env) == -1)
 					return (NULL);
 		}

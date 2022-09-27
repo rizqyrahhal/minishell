@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/26 21:58:42 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/27 14:49:30 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 ))) pwd if cd whit non option
 ))) << l 'wfwfwfwfwe << l       segmentetion fault par fois   hadchi y9dar ykon andi
 ))) export a="-l   -a"     and ls $a      errrooor par fois freeed
+))) ls << "<<"
 */
 
 void signal_ctrl_c()

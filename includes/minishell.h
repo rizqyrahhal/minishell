@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/26 21:59:06 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/27 17:20:28 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_token
 		TOKEN_OU,
 		TOKEN_APPAND,
 		TOKEN_EOF,
-	} type;
+	} e_type;
 }	t_token;
 
 t_token	*init_token(char *value, int type);
@@ -149,7 +149,7 @@ void		open_heredoc(int fd, char *delemeter, t_envp *my_env);
 
 t_tac		*ft_rediriction(t_tac *tac);
 
-t_heredoc	*creat__file(t_heredoc *here, char *src);
+t_heredoc	*creat__file(t_heredoc *here, char *src, int stop);
 t_heredoc	*get_delemeter(t_heredoc *here, char *src);
 
 

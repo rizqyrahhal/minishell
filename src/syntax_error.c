@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:59:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/25 16:35:53 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/27 14:03:00 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	init(t_lexer **lexer, t_lexer **next_lexer, char **src)
 
 int	one(t_token *token, t_token *next_token, t_lexer *lexer, int **i)
 {
-	if (token->type == TOKEN_PIPE && !next_token)
+	if (token->e_type == TOKEN_PIPE && !next_token)
 	{
 		printf("minishell: syntax error near unexpected token `|'\n");
 		**i = lexer->i;
 		return (-1);
 	}
-	if (token->type == TOKEN_PIPE && (next_token->type == TOKEN_PIPE
+	if (token->e_type == TOKEN_PIPE && (next_token->e_type == TOKEN_PIPE
 			|| !next_token->value))
 	{
 		printf("minishell: syntax error near unexpected token `|'\n");
@@ -40,19 +40,19 @@ int	one(t_token *token, t_token *next_token, t_lexer *lexer, int **i)
 
 int	too(t_token *token, t_token *next_token, t_lexer *lexer, int **i)
 {
-	if ((token->type == TOKEN_HERDOC || token->type == TOKEN_IN
-			|| token->type == TOKEN_OU || token->type == TOKEN_APPAND
-			|| token->type == TOKEN_PIPE) && (!next_token->value))
+	if ((token->e_type == TOKEN_HERDOC || token->e_type == TOKEN_IN
+			|| token->e_type == TOKEN_OU || token->e_type == TOKEN_APPAND
+			|| token->e_type == TOKEN_PIPE) && (!next_token->value))
 	{
 		printf("minishell: syntax error near unexpected token `newline'\n");
 		**i = lexer->i;
 		return (-1);
 	}
-	if ((token->type == TOKEN_HERDOC || token->type == TOKEN_IN
-			|| token->type == TOKEN_OU || token->type == TOKEN_APPAND)
-		&& (next_token->type == TOKEN_HERDOC || next_token->type == TOKEN_IN
-			|| next_token->type == TOKEN_OU || next_token->type == TOKEN_APPAND
-			|| next_token->type == TOKEN_PIPE))
+	if ((token->e_type == TOKEN_HERDOC || token->e_type == TOKEN_IN
+			|| token->e_type == TOKEN_OU || token->e_type == TOKEN_APPAND)
+		&& (next_token->e_type == TOKEN_HERDOC || next_token->e_type == TOKEN_IN
+			|| next_token->e_type == TOKEN_OU || next_token->e_type == TOKEN_APPAND
+			|| next_token->e_type == TOKEN_PIPE))
 	{	
 		printf("minishell: syntax error near unexpected token `%s'\n",
 			next_token->value);
@@ -74,7 +74,7 @@ int	check_syntax_error(char *src, int *i)
 	next_token = lexer_next_token(next_lexer);
 	if (one(token, next_token, lexer, &i) == -1)
 		return (-1);
-	while (token->type != TOKEN_EOF)
+	while (token->e_type != TOKEN_EOF)
 	{
 		if (next_lexer->c == ' ')
 			lexer_skip_whitespace(next_lexer);
