@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/27 21:38:09 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/28 13:01:02 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,5 @@ char	*here_doc(char *src, int stop, t_envp *my_env)
 			here->str[here->j] = '\0';
 		}
 	}
-	printf("---> %s\n", here->str);
 	return (here->str);
 }

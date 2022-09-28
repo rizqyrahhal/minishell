@@ -6,17 +6,17 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 17:33:47 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/25 18:51:11 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/28 15:27:09 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-
-char    *ft_cpy(char *s, int k)
+char	*ft_cpy(char *s, int k)
 {
-	char    *var;
-	int     i;
+	char	*var;
+	int		i;
+
 	i = 0;
 	var = malloc(k + 1);
 	while (i < k)
@@ -30,7 +30,7 @@ char    *ft_cpy(char *s, int k)
 
 void	fill_env(char *env[], t_envp *my_env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (env[i])
@@ -40,3 +40,4 @@ void	fill_env(char *env[], t_envp *my_env)
 	}
 	my_env->env[i] = 0;
 }
+

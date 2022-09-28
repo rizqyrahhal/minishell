@@ -1,0 +1,16 @@
+#include "../../includes/execution.h"
+
+
+void	ex_env(char **sp, t_envp *my_env, int out)
+{
+	int		i;
+	// int 	status;
+
+	i = 1;
+	if (sp[1] == NULL)
+		print_ar(my_env->env, out);
+	else
+		printf("options or arguments not required\n");
+	my_env->status = 0;
+}
+

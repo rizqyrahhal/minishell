@@ -123,7 +123,8 @@ t_tac	*ft_rediriction(t_tac *tac)
 	tac = infile_error(tac, str, next_token->value);
 	if (tac->parser->infile == -1 || tac->parser->outfile == -1
 		|| tac->parser->no_assign == -1)
-		while (tac->token->e_type != TOKEN_PIPE && tac->token->e_type != TOKEN_EOF)
+		while (tac->token->e_type != TOKEN_PIPE
+			&& tac->token->e_type != TOKEN_EOF)
 			tac->token = lexer_next_token(tac->lexer);
 	free(str);
 	return (tac);

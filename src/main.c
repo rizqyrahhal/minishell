@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/27 20:29:57 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/28 13:20:35 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,6 @@ void signal_ctrl_c()
 	rl_replace_line("\0", 0);
 	rl_redisplay();
 }
-
-// void signal_ctrl_c_heredoc()
-// {
-// 	r
-// }
-
 
 void	signal_ctrl_c_heredoc()
 {

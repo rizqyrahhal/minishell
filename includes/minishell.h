@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/27 21:30:30 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/28 13:41:50 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,6 @@
 # include <string.h>
 
 # include "libft.h"
-
-// # define MAX(a, b)\
-//    a > b ? a : b
-
-# define MIN(a, b)\
-   a < b ? a : b
 
 # define SIGHEREDOC 13
 # define SIGQUIT_INCHILD 37
@@ -52,14 +46,14 @@ typedef struct s_token
 	} e_type;
 }	t_token;
 
-t_token	*init_token(char *value, int type);
-char	*token_to_str(t_token *token);
+t_token		*init_token(char *value, int type);
+// char		*token_to_str(t_token *token);
 
 // ******************************************************** struct.h
 typedef struct s_command_node
 {
 	char					**cmd;
-	int 					madir_walo;
+	int						madir_walo;
 	int						infile;
 	int						outfile;
 	int						splite[262144];
@@ -70,45 +64,45 @@ typedef struct s_envp
 {
 	char	**env;
 	int		status;
-	char	*PWD;
+	char	*pwd;
 	int		num_pipe;
 }	t_envp;
 
 //************************************************* lexer.h
 typedef struct s_lexer
 {
-	char*			src;
+	char			*src;
 	size_t			src_size;
 	char			c;
 	unsigned int	i;
-	t_token*		token;
-	t_envp*			my_env;
+	t_token			*token;
+	t_envp			*my_env;
 	int				spliter;
 	int				not_expand;
-} t_lexer;
+}	t_lexer;
 
-t_lexer*	init_lexer(char* src);
-void		lexer_advance(t_lexer* lexer);
-void		lexer_skip_whitespace(t_lexer* lexer);
-char		lexer_peek(t_lexer* lexer, int offset);
-t_token*	lexer_advance_with(t_lexer* lexer, t_token* token);
-t_token*	lexer_advance_current(t_lexer* lexer, int type);
-t_token*	lexer_next_token(t_lexer* lexer);
+t_lexer		*init_lexer(char *src);
+void		lexer_advance(t_lexer *lexer);
+void		lexer_skip_whitespace(t_lexer *lexer);
+char		lexer_peek(t_lexer *lexer, int offset);
+t_token		*lexer_advance_with(t_lexer *lexer, t_token *token);
+t_token		*lexer_advance_current(t_lexer *lexer, int type);
+t_token		*lexer_next_token(t_lexer *lexer);
 t_token		*help1_next_token(t_lexer *lexer);
 t_token		*help2_next_token(t_lexer *lexer);
 t_token		*lexer_collect_string(t_lexer *lexer);
 
-void	fill_env(char *env[], t_envp *my_env);
+void		fill_env(char *env[], t_envp *my_env);
 
 // ************************************************ parser.h
 typedef struct s_parser
 {
-	char**	cmd;
+	char	**cmd;
 	int		infile;
 	int		outfile;
-	int 	no_assign;
+	int		no_assign;
 	int		splite[262144];
-} t_parser;
+}	t_parser;
 
 t_command	*parser(t_lexer *lexer, t_token *token, t_command *list);
 char		*get_string(t_envp *my_env, char *s, int count);
@@ -116,30 +110,29 @@ char		*get_string(t_envp *my_env, char *s, int count);
 // *********************************************** tac.h
 typedef struct s_tac
 {
-	t_lexer*	lexer;
-	t_token*	token;
-	t_command*	list;
-	t_parser*	parser;
-} t_tac;
+	t_lexer		*lexer;
+	t_token		*token;
+	t_command	*list;
+	t_parser	*parser;
+}	t_tac;
 
 typedef struct s_heredoc
 {
 	int		i;
-	char*	str;
+	char	*str;
 	int		j;
-	char*	del_to_name;
+	char	*del_to_name;
 	int		k;
 	int		fd;
-	t_lexer *lexer;
-	t_token *token;
+	t_lexer	*lexer;
+	t_token	*token;
 }	t_heredoc;
 
-
-void	tac_compile(char* src, t_envp* my_env);
-int		check_syntax_error(char *src, int *i);
-int		unclosed_quotes(char *src, int **k);
-char*	here_doc(char* src, int stop, t_envp* my_env);
-void	print_node(t_command *lst, t_envp* my_env);
+void		tac_compile(char *src, t_envp *my_env);
+int			check_syntax_error(char *src, int *i);
+int			unclosed_quotes(char *src, int **k);
+char		*here_doc(char *src, int stop, t_envp *my_env);
+void		print_node(t_command *lst, t_envp *my_env);
 
 //heredoc
 char		*here_doc(char *src, int stop, t_envp *my_env);
@@ -152,17 +145,13 @@ t_tac		*ft_rediriction(t_tac *tac);
 t_heredoc	*creat__file(t_heredoc *here, char *src, int stop);
 t_heredoc	*get_delemeter(t_heredoc *here, char *src);
 
-
 // function of linked list
-t_command*	ft_lstnew(char** s, int infile, int outfile);
-void		ft_addfront(t_command** list, t_command* new);
+t_command	*ft_lstnew(char **s, int infile, int outfile);
+void		ft_addfront(t_command **list, t_command *new);
 
-
-void	execution(t_command* list, t_envp* my_env);
-int		pipes(int k, t_command *cmd, t_envp *my_env);
+void		execution(t_command *list, t_envp *my_env);
+int			pipes(int k, t_command *cmd, t_envp *my_env);
 
 //   signals
-void	handle_signals(int sig);
-void	signal_ctrl_c();
-
+void		handle_signals(int sig);
 #endif

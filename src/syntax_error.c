@@ -51,7 +51,8 @@ int	too(t_token *token, t_token *next_token, t_lexer *lexer, int **i)
 	if ((token->e_type == TOKEN_HERDOC || token->e_type == TOKEN_IN
 			|| token->e_type == TOKEN_OU || token->e_type == TOKEN_APPAND)
 		&& (next_token->e_type == TOKEN_HERDOC || next_token->e_type == TOKEN_IN
-			|| next_token->e_type == TOKEN_OU || next_token->e_type == TOKEN_APPAND
+			|| next_token->e_type == TOKEN_OU
+			|| next_token->e_type == TOKEN_APPAND
 			|| next_token->e_type == TOKEN_PIPE))
 	{	
 		printf("minishell: syntax error near unexpected token `%s'\n",

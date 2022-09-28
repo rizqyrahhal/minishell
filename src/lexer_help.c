@@ -20,12 +20,10 @@ int	get_min(int a, int b)
 		return (b);
 }
 
+// return lexer->src[i + 1] if exist or '\0'
 char	lexer_peek(t_lexer *lexer, int offset)
 {
-	//  bash man9alabch kharj man size         //   here macroos
 	return (lexer->src[get_min(lexer->i + offset, lexer->src_size)]);
-	// return (lexer->src[MIN(lexer->i + offset, lexer->src_size)]);
-	// return lexer->src[i + 1] if exist or '\0'
 }
 
 t_token	*lexer_advance_with(t_lexer *lexer, t_token *token)
