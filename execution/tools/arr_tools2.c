@@ -1,26 +1,38 @@
-#include "../../includes/execution.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   arr_tools2.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/25 16:18:46 by lsemlali          #+#    #+#             */
+/*   Updated: 2022/09/25 16:18:47 by lsemlali         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../../includes/execution.h"
 
 void	print_ar(char **arr, int out)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (arr[i])
 	{
-		if (sea_rch(arr[i], '=')) {
-            ft_putstr_fd(arr[i], out);
-            write(out, "\n", 1);
-        }
+		if (sea_rch(arr[i], '='))
+		{
+			putstr_fd(arr[i], out);
+			write(out, "\n", 1);
+		}
 		i++;
 	}
 }
 
-int arr_s(char **s, char *str)
+int	arr_s(char **s, char *str)
 {
-	int i;
-	int j;
-	int k;
+	int	i;
+	int	j;
+	int	k;
 
 	i = 0;
 	k = 0;
@@ -28,7 +40,8 @@ int arr_s(char **s, char *str)
 		k++;
 	if (str[k - 1] == '+')
 		k--;
-	while (s[i]) {
+	while (s[i])
+	{
 		j = 0;
 		while (s[i][j] && s[i][j] != '=')
 			j++;
@@ -39,12 +52,12 @@ int arr_s(char **s, char *str)
 	return (-1);
 }
 
-char **spl(char *s)
+char	**spl(char *s)
 {
 	int		i;
-	char**	sp;
+	char	**sp;
 
-	sp = malloc(3 * sizeof (char*));
+	sp = malloc(3 * sizeof (char *));
 	i = 0;
 	while (s[i] && s[i] != '=')
 		i++;
@@ -65,7 +78,7 @@ void	arr_cpy(t_envp *my_env, char *str)
 
 	i = 0;
 	j = 0;
-	s = malloc((arr_size(my_env->env) + 2) * sizeof (char*));
+	s = malloc((arr_size(my_env->env) + 2) * sizeof (char *));
 	while (my_env->env[j])
 	{
 		if (i == 5)
@@ -76,16 +89,15 @@ void	arr_cpy(t_envp *my_env, char *str)
 	}
 	s[i] = NULL;
 	free_arr(my_env->env);
-	free(my_env->env);
 	free(str);
 	my_env->env = s;
 }
 
 void	arr_delete(t_envp *my_env, char **s, char *str)
 {
-	int i;
-	int j;
-	int k;
+	int	i;
+	int	j;
+	int	k;
 
 	i = 0;
 	j = 0;

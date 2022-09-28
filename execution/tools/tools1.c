@@ -1,31 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools1.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/25 16:18:48 by lsemlali          #+#    #+#             */
+/*   Updated: 2022/09/25 16:18:49 by lsemlali         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/execution.h"
-
-int	sea_rch(char *s, int a)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == a)
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 void	arr_deletee(char **my_env, char **s, char *str)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
 	while (my_env[j])
 	{
-		if (ft_strncmp(my_env[j], str, ft_strlen(str)) == 0 && ft_strlen(str) == ft_strlen(my_env[j])) {
+		if (ft_strncmp(my_env[j], str, ft_strlen(str)) == 0
+			&& ft_strlen(str) == ft_strlen(my_env[j]))
 			j++;
-		}
 		else
 			s[i++] = ft_strdup(my_env[j++]);
 		free(my_env[j - 1]);
@@ -34,10 +32,10 @@ void	arr_deletee(char **my_env, char **s, char *str)
 	s[i] = NULL;
 }
 
-int __sort(char **s)
+int	__sort(char **s)
 {
-	int i;
-	int k;
+	int	i;
+	int	k;
 
 	i = 0;
 	k = 0;
@@ -50,47 +48,61 @@ int __sort(char **s)
 	return (k);
 }
 
-char**	ft_removee(char *my_env[], char *var)
+char	**ft_removee(char *my_env[], char *var)
 {
-	int k;
-	char **s;
-
+	int		k;
+	char	**s;
 
 	k = arr_size(my_env);
-	s = malloc(k * sizeof (char*));
+	s = malloc(k * sizeof (char *));
 	arr_deletee(my_env, s, var);
 	return (s);
 }
 
+int	get_pr_len(char *s)
+{
+	size_t k;
+
+	k = ft_strlen(s) + 11;
+	if (sea_rch(s, '='))
+		k+=2;
+	return (k);
+}
+
 void	print_q(char *s, int out)
 {
-	int i;
+	int		i;
+	int		k;
+	char	*str;
 
+	str = malloc(get_pr_len(s) + 1);
 	i = -1;
-	ft_putstr_fd("declare -x ", out);
+	ft_strlcpy(str, "declare -x ", get_pr_len(s));
+	k = 11;
 	while (s[++i] && s[i] != '=')
-		write(out, &s[i], 1);
-    write(out, &s[i], 1);
-	if (sea_rch(s, '=')) {
-		write(out, "\"", 1);
+		str[k++] = s[i];
+	str[k++] = s[i];
+	if (sea_rch(s, '='))
+	{
+		str[k++] = '"';
 		while (s[++i])
-			write(out, &s[i], 1);
-		write(out, "\"\n", 2);
+			str[k++] = s[i];
+		str[k++] = '"';
 	}
-	else
-		write(out, "\n", 1);
-
+	str[k] = '\0';
+	putstr_fd(str, out);
+	putstr_fd("\n", out);
 }
 
 void	export_(char **arr, int out)
 {
-	int i;
-	int c;
-	char **s;
+	int		i;
+	int		c;
+	char	**s;
 
 	i = 0;
 	c = 0;
-	s = malloc((arr_size(arr) + 1) * sizeof (char*));
+	s = malloc((arr_size(arr) + 1) * sizeof (char *));
 	fill_arr(arr, s);
 	while (arr_size(s) > 0)
 	{

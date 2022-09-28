@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/28 13:20:35 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:07:38 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,8 @@ int	main(int argc, char *argv[], char *env[])
 
 	(void)argv;
 	my_env = (t_envp *)malloc(sizeof(t_envp));
-	my_env->env = (char **)malloc(sizeof(char *) * (ft_d_strlen(env) + 1));
 	fill_env(env, my_env);
-	my_env->PWD = getcwd(NULL, 0);
+	my_env->pwd = getcwd(NULL, 0);
 	my_env->status = 0;
 	my_env->num_pipe = 0;
 	if (argc == 1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:43:36 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/28 12:49:43 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:13:47 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 
 # include <fcntl.h>
-// # include <readline/readline.h>
-// #include "../readline/8.1.2/include/readline/readline.h"
-// #include "../readline/8.1.2/include/readline/history.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include "../execut_libft/ex_libft.h"
@@ -26,45 +23,12 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 
-
-int r;
-// typedef struct s_command
-// {
-// 	char**	cmd;
-// 	int		infile; // < if input != 0
-// 	int		outfile; // > if output != 1
-// 	int 	status;
-// 	struct s_command *next;
-// } t_command;
-
-// typedef struct s_exp
-// {
-// 	char	*var;
-//     char    *value;// alloca nmbr of command
-// }   t_exp;
-
-// typedef struct s_redirection
-// {
-// 	int		input; // < if input != 0
-// 	int		output; // > if output != 1
-// }	t_redirection;
-
-// typedef struct s_envp
-// {
-// 	char	**env;
-// 	// int		status;
-// 	char	*PWD;
-// }	t_envp;
-
-// typedef struct s_minishell
-// {
-// 	t_command		*command; // reallooc pour chaque cmd trete
-// 	int 			nbr_command;
-// 	t_redirection	redirection;
-// }   t_minishell;
-
-
-
+typedef struct s_exp
+{
+	char	*var;
+	char    *value;
+	struct s_exp *next;
+}   t_exp;
 
 typedef struct s_pipe
 {
@@ -112,13 +76,29 @@ void	arr_delete(t_envp *my_env, char **s, char *str);
 char    *ft_cpy(char *s, int k);
 size_t	arr_size(char *env[]);
 void	fill_arr(char *env[], char *s[]);
+
+
+// Execute
 int		pipes(int ac, t_command *cmd, t_envp *my_env);
+void	multiple_p(t_pipe *p, int k, t_command *cmd, t_envp *my_env);
+void	main_p(t_pipe *p, int k, t_command *cmd, t_envp *my_env);
+void	main_wait(t_pipe *p, int k, t_envp *my_env, int ch);
+void	ex_comm(t_pipe *p, int k, t_command **cmd, t_envp *my_env);
+void	__builtins(char **sp, t_envp *my_env, int out);
+int		is_built(char *s);
+void	ex_comm(t_pipe *p, int k, t_command **cmd, t_envp *my_env);
+void	f_close(t_pipe *p, int k);
+
+
+
 char	*get_path(char *s, char *cmd);
 void	one_cmd(t_envp *my_env, t_command *cmd);
 void	frst_cmd(t_envp *my_env, int *fd, t_command *cmd);
 void	next_cmd(t_envp *my_env, t_pipe *p, int i, t_command *cmd);
 void	last_cmd(t_envp *my_env, int *fd, t_command *cmd);
-void	put_error(char *s, int h);
+void	ex_ecu(char *path, char *sp[], t_envp *my_env, int out);
+void	ft_norm__(t_envp *my_env, t_pipe *p, int i, t_command *cmd);
+void	er_ror(char *err, char *s);
 int		sea_rch(char *s, int a);
 char	*handle_env(char *env[]);
 char	*skip_sl(char	*cmd);

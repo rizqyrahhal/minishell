@@ -1,34 +1,60 @@
 #include "../includes/execution.h"
 
-char    *ft_cpy(char *s, int k); ////move to hedre
-size_t	ft_d_strlen(char **s); // move to hedre
-
-
-typedef struct s_exp
+t_exp	*lst_last(t_exp* list)
 {
-	char	*var;
-	char    *value;// alloca nmbr of command
-}   t_exp;
+	while (list)
+	{
+		if (!list->next) {
+			return (list);
+		}
+		list = list->next;
+	}
+	return (list);
+}
 
-void ft_getVar(char *env[], t_exp **exp)
+void	add_front(t_exp **list, t_exp *new)
 {
-	int i;
-	int j;
-	int k;
+	t_exp	*tmp;
 
-	k = 0;
+	new->next = NULL;
+	if (*list == NULL)
+		*list = new;
+	else
+	{
+		if (*list)
+		{
+			tmp = lst_last(*list);
+			tmp->next = new;
+		}
+		else
+			*list = new;
+	}
+}
+
+t_exp *ft_getVar(char *env[], t_exp *exp)
+{
+	int 	i;
+	int 	j;
+	char	*str;
+	t_exp	*tmp;
+
 	j = 0;
 	i = 0;
 	while (env[i])
 	{
+		tmp = malloc(sizeof (t_exp));
 		while (env[i][j] != '=')
 			j++;
-		(*exp)[k].var = ft_strjoin("$", ft_cpy(env[i], j++));
-		(*exp)[k].value = ft_cpy(&env[i][j], ft_strlen(&env[i][j]));
+		str = ft_cpy(env[i], j++);
+		tmp->var = ft_strjoin("$", str);
+		tmp->value = ft_cpy(&env[i][j], ft_strlen(&env[i][j]));
+		add_front(&exp, tmp);
 		j = 0;
 		i++;
-		k++;
+		tmp = NULL;
+		free(str);
 	}
+	return (exp);
 }
 
 int	ft_isvalid(int c)
@@ -73,30 +99,35 @@ char* ft_replace(char* s, char* old, char* new, int *k)
 			result[i++] = s[j++];
 	}
 	result[i] = '\0';
+	free(s);
 	return result;
 }
 
-int ft_getidx(t_exp *exp, char *s, char *env[])
+t_exp *ft_getidx(t_exp *exp, char *s)
 {
 	int i;
+	t_exp *tmp;
 	// int j;
 
 	i = 0;
-	while (i < (int)ft_d_strlen(env))
+	tmp = exp;
+	while (tmp)
 	{
-		if (ft_strncmp(exp[i].var, s, ft_strlen(s)) == 0 && ft_strlen(s) == ft_strlen(exp[i].var))
-			return (i);
-		i++;
+		if (ft_strncmp(tmp->var, s, ft_strlen(s)) == 0 && ft_strlen(s) == ft_strlen(tmp->var))
+			return (tmp);
+		tmp = tmp->next;
 	}
-	return (-1);
+	return (0);
 }
 
 char*	exp_and(t_exp *exp, char **env, char *s, int *j)
 {
 	int		k;
 	char	*str;
+	t_exp	*tmp;
 	int 	i;
 
+	(void)env;
 	k = 0;
 	i = *j;
 	while (s[i] && ft_isvalid(s[i]))
@@ -107,16 +138,17 @@ char*	exp_and(t_exp *exp, char **env, char *s, int *j)
 	k++;
 	if (k > 1) {
 		str = ft_cpy(&s[i - k], k);
-		k = ft_getidx(exp, str, env);
-		if (k > -1) {
-			s = ft_replace(s, str, exp[k].value, j);
-			i += ft_strlen(exp[k].value) - ft_strlen(str);
+		tmp = ft_getidx(exp, str);
+		if (tmp && k > -1) {
+			s = ft_replace(s, str, tmp->value, j);
+			i += ft_strlen(tmp->value) - ft_strlen(str);
 		}
 		else {
 			s = ft_replace(s, str, "\0", j);
 			i -= ft_strlen(str);
 		}
 		(*j) = i;
+		free(str);
 	}
 	else
 		(*j)++;
@@ -147,20 +179,22 @@ char*	special_vars(char* s, int c, int *k, t_envp * my_env)
 		// i++;
 	}
 	*k = i;
+	free(str);
 	return (s);
 }
 
-void	free_exp(t_exp *exp, int k)
+void	free_exp(t_exp **exp)
 {
-	int i;
+	t_exp	*tmp;
 
-	i = 0;
-	while (i < k)
+	tmp = *exp;
+	while (tmp)
 	{
-		free(exp[i].var);
-		free(exp[i].value);
-		i++;
+		free(tmp->var);
+		free(tmp->value);
+		tmp = tmp->next;
 	}
+	free(*exp);
 }
 
 char *ft_exp(char *s, t_exp *exp, t_envp *my_env, int count)
@@ -187,7 +221,7 @@ char *ft_exp(char *s, t_exp *exp, t_envp *my_env, int count)
 		else
 			i++;
 	}
-	//free_exp(exp, arr_size(my_env->env));
+	free_exp(&exp);
 	return (s);
 }
 
@@ -198,10 +232,11 @@ char*	get_string(t_envp *my_env, char *s, int count)
 	// for (int i = 0; my_env->env[i]; i++){
 	// 	printf("%s\n", my_env->env[i]);
 	// }
-	// printf("| _----------------------_ |\n");
+	if (s && !sea_rch(s, '$'))
+		return s;
 	if (!s)
 		return (NULL);
-	exp = malloc((ft_d_strlen(my_env->env) + 1) * sizeof (t_exp));
-	ft_getVar(my_env->env, &exp);
+	exp = NULL;
+	exp = ft_getVar(my_env->env, exp);
 	return (ft_exp(s, exp, my_env, count));
 }

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtins_tools.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/25 16:18:52 by lsemlali          #+#    #+#             */
+/*   Updated: 2022/09/25 16:18:53 by lsemlali         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/execution.h"
 
-char *new_var(char *var)
+char	*new_var(char *var)
 {
 	char	*new_var;
 	int		i;
@@ -27,10 +39,9 @@ char *new_var(char *var)
 	return (new_var);
 }
 
-char*	new_value(char* s, char* old)
+char	*new_value(char *s, char *old)
 {
 	int		i;
-	// char	*val;
 
 	i = 0;
 	while (s[i] && s[i] != '=')
@@ -40,17 +51,19 @@ char*	new_value(char* s, char* old)
 	return (ft_substr(s, i + 1, ft_strlen(s) - i - 1));
 }
 
-char *get_wich(char* old, char* new)
+char	*get_wich(char *old, char *new)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	if (sea_rch(new, '=')) {
+	if (sea_rch(new, '='))
+	{
 		while (new[i] && new[i] != '=')
 			i++;
 		if (new[i - 1] == '+' && new[i + 1])
 			return (ft_strjoin(old, new_value(new, old)));
-		else if (new[i - 1] == '+' && !new[i + 1]) {
+		else if (new[i - 1] == '+' && !new[i + 1])
+		{
 			if (sea_rch(old, '='))
 				return (ft_strdup(old));
 			else
@@ -64,18 +77,20 @@ char *get_wich(char* old, char* new)
 
 int	ft_add2env(t_envp *my_env, char *var)
 {
-	int k;
-	int i;
+	int	k;
+	int	i;
 
 	i = 0;
-	if (!check_export(var)) {
-		printf("minishell: export: `%s': not a valid identifier\n", var);
+	if (!check_export(var))
+	{
+		var = ft_strjoin("minishell: export: `%s", var);
+		var = ft_strjoin(var, "': not a valid identifier\n");
+		putstr_fd(var, 2);
 		return (1);
 	}
 	k = arr_s(my_env->env, var);
-	if (k != -1) {
+	if (k != -1)
 		my_env->env[k] = get_wich(my_env->env[k], var);
-	}
 	else
 		arr_cpy(my_env, new_var(var));
 	return (0);
@@ -83,20 +98,19 @@ int	ft_add2env(t_envp *my_env, char *var)
 
 int	ft_remove(t_envp *my_env, char *var)
 {
-	int k;
-	char **s;
+	int		k;
+	char	**s;
 
-	if (!check_unset(var)) {
+	if (!check_unset(var))
+	{
 		printf("minishell: unset: `%s': not a valid identifier\n", var);
 		return (1);
 	}
 	if (arr_s(my_env->env, var) == -1)
 		return (0);
 	k = arr_size(my_env->env);
-	s = malloc(k * sizeof (char*));
+	s = malloc(k * sizeof (char *));
 	arr_delete(my_env, s, var);
-	//free_arr(my_env->env);
 	my_env->env = s;
-	r = 0;
 	return (0);
 }

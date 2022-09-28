@@ -1,10 +1,20 @@
-#include "../../includes/execution.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/25 16:18:58 by lsemlali          #+#    #+#             */
+/*   Updated: 2022/09/25 16:18:59 by lsemlali         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../../includes/execution.h"
 
 void	ex_env(char **sp, t_envp *my_env, int out)
 {
 	int		i;
-	// int 	status;
 
 	i = 1;
 	if (sp[1] == NULL)
@@ -13,4 +23,3 @@ void	ex_env(char **sp, t_envp *my_env, int out)
 		printf("options or arguments not required\n");
 	my_env->status = 0;
 }
-

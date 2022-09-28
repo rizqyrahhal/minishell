@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ex_tools2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/26 11:01:02 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/25 14:19:42 by rarahhal         ###   ########.fr       */
+/*   Created: 2022/09/25 16:18:25 by lsemlali          #+#    #+#             */
+/*   Updated: 2022/09/25 16:18:26 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/execution.h"
-
-char	*skip_sl(char	*cmd)
-{
-	char	*n_cmd;
-	int		i;
-
-	i = ft_strlen(cmd);
-	while (i >= 0)
-	{
-		if (cmd[i] == '/')
-			break ;
-		i--;
-	}
-	n_cmd = ft_substr(cmd, i + 1, ft_strlen(cmd) - (i + 1));
-	return (n_cmd);
-}
 
 char	*get_path(char *s, char *cmd)
 {

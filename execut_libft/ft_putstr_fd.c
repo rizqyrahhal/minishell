@@ -6,13 +6,13 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 09:22:57 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/28 12:48:26 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/25 21:37:00 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ex_libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	putstr_fd(char *s, int fd)
 {
 	int	i;
 

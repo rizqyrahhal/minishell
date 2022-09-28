@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
+#    By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 17:12:13 by rarahhal          #+#    #+#              #
-#    Updated: 2022/09/28 15:27:09 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/09/28 16:03:07 by lsemlali         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,10 @@ SRCS = 	src/main.c \
 		execution/tools/tools1.c \
         execution/tools/arr_tools.c \
         execution/tools/arr_tools2.c \
+		execution/ex_main_tools.c \
         execution/execute.c \
+		execution/execute_1.c \
+        execution/execute_2.c \
         execution/ex_tools.c \
         execution/ex_tools2.c \
         execution/builtins/cd.c \
@@ -63,6 +66,7 @@ EXECUT_LIBFT = execut_libft/ft_split.c \
 		execut_libft/ft_strlcpy.c \
 		execut_libft/ft_isalpha.c \
 		execut_libft/ft_tolower.c \
+		execut_libft/ft_lower.c \
 		execut_libft/ft_isdigit.c \
 		execut_libft/ft_putstr_fd.c \
 		execut_libft/ft_itoa.c \

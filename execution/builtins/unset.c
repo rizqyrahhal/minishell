@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/25 16:19:04 by lsemlali          #+#    #+#             */
+/*   Updated: 2022/09/25 16:19:05 by lsemlali         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/execution.h"
 
-int check_unset(char *var)
+int	check_unset(char *var)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (ft_isdigit(var[0]))
@@ -19,16 +31,16 @@ int check_unset(char *var)
 void	ex_unset(char **sp, t_envp *my_env)
 {
 	int		i;
-	// int 	status;
 
 	i = 1;
 	if (sp[1] && sp[1][0] == '-')
 		printf("options not required\n");
-	else {
-		while (sp[i]) {
+	else
+	{
+		while (sp[i])
+		{
 			my_env->status = ft_remove(my_env, sp[i]);
 			i++;
 		}
 	}
-	r = 0;
 }

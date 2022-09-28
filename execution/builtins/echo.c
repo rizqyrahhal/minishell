@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/25 16:18:56 by lsemlali          #+#    #+#             */
+/*   Updated: 2022/09/25 16:18:57 by lsemlali         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/execution.h"
 
 int	is_accept(char *s)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	if (s[1] == '\0')
-		return  (0);
+		return (0);
 	while (s[i])
 	{
 		if (s[i] != 'n')
@@ -18,28 +30,26 @@ int	is_accept(char *s)
 
 void	ex_echo(char **cmd, t_envp *myenv, int out)
 {
-	int i;
-	int k;
+	int	i;
+	int	k;
 
-	k = 1;
 	i = 1;
-	while (cmd[i] && cmd[i][0] == '-') {
-		if (is_accept(cmd[i])) {
-			k++;
+	while (cmd[i] && cmd[i][0] == '-')
+	{
+		if (is_accept(cmd[i]))
 			i++;
-		}
 		else
-			break;
+			break ;
 	}
-	i = k;
+	k = i;
 	while (cmd[i])
 	{
-		ft_putstr_fd(cmd[i], out);
+		putstr_fd(cmd[i], out);
 		if (cmd[i + 1])
-        	write(out, " ", 1);
+			write(out, " ", 1);
 		i++;
 	}
 	if (k == 1)
-		ft_putstr_fd("\n", out);
+		putstr_fd("\n", out);
 	myenv->status = 0;
 }

@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/25 16:19:01 by lsemlali          #+#    #+#             */
+/*   Updated: 2022/09/25 16:19:02 by lsemlali         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/execution.h"
 
-int check_export(char *var)
+int	check_export(char *var)
 {
-	int i;
+	int	i;
 	int	k;
 
 	k = 0;
@@ -26,20 +38,22 @@ int check_export(char *var)
 
 void	ex_export(char **sp, t_envp *my_env, int out)
 {
-	// char **s;
 	int		i;
-	char*	s;
-	// int		status;
-	// oldpwd at first
+	char	*s;
+
 	i = 1;
 	if (sp[1] == NULL)
 		export_(my_env->env, out);
-	while (sp[i]) {
-		if (sp[1][0] == '-') {
+	while (sp[i])
+	{
+		if (sp[1][0] == '-')
+		{
 			s = ft_strjoin("minishell: export: ", sp[1]);
 			s = ft_strjoin(s, ": invalid option\n");
-			ft_putstr_fd(s, 2);
-			ft_putstr_fd("export: usage: export [-nf] [name[=value] ...] or export -p\n", 2);
+			putstr_fd(s, 2);
+			putstr_fd("export: usage: ", 2);
+			putstr_fd("export [-nf] [name[=value] ...] or export -p\n", 2);
+			my_env->status = 2;
 			return ;
 		}
 		my_env->status = ft_add2env(my_env, sp[i]);

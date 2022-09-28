@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_lower.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 10:05:12 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/25 21:38:03 by rarahhal         ###   ########.fr       */
+/*   Created: 2022/09/25 16:17:42 by lsemlali          #+#    #+#             */
+/*   Updated: 2022/09/25 16:17:43 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ex_libft.h"
 
-int	ft_toupper(int c)
+char	*lo_wer(char *s)
 {
-	if (c <= 'z' && c >= 'a')
-		c -= 32;
-	return (c);
+	int		i;
+	char	*low;
+
+	i = 0;
+	low = malloc(ft_strlen(s) + 1);
+	while (s[i])
+	{
+		if (ft_isalpha(s[i]))
+			low[i] = ft_tolower(s[i]);
+		else
+			low[i] = s[i];
+		i++;
+	}
+	low[i] = 0;
+	return (low);
 }
