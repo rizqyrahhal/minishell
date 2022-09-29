@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:00 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/26 17:24:38 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/29 17:51:31 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_token	*lexer_advance_current(t_lexer *lexer, int type)
 	char	*value;
 	t_token	*token;
 
-	value = ft_calloc(2, sizeof(char));
+	value = malloc(2);
 	value[0] = lexer->c;
 	value[1] = '\0';
 	token = init_token(value, type);

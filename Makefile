@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+         #
+#    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 17:12:13 by rarahhal          #+#    #+#              #
-#    Updated: 2022/09/28 16:03:07 by lsemlali         ###   ########.fr        #
+#    Updated: 2022/09/28 22:32:51 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,9 +75,8 @@ EXECUT_LIBFT = execut_libft/ft_split.c \
 READLINE = ~/.brew/opt/readline
 
 $(NAME):  $(SRCS) $(LIBFT) $(EXECUT_LIBFT)
-	@echo "\033[0;34m                     -------------------------------\n                     | MINISHELL COMPILING ....... |\n                     -------------------------------\n\033[0m"
 	@$(sig_remove_ctr_c)
-	@$(CC) -lreadline -L $(READLINE)/lib -I $(READLINE)/include $(CFLAGS) $(SRCS) $(LIBFT) $(EXECUT_LIBFT) -o $(NAME)
+	@$(CC) -lreadline -g $(CFLAGS) $(SRCS) $(LIBFT) $(EXECUT_LIBFT) -o $(NAME)
 
 all: $(NAME)
 
@@ -90,3 +89,8 @@ re: fclean
 	@make all
 
 .PHONY: all clean fclean re
+
+# $(NAME):  $(SRCS) $(LIBFT) $(EXECUT_LIBFT)
+# 	@echo "\033[0;34m                     -------------------------------\n                     | MINISHELL COMPILING ....... |\n                     -------------------------------\n\033[0m"
+# 	@$(sig_remove_ctr_c)
+# 	@$(CC) -lreadline -L $(READLINE)/lib -I $(READLINE)/include -g $(CFLAGS) $(SRCS) $(LIBFT) $(EXECUT_LIBFT) -o $(NAME)

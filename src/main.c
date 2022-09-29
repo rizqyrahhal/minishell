@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/28 16:07:38 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/09/29 14:50:23 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void signal_ctrl_c()
 {
 	write(2, "\n", 1);
 	rl_on_new_line();
-	rl_replace_line("\0", 0);
+	// rl_replace_line("\0", 0);
 	rl_redisplay();
 }
 
@@ -36,13 +36,13 @@ void	signal_ctrl_c_heredoc()
 void	signal_quit()
 {
 	printf("Quit: 3\n");
-	rl_replace_line("\0", 0);
+	// rl_replace_line("\0", 0);
 }
 
 void	signal_()
 {
 	printf("\n");
-	rl_replace_line("\0", 0);
+	// rl_replace_line("\0", 0);
 }
 
 
@@ -78,9 +78,17 @@ int	main(int argc, char *argv[], char *env[])
 			handle_signals(SIGINT);
 			handle_signals(SIGQUIT);
 			buf = readline("\033[0;33mminishell > \033[0m");
-			handle_signals(SIGINT_);
 			if (!buf)
+			{
+				free(buf);
 				exit (my_env->status);
+			}
+			if (!buf[0])
+			{
+				free(buf);
+				continue ;
+			}
+			handle_signals(SIGINT_);
 			add_history(buf);
 			if (buf)
 				tac_compile(buf, my_env);
@@ -92,3 +100,5 @@ int	main(int argc, char *argv[], char *env[])
 		printf("execute as fallows: ./minishell (! whilt no argement)\n");
 	return (my_env->status);
 }
+
+// export MallocStackLogging=1

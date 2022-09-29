@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/28 16:03:19 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/09/29 22:18:47 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <sys/stat.h>
 # include <sys/wait.h>
 # include <fcntl.h>
-# include "readline/readline.h"
-# include "readline/history.h"
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <unistd.h>
 # include <string.h>
 
@@ -136,7 +136,7 @@ void		print_node(t_command *lst, t_envp *my_env);
 
 //heredoc
 char		*here_doc(char *src, int stop, t_envp *my_env);
-t_heredoc	*init__(t_heredoc *here, char *src);
+t_heredoc	*init__(char *src);
 int			creat_heredoc(int fd, char *delemeter, t_envp *my_env);
 void		open_heredoc(int fd, char *delemeter, t_envp *my_env);
 
@@ -146,7 +146,9 @@ t_heredoc	*creat__file(t_heredoc *here, char *src, int stop);
 t_heredoc	*get_delemeter(t_heredoc *here, char *src);
 
 // function of linked list
-t_command	*ft_lstnew(char **s, int infile, int outfile);
+t_command	*ft_lstnew(t_command **n1, char **s, int infile, int outfile);
+t_command*	ft_lstlast(t_command* list);
+void		free_string(char	**s);
 void		ft_addfront(t_command **list, t_command *new);
 
 void		execution(t_command *list, t_envp *my_env);

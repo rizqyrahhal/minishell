@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:46:39 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/28 15:27:09 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:28:05 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ char	*non_qouting2(t_lexer *lexer, char *value, int *count)
 t_token	*lexer_collect_string(t_lexer *lexer)
 {
 	char	*value;
+	char	*new;
 	int		len;
 	int		count;
 
@@ -129,5 +130,7 @@ t_token	*lexer_collect_string(t_lexer *lexer)
 		}
 	}
 	value[len] = '\0';
-	return (init_token(value, TOKEN_STRING));
+	new = ft_strdup(value);
+	free(value);
+	return (init_token(new, TOKEN_STRING));
 }

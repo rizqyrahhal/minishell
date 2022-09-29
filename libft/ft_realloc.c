@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:29:41 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/18 18:28:57 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/29 22:19:46 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char**	ft_realloc(char	**s)
 		i++;
 	}
 	str[i] = 0;
+	free_string(s);
 	free(s);
 	return (str);
 }

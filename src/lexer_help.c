@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 15:47:21 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/27 21:30:29 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/29 17:48:21 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ t_token	*help1_next_token(t_lexer *lexer)
 	if (lexer_peek(lexer, 1) == '<')
 	{
 		lexer->i += 1;
-		return (lexer_advance_with(lexer, init_token("<<", TOKEN_HERDOC)));
+		return (lexer_advance_with(lexer, init_token(ft_strdup("<<"), TOKEN_HERDOC)));
 	}
 	else
-		return (lexer_advance_with(lexer, init_token("<", TOKEN_IN)));
+		return (lexer_advance_with(lexer, init_token(ft_strdup("<"), TOKEN_IN)));
 }
 
 t_token	*help2_next_token(t_lexer *lexer)
@@ -48,8 +48,8 @@ t_token	*help2_next_token(t_lexer *lexer)
 	if (lexer_peek(lexer, 1) == '>')
 	{
 		lexer->i += 1;
-		return (lexer_advance_with(lexer, init_token(">>", TOKEN_APPAND)));
+		return (lexer_advance_with(lexer, init_token(ft_strdup(">>"), TOKEN_APPAND)));
 	}
 	else
-		return (lexer_advance_with(lexer, init_token(">", TOKEN_OU)));
+		return (lexer_advance_with(lexer, init_token(ft_strdup(">"), TOKEN_OU)));
 }

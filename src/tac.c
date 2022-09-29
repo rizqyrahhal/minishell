@@ -6,55 +6,62 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/27 17:36:31 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/29 21:44:23 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 // print All data of linked list 
-void	print_node(t_command *lst, t_envp* my_env)
-{
-	t_command*	list;
-	int			i;
+// void	print_node(t_command *lst, t_envp* my_env)
+// {
+// 	t_command*	list;
+// 	int			i;
 
-	if (lst == NULL)
-		return;
-	list = lst;
-	(void)my_env;
-	printf("\033[0;31m|--__---### All Data of Linked List Structre ###---__--|\033[0m\n");
-	printf("pipe_numbere: %d\n", my_env->num_pipe);
-	while (list != NULL)
-	{
-		printf("madir walo > %d\n", list->madir_walo);
-		if (list->madir_walo == -404) {
-			list = list->next;
-		}
-		else {
-			i = 0;
-			printf("COMMAND: ");
-			while (list->cmd[i]) {
-				printf("[%s]=%d  ", list->cmd[i], list->splite[i]);
-				i++;
-			}
-			printf(", INfile: %d, OUTfile: %d", list->infile, list->outfile);
-			printf("\n");
-			list = list->next;
-		}
-	}
-}
+// 	if (lst == NULL)
+// 		return;
+// 	list = lst;
+// 	(void)my_env;
+// 	printf("\033[0;31m|--__---### All Data of Linked List Structre ###---__--|\033[0m\n");
+// 	printf("pipe_numbere: %d\n", my_env->num_pipe);
+// 	while (list->next != NULL)
+// 	{
+// 		printf("madir walo > %d\n", list->madir_walo);
+// 		if (list->madir_walo == -404) {
+// 			list = list->next;
+// 		}
+// 		else {
+// 			i = 0;
+// 			printf("COMMAND: ");
+// 			while (list->cmd[i]) {
+// 				printf("[%s]=%d  ", list->cmd[i], list->splite[i]);
+// 				i++;
+// 			}
+// 			printf(", INfile: %d, OUTfile: %d", list->infile, list->outfile);
+// 			printf("\n");
+// 			list = list->next;
+// 		}
+// 	}
+// }
 
 void	free_list(t_command* list)
 {
 	int	i;
-
-	i = 0;
-	while (list && list->madir_walo == 0 && list->cmd[i]){
-		free(list->cmd[i]);
-		i++;
+	t_command	*new;
+	
+	while (list)
+	{
+		i = 0;
+		while (list && list->madir_walo == 0 && list->cmd[i])
+		{
+			free(list->cmd[i]);
+			i++;
+		}
+		free(list->cmd);
+		new = list;
+		list = list->next;
+		free(new);
 	}
-	free(list->cmd);
-	free(list);
 }
 
 void	tac_compile(char* src, t_envp* my_env)
@@ -69,6 +76,7 @@ void	tac_compile(char* src, t_envp* my_env)
 	{
 		my_env->status = 258;
 		src = here_doc(src, i, my_env);
+		free(src);
 		return;
 	}
 	else
@@ -80,7 +88,6 @@ void	tac_compile(char* src, t_envp* my_env)
 	lexer_skip_whitespace(lexer);
 	lexer->my_env = my_env;
 	token = lexer_next_token(lexer);
-	list = (t_command *)malloc(sizeof(t_command));
 	list = NULL;
 	while(token->e_type != TOKEN_EOF)
 	{
@@ -90,10 +97,12 @@ void	tac_compile(char* src, t_envp* my_env)
 
 	// lexer free ms not just here
 	free(lexer);
+	free(token->value);
 	free(token);
-
+	free(src);
 	if (list)
 	{
+		// printf("%s ------ %s", list->cmd[0], list->next->cmd[0]);
 		execution(list, my_env);
 		my_env->num_pipe = 0;
 		free_list(list);

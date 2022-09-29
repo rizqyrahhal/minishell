@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:59:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/27 14:03:00 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/29 17:59:03 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,16 @@ int	too(t_token *token, t_token *next_token, t_lexer *lexer, int **i)
 	return (0);
 }
 
+void	ft_free_(t_lexer *l, t_lexer *nl, t_token *t, t_token *nt)
+{
+	free(l);
+	free(nl);
+	free(t->value);
+	free(t);
+	free(nt->value);
+	free(nt);
+}
+
 int	check_syntax_error(char *src, int *i)
 {
 	t_lexer	*lexer;
@@ -73,20 +83,38 @@ int	check_syntax_error(char *src, int *i)
 	init(&lexer, &next_lexer, &src);
 	token = lexer_next_token(lexer);
 	next_token = lexer_next_token(next_lexer);
+	// free(next_token->value);
 	if (one(token, next_token, lexer, &i) == -1)
+	{
+		ft_free_(lexer, next_lexer, token, next_token);
 		return (-1);
+	}
 	while (token->e_type != TOKEN_EOF)
 	{
 		if (next_lexer->c == ' ')
 			lexer_skip_whitespace(next_lexer);
+		free(next_token->value);
+		free(next_token);
 		next_token = lexer_next_token(next_lexer);
 		if (one(token, next_token, lexer, &i) == -1)
+		{
+			ft_free_(lexer, next_lexer, token, next_token);
 			return (-1);
+		}
 		if (too(token, next_token, lexer, &i) == -1)
+		{
+			ft_free_(lexer, next_lexer, token, next_token);
 			return (-1);
+		}
+		free(token->value);
+		free(token);
 		token = lexer_next_token(lexer);
 	}
 	if (unclosed_quotes(src, &i) == -1)
+	{
+		ft_free_(lexer, next_lexer, token, next_token);
 		return (-1);
+	}
+	ft_free_(lexer, next_lexer, token, next_token);
 	return (0);
 }

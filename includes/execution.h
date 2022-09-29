@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:43:36 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/28 16:13:47 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/09/29 21:52:37 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,9 @@ int		pipes(int ac, t_command *cmd, t_envp *my_env);
 void	multiple_p(t_pipe *p, int k, t_command *cmd, t_envp *my_env);
 void	main_p(t_pipe *p, int k, t_command *cmd, t_envp *my_env);
 void	main_wait(t_pipe *p, int k, t_envp *my_env, int ch);
-void	ex_comm(t_pipe *p, int k, t_command **cmd, t_envp *my_env);
+t_command	*ex_comm(t_pipe *p, int k, t_command *cmd, t_envp *my_env);
 void	__builtins(char **sp, t_envp *my_env, int out);
 int		is_built(char *s);
-void	ex_comm(t_pipe *p, int k, t_command **cmd, t_envp *my_env);
 void	f_close(t_pipe *p, int k);
 
 

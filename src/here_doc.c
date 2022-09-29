@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/28 13:01:02 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/29 21:22:19 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,14 @@ int	creat_heredoc(int fd, char *delemeter, t_envp *my_env)
 	return (0);
 }
 
-t_heredoc	*init__(t_heredoc *here, char *src)
+t_heredoc	*init__(char *src)
 {
+	t_heredoc	*here;
+
 	here = malloc(sizeof(t_heredoc));
 	here->lexer = init_lexer(src);
 	here->lexer->not_expand = -1;
+	here->token = init_token(NULL, 0);
 	here->i = 0;
 	here->j = 0;
 	here->str = malloc(1);
@@ -93,14 +96,15 @@ char	*here_doc(char *src, int stop, t_envp *my_env)
 {
 	t_heredoc	*here;
 
-	here = malloc(sizeof(t_heredoc));
-	here = init__(here, src);
+	here = NULL;
+	here = init__(src);
 	while (src && src[here->i] && here->i < stop)
 	{
 		here = skip_qouting(here, src);
 		if (src[here->i] == '<' && src[here->i + 1] == '<')
 		{
 			here = creat__file(here, src, stop);
+			free(here->del_to_name);
 			if (!here)
 				return (NULL);
 			if (here->token->e_type == TOKEN_STRING)
@@ -114,5 +118,11 @@ char	*here_doc(char *src, int stop, t_envp *my_env)
 			here->str[here->j] = '\0';
 		}
 	}
-	return (here->str);
+	free(here->token->value);
+	free(here->token);
+	free(here->lexer);
+	src = ft_strdup(here->str);
+	free(here->str);
+	free(here);
+	return (src);
 }

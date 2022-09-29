@@ -227,13 +227,17 @@ char *ft_exp(char *s, t_exp *exp, t_envp *my_env, int count)
 
 char*	get_string(t_envp *my_env, char *s, int count)
 {
-	t_exp *exp;
-
+	t_exp	*exp;
+	char	*str;
 	// for (int i = 0; my_env->env[i]; i++){
 	// 	printf("%s\n", my_env->env[i]);
 	// }
 	if (s && !sea_rch(s, '$'))
-		return s;
+	{
+		str = ft_strdup(s);
+		free(s);
+		return (str);
+	}
 	if (!s)
 		return (NULL);
 	exp = NULL;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execute_1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:18:29 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/25 16:18:30 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/09/29 21:56:59 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/execution.h"
 
-void	ex_comm(t_pipe *p, int k, t_command **cmd, t_envp *my_env)
+t_command	*ex_comm(t_pipe *p, int k, t_command *cmd, t_envp *my_env)
 {
 	int	i;
 
@@ -21,12 +21,13 @@ void	ex_comm(t_pipe *p, int k, t_command **cmd, t_envp *my_env)
 	{
 		pipe(p->fd[i + 1]);
 		if (p->check == -1)
-			return ;
-		next_cmd(my_env, p, i, *cmd);
+			return cmd;
+		next_cmd(my_env, p, i, cmd);
 		close(p->fd[i][0]);
 		close(p->fd[i][1]);
-		*cmd = (*cmd)->next;
+		cmd = cmd->next;
 	}
+	return (cmd);
 }
 
 void	main_wait(t_pipe *p, int k, t_envp *my_env, int ch)
@@ -56,7 +57,7 @@ void	main_wait(t_pipe *p, int k, t_envp *my_env, int ch)
 
 void	main_p(t_pipe *p, int k, t_command *cmd, t_envp *my_env)
 {
-	ex_comm(p, k, &cmd->next, my_env);
+	cmd = ex_comm(p, k, cmd->next, my_env);
 	if (p->check == -1)
 	{
 		f_close(p, k);
@@ -69,7 +70,7 @@ void	main_p(t_pipe *p, int k, t_command *cmd, t_envp *my_env)
 		return ;
 	}
 	if (p->pid2 == 0)
-		last_cmd(my_env, p->fd[k - 1], cmd->next);
+		last_cmd(my_env, p->fd[k - 1], cmd);
 	else
 		main_wait(p, k, my_env, 0);
 }
@@ -77,6 +78,9 @@ void	main_p(t_pipe *p, int k, t_command *cmd, t_envp *my_env)
 void	multiple_p(t_pipe *p, int k, t_command *cmd, t_envp *my_env)
 {
 	pipe(p->fd[0]);
+	t_command	*cmds;
+
+	cmds = cmd;
 	p->pid1 = fork();
 	if (p->pid1 == -1)
 	{
@@ -84,7 +88,7 @@ void	multiple_p(t_pipe *p, int k, t_command *cmd, t_envp *my_env)
 		return ;
 	}
 	if (p->pid1 == 0)
-		frst_cmd(my_env, p->fd[0], cmd);
+		frst_cmd(my_env, p->fd[0], cmds);
 	else
-		main_p(p, k, cmd, my_env);
+		main_p(p, k, cmds, my_env);
 }

@@ -6,25 +6,25 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/27 21:30:30 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/29 22:13:55 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	free_parser(t_parser *parser)
-{
-	int	i;
+// void	free_parser(t_parser *parser)
+// {
+// 	int	i;
 
-	i = 0;
-	while (parser->cmd[i])
-	{
-		free(parser->cmd[i]);
-		i++;
-	}
-	free(parser->cmd);
-	free(parser);
-}
+// 	i = 0;
+// 	while (parser->cmd[i])
+// 	{
+// 		free(parser->cmd[i]);
+// 		i++;
+// 	}
+// 	free(parser->cmd);
+// 	free(parser);
+// }
 
 t_tac	*parese_command(t_tac *tac)
 {
@@ -47,19 +47,23 @@ t_tac	*parese_command(t_tac *tac)
 			tac->parser->splite[i] = -2;
 		}
 		if (tac->token->e_type != TOKEN_EOF && tac->token->e_type != TOKEN_PIPE)
+		{
+			free(tac->token->value);
+			free(tac->token);
 			tac->token = lexer_next_token(tac->lexer);
+		}
 	}
 	return (tac);
 }
 
 t_tac	*cmd_to_list(t_tac *tac)
 {
-	t_command	*new;
 	int			i;
-
+	t_command	*new;
+	
 	i = 0;
-	new = ft_lstnew(tac->parser->cmd, tac->parser->infile,
-			tac->parser->outfile);
+	ft_lstnew(&new, tac->parser->cmd, tac->parser->infile,
+		tac->parser->outfile);
 	while (tac->parser->splite[i] != -2)
 	{
 		new->splite[i] = tac->parser->splite[i];
@@ -67,6 +71,7 @@ t_tac	*cmd_to_list(t_tac *tac)
 	}
 	new->madir_walo = 0;
 	ft_addfront(&tac->list, new);
+	// free(new);
 	return (tac);
 }
 
@@ -74,6 +79,7 @@ t_tac	*simple_command(t_tac *tac)
 {
 	t_command	*new;
 
+	new = NULL;
 	tac->parser = malloc(sizeof(t_parser));
 	tac->parser->cmd = malloc(sizeof(char *));
 	tac->parser->cmd[0] = NULL;
@@ -85,9 +91,10 @@ t_tac	*simple_command(t_tac *tac)
 		tac = cmd_to_list(tac);
 	else
 	{
-		new = ft_lstnew(NULL, 0, 1);
+		new = ft_lstnew(&new, NULL, 0, 1);
 		new->madir_walo = -404;
 		ft_addfront(&tac->list, new);
+		// free(new);
 	}
 	tac->parser->no_assign = 0;
 	return (tac);
@@ -96,7 +103,7 @@ t_tac	*simple_command(t_tac *tac)
 t_command	*parser(t_lexer *lexer, t_token *token, t_command *list)
 {
 	t_tac	*tac;
-
+	
 	tac = (t_tac *)malloc(sizeof(t_tac));
 	tac->lexer = lexer;
 	tac->token = token;
@@ -107,10 +114,19 @@ t_command	*parser(t_lexer *lexer, t_token *token, t_command *list)
 		if (tac->token->e_type == TOKEN_PIPE)
 		{
 			tac->lexer->my_env->num_pipe++;
+			free(tac->token->value);
+			free(tac->token);
 			tac->token = lexer_next_token(tac->lexer);
 		}
 		if (tac->parser)
-			free_parser(tac->parser);
+		{
+			free(tac->parser->cmd);
+			free(tac->parser);
+		}
 	}
-	return (tac->list);
+	list = tac->list;
+	free(tac->token->value);
+	free(tac->token);
+	free(tac);
+	return (list);
 }

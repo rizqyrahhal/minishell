@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:18:31 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/25 16:18:32 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/09/28 22:10:39 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,22 @@ int	is_built(char *s)
 
 void	__builtins(char **sp, t_envp *my_env, int out)
 {
+	char	*s;
+
+	s = lo_wer(sp[0]);
 	if (ft_strncmp(sp[0], "cd", 2) == 0 && ft_strlen(sp[0]) == 2)
 		ex_cd(sp, my_env);
 	if (ft_strncmp(sp[0], "export", 6) == 0 && ft_strlen(sp[0]) == 6)
 		ex_export(sp, my_env, out);
-	if (ft_strncmp(lo_wer(sp[0]), "env", 3) == 0 && ft_strlen(sp[0]) == 3)
+	if (ft_strncmp(s, "env", 3) == 0 && ft_strlen(sp[0]) == 3)
 		ex_env(sp, my_env, out);
-	if (ft_strncmp(lo_wer(sp[0]), "pwd", 3) == 0 && ft_strlen(sp[0]) == 3)
+	if (ft_strncmp(s, "pwd", 3) == 0 && ft_strlen(sp[0]) == 3)
 		ex_pwd(sp, my_env, out);
 	if (ft_strncmp(sp[0], "unset", 5) == 0 && ft_strlen(sp[0]) == 5)
 		ex_unset(sp, my_env);
-	if (ft_strncmp(lo_wer(sp[0]), "echo", 4) == 0 && ft_strlen(sp[0]) == 4)
+	if (ft_strncmp(s, "echo", 4) == 0 && ft_strlen(sp[0]) == 4)
 		ex_echo(sp, my_env, out);
 	if (ft_strncmp(sp[0], "exit", 4) == 0 && ft_strlen(sp[0]) == 4)
 		ex_exit(sp, my_env);
+	free(s);
 }

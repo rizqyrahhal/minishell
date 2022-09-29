@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 20:21:06 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/27 21:30:30 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/29 21:00:52 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ t_tac	*ouftile_tokens(t_tac *tac, char *str, int flag)
 {
 	char	*value;
 	t_token	*next_token;
+	char	*join;
 
+	join = NULL;
 	next_token = lexer_next_token(tac->lexer);
 	tac->parser->no_assign = 0;
 	if (tac->parser->outfile != 1)
@@ -76,10 +78,14 @@ t_tac	*ouftile_tokens(t_tac *tac, char *str, int flag)
 				| O_RDWR | flag, 0644);
 	if (tac->parser->outfile == -1 && tac->parser->no_assign > -1)
 	{
-		perror(ft_strjoin("minishell: ", next_token->value));
+		join = ft_strjoin("minishell: ", next_token->value);
+		perror(join);
+		free(join);
 		tac->lexer->my_env->status = 1;
 		tac->parser->no_assign = -1;
 	}
+	free(next_token->value);
+	free(next_token);
 	return (tac);
 }
 
@@ -97,6 +103,7 @@ t_tac	*infile_error(t_tac *tac, char *str, char *next_token)
 		else
 			printf("minishell: %s: No such file or directory\n", next_token);
 		tac->lexer->my_env->status = 1;
+		free(value);
 	}
 	return (tac);
 }
@@ -107,11 +114,13 @@ t_tac	*ft_rediriction(t_tac *tac)
 	char	*str;
 
 	str = file_name(tac->lexer);
-	next_token = tac->token;
+	// next_token = tac->token;
+	next_token = init_token(NULL, 0);
 	if (tac->token->e_type == TOKEN_IN || tac->token->e_type == TOKEN_HERDOC)
 	{
 		if (tac->parser->infile != 0)
 			close(tac->parser->infile);
+		free(next_token);
 		next_token = lexer_next_token(tac->lexer);
 		if (next_token->e_type == TOKEN_STRING)
 			tac->parser->infile = open(next_token->value, O_RDONLY, 0600);
@@ -123,9 +132,17 @@ t_tac	*ft_rediriction(t_tac *tac)
 	tac = infile_error(tac, str, next_token->value);
 	if (tac->parser->infile == -1 || tac->parser->outfile == -1
 		|| tac->parser->no_assign == -1)
+	{
 		while (tac->token->e_type != TOKEN_PIPE
 			&& tac->token->e_type != TOKEN_EOF)
+		{
+			free(tac->token->value);
+			free(tac->token);
 			tac->token = lexer_next_token(tac->lexer);
-	free(str);
+		}
+	}
+	free(next_token->value);
+	free(next_token);
+	// free(str);
 	return (tac);
 }
