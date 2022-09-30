@@ -28,6 +28,7 @@ void	ex_pwd(char **sp, t_envp *my_env, int out)
 			pwd = my_env->pwd;
 		putstr_fd(pwd, out);
 		write(out, "\n", 1);
+		free(pwd);
 		my_env->status = 0;
 	}
 }

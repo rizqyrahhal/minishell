@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:42:37 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/30 15:18:19 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/30 17:51:00 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void	execution(t_command* list, t_envp* my_env)
 
 	handle_signals(SIGQUIT_INCHILD);
 	// k = struct_size(list) - 1;
-	// check_list(&list);
+	check_list(&list);
 //	my_env->splite = 0;
 
 	pipes(my_env->num_pipe, list, my_env);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
+#    By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 17:12:13 by rarahhal          #+#    #+#              #
-#    Updated: 2022/09/30 15:32:52 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/09/30 17:56:05 by lsemlali         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,8 @@ SRCS = 	src/main.c \
 		src/rediriction.c \
 		src/env.c \
 		src/expanda.c \
+		src/exp_tools.c \
+		src/exp_tools2.c \
 		src/execution.c \
 		execution/tools/tools1.c \
         execution/tools/arr_tools.c \
@@ -60,18 +62,18 @@ LIBFT = libft/ft_calloc.c \
 		libft/ft_strnstr.c \
 		libft/ft_randstring.c \
 
-EXECUT_LIBFT = execut_libft/ft_split.c \
-		execut_libft/ft_atoi.c \
-		execut_libft/ft_strcmp.c \
-		execut_libft/ft_strchr.c \
-		execut_libft/ft_strlcpy.c \
-		execut_libft/ft_isalpha.c \
-		execut_libft/ft_tolower.c \
-		execut_libft/ft_lower.c \
-		execut_libft/ft_isdigit.c \
-		execut_libft/ft_putstr_fd.c \
-		execut_libft/ft_itoa.c \
-		execut_libft/ft_substr.c
+EXECUT_LIBFT = execution/execut_libft/ft_split.c \
+		execution/execut_libft/ft_atoi.c \
+		execution/execut_libft/ft_strcmp.c \
+		execution/execut_libft/ft_strchr.c \
+		execution/execut_libft/ft_strlcpy.c \
+		execution/execut_libft/ft_isalpha.c \
+		execution/execut_libft/ft_tolower.c \
+		execution/execut_libft/ft_lower.c \
+		execution/execut_libft/ft_isdigit.c \
+		execution/execut_libft/ft_putstr_fd.c \
+		execution/execut_libft/ft_itoa.c \
+		execution/execut_libft/ft_substr.c
 
 READLINE = ~/.brew/opt/readline
 

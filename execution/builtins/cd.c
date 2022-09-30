@@ -12,6 +12,34 @@
 
 #include "../../includes/execution.h"
 
+void	fun_a(t_envp *my_env)
+{
+	char	*fr_ee;
+
+	fr_ee = my_env->pwd;
+	ft_add2env(my_env, "PWD+=/..");
+	free(my_env->pwd);
+	my_env->pwd = ft_strjoin(my_env->pwd, "/..");
+	free(fr_ee);
+	printf("cd: error retrieving current directory: getcwd: cannot ");
+	printf("access parent directories: No such file or directory\n");
+	my_env->status = 0;
+}
+
+void	fun_b(t_envp *my_env, char *old_cwd, char cwd[256])
+{
+	char	*fr_ee;
+
+	fr_ee = ft_strjoin("PWD=", cwd);
+	ft_add2env(my_env, fr_ee);
+	free(fr_ee);
+	free(my_env->pwd);
+	my_env->pwd = ft_strdup(cwd);
+	fr_ee = ft_strjoin("OLDPWD=", old_cwd);
+	ft_add2env(my_env, fr_ee);
+	free(fr_ee);
+}
+
 void	get_current(char **sp, t_envp *my_env, int k, char *old_cwd)
 {
 	char	cwd[256];
@@ -19,19 +47,9 @@ void	get_current(char **sp, t_envp *my_env, int k, char *old_cwd)
 	if (chdir(sp[1]) == 0 && k == 0)
 	{
 		if (!getcwd(cwd, sizeof(cwd)))
-		{
-			ft_add2env(my_env, "PWD+=/..");
-			my_env->pwd = ft_strjoin(my_env->pwd, "/..");
-			printf("cd: error retrieving current directory: getcwd: cannot ");
-			printf("access parent directories: No such file or directory\n");
-			my_env->status = 0;
-		}
+			fun_a(my_env);
 		else
-		{
-			ft_add2env(my_env, ft_strjoin("PWD=", cwd));
-			my_env->pwd = ft_strdup(cwd);
-			ft_add2env(my_env, ft_strjoin("OLDPWD=", old_cwd));
-		}
+			fun_b(my_env, old_cwd, cwd);
 	}
 	else if (k == 0)
 	{
@@ -44,6 +62,7 @@ void	get_old(char **sp, t_envp *my_env)
 {
 	char	old_cwd[256];
 	int		k;
+	char	*fr_ee;
 
 	k = 0;
 	if (!getcwd(old_cwd, sizeof(old_cwd)))
@@ -51,8 +70,12 @@ void	get_old(char **sp, t_envp *my_env)
 		if (sp[1] && sp[1][0] == '.' && ft_strlen(sp[1]) == 1)
 		{
 			ft_add2env(my_env, "PWD+=/.");
-			ft_add2env(my_env, ft_strjoin("OLDPWD=", my_env->pwd));
+			fr_ee = ft_strjoin("OLDPWD=", my_env->pwd);
+			ft_add2env(my_env, fr_ee);
+			free(fr_ee);
+			fr_ee = my_env->pwd;
 			my_env->pwd = ft_strjoin(my_env->pwd, "/.");
+			free(fr_ee);
 			printf("cd: error retrieving current directory: getcwd: cannot ");
 			printf("access parent directories: No such file or directory\n");
 			my_env->status = 0;

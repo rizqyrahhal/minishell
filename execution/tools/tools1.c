@@ -26,26 +26,9 @@ void	arr_deletee(char **my_env, char **s, char *str)
 			j++;
 		else
 			s[i++] = ft_strdup(my_env[j++]);
-		free(my_env[j - 1]);
 	}
-	free(my_env);
+	free_arr(my_env);
 	s[i] = NULL;
-}
-
-int	__sort(char **s)
-{
-	int	i;
-	int	k;
-
-	i = 0;
-	k = 0;
-	while (s[i])
-	{
-		if (ft_strcmp(s[k], s[i]) == 1)
-			k = i;
-		i++;
-	}
-	return (k);
 }
 
 char	**ft_removee(char *my_env[], char *var)
@@ -61,11 +44,11 @@ char	**ft_removee(char *my_env[], char *var)
 
 int	get_pr_len(char *s)
 {
-	size_t k;
+	size_t	k;
 
 	k = ft_strlen(s) + 11;
 	if (sea_rch(s, '='))
-		k+=2;
+		k += 2;
 	return (k);
 }
 
@@ -92,6 +75,7 @@ void	print_q(char *s, int out)
 	str[k] = '\0';
 	putstr_fd(str, out);
 	putstr_fd("\n", out);
+	free(str);
 }
 
 void	export_(char **arr, int out)
@@ -111,4 +95,5 @@ void	export_(char **arr, int out)
 		s = ft_removee(s, s[c]);
 		i++;
 	}
+	free(s);
 }

@@ -48,3 +48,19 @@ void	fill_arr(char *env[], char *s[])
 	}
 	s[i] = 0;
 }
+
+int	__sort(char **s)
+{
+	int	i;
+	int	k;
+
+	i = 0;
+	k = 0;
+	while (s[i])
+	{
+		if (ft_strcmp(s[k], s[i]) == 1)
+			k = i;
+		i++;
+	}
+	return (k);
+}

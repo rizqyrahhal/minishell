@@ -30,11 +30,14 @@ int	check_unset(char *var)
 
 void	ex_unset(char **sp, t_envp *my_env)
 {
-	int		i;
+	int	i;
 
 	i = 1;
 	if (sp[1] && sp[1][0] == '-')
+	{
 		printf("options not required\n");
+		my_env->status = 2;
+	}
 	else
 	{
 		while (sp[i])

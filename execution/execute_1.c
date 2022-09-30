@@ -21,7 +21,7 @@ t_command	*ex_comm(t_pipe *p, int k, t_command *cmd, t_envp *my_env)
 	{
 		pipe(p->fd[i + 1]);
 		if (p->check == -1)
-			return cmd;
+			return (cmd);
 		next_cmd(my_env, p, i, cmd);
 		close(p->fd[i][0]);
 		close(p->fd[i][1]);
@@ -77,9 +77,9 @@ void	main_p(t_pipe *p, int k, t_command *cmd, t_envp *my_env)
 
 void	multiple_p(t_pipe *p, int k, t_command *cmd, t_envp *my_env)
 {
-	pipe(p->fd[0]);
 	t_command	*cmds;
 
+	pipe(p->fd[0]);
 	cmds = cmd;
 	p->pid1 = fork();
 	if (p->pid1 == -1)

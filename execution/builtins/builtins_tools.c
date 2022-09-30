@@ -51,9 +51,9 @@ char	*new_value(char *s, char *old)
 	return (ft_substr(s, i + 1, ft_strlen(s) - i - 1));
 }
 
-char	*get_wich(char *old, char *new)
+char	*get_wich(char *old, char *new, char *ch)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	if (sea_rch(new, '='))
@@ -61,7 +61,12 @@ char	*get_wich(char *old, char *new)
 		while (new[i] && new[i] != '=')
 			i++;
 		if (new[i - 1] == '+' && new[i + 1])
-			return (ft_strjoin(old, new_value(new, old)));
+		{
+			ch = new_value(new, old);
+			new = ft_strjoin(old, ch);
+			free(ch);
+			return (new);
+		}
 		else if (new[i - 1] == '+' && !new[i + 1])
 		{
 			if (sea_rch(old, '='))
@@ -72,13 +77,14 @@ char	*get_wich(char *old, char *new)
 		return (ft_strdup(new));
 	}
 	else
-		return (old);
+		return (ft_strdup(old));
 }
 
 int	ft_add2env(t_envp *my_env, char *var)
 {
-	int	k;
-	int	i;
+	int		k;
+	int		i;
+	char	*ch;
 
 	i = 0;
 	if (!check_export(var))
@@ -90,7 +96,11 @@ int	ft_add2env(t_envp *my_env, char *var)
 	}
 	k = arr_s(my_env->env, var);
 	if (k != -1)
-		my_env->env[k] = get_wich(my_env->env[k], var);
+	{
+		ch = my_env->env[k];
+		my_env->env[k] = get_wich(my_env->env[k], var, ch);
+		free(ch);
+	}
 	else
 		arr_cpy(my_env, new_var(var));
 	return (0);
@@ -111,6 +121,7 @@ int	ft_remove(t_envp *my_env, char *var)
 	k = arr_size(my_env->env);
 	s = malloc(k * sizeof (char *));
 	arr_delete(my_env, s, var);
+	free_arr(my_env->env);
 	my_env->env = s;
 	return (0);
 }

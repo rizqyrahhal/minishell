@@ -31,7 +31,7 @@ void	child(t_pipe *p, int k, t_command *cmd, t_envp *my_env)
 		else
 		{
 			main_wait(p, k, my_env, 1);
-			__builtins(cmd->cmd, my_env, cmd->outfile);
+			__builtins(cmd->cmd, my_env, cmd->outfile, k);
 		}
 	}
 }

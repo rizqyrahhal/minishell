@@ -44,7 +44,7 @@ int	is_built(char *s)
 	return (0);
 }
 
-void	__builtins(char **sp, t_envp *my_env, int out)
+void	__builtins(char **sp, t_envp *my_env, int out, int k)
 {
 	char	*s;
 
@@ -62,6 +62,6 @@ void	__builtins(char **sp, t_envp *my_env, int out)
 	if (ft_strncmp(s, "echo", 4) == 0 && ft_strlen(sp[0]) == 4)
 		ex_echo(sp, my_env, out);
 	if (ft_strncmp(sp[0], "exit", 4) == 0 && ft_strlen(sp[0]) == 4)
-		ex_exit(sp, my_env);
+		ex_exit(sp, my_env, k);
 	free(s);
 }

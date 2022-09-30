@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/execution.h"
-#include <dirent.h>
 
 void	er_ror(char *err, char *s)
 {
@@ -24,7 +23,7 @@ void	ex_ecu(char *path, char *sp[], t_envp *my_env, int out)
 {
 	if (is_built(sp[0]))
 	{
-		__builtins(sp, my_env, out);
+		__builtins(sp, my_env, out, -1);
 		exit (my_env->status);
 	}
 	else if (execve(path, sp, my_env->env) == -1)

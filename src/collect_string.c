@@ -3,15 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   collect_string.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:46:39 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/30 15:41:50 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/30 17:56:31 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-#include "../execut_libft/ex_libft.h"
 #include "../includes/execution.h"
 
 char	*singel_qoute(t_lexer *lexer, char *value, int *len, int *count)
