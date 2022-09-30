@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 17:33:47 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/28 16:09:36 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:48:41 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,3 @@ void	fill_env(char *env[], t_envp *my_env)
 	}
 	my_env->env[i] = 0;
 }
-

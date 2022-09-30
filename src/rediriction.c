@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 20:21:06 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/29 21:00:52 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/30 17:07:29 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,7 @@ t_tac	*ouftile_tokens(t_tac *tac, char *str, int flag)
 		tac->lexer->my_env->status = 1;
 		tac->parser->no_assign = -1;
 	}
-	free(next_token->value);
-	free(next_token);
+	f_ree_(&next_token);
 	return (tac);
 }
 
@@ -114,7 +113,6 @@ t_tac	*ft_rediriction(t_tac *tac)
 	char	*str;
 
 	str = file_name(tac->lexer);
-	// next_token = tac->token;
 	next_token = init_token(NULL, 0);
 	if (tac->token->e_type == TOKEN_IN || tac->token->e_type == TOKEN_HERDOC)
 	{
@@ -130,19 +128,8 @@ t_tac	*ft_rediriction(t_tac *tac)
 	if (tac->token->e_type == TOKEN_APPAND)
 		tac = ouftile_tokens(tac, str, O_APPEND);
 	tac = infile_error(tac, str, next_token->value);
-	if (tac->parser->infile == -1 || tac->parser->outfile == -1
-		|| tac->parser->no_assign == -1)
-	{
-		while (tac->token->e_type != TOKEN_PIPE
-			&& tac->token->e_type != TOKEN_EOF)
-		{
-			free(tac->token->value);
-			free(tac->token);
-			tac->token = lexer_next_token(tac->lexer);
-		}
-	}
+	tac = next_command(&tac);
 	free(next_token->value);
 	free(next_token);
-	// free(str);
 	return (tac);
 }

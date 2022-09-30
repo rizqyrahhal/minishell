@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/29 21:22:19 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:46:53 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,20 +73,24 @@ t_heredoc	*skip_qouting(t_heredoc *here, char *src)
 	{
 		here->str = ft_d_realloc(here->str);
 		here->str[here->j++] = src[here->i++];
+		here->str[here->j] = '\0';
 		while (src[here->i] != '"')
 		{
 			here->str = ft_d_realloc(here->str);
 			here->str[here->j++] = src[here->i++];
+			here->str[here->j] = '\0';
 		}
 	}
 	if (src[here->i] == '\'')
 	{
 		here->str = ft_d_realloc(here->str);
 		here->str[here->j++] = src[here->i++];
+		here->str[here->j] = '\0';
 		while (src[here->i] != '\'')
 		{
 			here->str = ft_d_realloc(here->str);
 			here->str[here->j++] = src[here->i++];
+			here->str[here->j] = '\0';
 		}
 	}
 	return (here);
@@ -118,11 +122,5 @@ char	*here_doc(char *src, int stop, t_envp *my_env)
 			here->str[here->j] = '\0';
 		}
 	}
-	free(here->token->value);
-	free(here->token);
-	free(here->lexer);
-	src = ft_strdup(here->str);
-	free(here->str);
-	free(here);
-	return (src);
+	return (_free_token(here, src));
 }

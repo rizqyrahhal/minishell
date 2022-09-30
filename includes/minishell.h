@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/29 22:18:47 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/30 17:07:58 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ t_token		*lexer_next_token(t_lexer *lexer);
 t_token		*help1_next_token(t_lexer *lexer);
 t_token		*help2_next_token(t_lexer *lexer);
 t_token		*lexer_collect_string(t_lexer *lexer);
+char		*_free_value(char *value);
 
 void		fill_env(char *env[], t_envp *my_env);
 
@@ -131,16 +132,19 @@ typedef struct s_heredoc
 void		tac_compile(char *src, t_envp *my_env);
 int			check_syntax_error(char *src, int *i);
 int			unclosed_quotes(char *src, int **k);
-char		*here_doc(char *src, int stop, t_envp *my_env);
 void		print_node(t_command *lst, t_envp *my_env);
 
 //heredoc
 char		*here_doc(char *src, int stop, t_envp *my_env);
+char		*_free_token(t_heredoc *here, char *src);
 t_heredoc	*init__(char *src);
 int			creat_heredoc(int fd, char *delemeter, t_envp *my_env);
 void		open_heredoc(int fd, char *delemeter, t_envp *my_env);
 
 t_tac		*ft_rediriction(t_tac *tac);
+t_tac		*next_command(t_tac **tac);
+void		f_ree_(t_token **token);
+void		_free_(t_tac **tac, t_token **token, int k);
 
 t_heredoc	*creat__file(t_heredoc *here, char *src, int stop);
 t_heredoc	*get_delemeter(t_heredoc *here, char *src);

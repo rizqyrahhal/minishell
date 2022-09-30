@@ -6,25 +6,32 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 20:28:49 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/29 21:24:50 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:49:12 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_heredoc	*creat__file(t_heredoc *here, char *src, int stop)
+char	*get_filename(void)
 {
 	char	*rand_str;
+	char	*file_name;
 
 	rand_str = ft_randstring(8);
-	here->del_to_name = ft_strjoin("/tmp/", rand_str);
+	file_name = ft_strjoin("/tmp/_", rand_str);
 	free(rand_str);
-	// here->del_to_name = ft_strjoin("/tmp/", ft_randstring(8));
+	return (file_name);
+}
+
+t_heredoc	*creat__file(t_heredoc *here, char *src, int stop)
+{
+	here->del_to_name = get_filename();
 	if (here->i + 2 < stop)
 		here->fd = open(here->del_to_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	here->str = ft_d_realloc(here->str);
-	here->str = ft_d_realloc(here->str);
 	here->str[here->j++] = src[here->i++];
+	here->str[here->j] = '\0';
+	here->str = ft_d_realloc(here->str);
 	here->str[here->j++] = src[here->i++];
 	here->str[here->j] = '\0';
 	while (src[here->i] && (src[here->i] == ' ' || src[here->i] == '\t'))
@@ -50,7 +57,8 @@ t_heredoc	*get_delemeter(t_heredoc *here, char *src)
 	qout = 0;
 	if (src[here->i] == '"' || src[here->i] == '\'')
 		qout = 2;
-	while (src[here->i] && (int)here->lexer->i <= here->i){
+	while (src[here->i] && (int)here->lexer->i <= here->i)
+	{
 		if (here->token->value)
 			free(here->token->value);
 		free(here->token);
@@ -60,4 +68,15 @@ t_heredoc	*get_delemeter(t_heredoc *here, char *src)
 		return (NULL);
 	here->i += ft_strlen(here->token->value) + qout;
 	return (here);
+}
+
+char	*_free_token(t_heredoc *here, char *src)
+{
+	free(here->token->value);
+	free(here->token);
+	free(here->lexer);
+	src = ft_strdup(here->str);
+	free(here->str);
+	free(here);
+	return (src);
 }

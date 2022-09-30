@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:59:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/29 17:59:03 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/29 23:02:46 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int	check_syntax_error(char *src, int *i)
 	init(&lexer, &next_lexer, &src);
 	token = lexer_next_token(lexer);
 	next_token = lexer_next_token(next_lexer);
-	// free(next_token->value);
 	if (one(token, next_token, lexer, &i) == -1)
 	{
 		ft_free_(lexer, next_lexer, token, next_token);

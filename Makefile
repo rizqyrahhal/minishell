@@ -6,7 +6,7 @@
 #    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 17:12:13 by rarahhal          #+#    #+#              #
-#    Updated: 2022/09/28 22:32:51 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/09/30 15:32:52 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS = 	src/main.c \
 		src/lexer.c \
 		src/lexer_help.c \
 		src/collect_string.c \
+		src/free.c \
 		src/token.c \
 		src/tac.c \
 		src/syntax_error.c \
@@ -84,6 +85,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f /tmp/_????????
 
 re: fclean
 	@make all

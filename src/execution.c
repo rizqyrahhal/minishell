@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:42:37 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/29 21:49:02 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:18:19 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ char**	fix_cmd(char** s, int *i)
 void	execution(t_command* list, t_envp* my_env)
 {
 	// int	k;
+
 
 	handle_signals(SIGQUIT_INCHILD);
 	// k = struct_size(list) - 1;

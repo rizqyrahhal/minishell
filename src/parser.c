@@ -6,25 +6,27 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/29 22:13:55 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/30 17:07:39 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// void	free_parser(t_parser *parser)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (parser->cmd[i])
-// 	{
-// 		free(parser->cmd[i]);
-// 		i++;
-// 	}
-// 	free(parser->cmd);
-// 	free(parser);
-// }
+t_tac	*next_command(t_tac **tac)
+{
+	if ((*tac)->parser->infile == -1 || (*tac)->parser->outfile == -1
+		|| (*tac)->parser->no_assign == -1)
+	{
+		while ((*tac)->token->e_type != TOKEN_PIPE
+			&& (*tac)->token->e_type != TOKEN_EOF)
+		{
+			free((*tac)->token->value);
+			free((*tac)->token);
+			(*tac)->token = lexer_next_token((*tac)->lexer);
+		}
+	}
+	return (*tac);
+}
 
 t_tac	*parese_command(t_tac *tac)
 {
@@ -48,8 +50,7 @@ t_tac	*parese_command(t_tac *tac)
 		}
 		if (tac->token->e_type != TOKEN_EOF && tac->token->e_type != TOKEN_PIPE)
 		{
-			free(tac->token->value);
-			free(tac->token);
+			_free_(&tac, &tac->token, 0);
 			tac->token = lexer_next_token(tac->lexer);
 		}
 	}
@@ -60,7 +61,7 @@ t_tac	*cmd_to_list(t_tac *tac)
 {
 	int			i;
 	t_command	*new;
-	
+
 	i = 0;
 	ft_lstnew(&new, tac->parser->cmd, tac->parser->infile,
 		tac->parser->outfile);
@@ -71,7 +72,6 @@ t_tac	*cmd_to_list(t_tac *tac)
 	}
 	new->madir_walo = 0;
 	ft_addfront(&tac->list, new);
-	// free(new);
 	return (tac);
 }
 
@@ -91,10 +91,10 @@ t_tac	*simple_command(t_tac *tac)
 		tac = cmd_to_list(tac);
 	else
 	{
+		free_string(tac->parser->cmd);
 		new = ft_lstnew(&new, NULL, 0, 1);
 		new->madir_walo = -404;
 		ft_addfront(&tac->list, new);
-		// free(new);
 	}
 	tac->parser->no_assign = 0;
 	return (tac);
@@ -103,7 +103,7 @@ t_tac	*simple_command(t_tac *tac)
 t_command	*parser(t_lexer *lexer, t_token *token, t_command *list)
 {
 	t_tac	*tac;
-	
+
 	tac = (t_tac *)malloc(sizeof(t_tac));
 	tac->lexer = lexer;
 	tac->token = token;
@@ -125,8 +125,6 @@ t_command	*parser(t_lexer *lexer, t_token *token, t_command *list)
 		}
 	}
 	list = tac->list;
-	free(tac->token->value);
-	free(tac->token);
-	free(tac);
+	_free_(&tac, &tac->token, 1);
 	return (list);
 }
