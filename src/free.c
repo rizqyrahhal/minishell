@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 14:04:24 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/30 16:36:42 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/30 21:35:15 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,6 @@ char	*_free_value(char *value)
 	new = ft_strdup(value);
 	free(value);
 	return (new);
-}
-
-void	f_ree_(t_token **token)
-{
-	free((*token)->value);
-	free(*token);
 }
 
 void	_free_(t_tac **tac, t_token **token, int k)

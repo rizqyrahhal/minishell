@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expanda.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 11:42:34 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/30 16:06:18 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/09/30 18:35:47 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,9 @@ void	free_exp(t_exp **exp)
 char	*ft_exp(char *s, t_exp *exp, t_envp *my_env, int count)
 {
 	int		i;
-	char	*str;
 
 	i = 0;
 	i = count;
-	str = NULL;
 	while (s[i])
 	{
 		if (s[i] == '$')

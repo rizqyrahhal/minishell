@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collect_string.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:46:39 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/30 17:56:31 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/09/30 20:42:29 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	*_double_qoute(t_lexer *lexer, char *value, int *len, int *count)
 			value = get_string(lexer->my_env, value, *count);
 		*len = ft_strlen(value);
 		*count = *len;
+		lexer->spliter = 0;
 	}
 	return (value);
 }
@@ -90,8 +91,7 @@ char	*non_qouting2(t_lexer *lexer, char *value, int *count)
 		while (value[m] && (ft_isalpha(value[m])
 				|| ft_isdigit(value[m]) || value[m] == '_'))
 			m++;
-		if (value[m] && !ft_isalpha(value[m])
-			&& !ft_isdigit(value[m]) && value[m] != '_')
+		if (m - 1 >= 0)
 			lexer->spliter = 0;
 		value = get_string(lexer->my_env, value, *count);
 	}

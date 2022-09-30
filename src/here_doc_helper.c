@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 20:28:49 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/30 15:49:12 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/30 22:32:51 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,13 @@ t_heredoc	*creat__file(t_heredoc *here, char *src, int stop)
 t_heredoc	*get_delemeter(t_heredoc *here, char *src)
 {
 	int	qout;
+	int	i;
 
+	i = here->i;
+	while (src[i] && src[i] != '"' && src[i] != '\'' && src[i] != ' ' && src[i] != '\t')
+		i++;
 	qout = 0;
-	if (src[here->i] == '"' || src[here->i] == '\'')
+	if (src[i] && (src[i] == '"' || src[i] == '\''))
 		qout = 2;
 	while (src[here->i] && (int)here->lexer->i <= here->i)
 	{

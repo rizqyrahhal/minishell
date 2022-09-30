@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/30 17:07:58 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/30 21:35:23 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,6 @@ void		open_heredoc(int fd, char *delemeter, t_envp *my_env);
 
 t_tac		*ft_rediriction(t_tac *tac);
 t_tac		*next_command(t_tac **tac);
-void		f_ree_(t_token **token);
 void		_free_(t_tac **tac, t_token **token, int k);
 
 t_heredoc	*creat__file(t_heredoc *here, char *src, int stop);

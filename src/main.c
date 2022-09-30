@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/29 14:50:23 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/30 18:28:35 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void handle_signals(int sig)
 	else if (sig == SIGHEREDOC)
 	 	signal(SIGINT, signal_ctrl_c_heredoc);
 }
+
+
 
 int	main(int argc, char *argv[], char *env[])
 {

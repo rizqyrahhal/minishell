@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 20:21:06 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/30 17:07:29 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/30 21:35:07 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_tac	*ouftile_tokens(t_tac *tac, char *str, int flag)
 		tac->lexer->my_env->status = 1;
 		tac->parser->no_assign = -1;
 	}
-	f_ree_(&next_token);
+	_free_(&tac, &next_token, 0);
 	return (tac);
 }
 
@@ -129,6 +129,7 @@ t_tac	*ft_rediriction(t_tac *tac)
 		tac = ouftile_tokens(tac, str, O_APPEND);
 	tac = infile_error(tac, str, next_token->value);
 	tac = next_command(&tac);
+	free(str);
 	free(next_token->value);
 	free(next_token);
 	return (tac);

@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/30 15:46:53 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/09/30 22:20:01 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,6 @@ char	*here_doc(char *src, int stop, t_envp *my_env)
 			here->str[here->j] = '\0';
 		}
 	}
+	printf("%s\n", here->str);
 	return (_free_token(here, src));
 }
