@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_tools.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:18:52 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/25 16:18:53 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/10/01 21:53:11 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,11 @@ int	ft_add2env(t_envp *my_env, char *var)
 	if (!check_export(var))
 	{
 		var = ft_strjoin("minishell: export: `%s", var);
+		ch = var;
 		var = ft_strjoin(var, "': not a valid identifier\n");
+		free(ch);
 		putstr_fd(var, 2);
+		free(var);
 		return (1);
 	}
 	k = arr_s(my_env->env, var);

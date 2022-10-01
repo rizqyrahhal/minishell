@@ -1,52 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_realloc.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 21:29:41 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/30 15:29:52 by rarahhal         ###   ########.fr       */
+/*   Created: 2022/08/26 23:56:07 by rarahhal          #+#    #+#             */
+/*   Updated: 2022/10/01 18:41:15 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "../../includes/libft.h"
 
-char**	ft_realloc(char	**s)
+char	*ft_strdup(const char *s1)
 {
-	int		i;
-	int		k;
-	char	**str;
-	
-	i = 0;
-	k = ft_d_strlen(s);
-	str = malloc((k + 2) * sizeof(char*));
-	while (i < k)
-	{
-		str[i] = ft_strdup(s[i]);
-		i++;
-	}
-	str[i] = 0;
-	free_string(s);
-	free(s);
-	return (str);
-}
-
-char*	ft_d_realloc(char	*s)
-{
-	int		i;
-	int		k;
 	char	*str;
-	
+	size_t	i;
+
 	i = 0;
-	k = ft_strlen(s);
-	str = malloc((k + 2) * sizeof(char));
-	while (i < k)
+	if (!s1)
+		return (NULL);
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	if (!str)
+		return (NULL);
+	while (s1[i])
 	{
-		str[i] = s[i];
+		str[i] = s1[i];
 		i++;
 	}
 	str[i] = 0;
-	free(s);
 	return (str);
 }

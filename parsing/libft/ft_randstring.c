@@ -6,11 +6,11 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 05:00:53 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/17 16:43:11 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/01 14:48:29 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "../../includes/libft.h"
 #include <string.h>
 #include <time.h>
 #include <stdlib.h>

@@ -1,42 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/17 17:24:47 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/08/17 22:07:18 by rarahhal         ###   ########.fr       */
+/*   Created: 2022/08/17 17:12:08 by rarahhal          #+#    #+#             */
+/*   Updated: 2022/10/01 19:29:51 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "../includes/minishell.h"
 
-void	ft_bzero(void	*s, size_t	n)
+t_token	*init_token(char *value, int type)
 {
-	unsigned char	*str;
-	size_t			i;
+	t_token	*token;
 
-	if (n != 0)
-	{
-		i = 0;
-		str = s;
-		while (i < n)
-		{
-			str[i] = 0;
-			i++;
-		}
-	}
-	return ;
-}
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	void	*p;
-
-	p = malloc(count * size);
-	if (!p)
-		return (NULL);
-	ft_bzero(p, count * size);
-	return (p);
+	token = ft_calloc(1, sizeof(t_token));
+	token->value = value;
+	token->e_type = type;
+	return (token);
 }

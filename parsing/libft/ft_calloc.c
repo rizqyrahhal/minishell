@@ -1,30 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/30 14:04:24 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/30 21:35:15 by rarahhal         ###   ########.fr       */
+/*   Created: 2022/08/17 17:24:47 by rarahhal          #+#    #+#             */
+/*   Updated: 2022/10/01 18:36:48 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/libft.h"
 
-char	*_free_value(char *value)
+void	ft_bzero(void	*s, size_t	n)
 {
-	char	*new;
+	unsigned char	*str;
+	size_t			i;
 
-	new = ft_strdup(value);
-	free(value);
-	return (new);
+	if (n != 0)
+	{
+		i = 0;
+		str = s;
+		while (i < n)
+		{
+			str[i] = 0;
+			i++;
+		}
+	}
+	return ;
 }
 
-void	_free_(t_tac **tac, t_token **token, int k)
+void	*ft_calloc(size_t count, size_t size)
 {
-	free((*token)->value);
-	free(*token);
-	if (k)
-		free(*tac);
+	void	*p;
+
+	p = malloc(count * size);
+	if (!p)
+		return (NULL);
+	ft_bzero(p, count * size);
+	return (p);
 }

@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 20:21:06 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/30 21:35:07 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/01 17:28:22 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,19 @@ char	*file_name(t_lexer *lexer)
 	k = lexer->i;
 	str = NULL;
 	f = 0;
-	while (lexer->src[k] == ' ' && lexer->src[k])
+	while (lexer->src[k] && lexer->src[k] == ' ')
 		k++;
 	p = k;
 	if (lexer->src[k] == '$')
 	{
-		while (lexer->src[p] != ' ' && lexer->src[p])
+		while (lexer->src[p] && lexer->src[p] != ' ')
 			p++;
 		str = malloc(p - k + 1);
-		while (lexer->src[k] != ' ' && lexer->src[k])
+		while (lexer->src[k] && lexer->src[k] != ' ')
+		{	
 			str[f++] = lexer->src[k++];
+			str[f] = '\0';
+		}
 	}
 	return (str);
 }
@@ -70,7 +73,7 @@ t_tac	*ouftile_tokens(t_tac *tac, char *str, int flag)
 	tac->parser->no_assign = 0;
 	if (tac->parser->outfile != 1)
 		close(tac->parser->outfile);
-	value = get_string(tac->lexer->my_env, str, 0);
+	value = get_string(tac->lexer->my_env, ft_strdup(str), 0);
 	if ((value && value[0]) || str)
 		help_outfile(tac, str, value, flag);
 	else if (next_token->e_type == TOKEN_STRING)
@@ -84,7 +87,7 @@ t_tac	*ouftile_tokens(t_tac *tac, char *str, int flag)
 		tac->lexer->my_env->status = 1;
 		tac->parser->no_assign = -1;
 	}
-	_free_(&tac, &next_token, 0);
+	_free_t_v(&next_token, &value);
 	return (tac);
 }
 

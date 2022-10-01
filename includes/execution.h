@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:43:36 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/29 21:52:37 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/01 23:03:55 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ t_exp		*ft_getvar(char *env[], t_exp *exp);
 int			sk_ip(t_exp *tmp, char *s);
 char		*ft_replace(char *s, char *old, char *new, int *k);
 t_exp		*ft_getidx(t_exp *exp, char *s);
-
 
 // Execute
 int			pipes(int ac, t_command *cmd, t_envp *my_env);

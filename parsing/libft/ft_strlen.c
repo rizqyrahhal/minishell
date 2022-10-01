@@ -1,21 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_non_tokenable.c                                 :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/19 01:36:57 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/15 12:37:44 by rarahhal         ###   ########.fr       */
+/*   Created: 2022/08/17 17:59:32 by rarahhal          #+#    #+#             */
+/*   Updated: 2022/10/01 18:41:53 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "../../includes/libft.h"
 
-int	ft_non_tokenable(int c)
+size_t	ft_strlen(const char *s)
 {
-	if (c != '|' && c != '<' && c != '>' && c != ' ' && c != '\t')
-		return (1);
-	else
+	size_t	i;
+
+	i = 0;
+	if (!s)
 		return (0);
+	while (s[i])
+		i++;
+	return (i);
+}
+
+size_t	ft_d_strlen(char **s)
+{
+	size_t	i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i])
+		i++;
+	return (i);
 }

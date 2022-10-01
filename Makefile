@@ -6,7 +6,7 @@
 #    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 17:12:13 by rarahhal          #+#    #+#              #
-#    Updated: 2022/09/30 18:30:07 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/10/01 21:53:11 by rarahhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,24 +15,26 @@ NAME = minishell
 CFLAGS = -Wall -Werror -Wextra
 CC = cc
 
-SRCS = 	src/main.c \
-		src/lexer.c \
-		src/lexer_help.c \
-		src/collect_string.c \
-		src/free.c \
-		src/token.c \
-		src/tac.c \
-		src/syntax_error.c \
-		src/unclosed_quotes.c \
-		src/here_doc.c \
-		src/here_doc_helper.c \
-		src/parser.c \
-		src/rediriction.c \
-		src/env.c \
-		src/expanda.c \
-		src/exp_tools.c \
-		src/exp_tools2.c \
-		src/execution.c \
+SRCS = 	parsing/main.c \
+		parsing/signals.c \
+		parsing/lexer.c \
+		parsing/lexer_help.c \
+		parsing/collect_string.c \
+		parsing/free.c \
+		parsing/free2.c \
+		parsing/token.c \
+		parsing/tac.c \
+		parsing/syntax_error.c \
+		parsing/unclosed_quotes.c \
+		parsing/here_doc.c \
+		parsing/here_doc_helper.c \
+		parsing/parser.c \
+		parsing/rediriction.c \
+		parsing/env.c \
+		parsing/expanda.c \
+		parsing/exp_tools.c \
+		parsing/exp_tools2.c \
+		parsing/execution.c \
 		execution/tools/tools1.c \
         execution/tools/arr_tools.c \
         execution/tools/arr_tools2.c \
@@ -51,16 +53,16 @@ SRCS = 	src/main.c \
         execution/builtins/unset.c \
         execution/builtins/builtins_tools.c \
 
-LIBFT = libft/ft_calloc.c \
-		libft/ft_realloc.c \
-		libft/ft_strlen.c \
-		libft/ft_non_tokenable.c \
-		libft/ft_strjoin.c \
-		libft/ft_strdup.c \
-		libft/ft_strncmp.c \
-		libft/linked_list.c \
-		libft/ft_strnstr.c \
-		libft/ft_randstring.c \
+LIBFT = parsing/libft/ft_calloc.c \
+		parsing/libft/ft_realloc.c \
+		parsing/libft/ft_strlen.c \
+		parsing/libft/ft_non_tokenable.c \
+		parsing/libft/ft_strjoin.c \
+		parsing/libft/ft_strdup.c \
+		parsing/libft/ft_strncmp.c \
+		parsing/libft/linked_list.c \
+		parsing/libft/ft_strnstr.c \
+		parsing/libft/ft_randstring.c \
 
 EXECUT_LIBFT = execution/execut_libft/ft_split.c \
 		execution/execut_libft/ft_atoi.c \
@@ -78,8 +80,9 @@ EXECUT_LIBFT = execution/execut_libft/ft_split.c \
 READLINE = ~/.brew/opt/readline
 
 $(NAME):  $(SRCS) $(LIBFT) $(EXECUT_LIBFT)
+	@echo "\033[0;34m                     -------------------------------\n                     | MINISHELL COMPILING ....... |\n                     -------------------------------\n\033[0m"
 	@$(sig_remove_ctr_c)
-	@$(CC) -lreadline -g $(CFLAGS) $(SRCS) $(LIBFT) $(EXECUT_LIBFT) -o $(NAME)
+	@$(CC) -lreadline -L $(READLINE)/lib -I $(READLINE)/include $(CFLAGS) $(SRCS) $(LIBFT) $(EXECUT_LIBFT) -o $(NAME)
 
 all: $(NAME)
 
@@ -95,6 +98,5 @@ re: fclean
 .PHONY: all clean fclean re
 
 # $(NAME):  $(SRCS) $(LIBFT) $(EXECUT_LIBFT)
-# 	@echo "\033[0;34m                     -------------------------------\n                     | MINISHELL COMPILING ....... |\n                     -------------------------------\n\033[0m"
 # 	@$(sig_remove_ctr_c)
 # 	@$(CC) -lreadline -L $(READLINE)/lib -I $(READLINE)/include -g $(CFLAGS) $(SRCS) $(LIBFT) $(EXECUT_LIBFT) -o $(NAME)

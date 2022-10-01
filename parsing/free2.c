@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   free2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/17 17:59:32 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/06 14:01:32 by rarahhal         ###   ########.fr       */
+/*   Created: 2022/10/01 18:45:52 by rarahhal          #+#    #+#             */
+/*   Updated: 2022/10/01 23:00:29 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "../includes/minishell.h"
 
-size_t	ft_strlen(const char *s)
+char	*_free_value(char *value)
 {
-	size_t	i;
+	char	*new;
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
-		i++;
-	return (i);
+	new = ft_strdup(value);
+	free(value);
+	return (new);
 }
 
-size_t	ft_d_strlen(char **s)
+void	_tac_free(t_lexer **lexer, t_token **token, char *src)
 {
-	size_t	i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	while(s[i])
-		i++;
-	return (i);
+	free(*lexer);
+	free((*token)->value);
+	free(*token);
+	free(src);
 }

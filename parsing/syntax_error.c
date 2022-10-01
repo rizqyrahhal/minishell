@@ -6,20 +6,11 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:59:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/30 21:56:48 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/01 13:42:03 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-// typedef struct s_sy
-// {
-// 	t_lexer	*lexer;
-// 	t_lexer	*next_lexer;
-// 	t_token	*token;
-// 	t_token	*next_token;
-// }	t_sy;
-
 
 void	init(t_lexer **lexer, t_lexer **next_lexer, char **src)
 {
@@ -28,14 +19,6 @@ void	init(t_lexer **lexer, t_lexer **next_lexer, char **src)
 	(*lexer)->not_expand = -1;
 	(*next_lexer)->not_expand = -1;
 }
-
-// t_sy	init(t_sy *sy, char **src)
-// {
-// 	sy->lexer = init_lexer(*src);
-// 	sy->next_lexer = init_lexer(*src);
-// 	sy->lexer->not_expand = -1;
-// 	sy->next_lexer->not_expand = -1;
-// }
 
 int	one(t_token *token, t_token *next_token)
 {
@@ -76,16 +59,6 @@ int	too(t_token *token, t_token *next_token)
 	return (0);
 }
 
-void	ft_free_(t_lexer *l, t_lexer *nl, t_token *t, t_token *nt)
-{
-	free(l);
-	free(nl);
-	free(t->value);
-	free(t);
-	free(nt->value);
-	free(nt);
-}
-
 int	syntax_logic(t_lexer **l, t_lexer **nl, t_token **t, t_token **nt)
 {
 	while ((*t)->e_type != TOKEN_EOF)
@@ -95,10 +68,7 @@ int	syntax_logic(t_lexer **l, t_lexer **nl, t_token **t, t_token **nt)
 		free(*nt);
 		*nt = lexer_next_token(*nl);
 		if (one(*t, *nt) == -1 || too(*t, *nt) == -1)
-		{
-			ft_free_(*l, *nl, *t, *nt);
 			return (-1);
-		}
 		free((*t)->value);
 		free(*t);
 		*t = lexer_next_token(*l);
@@ -125,6 +95,7 @@ int	check_syntax_error(char *src, int *i)
 	if (syntax_logic(&lexer, &next_lexer, &token, &next_token) == -1)
 	{
 		*i = lexer->i;
+		ft_free_(lexer, next_lexer, token, next_token);
 		return (-1);
 	}
 	ft_free_(lexer, next_lexer, token, next_token);

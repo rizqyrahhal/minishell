@@ -6,28 +6,28 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 01:12:19 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/29 22:08:05 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/01 18:44:35 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-#include "../includes/libft.h"
+#include "../../includes/minishell.h"
+#include "../../includes/libft.h"
 
-t_command*	ft_lstlast(t_command* list)
+t_command	*ft_lstlast(t_command *list)
 {
 	while (list)
 	{
 		if (!list->next)
-			return(list);
+			return (list);
 		list = list->next;
 	}
 	return (list);
 }
 
-void	ft_addfront(t_command**	list, t_command *new)
+void	ft_addfront(t_command **list, t_command *new)
 {
-	t_command*	tmp;
-	
+	t_command	*tmp;
+
 	if (*list == NULL)
 		*list = new;
 	else
@@ -54,15 +54,15 @@ void	free_string(char	**s)
 	}
 }
 
-char**	fill_t(char** s)
+char	**fill_t(char **s)
 {
-	int 	i;
-	char**	str;
+	int		i;
+	char	**str;
 
 	i = 0;
 	if (!s)
 		return (NULL);
-	str = malloc((ft_d_strlen(s) + 1) * sizeof(char*));
+	str = malloc((ft_d_strlen(s) + 1) * sizeof(char *));
 	while (s[i])
 	{
 		str[i] = ft_strdup(s[i]);
@@ -74,15 +74,15 @@ char**	fill_t(char** s)
 	return (str);
 }
 
-t_command*	ft_lstnew(t_command **n1, char** cmd_data, int infile, int outfile)
+t_command	*ft_lstnew(t_command **n1, char	**cmd_data, int infile, int outfile)
 {
-	char**		s;
+	char	**s;
 
 	s = fill_t(cmd_data);
 	*n1 = malloc(sizeof(t_command));
 	if (s != NULL)
 	{
-		(*n1)->cmd = (char**)malloc(sizeof(char*) * ft_d_strlen(s) + 1);
+		(*n1)->cmd = (char **)malloc(sizeof(char *) * ft_d_strlen(s) + 1);
 		(*n1)->cmd = s;
 	}
 	else

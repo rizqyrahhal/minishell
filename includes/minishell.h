@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/30 21:35:23 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/01 23:01:02 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <sys/stat.h>
 # include <sys/wait.h>
 # include <fcntl.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+# include "readline/readline.h"
+# include "readline/history.h"
 # include <unistd.h>
 # include <string.h>
 
@@ -29,6 +29,14 @@
 # define SIGHEREDOC 13
 # define SIGQUIT_INCHILD 37
 # define SIGINT_ 1337
+
+typedef struct s_status
+{
+	int	ginp;
+	int	status;
+}	t_status;
+
+t_status	*g_sts;
 
 // ********************************************* token.h
 typedef struct s_token
@@ -47,7 +55,6 @@ typedef struct s_token
 }	t_token;
 
 t_token		*init_token(char *value, int type);
-// char		*token_to_str(t_token *token);
 
 // ******************************************************** struct.h
 typedef struct s_command_node
@@ -131,27 +138,31 @@ typedef struct s_heredoc
 
 void		tac_compile(char *src, t_envp *my_env);
 int			check_syntax_error(char *src, int *i);
+void		ft_free_(t_lexer *l, t_lexer *nl, t_token *t, t_token *nt);
 int			unclosed_quotes(char *src, int **k);
-void		print_node(t_command *lst, t_envp *my_env);
+void		_tac_free(t_lexer **lexer, t_token **token, char *src);
 
 //heredoc
 char		*here_doc(char *src, int stop, t_envp *my_env);
 char		*_free_token(t_heredoc *here, char *src);
+void		_tokenfree_(t_heredoc **here);
 t_heredoc	*init__(char *src);
-int			creat_heredoc(int fd, char *delemeter, t_envp *my_env);
+int			creat_heredoc(int fd, char *delemeter,
+				t_envp *my_env, t_heredoc **here);
 void		open_heredoc(int fd, char *delemeter, t_envp *my_env);
 
 t_tac		*ft_rediriction(t_tac *tac);
 t_tac		*next_command(t_tac **tac);
 void		_free_(t_tac **tac, t_token **token, int k);
+void		_free_t_v(t_token **token, char **value);
 
 t_heredoc	*creat__file(t_heredoc *here, char *src, int stop);
 t_heredoc	*get_delemeter(t_heredoc *here, char *src);
 
 // function of linked list
 t_command	*ft_lstnew(t_command **n1, char **s, int infile, int outfile);
-t_command*	ft_lstlast(t_command* list);
-void		free_string(char	**s);
+t_command	*ft_lstlast(t_command *list);
+void		free_string(char **s);
 void		ft_addfront(t_command **list, t_command *new);
 
 void		execution(t_command *list, t_envp *my_env);
@@ -159,4 +170,5 @@ int			pipes(int k, t_command *cmd, t_envp *my_env);
 
 //   signals
 void		handle_signals(int sig);
+
 #endif

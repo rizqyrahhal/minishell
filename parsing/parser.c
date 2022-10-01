@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/30 19:03:27 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/01 15:44:46 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_tac	*parese_command(t_tac *tac)
 	{
 		tac = ft_rediriction(tac);
 		lexer_skip_whitespace(tac->lexer);
-		if (tac->token->e_type == TOKEN_STRING && tac->token->value[0] != 15)
+		if (tac->token->e_type == TOKEN_STRING && tac->token->value[0])
 		{
 			tac->parser->splite[i] = 0;
 			tac->parser->cmd = ft_realloc(tac->parser->cmd);

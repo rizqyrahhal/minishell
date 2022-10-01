@@ -6,11 +6,11 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:05:41 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/08 17:05:45 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/01 14:48:52 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "../../includes/libft.h"
 
 static char	*ft_search(const char *str, const char *needle, size_t len)
 {

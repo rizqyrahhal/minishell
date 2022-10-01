@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exp_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 11:42:43 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/30 11:42:44 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/10/01 22:35:40 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_exp	*ft_getvar(char *env[], t_exp *exp)
 	while (env[i])
 	{
 		tmp = malloc(sizeof (t_exp));
-		while (env[i][j] != '=')
+		while (env[i][j] && env[i][j] != '=')
 			j++;
 		str = ft_cpy(env[i], j++);
 		tmp->var = ft_strjoin("$", str);

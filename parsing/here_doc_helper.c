@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 20:28:49 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/09/30 22:32:51 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/01 13:36:12 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_heredoc	*creat__file(t_heredoc *here, char *src, int stop)
 	here->str = ft_d_realloc(here->str);
 	here->str[here->j++] = src[here->i++];
 	here->str[here->j] = '\0';
-	while (src[here->i] && (src[here->i] == ' ' || src[here->i] == '\t'))
+	while (src && src[here->i] && (src[here->i] == ' ' || src[here->i] == '\t'))
 	{
 		here->str = ft_d_realloc(here->str);
 		here->str[here->j++] = src[here->i++];
@@ -47,20 +47,41 @@ t_heredoc	*creat__file(t_heredoc *here, char *src, int stop)
 		here->str[here->j++] = here->del_to_name[here->k++];
 		here->str[here->j] = '\0';
 	}
+	free(here->del_to_name);
 	return (get_delemeter(here, src));
+}
+
+int	count_(char *src, int i)
+{
+	int	count;
+
+	count = 0;
+	while (src[i] && src[i] != ' ')
+	{
+		if (src[i] == '\'')
+		{
+			i++;
+			while (src[i] != '\'')
+				i++;
+			count += 2;
+		}				
+		if (src[i] == '"')
+		{
+			i++;
+			while (src[i] != '"')
+				i++;
+			count += 2;
+		}
+		i++;
+	}
+	return (count);
 }
 
 t_heredoc	*get_delemeter(t_heredoc *here, char *src)
 {
 	int	qout;
-	int	i;
 
-	i = here->i;
-	while (src[i] && src[i] != '"' && src[i] != '\'' && src[i] != ' ' && src[i] != '\t')
-		i++;
-	qout = 0;
-	if (src[i] && (src[i] == '"' || src[i] == '\''))
-		qout = 2;
+	qout = count_(src, here->i);
 	while (src[here->i] && (int)here->lexer->i <= here->i)
 	{
 		if (here->token->value)
@@ -68,19 +89,11 @@ t_heredoc	*get_delemeter(t_heredoc *here, char *src)
 		free(here->token);
 		here->token = lexer_next_token(here->lexer);
 	}
-	if (!src[here->i])
+	if (src && !src[here->i])
+	{
+		_tokenfree_(&here);
 		return (NULL);
+	}
 	here->i += ft_strlen(here->token->value) + qout;
 	return (here);
-}
-
-char	*_free_token(t_heredoc *here, char *src)
-{
-	free(here->token->value);
-	free(here->token);
-	free(here->lexer);
-	src = ft_strdup(here->str);
-	free(here->str);
-	free(here);
-	return (src);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:18:54 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/28 15:54:10 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/10/01 22:44:33 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,23 @@ void	fun_b(t_envp *my_env, char *old_cwd, char cwd[256])
 {
 	char	*fr_ee;
 
+	if (arr_s(my_env->env, "PWD") != -1)
+	{
+		fr_ee = ft_strjoin("OLDPWD=", old_cwd);
+		ft_add2env(my_env, fr_ee);
+		free(fr_ee);
+	}
 	fr_ee = ft_strjoin("PWD=", cwd);
 	ft_add2env(my_env, fr_ee);
 	free(fr_ee);
 	free(my_env->pwd);
 	my_env->pwd = ft_strdup(cwd);
-	fr_ee = ft_strjoin("OLDPWD=", old_cwd);
-	ft_add2env(my_env, fr_ee);
-	free(fr_ee);
 }
 
 void	get_current(char **sp, t_envp *my_env, int k, char *old_cwd)
 {
 	char	cwd[256];
+	char	*fr_ee;
 
 	if (chdir(sp[1]) == 0 && k == 0)
 	{
@@ -53,7 +57,9 @@ void	get_current(char **sp, t_envp *my_env, int k, char *old_cwd)
 	}
 	else if (k == 0)
 	{
-		perror(ft_strjoin("minishell: cd: ", sp[1]));
+		fr_ee = ft_strjoin("minishell: cd: ", sp[1]);
+		perror(fr_ee);
+		free(fr_ee);
 		my_env->status = 1;
 	}
 }
@@ -87,6 +93,9 @@ void	get_old(char **sp, t_envp *my_env)
 
 void	ex_cd(char **sp, t_envp *my_env)
 {
+	char	*fr_ee;
+	char	cwd[256];
+
 	if (sp[1] == NULL || (sp[1][0] == '~' && ft_strlen(sp[1]) == 1))
 	{
 		if (arr_s(my_env->env, "HOME") == -1 && !sp[1])
@@ -95,7 +104,13 @@ void	ex_cd(char **sp, t_envp *my_env)
 			my_env->status = 1;
 		}
 		else
+		{
 			chdir(getenv("HOME"));
+			getcwd(cwd, sizeof(cwd));
+			fr_ee = ft_strjoin("PWD=", cwd);
+			ft_add2env(my_env, fr_ee);
+			free(fr_ee);
+		}
 	}
 	else
 		get_old(sp, my_env);
