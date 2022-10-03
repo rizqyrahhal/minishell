@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 08:03:28 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/10/01 18:17:46 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/02 09:58:35 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,9 @@ char	**ft_split(char const *s, char c)
 {
 	char	**arr;
 	int		m;
-	int		p;
 	int		i;
 
 	m = 0;
-	p = 0;
 	i = 0;
 	if (!s)
 		return (0);

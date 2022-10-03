@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 01:12:19 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/10/01 18:44:35 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/03 19:10:36 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ char	**fill_t(char **s)
 	}
 	str[i] = NULL;
 	free_string(s);
-	free(s);
 	return (str);
 }
 
@@ -81,10 +80,7 @@ t_command	*ft_lstnew(t_command **n1, char	**cmd_data, int infile, int outfile)
 	s = fill_t(cmd_data);
 	*n1 = malloc(sizeof(t_command));
 	if (s != NULL)
-	{
-		(*n1)->cmd = (char **)malloc(sizeof(char *) * ft_d_strlen(s) + 1);
 		(*n1)->cmd = s;
-	}
 	else
 		(*n1)->cmd = NULL;
 	(*n1)->infile = infile;

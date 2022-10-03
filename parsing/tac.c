@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tac.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/10/01 19:29:51 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/03 16:08:05 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	free_list(t_command *list)
 			free(list->cmd[i]);
 			i++;
 		}
-		free(list->cmd);
+		if (list->madir_walo == 0)
+			free(list->cmd);
 		new = list;
 		list = list->next;
 		free(new);
@@ -63,6 +64,7 @@ void	tac_compile(char *src, t_envp *my_env)
 	int	i;
 
 	i = 0;
+	g_sts->check = 0;
 	if (check_syntax_error(src, &i) == -1)
 	{
 		my_env->status = 258;

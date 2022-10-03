@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/10/01 23:01:02 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/02 09:58:36 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_status
 {
 	int	ginp;
 	int	status;
+	int	check;
 }	t_status;
 
 t_status	*g_sts;

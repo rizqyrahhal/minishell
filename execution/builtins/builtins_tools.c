@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_tools.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:18:52 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/10/01 21:53:11 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/03 18:30:35 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,11 @@ char	*get_wich(char *old, char *new, char *ch)
 int	ft_add2env(t_envp *my_env, char *var)
 {
 	int		k;
-	int		i;
 	char	*ch;
 
-	i = 0;
 	if (!check_export(var))
 	{
-		var = ft_strjoin("minishell: export: `%s", var);
+		var = ft_strjoin("minishell: export: `", var);
 		ch = var;
 		var = ft_strjoin(var, "': not a valid identifier\n");
 		free(ch);

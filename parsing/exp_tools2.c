@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 11:42:36 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/10/01 22:35:40 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/02 09:58:35 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,8 @@ char	*ft_replace(char *s, char *old, char *new, int *k)
 
 t_exp	*ft_getidx(t_exp *exp, char *s)
 {
-	int		i;
 	t_exp	*tmp;
 
-	i = 0;
 	tmp = exp;
 	while (tmp)
 	{

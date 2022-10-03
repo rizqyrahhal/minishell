@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 11:42:34 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/10/01 22:35:40 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/02 09:58:36 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,16 @@ char	*exp_and(t_exp *exp, char *s, int *j)
 char	*special_vars(char *s, int c, int *k, t_envp *my_env)
 {
 	char	*str;
+	char	*fr;
 	int		i;
 
 	i = *k;
 	if (c == '?')
 	{
 		str = ft_cpy(&s[i - 1], 2);
-		s = ft_replace(s, str, ft_itoa(my_env->status), &i);
+		fr = ft_itoa(my_env->status);
+		s = ft_replace(s, str, fr, &i);
+		free(fr);
 	}
 	if (ft_isdigit(c))
 	{

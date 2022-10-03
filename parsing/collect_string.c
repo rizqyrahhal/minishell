@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collect_string.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:46:39 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/10/01 17:16:28 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:13:01 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,11 @@ char	*non_qouting2(t_lexer *lexer, char *value, int *count)
 		if (m - 1 >= 0)
 			lexer->spliter = 0;
 		value = get_string(lexer->my_env, value, *count);
+	}
+	if (lexer->c != '\'' && lexer->c != '"')
+	{	
+		if (value[0] == '\0')
+			g_sts->check = 15;
 	}
 	return (value);
 }

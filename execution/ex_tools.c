@@ -6,7 +6,7 @@
 /*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:18:17 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/25 16:18:18 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/10/03 19:09:27 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,20 @@
 
 void	er_ror(char *err, char *s)
 {
-	s = ft_strjoin("minishell: ", s);
-	putstr_fd(ft_strjoin(s, err), 2);
+	char	*fr;
+
+	if (!access(s, X_OK) || (!access(s, F_OK) && !sea_rch(s, '/')))
+	{
+		s = ft_strjoin(s, err);
+		fr = ft_strjoin("minishell: ", s);
+		putstr_fd(fr, 2);
+		free(fr);
+	}
+	else
+	{
+		s = ft_strjoin("minishell: ", s);
+		perror(s);
+	}
 	free(s);
 }
 

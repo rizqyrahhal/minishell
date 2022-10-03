@@ -6,7 +6,7 @@
 /*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:18:25 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/25 16:18:26 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/10/03 18:24:33 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ char	*get_path(char *s, char *cmd)
 	free_arr(sp);
 	free(tmp);
 	free(s);
-	if (n_cmd == NULL && access(cmd, X_OK) == 0)
-		return (cmd);
 	return (0);
 }
 

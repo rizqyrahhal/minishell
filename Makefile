@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+         #
+#    By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 17:12:13 by rarahhal          #+#    #+#              #
-#    Updated: 2022/10/01 21:53:11 by rarahhal         ###   ########.fr        #
+#    Updated: 2022/10/03 18:57:29 by lsemlali         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,3 @@ re: fclean
 	@make all
 
 .PHONY: all clean fclean re
-
-# $(NAME):  $(SRCS) $(LIBFT) $(EXECUT_LIBFT)
-# 	@$(sig_remove_ctr_c)
-# 	@$(CC) -lreadline -L $(READLINE)/lib -I $(READLINE)/include -g $(CFLAGS) $(SRCS) $(LIBFT) $(EXECUT_LIBFT) -o $(NAME)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rediriction.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 20:21:06 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/10/01 17:28:22 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/03 19:09:45 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ t_tac	*help_outfile(t_tac *tac, char *str, char *value, int flag)
 	if (value && value[0])
 	{
 		tac->parser->outfile = open(value, O_CREAT | O_RDWR | flag, 0644);
-		lexer_next_token(tac->lexer);
 		if (tac->parser->outfile == -1)
 		{
 			perror(ft_strjoin("minishell: ", value));
@@ -97,7 +96,7 @@ t_tac	*infile_error(t_tac *tac, char *str, char *next_token)
 
 	if (tac->parser->infile == -1)
 	{
-		value = get_string(tac->lexer->my_env, str, 0);
+		value = get_string(tac->lexer->my_env, ft_strdup(str), 0);
 		if (value && value[0])
 			printf("minishell: %s: No such file or directory\n", value);
 		else if (str)

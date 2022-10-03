@@ -6,36 +6,11 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 13:24:27 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/25 21:35:45 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/02 11:41:35 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ex_libft.h"
-//#include <limits.h>
-//static int	my_atoi(const char *str)
-//{
-//	long	n;
-//	long	i;
-//
-//	i = 0;
-//	n = 0;
-//	while (str[i] >= '0' && str[i] <= '9' && str[i])
-//	{
-//		n = n * 10 + (str[i] - '0');
-//		i++;
-//	}
-//	return (n);
-//}
-
-//static int	my_strlen(const char *str)
-//{
-//	int	i;
-//
-//	i = 0;
-//	while (str[i] && str[i] >= '0' && str[i] <= '9')
-//		i++;
-//	return (i);
-//}
 
 static int	my_skip(const char *str)
 {
@@ -54,7 +29,7 @@ static int	my_skip(const char *str)
 	return (i);
 }
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
 	long	i;
 	long	p;

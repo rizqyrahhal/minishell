@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 09:22:57 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/25 21:37:00 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/02 09:58:35 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	putstr_fd(char *s, int fd)
 {
-	int	i;
-
-	i = 0;
 	if (!s)
 		return ;
 	write(fd, s, ft_strlen(s));

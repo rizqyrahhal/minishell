@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/10/01 15:44:46 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/03 19:14:12 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,14 @@ t_tac	*parese_command(t_tac *tac)
 	{
 		tac = ft_rediriction(tac);
 		lexer_skip_whitespace(tac->lexer);
-		if (tac->token->e_type == TOKEN_STRING && tac->token->value[0])
+		if (tac->token->e_type == TOKEN_STRING && g_sts->check != 15)
 		{
 			tac->parser->splite[i] = 0;
 			tac->parser->cmd = ft_realloc(tac->parser->cmd);
 			tac->parser->cmd[i] = ft_strdup(tac->token->value);
 			if (tac->lexer->spliter == -1)
 				tac->parser->splite[i] = 1;
-			i++;
-			tac->parser->cmd[i] = 0;
+			tac->parser->cmd[++i] = 0;
 			tac->parser->splite[i] = -2;
 		}
 		if (tac->token->e_type != TOKEN_EOF && tac->token->e_type != TOKEN_PIPE)
@@ -54,6 +53,7 @@ t_tac	*parese_command(t_tac *tac)
 			tac->token = lexer_next_token(tac->lexer);
 		}
 	}
+	g_sts->check = 0;
 	return (tac);
 }
 
@@ -92,7 +92,7 @@ t_tac	*simple_command(t_tac *tac)
 	else
 	{
 		free_string(tac->parser->cmd);
-		new = ft_lstnew(&new, NULL, 0, 1);
+		ft_lstnew(&new, NULL, 0, 1);
 		new->madir_walo = -404;
 		ft_addfront(&tac->list, new);
 	}
@@ -107,7 +107,7 @@ t_command	*parser(t_lexer *lexer, t_token *token, t_command *list)
 	tac = (t_tac *)malloc(sizeof(t_tac));
 	tac->lexer = lexer;
 	tac->token = token;
-	tac->list = list;
+	tac->list = NULL;
 	while (tac->token->e_type != TOKEN_EOF)
 	{
 		tac = simple_command(tac);

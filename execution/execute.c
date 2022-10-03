@@ -6,7 +6,7 @@
 /*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:18:40 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/25 16:18:41 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/10/03 18:23:11 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	child(t_pipe *p, int k, t_command *cmd, t_envp *my_env)
 		}
 		else
 		{
-			main_wait(p, k, my_env, 1);
+			if (!is_built(cmd->cmd[0]))
+				main_wait(p, k, my_env, 1);
 			__builtins(cmd->cmd, my_env, cmd->outfile, k);
 		}
 	}
