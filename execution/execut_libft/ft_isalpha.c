@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 10:19:22 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/25 21:36:17 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/04 11:32:55 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	is_str(char *s)
 {
 	int	i;
 
+	if (ft_atoi(s) == -1)
+		return (0);
 	i = 0;
 	while (s[i])
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 13:24:27 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/10/02 11:41:35 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/04 11:34:48 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,15 @@ long	ft_atoi(const char *str)
 		i = -i;
 		p = -1;
 	}
+	if (ft_strlen(&str[i]) > 19)
+		return (-1);
 	n = 0;
 	while (str[i] >= '0' && str[i] <= '9' && str[i])
 	{
 		n = n * 10 + (str[i] - 48);
 		i++;
 	}
+	if (n < 0)
+		return (-1);
 	return (n * p);
 }
