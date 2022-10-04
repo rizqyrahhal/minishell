@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ex_tools.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:18:17 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/10/03 19:09:27 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:13:54 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	er_ror(char *err, char *s)
 {
 	char	*fr;
 
-	if (!access(s, X_OK) || (!access(s, F_OK) && !sea_rch(s, '/')))
+	if (!access(s, X_OK) || (!access(s, F_OK) && !sea_rch(s, '/'))
+		|| (access(s, F_OK) && !sea_rch(s, '/')))
 	{
 		s = ft_strjoin(s, err);
 		fr = ft_strjoin("minishell: ", s);

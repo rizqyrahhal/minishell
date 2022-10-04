@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collect_string.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:46:39 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/10/03 15:13:01 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/10/04 15:49:20 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ t_token	*lexer_collect_string(t_lexer *lexer)
 	int		len;
 	int		count;
 
+	g_sts->check = 0;
 	value = ft_calloc(1, sizeof(char));
 	len = 0;
 	count = 0;
