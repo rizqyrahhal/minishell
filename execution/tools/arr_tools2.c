@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:18:46 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/10/01 23:03:39 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/05 17:41:03 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,21 @@ void	arr_cpy(t_envp *my_env, char *str)
 	char	**s;
 	int		i;
 	int		j;
+	int		k;
 
 	i = 0;
 	j = 0;
+	k = rand__();
+	k = k % (arr_size(my_env->env) + 1);
 	s = malloc((arr_size(my_env->env) + 2) * sizeof (char *));
+	if (my_env->env[0] == NULL)
+	{
+		s[0] = ft_strdup(str);
+		i++;
+	}
 	while (my_env->env[j])
 	{
-		if (i == 5)
+		if (i == k)
 			s[i] = ft_strdup(str);
 		else
 			s[i] = ft_strdup(my_env->env[j++]);

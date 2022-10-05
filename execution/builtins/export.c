@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:19:01 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/25 16:19:02 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/10/05 16:33:52 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	ex_export(char **sp, t_envp *my_env, int out)
 {
 	int		i;
 	char	*s;
-
+	char	*fr;
+	
 	i = 1;
 	if (sp[1] == NULL)
 		export_(my_env->env, out);
@@ -48,12 +49,14 @@ void	ex_export(char **sp, t_envp *my_env, int out)
 	{
 		if (sp[1][0] == '-')
 		{
-			s = ft_strjoin("minishell: export: ", sp[1]);
-			s = ft_strjoin(s, ": invalid option\n");
+			fr = ft_strjoin("minishell: export: ", sp[1]);
+			s = ft_strjoin(fr, ": invalid option\n");
 			putstr_fd(s, 2);
 			putstr_fd("export: usage: ", 2);
 			putstr_fd("export [-nf] [name[=value] ...] or export -p\n", 2);
 			my_env->status = 2;
+			free(fr);
+			free(s);
 			return ;
 		}
 		my_env->status = ft_add2env(my_env, sp[i]);

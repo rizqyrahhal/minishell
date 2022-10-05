@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ex_tools2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:18:25 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/10/03 18:24:33 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/10/05 16:32:41 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ char	*get_path(char *s, char *cmd)
 	char	*n_cmd;
 	int		i;
 
+	if (sea_rch(cmd, '/'))
+		return (cmd);
 	if (!s)
 		return (NULL);
 	sp = ft_split(s, ':');
 	i = -1;
-	if (sea_rch(cmd, '/'))
-		return (cmd);
 	tmp = ft_strjoin("/", cmd);
 	while (sp[++i])
 	{

@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:35:14 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/10/01 23:05:27 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/05 17:02:10 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strdup(const char *s1);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
+int			rand__(void);
 char		*ft_randstring(size_t length);
 
 #endif
