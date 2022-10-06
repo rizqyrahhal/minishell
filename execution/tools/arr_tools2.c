@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arr_tools2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:18:46 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/10/05 17:41:03 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/07 00:00:07 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,10 @@ void	arr_cpy(t_envp *my_env, char *str)
 
 	i = 0;
 	j = 0;
-	k = rand__();
-	k = k % (arr_size(my_env->env) + 1);
+	k = rand__() % (arr_size(my_env->env) + 1);
 	s = malloc((arr_size(my_env->env) + 2) * sizeof (char *));
 	if (my_env->env[0] == NULL)
-	{
-		s[0] = ft_strdup(str);
-		i++;
-	}
+		s[i++] = ft_strdup(str);
 	while (my_env->env[j])
 	{
 		if (i == k)

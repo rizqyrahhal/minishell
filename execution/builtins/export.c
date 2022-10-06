@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:19:01 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/10/05 16:33:52 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/07 00:00:25 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ex_export(char **sp, t_envp *my_env, int out)
 	int		i;
 	char	*s;
 	char	*fr;
-	
+
 	i = 1;
 	if (sp[1] == NULL)
 		export_(my_env->env, out);
