@@ -6,7 +6,7 @@
 /*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:19:01 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/10/08 11:15:07 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/10/08 14:13:31 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ int	check_export(char *var)
 void	ex_export(char **sp, t_envp *my_env, int out)
 {
 	int		i;
-	char	*s;
-	char	*fr;
 
 	i = 1;
 	if (sp[1] == NULL)
@@ -49,14 +47,8 @@ void	ex_export(char **sp, t_envp *my_env, int out)
 	{
 		if (sp[1][0] == '-')
 		{
-			fr = ft_strjoin("minishell: export: ", sp[1]);
-			s = ft_strjoin(fr, ": invalid option\n");
-			putstr_fd(s, 2);
-			putstr_fd("export: usage: ", 2);
-			putstr_fd("export [-nf] [name[=value] ...] or export -p\n", 2);
+			putstr_fd("options not required\n", 2);
 			my_env->status = 2;
-			free(fr);
-			free(s);
 			return ;
 		}
 		if (i > 1 && my_env->status != 1)

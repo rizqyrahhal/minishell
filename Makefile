@@ -6,7 +6,7 @@
 #    By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 17:12:13 by rarahhal          #+#    #+#              #
-#    Updated: 2022/10/08 08:16:36 by lsemlali         ###   ########.fr        #
+#    Updated: 2022/10/08 14:22:50 by lsemlali         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS = 	parsing/main.c \
         execution/ex_tools.c \
         execution/ex_tools2.c \
         execution/builtins/cd.c \
+        execution/builtins/cd_tools.c \
         execution/builtins/echo.c \
         execution/builtins/env.c \
         execution/builtins/exit.c \

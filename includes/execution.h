@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:43:36 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/10/04 18:54:48 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/08 14:22:27 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int			check_var(char *var, int a);
 int			check_unset(char *var);
 int			check_export(char *var);
 int			__sort(char **s);
+void		get_old(char **sp, t_envp *my_env);
 
 //expand
 int			is_str(char *s);
