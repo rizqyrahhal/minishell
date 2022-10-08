@@ -6,7 +6,7 @@
 /*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:19:01 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/10/07 00:00:25 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/10/08 11:15:07 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ void	ex_export(char **sp, t_envp *my_env, int out)
 			free(s);
 			return ;
 		}
-		my_env->status = ft_add2env(my_env, sp[i]);
+		if (i > 1 && my_env->status != 1)
+			my_env->status = ft_add2env(my_env, sp[i]);
+		else if (i == 1)
+			my_env->status = ft_add2env(my_env, sp[i]);
 		i++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:18:54 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/10/01 22:44:33 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/08 11:01:51 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	fun_a(t_envp *my_env)
 
 	fr_ee = my_env->pwd;
 	ft_add2env(my_env, "PWD+=/..");
-	free(my_env->pwd);
+	// free(my_env->pwd);
 	my_env->pwd = ft_strjoin(my_env->pwd, "/..");
 	free(fr_ee);
 	printf("cd: error retrieving current directory: getcwd: cannot ");
@@ -26,7 +26,7 @@ void	fun_a(t_envp *my_env)
 	my_env->status = 0;
 }
 
-void	fun_b(t_envp *my_env, char *old_cwd, char cwd[256])
+void	fun_b(t_envp *my_env, char old_cwd[256], char cwd[256])
 {
 	char	*fr_ee;
 
@@ -87,8 +87,11 @@ void	get_old(char **sp, t_envp *my_env)
 			my_env->status = 0;
 			k++;
 		}
+		else
+			get_current(sp, my_env, 0, my_env->pwd);
 	}
-	get_current(sp, my_env, k, old_cwd);
+	else
+		get_current(sp, my_env, k, old_cwd);
 }
 
 void	ex_cd(char **sp, t_envp *my_env)
