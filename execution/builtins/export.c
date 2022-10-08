@@ -6,7 +6,7 @@
 /*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:19:01 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/10/08 14:13:31 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/10/08 15:59:16 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ int	check_export(char *var)
 void	ex_export(char **sp, t_envp *my_env, int out)
 {
 	int		i;
+	int		k;
 
 	i = 1;
+	k = 0;
 	if (sp[1] == NULL)
 		export_(my_env->env, out);
 	while (sp[i])
@@ -51,10 +53,11 @@ void	ex_export(char **sp, t_envp *my_env, int out)
 			my_env->status = 2;
 			return ;
 		}
-		if (i > 1 && my_env->status != 1)
-			my_env->status = ft_add2env(my_env, sp[i]);
-		else if (i == 1)
-			my_env->status = ft_add2env(my_env, sp[i]);
+		my_env->status = ft_add2env(my_env, sp[i]);
+		if (k != 1)
+			k = my_env->status;
 		i++;
 	}
+	if (sp[1])
+		my_env->status = k;
 }
