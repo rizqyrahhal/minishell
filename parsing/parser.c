@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:29:43 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/10/04 15:51:04 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/11 11:32:55 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ t_tac	*simple_command(t_tac *tac)
 	tac->parser->cmd[0] = NULL;
 	tac->parser->infile = 0;
 	tac->parser->outfile = 1;
+	tac->parser->no_assign = 0;
 	tac = parese_command(tac);
 	if (tac->parser->infile != -1 && tac->parser->cmd[0] != NULL
 		&& tac->parser->no_assign > -1)

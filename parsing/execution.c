@@ -6,7 +6,7 @@
 /*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:42:37 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/10/03 17:52:18 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:10:03 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,9 @@ void	check_list(t_command	**list)
 
 void	execution(t_command *list, t_envp *my_env)
 {
-	handle_signals(SIGQUIT_INCHILD);
+	handle_signals(SIG_CHILD);
 	check_list(&list);
 	pipes(my_env->num_pipe, list, my_env);
+	handle_signals(SIGINT);
 	handle_signals(SIGQUIT);
 }

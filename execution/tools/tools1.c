@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:18:48 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/09/29 22:24:32 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/11 11:35:32 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	print_q(char *s, int out)
 	k = 11;
 	while (s[++i] && s[i] != '=')
 		str[k++] = s[i];
-	str[k++] = s[i];
+	if (s[i])
+		str[k++] = s[i];
 	if (sea_rch(s, '='))
 	{
 		str[k++] = '"';

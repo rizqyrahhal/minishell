@@ -3,34 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ex_tools2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:18:25 by lsemlali          #+#    #+#             */
-/*   Updated: 2022/10/05 16:32:41 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/11 13:22:58 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/execution.h"
 
-char	*get_path(char *s, char *cmd)
+char	*f_check(char **sp, char *tmp, char *s)
 {
-	char	**sp;
-	char	*tmp;
 	char	*n_cmd;
 	int		i;
 
-	if (sea_rch(cmd, '/'))
-		return (cmd);
-	if (!s)
-		return (NULL);
-	sp = ft_split(s, ':');
 	i = -1;
-	tmp = ft_strjoin("/", cmd);
 	while (sp[++i])
 	{
 		n_cmd = ft_strjoin(sp[i], tmp);
 		if (!access(n_cmd, F_OK) && !access(n_cmd, X_OK))
+		{
+			free_arr(sp);
+			free(tmp);
+			free(s);
 			return (n_cmd);
+		}
+		free(n_cmd);
 		n_cmd = NULL;
 	}
 	free_arr(sp);
@@ -39,15 +37,38 @@ char	*get_path(char *s, char *cmd)
 	return (0);
 }
 
+char	*get_path(char *s, char *cmd)
+{
+	char	**sp;
+	char	*tmp;
+
+	if (sea_rch(cmd, '/'))
+	{
+		free(s);
+		return (cmd);
+	}
+	if (!s)
+		return (NULL);
+	sp = ft_split(s, ':');
+	tmp = ft_strjoin("/", cmd);
+	return (f_check(sp, tmp, s));
+}
+
 char	*handle_env(char *env[])
 {
-	int	i;
+	char	*s;
+	int		i;
 
 	i = 0;
 	while (env[i])
 	{
-		if (ft_strncmp("PATH", ft_substr(env[i], 0, 4), 4) == 0)
+		s = ft_substr(env[i], 0, 5);
+		if (ft_strncmp("PATH=", s, 5) == 0)
+		{
+			free (s);
 			return (ft_substr(env[i], 5, ft_strlen(env[i]) - 5));
+		}
+		free (s);
 		i++;
 	}
 	return (NULL);

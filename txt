@@ -1,15 +1,4 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/08/17 17:12:13 by rarahhal          #+#    #+#              #
-#    Updated: 2022/10/11 14:31:18 by lsemlali         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
+sig_remove_ctr_c = `stty -echoctl`
 NAME = minishell
 CFLAGS = -Wall -Werror -Wextra
 CC = cc
@@ -83,6 +72,7 @@ OLIBFT = $(LIBFT:.c=.o)
 OEXLIBFT = $(EXECUT_LIBFT:.c=.o)
 
 $(NAME):  $(OSRC) $(OLIBFT) $(OEXLIBFT)
+	@$(sig_remove_ctr_c)
 	@$(CC) -lreadline -L $(READLINE)/lib -I $(READLINE)/include $(CFLAGS) $(OSRC) $(OLIBFT) $(OEXLIBFT) -o $(NAME)
 
 %.o: %.c

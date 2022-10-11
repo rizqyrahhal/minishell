@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 14:44:16 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/10/01 23:02:25 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:19:06 by lsemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	signal_ctrl_c(int sig)
 	rl_on_new_line();
 	rl_replace_line("\0", 0);
 	rl_redisplay();
+	g_sts->status = 1;
 }
 
 void	signal_ctrl_c_heredoc(int sig)
@@ -51,7 +52,7 @@ void	handle_signals(int sig)
 {
 	if (sig == SIGINT)
 		signal(SIGINT, signal_ctrl_c);
-	else if (sig == SIGQUIT_INCHILD)
+	else if (sig == SIG_CHILD)
 		signal(3, signal_quit);
 	else if (sig == SIGINT_)
 		signal(SIGINT, signal_);
