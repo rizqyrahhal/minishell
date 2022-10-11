@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:10:22 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/10/11 13:28:30 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/10/11 16:23:11 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ typedef struct s_heredoc
 	t_token	*token;
 }	t_heredoc;
 
-void		tac_compile(char *src, t_envp *my_env);
+int			tac_compile(char *src, t_envp *my_env);
 int			check_syntax_error(char *src, int *i);
 void		ft_free_(t_lexer *l, t_lexer *nl, t_token *t, t_token *nt);
 int			unclosed_quotes(char *src, int **k);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:03 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/10/11 15:59:55 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/10/11 16:26:29 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,11 @@ void	minishell(t_envp *my_env)
 			g_sts->ginp = -1;
 		handle_signals(SIGINT_);
 		add_history(buf);
-		if (buf)
-			tac_compile(buf, my_env);
+		if (tac_compile(buf, my_env) == -1)
+		{
+			free(buf);
+			exit (2);
+		}
 		free(buf);
 	}
 }

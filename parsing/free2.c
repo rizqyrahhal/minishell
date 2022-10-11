@@ -6,7 +6,7 @@
 /*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 18:45:52 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/10/01 23:00:29 by rarahhal         ###   ########.fr       */
+/*   Updated: 2022/10/11 16:24:48 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ void	_tac_free(t_lexer **lexer, t_token **token, char *src)
 	free(*lexer);
 	free((*token)->value);
 	free(*token);
-	free(src);
+	if (src)
+		free(src);
 }

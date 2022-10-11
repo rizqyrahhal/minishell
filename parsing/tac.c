@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tac.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsemlali <lsemlali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rarahhal <rarahhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 17:12:05 by rarahhal          #+#    #+#             */
-/*   Updated: 2022/10/11 11:32:14 by lsemlali         ###   ########.fr       */
+/*   Updated: 2022/10/11 16:44:44 by rarahhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,35 @@ void	merging_work(t_envp *my_env, char *src)
 	}
 }
 
-void	tac_compile(char *src, t_envp *my_env)
+int	n_heredoc(char *src, int i)
+{
+	t_lexer	*lexer;
+	t_token	*token;
+	int		n_heredoc;
+
+	lexer = init_lexer(src);
+	lexer->not_expand = -1;
+	token = lexer_next_token(lexer);
+	n_heredoc = 0;
+	while (token->e_type != TOKEN_EOF && lexer->i <= (unsigned int)i)
+	{
+		if (token->e_type == TOKEN_HERDOC)
+			n_heredoc++;
+		if (n_heredoc > 16)
+		{
+			printf("minishell: maximum here-document count exceeded\n");
+			_tac_free(&lexer, &token, NULL);
+			return (-1);
+		}
+		free(token->value);
+		free(token);
+		token = lexer_next_token(lexer);
+	}
+	_tac_free(&lexer, &token, NULL);
+	return (0);
+}
+
+int	tac_compile(char *src, t_envp *my_env)
 {
 	int	i;
 
@@ -68,13 +96,20 @@ void	tac_compile(char *src, t_envp *my_env)
 	if (check_syntax_error(src, &i) == -1)
 	{
 		my_env->status = 258;
+		if (n_heredoc(src, i) == -1)
+			return (-1);
 		src = here_doc(src, i, my_env);
 		free(src);
-		return ;
+		return (0);
 	}
 	else
+	{
+		if (n_heredoc(src, ft_strlen(src)) == -1)
+			return (-1);
 		src = here_doc(src, ft_strlen(src), my_env);
+	}
 	if (!src)
-		return ;
+		return (0);
 	merging_work(my_env, src);
+	return (0);
 }
